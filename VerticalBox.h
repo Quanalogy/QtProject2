@@ -10,7 +10,7 @@
 
 class VerticalBox : public QWidget{
 public:
-VerticalBox(QWidget *parent = 0);
+    VerticalBox(QWidget *parent = 0);
 
 };
 

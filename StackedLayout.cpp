@@ -8,14 +8,15 @@
 #include <QtWidgets/QStackedWidget>
 #include "StackedLayout.h"
 #include "VerticalBox.h"
+#include "MainPage.h"
 
 StackedLayout::StackedLayout(QWidget *parent) : QWidget(parent){
     QWidget *firstPageWidget = new QWidget;
     QWidget *secondPageWidget = new QWidget;
     QWidget *thirdPageWidget = new QWidget;
 
-    VerticalBox *firstPage = new VerticalBox;
-
+    VerticalBox *secondPage = new VerticalBox;
+    MainPage *firstPage = new MainPage;
     QStackedWidget *stackedWidget = new QStackedWidget;
     stackedWidget->addWidget(firstPage);
     stackedWidget->addWidget(secondPageWidget);
