@@ -11,6 +11,10 @@
 class StackedLayout : public QWidget{
 public:
     StackedLayout(QWidget *parent = 0);
+
+//public slots:
+    void onPrevClick();
+    void onNextClick();
 };
 
 

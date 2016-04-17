@@ -6,21 +6,28 @@
 #include <QtWidgets/QPushButton>
 #include "MainPage.h"
 
+
 MainPage::MainPage(QWidget *parent) : QWidget(parent){
     QGridLayout *gridLayout = new QGridLayout(this);
-    gridLayout->setSpacing(2);
+    //gridLayout->setSpacing(2);
+    gridLayout->setHorizontalSpacing(2);
 
-    QList<QString> menuList({"Bruger konfiguration", "Lysstyring", "blabla"});
+    QList<QString> menuList({"Adfærdsstyring", "Ændre brugerprofil", "Aktivitetssimulering",
+                             "Lysstyring", "Enhedshåndtering"});
 
     int pos = 0;
 
-    for (int i = 0; i <1 ; ++i) {
-        for (int j = 0; j <3 ; ++j) {
-            QPushButton *btn = new QPushButton(menuList[pos], this);
-            //btn->setFixedSize(40,40);
-            gridLayout->addWidget(btn);
-            ++pos;
+    for (auto i = menuList.begin(); i != menuList.end(); ++i) {
+        QPushButton *btn = new QPushButton(menuList[pos], this);
+        if(pos%2 == 0){
+            gridLayout->addWidget(btn, (int)floor(pos/2), 0, 0);
+        } else {
+            gridLayout->addWidget(btn, (int)floor(pos/2), 1, 0);
         }
+        ++pos;
     }
+
+
+
     setLayout(gridLayout);
 }

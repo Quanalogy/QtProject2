@@ -27,9 +27,12 @@ VerticalBox::VerticalBox(QWidget *parent) : QWidget(parent){
 
     QPushButton *next = new QPushButton("Next", this);
     next->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    connect(next, &QPushButton::clicked, this, &VerticalBox::onNextClick);
 
     QPushButton *prev = new QPushButton("Previous", this);
     prev->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+//    connect(prev, &QPushButton::clicked, onPrevClick());
+
 
     vBox->addWidget(settings);
     vBox->addWidget(accounts);
@@ -46,3 +49,4 @@ VerticalBox::VerticalBox(QWidget *parent) : QWidget(parent){
     setLayout(vBox);
 
 }
+
