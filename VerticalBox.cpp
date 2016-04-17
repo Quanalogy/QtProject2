@@ -25,9 +25,9 @@ VerticalBox::VerticalBox(QWidget *parent) : QWidget(parent){
     QPushButton *debts = new QPushButton("Debts", this);
     debts->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    QPushButton *next = new QPushButton("Next", this);
-    next->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    connect(next, &QPushButton::clicked, this, &VerticalBox::onNextClick);
+    QPushButton *nextBtn = new QPushButton("Next", this);
+    nextBtn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    connect(nextBtn, &QPushButton::clicked, this, &VerticalBox::onNextClick);
 
     QPushButton *prev = new QPushButton("Previous", this);
     prev->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -42,7 +42,7 @@ VerticalBox::VerticalBox(QWidget *parent) : QWidget(parent){
 
     QHBoxLayout *hBox = new QHBoxLayout;
     hBox->addWidget(prev);
-    hBox->addWidget(next);
+    hBox->addWidget(nextBtn);
 
     vBox->addLayout(hBox);
 

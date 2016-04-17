@@ -13,8 +13,10 @@ class VerticalBox : public QWidget{
 public:
     VerticalBox(QWidget *parent = 0);
 
-    void onNextClick(){cout << "Next clicked" << endl;};
-    void onPrevClick(){};
+signals:
+    void onNextClick();
+    void onPrevClick();
+
 };
 
 
