@@ -12,7 +12,7 @@ MainPage::MainPage(QWidget *parent) : QWidget(parent){
     //gridLayout->setSpacing(2);
     gridLayout->setHorizontalSpacing(2);
 
-    QList<QString> menuList({"Adfærdsstyring", "Ændre brugerprofil", "Aktivitetssimulering",
+    QList<QString> menuList({ "Tilføj bruger" , "Ændre brugerprofil","Adfærdsstyring",  "Aktivitetssimulering",
                              "Lysstyring", "Enhedshåndtering"});
 
     int pos = 0;

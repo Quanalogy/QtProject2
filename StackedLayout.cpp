@@ -3,46 +3,45 @@
 //
 
 #include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QStackedLayout>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QListWidget>
-#include "StackedLayout.h"
 #include "VerticalBox.h"
 #include "MainPage.h"
+#include "StackedLayout.h"
+#include "AddUser.h"
 
 StackedLayout::StackedLayout(QWidget *parent) : QWidget(parent){
 
+    // create a list of the pages, i think this would be usefull later on
     QList<QWidget *> qList;
-
-    MainPage *secondPage = new MainPage;
+    //Create the pages
     VerticalBox *firstPage = new VerticalBox;
-    qList << firstPage << secondPage;
+    AddUser *secondPage = new AddUser;
+    MainPage *thirdPage = new MainPage;
 
-    QStackedLayout *stackedLayout = new QStackedLayout;
+    //Add the pages to the list. It can now be accessed with qList.at(int)
+    qList << firstPage << secondPage << thirdPage;
+
     stackedLayout->addWidget(firstPage);
     stackedLayout->addWidget(secondPage);
+    stackedLayout->addWidget(thirdPage);
     connect(firstPage, &VerticalBox::onNextClick, this, &StackedLayout::onNextClick);
-    //connect(qListWidget, )
-/*    QComboBox *pageComboBox = new QComboBox;
-    pageComboBox->addItem(tr("Page 1"));
-    pageComboBox->addItem(tr("Page 2"));*/
-
-
-    //connect(firstPage, SLOT(onNextClick()),
-    //        stackedLayout);
-
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    //mainLayout->addWidget(pageComboBox);
-    mainLayout->addLayout(stackedLayout);
-    setLayout(mainLayout);
+    connect(firstPage, &VerticalBox::onPrevClick, this, &StackedLayout::onPrevClick);
+    connect(secondPage, &AddUser::onSaveClick, this, &StackedLayout::onNextClick);
+    connect(secondPage, &AddUser::onCancelClick, this, &StackedLayout::onPrevClick);
+    setLayout(stackedLayout);
 
 
  }
 
 void StackedLayout::onNextClick() {
-    cout << "It Works!" << endl;
+    if(stackedLayout->currentIndex()+1 != -1){
+        stackedLayout->setCurrentIndex(stackedLayout->currentIndex()+1);
+    }
 }
 
 void StackedLayout::onPrevClick() {
-
+    if(stackedLayout->currentIndex()-1 != -1){
+        stackedLayout->setCurrentIndex(stackedLayout->currentIndex()-1);
+    }
 }

@@ -31,7 +31,7 @@ VerticalBox::VerticalBox(QWidget *parent) : QWidget(parent){
 
     QPushButton *prev = new QPushButton("Previous", this);
     prev->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-//    connect(prev, &QPushButton::clicked, onPrevClick());
+    connect(prev, &QPushButton::clicked, this, &VerticalBox::onPrevClick);
 
 
     vBox->addWidget(settings);

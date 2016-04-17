@@ -7,14 +7,19 @@
 
 
 #include <QtWidgets/QWidget>
+#include <QtWidgets/QStackedLayout>
 
 class StackedLayout : public QWidget{
 public:
     StackedLayout(QWidget *parent = 0);
 
-//public slots:
+public slots:
     void onPrevClick();
     void onNextClick();
+
+private:
+    QStackedLayout *stackedLayout = new QStackedLayout;
+    //QStackedLayout *stackedLayout;
 };
 
 

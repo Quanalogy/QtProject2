@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
 */
 
     StackedLayout stackedLayout;
-    stackedLayout.setWindowTitle("This is the title");
+    //stackedLayout.setWindowTitle("This is the title");
     stackedLayout.show();
     return app.exec();
 }
