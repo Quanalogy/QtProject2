@@ -16,6 +16,8 @@ public:
 
 private:
     QString name = "Hovedmenu";
+    QList<MenuWidget *> menuPTRList;
+
 };
 
 

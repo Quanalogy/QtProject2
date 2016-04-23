@@ -6,7 +6,7 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui)
 
 
-set(SOURCE_FILES main.cpp VerticalBox.cpp VerticalBox.h Nesting.cpp Nesting.h StackedLayout.cpp StackedLayout.h MainPage.cpp MainPage.h AdfaerdsStyring.cpp AdfaerdsStyring.h AddUser.cpp AddUser.h MenuWidget.cpp MenuWidget.h)
+set(SOURCE_FILES main.cpp VerticalBox.cpp VerticalBox.h Nesting.cpp Nesting.h StackedLayout.cpp StackedLayout.h MainPage.cpp MainPage.h AdfaerdsStyring.cpp AdfaerdsStyring.h AddUser.cpp AddUser.h MenuWidget.cpp MenuWidget.h AendreBrugerprofil.cpp AendreBrugerprofil.h Aktivitetssimulering.cpp Aktivitetssimulering.h Lysstyring.cpp Lysstyring.h EnhedsHaandtering.cpp EnhedsHaandtering.h)
 add_executable(QtProject2 ${SOURCE_FILES})
 
 target_link_libraries(QtProject2 Qt5::Core Qt5::Widgets Qt5::Gui)

@@ -5,16 +5,19 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QPushButton>
 #include "MainPage.h"
+#include "AddUser.h"
+#include "AdfaerdsStyring.h"
 
 
 MainPage::MainPage(QWidget *parent) : QWidget(parent){
-    //this->setWindowTitle("This is main page");
     QGridLayout *gridLayout = new QGridLayout(this);
-    //gridLayout->setSpacing(2);
     gridLayout->setHorizontalSpacing(2);
 
-    QList<QString> menuList({ "Tilføj bruger" , "Ændre brugerprofil","Adfærdsstyring",  "Aktivitetssimulering",
-                             "Lysstyring", "Enhedshåndtering"});
+    AddUser *addPage = new AddUser;
+    AdfaerdsStyring *adfaerdsPage = new AdfaerdsStyring;
+
+    QList<QString> menuList({ "Tilføj bruger" , "Ændre brugerprofil", "Aktivitetssimulering",
+                              "Lysstyring", "Adfærdsstyring", "Enhedshåndtering"});
 
     int pos = 0;
 
