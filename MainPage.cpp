@@ -8,6 +8,7 @@
 
 
 MainPage::MainPage(QWidget *parent) : QWidget(parent){
+    //this->setWindowTitle("This is main page");
     QGridLayout *gridLayout = new QGridLayout(this);
     //gridLayout->setSpacing(2);
     gridLayout->setHorizontalSpacing(2);
@@ -30,4 +31,8 @@ MainPage::MainPage(QWidget *parent) : QWidget(parent){
 
 
     setLayout(gridLayout);
+}
+
+QString MainPage::getName() {
+    return name;
 }

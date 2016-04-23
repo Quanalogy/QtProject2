@@ -22,9 +22,11 @@
       <sourceFolder url="file://$MODULE_DIR$/StackedLayout.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/StackedLayout.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/AddUser.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidget.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MainPage.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MainPage.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidget.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/VerticalBox.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Nesting.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/AdfaerdsStyring.cpp" isTestSource="false" />

@@ -50,3 +50,6 @@ VerticalBox::VerticalBox(QWidget *parent) : QWidget(parent){
 
 }
 
+QString VerticalBox::getName() {
+    return name;
+}

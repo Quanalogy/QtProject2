@@ -7,15 +7,19 @@
 
 
 #include <QtWidgets/QWidget>
-
-class AddUser : public QWidget{
+#include "MenuWidget.h"
+class AddUser : public QWidget, public MenuWidget{
 Q_OBJECT
 public:
     AddUser(QWidget *parent = 0);
 
+    QString getName();
 signals:
     void onSaveClick();
     void onCancelClick();
+
+private:
+    QString name = "Tilføj bruger";
 };
 
 

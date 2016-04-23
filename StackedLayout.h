@@ -8,18 +8,21 @@
 
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QStackedLayout>
+#include "MenuWidget.h"
+
+using namespace std;
 
 class StackedLayout : public QWidget{
 public:
     StackedLayout(QWidget *parent = 0);
-
 public slots:
     void onPrevClick();
     void onNextClick();
 
 private:
     QStackedLayout *stackedLayout = new QStackedLayout;
-    //QStackedLayout *stackedLayout;
+    QList<MenuWidget *> qList;
+    int currentListItem = 0;
 };
 
 

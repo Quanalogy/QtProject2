@@ -7,10 +7,15 @@
 
 
 #include <QtWidgets/QWidget>
+#include "MenuWidget.h"
 
-class MainPage : public QWidget{
+class MainPage :public QWidget, public MenuWidget{
 public:
     MainPage(QWidget *parent = 0);
+    QString getName();
+
+private:
+    QString name = "Hovedmenu";
 };
 
 
