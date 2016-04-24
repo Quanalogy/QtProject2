@@ -60,7 +60,7 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : QWidget(parent){
             lVerticalLayout->addWidget(sovevaerelseCheck2);
         }
     }
-    lVerticalLayout->addWidget(save);
+    lVerticalLayout->addWidget(cancel);
     pos = 0;
     for (auto j = rightList.begin(); j != rightList.end() ; ++j, ++pos) {
         rVerticalLayout->addWidget(rightList.at(pos));
@@ -70,17 +70,15 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : QWidget(parent){
             rVerticalLayout->addWidget(rSovevaerelseCheck2);
         }
     }
-    rVerticalLayout->addWidget(cancel);
+    rVerticalLayout->addWidget(save);
 
-
-    serienummerInput->setText("Indsæt serienummer");
+    serienummerInput->setPlaceholderText("Indsæt serienummer");
 
     serienummerInput->show();
 
-
-    horizontalLayout->addLayout(rVerticalLayout);
-    horizontalLayout->addSpacing(4);
     horizontalLayout->addLayout(lVerticalLayout);
+    horizontalLayout->addSpacing(4);
+    horizontalLayout->addLayout(rVerticalLayout);
 
     setLayout(horizontalLayout);
 
