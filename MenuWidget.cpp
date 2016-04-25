@@ -3,3 +3,7 @@
 //
 
 #include "MenuWidget.h"
+
+MenuWidget::MenuWidget(QWidget *parent) : QWidget(parent){
+
+}

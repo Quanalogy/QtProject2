@@ -13,6 +13,7 @@
 using namespace std;
 
 class StackedLayout : public QWidget{
+    Q_OBJECT
 public:
     StackedLayout(QWidget *parent = 0);
 public slots:
@@ -22,7 +23,8 @@ public slots:
 private:
     QStackedLayout *stackedLayout = new QStackedLayout;
     QList<MenuWidget *> qList;
-    int currentListItem = 0;
+    QString name = "StackedLayout";
+    MenuWidget *currentWidget;
 };
 
 

@@ -8,11 +8,10 @@
 
 #include <QtWidgets/QWidget>
 #include "MenuWidget.h"
-class AddUser : public QWidget, public MenuWidget{
+class AddUser : public MenuWidget{
 Q_OBJECT
 public:
     AddUser(QWidget *parent = 0);
-
     QString getName();
 signals:
     void onSaveClick();

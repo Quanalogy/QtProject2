@@ -6,8 +6,15 @@
 #define QTPROJECT_LYSSTYRING_H
 
 
-class Lysstyring {
+#include "MenuWidget.h"
 
+class Lysstyring : public MenuWidget{
+public:
+    Lysstyring(QWidget *parent = 0);
+    QString getName();
+
+private:
+    QString name = "Lysstyring";
 };
 
 

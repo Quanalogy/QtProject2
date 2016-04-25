@@ -5,7 +5,6 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QListWidget>
-#include <iostream>
 #include "VerticalBox.h"
 #include "MainPage.h"
 #include "StackedLayout.h"
@@ -13,8 +12,6 @@
 using namespace std;
 
 StackedLayout::StackedLayout(QWidget *parent) : QWidget(parent){
-
-    // create a list of the pages, i think this would be usefull later on
 
     //Create the pages
     VerticalBox *firstPage = new VerticalBox;
@@ -39,12 +36,8 @@ StackedLayout::StackedLayout(QWidget *parent) : QWidget(parent){
 void StackedLayout::onNextClick() {
     if(stackedLayout->currentIndex()+1 != -1){
         stackedLayout->setCurrentIndex(stackedLayout->currentIndex()+1);
-        ++currentListItem;
     }
-    MenuWidget *currentWidget = qList.at(stackedLayout->currentIndex());
-
-    cout << "This is the current index: " << stackedLayout->currentIndex() << "\nThis is the current widget: "
-            << stackedLayout->currentWidget() << "This is the current name: " <<  endl;
+    currentWidget = qList.at(stackedLayout->currentIndex());
 
     this->setWindowTitle(currentWidget->getName());
 }
@@ -53,4 +46,7 @@ void StackedLayout::onNextClick() {
     if(stackedLayout->currentIndex()-1 != -1){
         stackedLayout->setCurrentIndex(stackedLayout->currentIndex()-1);
     }
+    currentWidget = qList.at(stackedLayout->currentIndex());
+
+    this->setWindowTitle(currentWidget->getName());
 }

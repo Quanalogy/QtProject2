@@ -3,3 +3,11 @@
 //
 
 #include "AendreBrugerprofil.h"
+
+AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
+
+}
+
+QString AendreBrugerprofil::getName() {
+    return name;
+}

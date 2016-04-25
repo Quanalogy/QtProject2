@@ -9,15 +9,14 @@
 #include <QtWidgets/QWidget>
 #include "MenuWidget.h"
 
-class MainPage :public QWidget, public MenuWidget{
+class MainPage : public MenuWidget{
 public:
     MainPage(QWidget *parent = 0);
     QString getName();
 
 private:
     QString name = "Hovedmenu";
-    QList<MenuWidget *> menuPTRList;
-
+    QList<MenuWidget *> pages;
 };
 
 

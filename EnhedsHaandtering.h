@@ -6,11 +6,12 @@
 #define QTPROJECT_ENHEDSHAANDTERING_H
 
 
-#include <QtWidgets/QWidget>
+//#include <QtWidgets/QWidget>
 #include "MenuWidget.h"
 #include <QtWidgets/QLabel>
 
-class EnhedsHaandtering : public QWidget, public MenuWidget{
+class EnhedsHaandtering : public MenuWidget{
+    Q_OBJECT
 public:
     EnhedsHaandtering(QWidget *parent = 0);
     QString getName();

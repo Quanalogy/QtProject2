@@ -3,3 +3,11 @@
 //
 
 #include "Aktivitetssimulering.h"
+
+Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent){
+
+}
+
+QString Aktivitetssimulering::getName() {
+    return name;
+}

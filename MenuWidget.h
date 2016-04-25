@@ -5,16 +5,24 @@
 #ifndef QTPROJECT_MENUWIDGET_H
 #define QTPROJECT_MENUWIDGET_H
 
-#include <QtCore/QString>
 #include <QtWidgets/QWidget>
+#include <iostream>
 
-class MenuWidget {
-
+using namespace std;
+class MenuWidget : public QWidget {
+    Q_OBJECT
 public:
-    MenuWidget(){};
+    MenuWidget(QWidget *parent = 0);
     ~MenuWidget(){};
     virtual QString getName()=0;
 
+public slots:
+    virtual void open(){cout << "Open has been clicked" << endl;};
+
+signals:
+    virtual void onSaveClick();
+    //virtual void onNextClick();
+    //virtual void onPrevClick();
 };
 
 

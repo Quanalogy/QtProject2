@@ -10,7 +10,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QLabel>
 
-AddUser::AddUser(QWidget *parent) : QWidget(parent){
+AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
     mainLayout->setSpacing(1);

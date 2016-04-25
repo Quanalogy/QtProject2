@@ -3,3 +3,11 @@
 //
 
 #include "AdfaerdsStyring.h"
+
+AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
+
+}
+
+QString AdfaerdsStyring::getName() {
+    return name;
+}

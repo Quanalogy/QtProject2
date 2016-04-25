@@ -6,8 +6,15 @@
 #define QTPROJECT_AENDREBRUGERPROFIL_H
 
 
-class AendreBrugerprofil {
+#include "MenuWidget.h"
 
+class AendreBrugerprofil : public MenuWidget {
+public:
+    AendreBrugerprofil(QWidget *parent = 0);
+    QString getName();
+
+private:
+    QString name = "Ændre brugerprofil";
 };
 
 

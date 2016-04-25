@@ -3,3 +3,11 @@
 //
 
 #include "Lysstyring.h"
+
+Lysstyring::Lysstyring(QWidget *parent) : MenuWidget(parent){
+
+}
+
+QString Lysstyring::getName() {
+    return name;
+}

@@ -9,9 +9,9 @@ using namespace std;
 int main(int argc, char *argv[]) {
     QApplication app(argc,argv);
 
-    EnhedsHaandtering test;
-    test.show();
-    //StackedLayout intro;
-    //intro.show();
+    //EnhedsHaandtering test;
+    //test.show();
+    StackedLayout intro;
+    intro.show();
     return app.exec();
 }

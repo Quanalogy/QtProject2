@@ -8,7 +8,7 @@
 #include "MenuWidget.h"
 
 using namespace std;
-class VerticalBox : public QWidget, public MenuWidget{
+class VerticalBox : public MenuWidget{
     Q_OBJECT
 public:
     VerticalBox(QWidget *parent = 0);

@@ -6,7 +6,7 @@
 #include <QtWidgets/QPushButton>
 #include "VerticalBox.h"
 
-VerticalBox::VerticalBox(QWidget *parent) : QWidget(parent){
+VerticalBox::VerticalBox(QWidget *parent) : MenuWidget(parent){
     QVBoxLayout *vBox = new QVBoxLayout(this);
     vBox->setSpacing(1);
 

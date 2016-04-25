@@ -8,11 +8,12 @@
 #include <QtWidgets/QPushButton>
 #include "EnhedsHaandtering.h"
 
-EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : QWidget(parent){
+EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
     //Add layouts to design from
     QVBoxLayout *lVerticalLayout = new QVBoxLayout;
     QVBoxLayout *rVerticalLayout = new QVBoxLayout;
     QHBoxLayout *horizontalLayout = new QHBoxLayout(this);
+
     //Begin with labels on left side
     QLabel *tilfoej = new QLabel(this);
     QLabel *serienummer = new QLabel(this);

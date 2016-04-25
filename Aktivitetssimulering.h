@@ -6,8 +6,15 @@
 #define QTPROJECT_AKTIVITETSSIMULERING_H
 
 
-class Aktivitetssimulering {
+#include "MenuWidget.h"
 
+class Aktivitetssimulering : public MenuWidget{
+public:
+    Aktivitetssimulering(QWidget *parent = 0);
+    QString getName();
+
+private:
+    QString name = "Aktivitetssimulering";
 };
 
 

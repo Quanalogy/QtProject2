@@ -6,10 +6,15 @@
 #define QTPROJECT_ADFAERDSSTYRING_H
 
 
+#include "MenuWidget.h"
 
-class AdfaerdsStyring  {
+class AdfaerdsStyring : public MenuWidget {
+public:
+    AdfaerdsStyring(QWidget *parent = 0);
+    QString getName();
 
-
+private:
+    QString name = "Adfærdsstyring";
 };
 
 
