@@ -23,8 +23,6 @@ private:
     QString name = "Hovedmenu";
     QList<MenuWidget *> pages;
     QList<QPushButton *> buttons;
-    //QList<QPushButton *> buttonsR;
-    QStackedLayout *stackedLayout;
 };
 
 
