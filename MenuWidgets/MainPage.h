@@ -7,16 +7,24 @@
 
 
 #include <QtWidgets/QWidget>
+#include <QtWidgets/QStackedLayout>
 #include "MenuWidget.h"
+#include <QtWidgets/QPushButton>
 
 class MainPage : public MenuWidget{
+    Q_OBJECT
 public:
     MainPage(QWidget *parent = 0);
-    QString getName();
+    QString getName(){return name;};
 
+public slots:
+    void ChangeView();
 private:
     QString name = "Hovedmenu";
     QList<MenuWidget *> pages;
+    QList<QPushButton *> buttons;
+    //QList<QPushButton *> buttonsR;
+    QStackedLayout *stackedLayout;
 };
 
 

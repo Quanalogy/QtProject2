@@ -9,6 +9,7 @@
 #include "MenuWidget.h"
 
 class Aktivitetssimulering : public MenuWidget{
+Q_OBJECT
 public:
     Aktivitetssimulering(QWidget *parent = 0);
     QString getName();

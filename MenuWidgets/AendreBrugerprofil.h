@@ -9,6 +9,7 @@
 #include "MenuWidget.h"
 
 class AendreBrugerprofil : public MenuWidget {
+Q_OBJECT
 public:
     AendreBrugerprofil(QWidget *parent = 0);
     QString getName();

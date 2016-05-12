@@ -5,7 +5,7 @@
 #ifndef QTPROJECT_VERTICALBOX_H
 #define QTPROJECT_VERTICALBOX_H
 
-#include "MenuWidget.h"
+#include "MenuWidgets/MenuWidget.h"
 
 using namespace std;
 class VerticalBox : public MenuWidget{

@@ -2,11 +2,10 @@ cmake_minimum_required(VERSION 3.3)
 project(QtProject)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(CMAKE_AUTOMOC ON)
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui)
+include_directories(MenuWidgets)
 
-
-set(SOURCE_FILES main.cpp VerticalBox.cpp VerticalBox.h Nesting.cpp Nesting.h StackedLayout.cpp StackedLayout.h MainPage.cpp MainPage.h AdfaerdsStyring.cpp AdfaerdsStyring.h AddUser.cpp AddUser.h MenuWidget.cpp MenuWidget.h AendreBrugerprofil.cpp AendreBrugerprofil.h Aktivitetssimulering.cpp Aktivitetssimulering.h Lysstyring.cpp Lysstyring.h EnhedsHaandtering.cpp EnhedsHaandtering.h)
+set(SOURCE_FILES main.cpp VerticalBox.cpp VerticalBox.h Nesting.cpp Nesting.h StackedLayout.cpp StackedLayout.h MenuWidgets/MainPage.cpp MenuWidgets/MainPage.h MenuWidgets/AdfaerdsStyring.cpp MenuWidgets/AdfaerdsStyring.h MenuWidgets/AddUser.cpp MenuWidgets/AddUser.h MenuWidgets/MenuWidget.cpp MenuWidgets/MenuWidget.h MenuWidgets/AendreBrugerprofil.cpp MenuWidgets/AendreBrugerprofil.h MenuWidgets/Aktivitetssimulering.cpp MenuWidgets/Aktivitetssimulering.h MenuWidgets/Lysstyring.cpp MenuWidgets/Lysstyring.h MenuWidgets/EnhedsHaandtering.cpp MenuWidgets/EnhedsHaandtering.h)
 add_executable(QtProject2 ${SOURCE_FILES})
 
 target_link_libraries(QtProject2 Qt5::Core Qt5::Widgets Qt5::Gui)

@@ -9,6 +9,7 @@
 #include "MenuWidget.h"
 
 class Lysstyring : public MenuWidget{
+Q_OBJECT
 public:
     Lysstyring(QWidget *parent = 0);
     QString getName();

@@ -13,9 +13,13 @@ Q_OBJECT
 public:
     AddUser(QWidget *parent = 0);
     QString getName();
+
 signals:
     void onSaveClick();
     void onCancelClick();
+
+public slots:
+    void open(){cout << "Open has been clicked on AddUser" << endl;};
 
 private:
     QString name = "Tilføj bruger";

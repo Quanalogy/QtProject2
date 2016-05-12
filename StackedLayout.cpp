@@ -4,11 +4,10 @@
 
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QComboBox>
-#include <QtWidgets/QListWidget>
 #include "VerticalBox.h"
-#include "MainPage.h"
+#include "MenuWidgets/MainPage.h"
 #include "StackedLayout.h"
-#include "AddUser.h"
+#include "MenuWidgets/AddUser.h"
 using namespace std;
 
 StackedLayout::StackedLayout(QWidget *parent) : QWidget(parent){

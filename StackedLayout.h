@@ -8,7 +8,7 @@
 
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QStackedLayout>
-#include "MenuWidget.h"
+#include "MenuWidgets/MenuWidget.h"
 
 using namespace std;
 

@@ -9,6 +9,7 @@
 #include "MenuWidget.h"
 
 class AdfaerdsStyring : public MenuWidget {
+Q_OBJECT
 public:
     AdfaerdsStyring(QWidget *parent = 0);
     QString getName();

@@ -21,8 +21,7 @@ public slots:
 
 signals:
     virtual void onSaveClick();
-    //virtual void onNextClick();
-    //virtual void onPrevClick();
+
 };
 
 
