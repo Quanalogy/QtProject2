@@ -15,7 +15,7 @@
 
 MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     //Create layouts
-
+    this->setWindowTitle(name);
     QGridLayout *gridLayout = new QGridLayout(this);
     //create pages that needs connections to the buttons
     AddUser *addPage = new AddUser;
@@ -29,11 +29,9 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     pages << addPage << changeProfilePage << aktivitetssimuleringPage << lysstyringPage
             << adfaerdsPage << enhedsHaandteringPage;
 
-    QList<QString> menuList({ "Tilføj bruger" , "Ændre brugerprofil", "Aktivitetxssimulering",
-                              "Lysstyring", "Adfærdsstyring", "Enhedshåndtering"});
     int pos = 0;
-    for (auto i = menuList.begin(); i != menuList.end(); ++i) {
-        QPushButton *btn = new QPushButton(menuList[pos], this);
+    for (auto i = pages.begin(); i != pages.end(); ++i) {
+        QPushButton *btn = new QPushButton(pages[pos]->getName(), this);
         buttons << btn;
         if(pos%2 == 0){
             gridLayout->addWidget(btn, (int)floor(pos/2), 0, 0);
