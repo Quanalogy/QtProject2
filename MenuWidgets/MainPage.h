@@ -19,10 +19,14 @@ public:
 
 public slots:
     void ChangeView();
+    void handleSaveClick();
+    void handleCancelClick();
 private:
     QString name = "Hovedmenu";
     QList<MenuWidget *> pages;
     QList<QPushButton *> buttons;
+    QStackedLayout *mainLayout;
+    int index;
 };
 
 

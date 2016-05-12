@@ -17,11 +17,11 @@ public:
     virtual QString getName()=0;
 
 public slots:
-    virtual void open(){cout << "Open has been clicked" << endl; };
+
 
 signals:
     virtual void onSaveClick();
-
+    virtual void onCancelClick();
 };
 
 
