@@ -7,6 +7,7 @@
 
 
 #include "MenuWidget.h"
+#include <QtWidgets/QLabel>
 
 class AdfaerdsStyring : public MenuWidget {
 Q_OBJECT
@@ -16,6 +17,8 @@ public:
 
 private:
     QString name = "Adfærdsstyring";
+    QList<QLabel *> leftList;
+    QList<QLabel *> rightList;
 };
 
 
