@@ -12,10 +12,8 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     this->setWindowTitle(name);
     QVBoxLayout *lefVertivalLayout = new QVBoxLayout;
     QVBoxLayout *rigVerticalLayout = new QVBoxLayout;
-    QHBoxLayout *topHorizontalLayout = new QHBoxLayout;
     QHBoxLayout *controlHorizontalLayout = new QHBoxLayout(this);
     //labels
-    QLabel *profiler = new QLabel(this);
     QLabel *dagProfil = new QLabel(this);
     QLabel *natProfil = new QLabel(this);
     QLabel *intervalNat = new QLabel(this);
@@ -27,7 +25,7 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     QLineEdit *dagTil = new QLineEdit(this);
     QLineEdit *natFra = new QLineEdit(this);
     QLineEdit *natTil = new QLineEdit(this);
-    //check boxe
+    //check boxes
     QCheckBox *stueDag = new QCheckBox("Stue",this);
     QCheckBox *soveDag1 = new QCheckBox("Soveværelse 1",this);
     QCheckBox *soveDag2 = new QCheckBox("Soveværelse 2",this);

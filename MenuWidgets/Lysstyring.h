@@ -7,6 +7,7 @@
 
 
 #include "MenuWidget.h"
+#include "QLabel.h"
 
 class Lysstyring : public MenuWidget{
 Q_OBJECT
@@ -16,6 +17,7 @@ public:
 
 private:
     QString name = "Lysstyring";
+
 };
 
 
