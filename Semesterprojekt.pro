@@ -11,27 +11,28 @@ CONFIG += c++11
 TARGET = SemesterprojektPI
 TEMPLATE = app
 
+# So wiringPi include files can be found during compile
+INCLUDEPATH    += /usr/local/include
+
+# To link the wiringPi library when making the executable
+LIBS += -L/usr/local/lib -lwiringPi
 
 SOURCES += main.cpp\
-        MainWindow.cpp \
-    MenuWidget.cpp \
-    AddUser.cpp \
-    AdfaerdsStyring.cpp \
-    AendreBrugerprofil.cpp \
-    Aktivitetssimulering.cpp \
-    EnhedsHaandtering.cpp \
-    Lysstyring.cpp \
-    MainPage.cpp \
-    StackedLayout.cpp
+    MenuWidgets/MenuWidget.cpp \
+    MenuWidgets/AddUser.cpp \
+    MenuWidgets/AdfaerdsStyring.cpp \
+    MenuWidgets/AendreBrugerprofil.cpp \
+    MenuWidgets/Aktivitetssimulering.cpp \
+    MenuWidgets/EnhedsHaandtering.cpp \
+    MenuWidgets/Lysstyring.cpp \
+    MenuWidgets/MainPage.cpp \
 
-HEADERS  += MainWindow.h \
-    MenuWidget.h \
-    AddUser.h \
-    AdfaerdsStyring.h \
-    AendreBrugerprofil.h \
-    Aktivitetssimulering.h \
-    EnhedsHaandtering.h \
-    Lysstyring.h \
-    MainPage.h \
-    StackedLayout.h
-FORMS    += mainwindow.ui
+
+HEADERS  += MenuWidgets/MenuWidget.h \
+    MenuWidgets/AddUser.h \
+    MenuWidgets/AdfaerdsStyring.h \
+    MenuWidgets/AendreBrugerprofil.h \
+    MenuWidgets/Aktivitetssimulering.h \
+    MenuWidgets/EnhedsHaandtering.h \
+    MenuWidgets/Lysstyring.h \
+    MenuWidgets/MainPage.h \
