@@ -37,7 +37,7 @@ Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent)
     timeBAct->setText("Tid før automatisk aktivering");
     timer->setPlaceholderText("Tid i timer");
 
-    //indsættelse af ting
+    //indsættelse af layout
 
     //top box
     top->addWidget(autAct);
