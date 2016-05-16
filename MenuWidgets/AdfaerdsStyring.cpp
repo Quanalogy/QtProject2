@@ -96,11 +96,15 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     natFra->setPlaceholderText("Fra");
     natTil->setPlaceholderText("Til");
 
+    connect(save,&QPushButton::clicked,this,&AdfaerdsStyring::onSaveClick);
+    connect(cancel,&QPushButton::clicked,this,&AdfaerdsStyring::onCancelClick);
+
     controlHorizontalLayout->addLayout(lefVertivalLayout);
     controlHorizontalLayout->addSpacing(4);
     controlHorizontalLayout->addLayout(rigVerticalLayout);
 
     setLayout(controlHorizontalLayout);
+
 }
 
 QString AdfaerdsStyring::getName() {
