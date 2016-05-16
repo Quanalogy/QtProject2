@@ -13,7 +13,7 @@ Lysstyring::Lysstyring(QWidget *parent) : MenuWidget(parent){
 
     QVBoxLayout *lefVerticalLayout = new QVBoxLayout;
     QVBoxLayout *rigVerticalLayout = new QVBoxLayout;
-    QHBoxLayout *controlLayout = new QHBoxLayout;
+    QHBoxLayout *controlLayout = new QHBoxLayout(this);
 
     //check boxes
     QCheckBox *stue = new QCheckBox("Stue",this);
