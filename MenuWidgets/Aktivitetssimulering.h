@@ -16,6 +16,10 @@ public:
 
 private:
     QString name = "Aktivitetssimulering";
+
+signals:
+    void onSaveClick();
+    void onCancelClick();
 };
 
 

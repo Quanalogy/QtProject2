@@ -16,6 +16,10 @@ public:
 
 private:
     QString name = "Ændre brugerprofil";
+
+signals:
+    void onSaveClick();
+    void onCancelClick();
 };
 
 

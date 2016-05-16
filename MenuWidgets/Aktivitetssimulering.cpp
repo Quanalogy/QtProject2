@@ -47,8 +47,9 @@ Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent)
     top->addWidget(off);
     top->addWidget(onOff);
 
-    connect(save,&QPushButton::clicked,this,&Aktivitetssimulering::onSaveClick);
-    connect(cancel,&QPushButton::clicked,this,&Aktivitetssimulering::onCancelClick);
+    connect(save, &QPushButton::clicked,this, &Aktivitetssimulering::onSaveClick);
+    connect(cancel, &QPushButton::clicked, this, &Aktivitetssimulering::onCancelClick);
+
 
     //bund box
     bottom->addWidget(cancel);

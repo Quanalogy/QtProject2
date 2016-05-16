@@ -20,6 +20,10 @@ private:
     QString name = "Enhedshåndtering";
     QList<QLabel *> leftList;
     QList<QLabel *> rightList;
+
+signals:
+    void onSaveClick();
+    void onCancelClick();
 };
 
 

@@ -77,6 +77,10 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
 
     serienummerInput->show();
 
+    //connect buttons
+    connect(save, &QPushButton::clicked, this, &EnhedsHaandtering::onSaveClick);
+    connect(cancel, &QPushButton::clicked, this, &EnhedsHaandtering::onCancelClick);
+
     horizontalLayout->addLayout(lVerticalLayout);
     horizontalLayout->addSpacing(4);
     horizontalLayout->addLayout(rVerticalLayout);

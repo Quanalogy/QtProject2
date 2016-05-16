@@ -6,12 +6,14 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
 #include "AendreBrugerprofil.h"
 
 AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     this->setWindowTitle(name);
     //Add layouts
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    QHBoxLayout *buttonLayout = new QHBoxLayout;
     //Labels
     QLabel *user = new QLabel(this);
     QLabel *changePass = new QLabel(this);
@@ -34,6 +36,19 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     QCheckBox *unitControlCheck = new QCheckBox("Enhedshåndtering");
     QCheckBox *changeUserCheck = new QCheckBox("Ændre brugerprofil");
 
+    //Pushbuttons
+    QPushButton *saveBtn = new QPushButton("Gem", this);
+    QPushButton *cancelBtn = new QPushButton("Annuller", this);
+
+    //Add buttons to horizontal layout
+    buttonLayout->addWidget(cancelBtn);
+    buttonLayout->addWidget(saveBtn);
+
+    //connect buttons with signals
+    connect(cancelBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onCancelClick);
+    connect(saveBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onSaveClick);
+
+    //Add to main layout
     mainLayout->addWidget(user,0,Qt::AlignTop);
     mainLayout->addWidget(userLockedCheck,0,Qt::AlignTop);
     mainLayout->addWidget(deleteUserCheck,0,Qt::AlignTop);
@@ -45,6 +60,7 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     mainLayout->addWidget(activitySimCheck,0,Qt::AlignTop);
     mainLayout->addWidget(unitControlCheck,0,Qt::AlignTop);
     mainLayout->addWidget(changeUserCheck,0,Qt::AlignTop);
+    mainLayout->addLayout(buttonLayout);
 }
 
 QString AendreBrugerprofil::getName() {
