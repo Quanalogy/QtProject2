@@ -7,6 +7,8 @@
 
 
 #include <QtWidgets/QWidget>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QLineEdit>
 #include "MenuWidget.h"
 class AddUser : public MenuWidget{
 Q_OBJECT
@@ -15,6 +17,12 @@ public:
     QString getName();
     vector<bool> getStates();
     QMap<QString,QString> getLogin();
+
+private:
+    QString usernameInputString;
+    QString passwordInputString;
+    QList<QCheckBox *> checkList;
+    QList<QLineEdit *> lineList;
 
 signals:
     void onSaveClick();

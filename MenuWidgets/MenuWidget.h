@@ -7,6 +7,7 @@
 
 #include <QtWidgets/QWidget>
 #include <iostream>
+#include <QtCore/QMap>
 
 using namespace std;
 class MenuWidget : public QWidget {
@@ -15,6 +16,8 @@ public:
     MenuWidget(QWidget *parent = 0);
     ~MenuWidget(){};
     virtual QString getName()=0;
+    virtual  QMap<QString,QString> getLogin(){QMap<QString,QString> qMap;
+        return qMap;};
 
 public slots:
 

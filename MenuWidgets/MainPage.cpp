@@ -6,12 +6,6 @@
 #include <QtCore/QCoreApplication>
 #include <QtWidgets/QMessageBox>
 #include "MainPage.h"
-#include "AddUser.h"
-#include "AdfaerdsStyring.h"
-#include "AendreBrugerprofil.h"
-#include "Aktivitetssimulering.h"
-#include "Lysstyring.h"
-#include "EnhedsHaandtering.h"
 #include "../LoginDialog.h"
 #include "../User.h"
 
@@ -25,7 +19,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     adminUser->setRights(true, true, true, true, true, true);
 
     // setup the login dialoag
-    LoginDialog* loginDialog = new LoginDialog( this );
+    loginDialog = new LoginDialog( this );
     QString username = "Admin";
     loginDialog->setUsername(username); // optional
     userMap["Admin"] = "Password";
@@ -46,14 +40,14 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     //now we can make the rest when the user is logged in
 
     //Create layouts
-    QGridLayout *gridLayout = new QGridLayout(this);
+    gridLayout = new QGridLayout(this);
     //create pages that needs connections to the buttons
-    AddUser *addPage = new AddUser;
-    AendreBrugerprofil *changeProfilePage = new AendreBrugerprofil;
-    Aktivitetssimulering *aktivitetssimuleringPage = new Aktivitetssimulering;
-    Lysstyring *lysstyringPage = new Lysstyring;
-    AdfaerdsStyring *adfaerdsPage = new AdfaerdsStyring;
-    EnhedsHaandtering *enhedsHaandteringPage = new EnhedsHaandtering;
+    addPage = new AddUser;
+    changeProfilePage = new AendreBrugerprofil;
+    aktivitetssimuleringPage = new Aktivitetssimulering;
+    lysstyringPage = new Lysstyring;
+    adfaerdsPage = new AdfaerdsStyring;
+    enhedsHaandteringPage = new EnhedsHaandtering;
 
     //input pages into QList
     pages << addPage << changeProfilePage << aktivitetssimuleringPage << lysstyringPage
@@ -82,7 +76,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     }
 
     //Connect the buttons with the
-    connect(addPage, &AddUser::onSaveClick, this, &MainPage::handleSaveClick);
+    //connect(addPage, &AddUser::onSaveClick, this, &MainPage::handleSaveClick);
     connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::handleSaveClick);
     connect(aktivitetssimuleringPage,&Aktivitetssimulering::onSaveClick,this,&MainPage::handleSaveClick);
     connect(lysstyringPage,&Lysstyring::onSaveClick,this,&MainPage::handleSaveClick);
@@ -98,7 +92,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     connect(adfaerdsPage, &AdfaerdsStyring::onCancelClick, this, &MainPage::handleCancelClick);
     connect(enhedsHaandteringPage, &EnhedsHaandtering::onCancelClick, this, &MainPage::handleCancelClick);
 
-
+    connect(addPage, &AddUser::onSaveClick, this, &MainPage::addUserSave);
 
     setLayout(gridLayout);
 }
@@ -131,3 +125,12 @@ bool MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
     return false;
 }
 
+void MainPage::addUserSave() {
+
+// AddUser tempuser = pages.at(0);
+   QMap<QString,QString> userCredentials= addPage->getLogin();
+   qDebug()<<userCredentials;
+    vector<bool> userPriv= addPage->getStates();
+
+
+}

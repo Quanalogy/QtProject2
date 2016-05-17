@@ -8,7 +8,12 @@
 
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QStackedLayout>
-#include "MenuWidget.h"
+#include "AddUser.h"
+#include "AdfaerdsStyring.h"
+#include "AendreBrugerprofil.h"
+#include "Aktivitetssimulering.h"
+#include "Lysstyring.h"
+#include "EnhedsHaandtering.h"
 #include <QtWidgets/QPushButton>
 #include <QtCore/QMap>
 #include <vector>
@@ -27,11 +32,21 @@ public slots:
     void handleCancelClick();                       // a slot to handle when cancel has been pressed
                                                     // on one of the views
     bool slotAcceptUserLogin(QString&,QString&);    //checks if the username and password is known
+    void addUserSave();
 private:
     QString name = "Hovedmenu";                     // the window title name
     QList<MenuWidget *> pages;                      // All the pages avialable
     QList<MenuWidget *> userMenuPages;              // an of accessible menupages, costumized to the users
                                                     // rights
+    LoginDialog* loginDialog
+    QGridLayout *gridLayout;
+    AddUser *addPage;
+    AendreBrugerprofil *changeProfilePage;
+    Aktivitetssimulering *aktivitetssimuleringPage;
+    Lysstyring *lysstyringPage;
+    AdfaerdsStyring *adfaerdsPage;
+    EnhedsHaandtering *enhedsHaandteringPage;
+
     QList<QPushButton *> buttons;                   // a list of all the buttons the user can use
     int index;                                      // holds the current index in the menu that has
                                                     // been pressed

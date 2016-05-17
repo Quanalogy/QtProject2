@@ -11,18 +11,9 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QCheckBox>
 
-//Checkboxes for left side
-QCheckBox *adfaerdsCheck = new QCheckBox("Adfærdsstyring");
-QCheckBox *lightCheck = new QCheckBox("Lysstyring");
-QCheckBox *activityCheck = new QCheckBox("Aktivitetssimulering");
-QCheckBox *unitCheck = new QCheckBox("Enhedshåndtering");
-QCheckBox *changeUserCheck = new QCheckBox("Ændre brugerprofil");
-QCheckBox *addUser = new QCheckBox("Tilføj bruger");
 
-//brugernavn
-QLineEdit *usernameInput = new QLineEdit;
-//kodeord
-QLineEdit *passwordInput = new QLineEdit;
+
+
 
 AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     this->setWindowTitle(name);
@@ -54,15 +45,30 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     QPushButton *scanNFC = new QPushButton("Klik for at scanne NFC", this);
     QPushButton *saveBtn = new QPushButton("Gem", this);
 
+    //Checkboxes for left side
+    QCheckBox *adfaerdsCheck = new QCheckBox("Adfærdsstyring");
+    QCheckBox *lightCheck = new QCheckBox("Lysstyring");
+    QCheckBox *activityCheck = new QCheckBox("Aktivitetssimulering");
+    QCheckBox *unitCheck = new QCheckBox("Enhedshåndtering");
+    QCheckBox *changeUserCheck = new QCheckBox("Ændre brugerprofil");
+    QCheckBox *addUser = new QCheckBox("Tilføj bruger");
+    checkList << adfaerdsCheck <<lightCheck<<activityCheck<<unitCheck<<changeUserCheck
+              << addUser;
+
     //Left side inputBox
+    QLineEdit *usernameInput = new QLineEdit;
+
     // set guidance text
     usernameInput->setPlaceholderText("Indtast brugernavn her");
 
     //Right side Inputbox
+    QLineEdit *passwordInput = new QLineEdit;
     QLineEdit *NFCIDInput = new QLineEdit(this);
     // set guidance text
     passwordInput->setPlaceholderText("Indtast kodeord her");
     NFCIDInput->setPlaceholderText("Scannet NFC ID vises her");
+
+    lineList<<usernameInput<<passwordInput;
 
     //Add widgets for left side
     leftLayout->addWidget(username);
@@ -114,17 +120,21 @@ QString AddUser::getName() {
 vector<bool> AddUser::getStates() {
     vector<bool> states;
 
-    states.push_back(addUser->isChecked());
-    states.push_back(changeUserCheck->isChecked());
-    states.push_back(activityCheck->isChecked());
-    states.push_back(lightCheck->isChecked());
-    states.push_back(adfaerdsCheck->isChecked());
-    states.push_back(unitCheck->isChecked());
+
+    states.push_back(checkList.at(5)->isChecked());
+    states.push_back(checkList.at(4)->isChecked());
+    states.push_back(checkList.at(2)->isChecked());
+    states.push_back(checkList.at(1)->isChecked());
+    states.push_back(checkList.at(0)->isChecked());
+    states.push_back(checkList.at(3)->isChecked());
     return states;
 }
 
 QMap<QString,QString> AddUser::getLogin(){
-    QMap credentials<usernameInput,passwordInput>;
+    usernameInputString = lineList.at(0)->text();
+    passwordInputString = lineList.at(1)->text();
+    QMap<QString,QString> credentials;
+    credentials[usernameInputString] = passwordInputString;
     return credentials;
 
 
