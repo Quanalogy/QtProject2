@@ -75,9 +75,13 @@ QString AendreBrugerprofil::getName() {
 
 vector<bool> AendreBrugerprofil::getStates(){
         vector<bool> states;
-
-
-
+    states.push_back(checkList.at(0));
+    states.push_back(checkList.at(1));
+    states.push_back(checkList.at(2));
+    states.push_back(checkList.at(3));
+    states.push_back(checkList.at(4));
+    states.push_back(checkList.at(5));
+    return states;
 }
 
 QString AendreBrugerprofil::getNewPassword() {

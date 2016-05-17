@@ -77,7 +77,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
     //Connect the buttons with the
     //connect(addPage, &AddUser::onSaveClick, this, &MainPage::handleSaveClick);
-    connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::handleSaveClick);
+    connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
     connect(aktivitetssimuleringPage,&Aktivitetssimulering::onSaveClick,this,&MainPage::handleSaveClick);
     connect(lysstyringPage,&Lysstyring::onSaveClick,this,&MainPage::handleSaveClick);
     connect(adfaerdsPage,&AdfaerdsStyring::onSaveClick,this,&MainPage::handleSaveClick);
@@ -139,10 +139,10 @@ void MainPage::addUserSave() {
     User *newUser = new User(*brugernavn,*kodeord);
     vector<bool> userPriv= addPage->getStates();
     newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
-
-
     this->show();
     pages.at(index)->hide();
+}
 
+void MainPage::changeProfileSave(){
 
 }
