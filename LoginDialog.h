@@ -57,6 +57,7 @@ private:
  * A method to set up all dialog components and
  * initialize them.
  */
+//    QList users;
     void setUpGUI();
 
 public:

@@ -130,7 +130,19 @@ void MainPage::addUserSave() {
 // AddUser tempuser = pages.at(0);
    QMap<QString,QString> userCredentials= addPage->getLogin();
    qDebug()<<userCredentials;
+    QString *brugernavn= new QString(userCredentials.firstKey());
+    QString *kodeord = new QString(userCredentials.value(userCredentials.firstKey()));
+    qDebug()<<*brugernavn;
+    qDebug()<<*kodeord;
+    userMap.insert(*brugernavn,*kodeord);
+    qDebug()<<userMap;
+    User *newUser = new User(*brugernavn,*kodeord);
     vector<bool> userPriv= addPage->getStates();
+    newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
+
+
+    this->show();
+    pages.at(index)->hide();
 
 
 }

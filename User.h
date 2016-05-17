@@ -20,6 +20,7 @@ private:
     QString userName, password;
     bool adfaerd, lysstyring, aktivitet, enhed, aendreBrugerprofil, tilfoej;
 
+
 };
 
 
