@@ -59,6 +59,7 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     QCheckBox *activityCheck = new QCheckBox("Aktivitetssimulering", this);
     QCheckBox *unitCheck = new QCheckBox("Enhedshåndtering", this);
     QCheckBox *changeUserCheck = new QCheckBox("Ændre brugerprofil", this);
+    QCheckBox *adduser = new QCheckBox("Tilføj bruger",this);
 
     //Add widgets for left side
     leftLayout->addWidget(username);
@@ -66,6 +67,7 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     leftLayout->addWidget(usernameInput);
     leftLayout->insertSpacing(20,10);
     leftLayout->addWidget(access);
+    leftLayout->addWidget(adduser);
     leftLayout->addWidget(adfaerdsCheck);
     leftLayout->addWidget(lightCheck);
     leftLayout->addWidget(activityCheck);
