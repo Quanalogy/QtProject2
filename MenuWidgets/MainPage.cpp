@@ -77,7 +77,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
     //Connect the buttons with the
     //connect(addPage, &AddUser::onSaveClick, this, &MainPage::handleSaveClick);
-    connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::handleSaveClick);
+    connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
     connect(aktivitetssimuleringPage,&Aktivitetssimulering::onSaveClick,this,&MainPage::handleSaveClick);
     connect(lysstyringPage,&Lysstyring::onSaveClick,this,&MainPage::handleSaveClick);
     connect(adfaerdsPage,&AdfaerdsStyring::onSaveClick,this,&MainPage::handleSaveClick);
@@ -138,6 +138,7 @@ void MainPage::addUserSave() {
         errorMessage.setText("Du skal skrive både brugernavn og kodeord!");
         errorMessage.exec();
     } else {
+
         userMap.insert(*brugernavn,*kodeord);
         User *newUser = new User(*brugernavn,*kodeord);
         vector<bool> userPriv= addPage->getStates();
@@ -146,7 +147,14 @@ void MainPage::addUserSave() {
         pages.at(index)->hide();
     }
 
-
-
-
 }
+ void MainPage::changeProfileSave() {
+     //bruger 1 ændring
+     QString kodeOrd= changeProfilePage->getNewPassword();
+     userMap.insert("Admin",kodeOrd);
+    qDebug()<<userMap;
+
+
+     this->show();
+     pages.at(index)->hide();
+ }
