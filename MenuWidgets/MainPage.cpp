@@ -93,6 +93,17 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     connect(adfaerdsPage,&AdfaerdsStyring::onSaveClick,this,&MainPage::handleSaveClick);
     connect(enhedsHaandteringPage,&EnhedsHaandtering::onSaveClick,this,&MainPage::handleSaveClick);
 
+
+    //Connect annuller knap
+    connect(addPage, &AddUser::onCancelClick, this, &MainPage::handleCancelClick);
+    connect(changeProfilePage, &AendreBrugerprofil::onCancelClick, this, &MainPage::handleCancelClick);
+    connect(aktivitetssimuleringPage, &Aktivitetssimulering::onCancelClick, this, &MainPage::handleCancelClick);
+    connect(lysstyringPage, &Lysstyring::onCancelClick, this, &MainPage::handleCancelClick);
+    connect(adfaerdsPage, &AdfaerdsStyring::onCancelClick, this, &MainPage::handleCancelClick);
+    connect(enhedsHaandteringPage, &EnhedsHaandtering::onCancelClick, this, &MainPage::handleCancelClick);
+
+
+
     setLayout(gridLayout);
 }
 
@@ -123,4 +134,11 @@ bool MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
     }
 
     return false;
+}
+
+void MainPage::handleAddSave() {
+
+
+    this->show();
+    pages.at(index)->hide();
 }

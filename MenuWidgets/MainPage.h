@@ -23,6 +23,7 @@ public:
 public slots:
     void ChangeView();
     void handleSaveClick();
+    void handleAddSave();
     void handleCancelClick();
     bool slotAcceptUserLogin(QString&,QString&);
 private:
