@@ -88,3 +88,9 @@ QString AendreBrugerprofil::getNewPassword() {
    QString kodeOrd= password->text();
     return kodeOrd;
 }
+
+QList<QString> getPasswords(){
+    QList<QString> kodeListe;
+
+    return  kodeListe;
+}
