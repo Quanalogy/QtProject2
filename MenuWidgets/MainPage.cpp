@@ -77,7 +77,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
     //Connect the buttons with the
     //connect(addPage, &AddUser::onSaveClick, this, &MainPage::handleSaveClick);
-    connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
+    connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::handleSaveClick);
     connect(aktivitetssimuleringPage,&Aktivitetssimulering::onSaveClick,this,&MainPage::handleSaveClick);
     connect(lysstyringPage,&Lysstyring::onSaveClick,this,&MainPage::handleSaveClick);
     connect(adfaerdsPage,&AdfaerdsStyring::onSaveClick,this,&MainPage::handleSaveClick);
@@ -118,6 +118,8 @@ bool MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
     //qDebug (userName_.toLatin1());
     currentUserName = userName;
     currentPassword = password;
+
+
     if(userMap.value(currentUserName) == currentPassword){
         return true;
     }
@@ -128,21 +130,23 @@ bool MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
 void MainPage::addUserSave() {
 
 // AddUser tempuser = pages.at(0);
-   QMap<QString,QString> userCredentials= addPage->getLogin();
-   qDebug()<<userCredentials;
+    QMap<QString,QString> userCredentials= addPage->getLogin();
     QString *brugernavn= new QString(userCredentials.firstKey());
     QString *kodeord = new QString(userCredentials.value(userCredentials.firstKey()));
-    qDebug()<<*brugernavn;
-    qDebug()<<*kodeord;
-    userMap.insert(*brugernavn,*kodeord);
-    qDebug()<<userMap;
-    User *newUser = new User(*brugernavn,*kodeord);
-    vector<bool> userPriv= addPage->getStates();
-    newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
-    this->show();
-    pages.at(index)->hide();
-}
+    if(brugernavn == NULL || *brugernavn == "" || kodeord == NULL || *kodeord == "" ){
+        QMessageBox errorMessage;
+        errorMessage.setText("Du skal skrive både brugernavn og kodeord!");
+        errorMessage.exec();
+    } else {
+        userMap.insert(*brugernavn,*kodeord);
+        User *newUser = new User(*brugernavn,*kodeord);
+        vector<bool> userPriv= addPage->getStates();
+        newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
+        this->show();
+        pages.at(index)->hide();
+    }
 
-void MainPage::changeProfileSave(){
+
+
 
 }

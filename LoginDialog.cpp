@@ -34,16 +34,16 @@ void LoginDialog::setUpGUI() {
 // initialize buttons
     buttons = new QDialogButtonBox(this);
     buttons->addButton(QDialogButtonBox::Ok);
-    buttons->addButton(QDialogButtonBox::Cancel);
+    //buttons->addButton(QDialogButtonBox::Cancel);
     buttons->button(QDialogButtonBox::Ok)->setText(tr("Log ind"));
-    buttons->button(QDialogButtonBox::Cancel)->setText(tr("Annuller"));
+    //buttons->button(QDialogButtonBox::Cancel)->setText(tr("Annuller"));
 
     // connects slots
-    connect(buttons->button(QDialogButtonBox::Cancel),
+    /*connect(buttons->button(QDialogButtonBox::Cancel),
             SIGNAL (clicked()),
             this,
             SLOT (close())
-    );
+    );*/
 
     connect(buttons->button(QDialogButtonBox::Ok),
             SIGNAL (clicked()),

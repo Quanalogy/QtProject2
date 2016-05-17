@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/Debug/QtProject2_automoc.cpp">
-      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/Debug/QtProject2_automoc.cpp" isTestSource="false" />
+    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/Semesterprojekt2-cad79e91/cad79e91/Debug/QtProject2_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/Semesterprojekt2-cad79e91/cad79e91/Debug/QtProject2_automoc.cpp" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/MinSizeRel/QtProject2_automoc.cpp">
-      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/MinSizeRel/QtProject2_automoc.cpp" isTestSource="false" />
+    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/Semesterprojekt2-cad79e91/cad79e91/MinSizeRel/QtProject2_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/Semesterprojekt2-cad79e91/cad79e91/MinSizeRel/QtProject2_automoc.cpp" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/RelWithDebInfo/QtProject2_automoc.cpp">
-      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/RelWithDebInfo/QtProject2_automoc.cpp" isTestSource="false" />
+    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/Semesterprojekt2-cad79e91/cad79e91/RelWithDebInfo/QtProject2_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/Semesterprojekt2-cad79e91/cad79e91/RelWithDebInfo/QtProject2_automoc.cpp" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/Release/QtProject2_automoc.cpp">
-      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/Release/QtProject2_automoc.cpp" isTestSource="false" />
+    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/Semesterprojekt2-cad79e91/cad79e91/Release/QtProject2_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/Semesterprojekt2-cad79e91/cad79e91/Release/QtProject2_automoc.cpp" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/User.h" isTestSource="false" />
@@ -23,18 +23,18 @@
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/VerticalBox.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Nesting.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Aktivitetssimulering.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/EnhedsHaandtering.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Lysstyring.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AendreBrugerprofil.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MainPage.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Aktivitetssimulering.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Lysstyring.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AddUser.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Lysstyring.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/EnhedsHaandtering.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Aktivitetssimulering.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MainPage.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Aktivitetssimulering.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AddUser.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MenuWidget.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AendreBrugerprofil.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AddUser.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MainPage.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MainPage.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AendreBrugerprofil.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MenuWidget.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AdfaerdsStyring.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AdfaerdsStyring.cpp" isTestSource="false" />
@@ -47,18 +47,20 @@
     <orderEntry type="module-library">
       <library name="Header Search Paths">
         <CLASSES>
-          <root url="file://C:/MinGW/lib/gcc/mingw32/4.9.3/include" />
           <root url="file://C:/MinGW/lib/gcc/mingw32/4.9.3/include-fixed" />
+          <root url="file://C:/MinGW/lib/gcc/mingw32/4.9.3/include" />
+          <root url="file://C:/MinGW/mingw32/include" />
           <root url="file://C:/MinGW/include" />
-          <root url="file://C:/Qt/5.5/mingw492_32/include" />
-          <root url="file://C:/Qt/5.5/mingw492_32/mkspecs/win32-g++" />
+          <root url="file://C:/Qt/5.6/mingw49_32/include" />
+          <root url="file://C:/Qt/5.6/mingw49_32/mkspecs/win32-g++" />
         </CLASSES>
         <SOURCES>
-          <root url="file://C:/MinGW/lib/gcc/mingw32/4.9.3/include" />
           <root url="file://C:/MinGW/lib/gcc/mingw32/4.9.3/include-fixed" />
+          <root url="file://C:/MinGW/lib/gcc/mingw32/4.9.3/include" />
+          <root url="file://C:/MinGW/mingw32/include" />
           <root url="file://C:/MinGW/include" />
-          <root url="file://C:/Qt/5.5/mingw492_32/include" />
-          <root url="file://C:/Qt/5.5/mingw492_32/mkspecs/win32-g++" />
+          <root url="file://C:/Qt/5.6/mingw49_32/include" />
+          <root url="file://C:/Qt/5.6/mingw49_32/mkspecs/win32-g++" />
         </SOURCES>
       </library>
     </orderEntry>
