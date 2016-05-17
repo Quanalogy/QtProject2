@@ -13,9 +13,21 @@ Q_OBJECT
 public:
     AendreBrugerprofil(QWidget *parent = 0);
     QString getName();
+    vector<bool> getStates();
+    QString getNewPassword();
 
 private:
     QString name = "Ændre brugerprofil";
+    QCheckBox *userLockedCheck;
+    QCheckBox *deleteUserCheck;
+    QCheckBox *adfaerdsCheck;
+    QCheckBox *lightCheck;
+    QCheckBox *activitySimCheck;
+    QCheckBox *unitControlCheck;
+    QCheckBox *changeUserCheck;
+    QCheckBox *addUserCheck;
+    QLineEdit *password;
+    QList<QCheckBox *> checkList;
 
 signals:
     void onSaveClick();

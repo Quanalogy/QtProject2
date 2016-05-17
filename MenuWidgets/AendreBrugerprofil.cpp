@@ -24,18 +24,22 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     userAccess->setText("<h2>Bruger har adgang til</h2>");
 
     //inputbox for new password
-    QLineEdit *password = new QLineEdit(this);
+    password = new QLineEdit(this);
     password->setPlaceholderText("Indtast nyt kodeord her");
 
     //Add checkboxes
-    QCheckBox *userLockedCheck = new QCheckBox("Bruger låst");
-    QCheckBox *deleteUserCheck = new QCheckBox("Markér for sletning");
-    QCheckBox *adfaerdsCheck = new QCheckBox("Adfærdsstyring");
-    QCheckBox *lightCheck = new QCheckBox("Lysstyring");
-    QCheckBox *activitySimCheck = new QCheckBox("Aktivitetssimulering");
-    QCheckBox *unitControlCheck = new QCheckBox("Enhedshåndtering");
-    QCheckBox *changeUserCheck = new QCheckBox("Ændre brugerprofil");
-    QCheckBox *addUserCheck = new QCheckBox("Tilføj brugerprofil");
+    userLockedCheck = new QCheckBox("Bruger låst");
+    deleteUserCheck = new QCheckBox("Markér for sletning");
+    adfaerdsCheck = new QCheckBox("Adfærdsstyring");
+    lightCheck = new QCheckBox("Lysstyring");
+    activitySimCheck = new QCheckBox("Aktivitetssimulering");
+    unitControlCheck = new QCheckBox("Enhedshåndtering");
+    changeUserCheck = new QCheckBox("Ændre brugerprofil");
+    addUserCheck = new QCheckBox("Tilføj brugerprofil");
+
+    checkList<<addUserCheck<<changeUserCheck<<activitySimCheck<<lightCheck<<adfaerdsCheck
+    << unitControlCheck;
+
 
     //Pushbuttons
     QPushButton *saveBtn = new QPushButton("Gem", this);
@@ -67,4 +71,16 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
 
 QString AendreBrugerprofil::getName() {
     return name;
+}
+
+vector<bool> AendreBrugerprofil::getStates(){
+        vector<bool> states;
+
+
+
+}
+
+QString AendreBrugerprofil::getNewPassword() {
+   QString kodeOrd= password->text();
+    return kodeOrd;
 }
