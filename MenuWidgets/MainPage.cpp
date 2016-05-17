@@ -60,18 +60,18 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
             << adfaerdsPage << enhedsHaandteringPage;
 
     rights = adminUser->getRights();
-    cout << rights.size() << endl;
+    // start on finding the relevant menupages for the user
     int pos = 0;
     for (auto i = pages.begin(); i != pages.end(); ++i,++pos) {
-        if(!rights.at(pos)){
-            pages.erase(i);
+        if(rights.at(pos)){
+            userMenuPages << pages.at(pos);
         }
     }
-    cout << pos << endl;
+    //Begin to add buttons, that map to the menupages the user has access to
     pos =0;
-    for (auto i = pages.begin(); i != pages.end(); ++i,++pos) {
+    for (auto i = userMenuPages.begin(); i != userMenuPages.end(); ++i,++pos) {
 
-            QPushButton *btn = new QPushButton(pages[pos]->getName(), this);
+            QPushButton *btn = new QPushButton(userMenuPages[pos]->getName(), this);
             buttons << btn;
             if(pos%2 == 0){
                 gridLayout->addWidget(btn, (int)floor(pos/2), 0, 0);
@@ -79,11 +79,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
                 gridLayout->addWidget(btn, (int)floor(pos/2), 1, 0);
             }
             connect(buttons.at(pos), &QPushButton::clicked, this, &MainPage::ChangeView);
-       // if(!rights.at(pos)){
-       //     btn->hide();
-       // }
     }
-    cout << pos << endl;
 
     //Connect the buttons with the
     connect(addPage, &AddUser::onSaveClick, this, &MainPage::handleSaveClick);
@@ -111,7 +107,6 @@ void MainPage::ChangeView() {
     index = buttons.indexOf((QPushButton*)QObject::sender());
     pages.at(index)->show();
     this->hide();
-    //this->repaint();
 }
 
 void MainPage::handleSaveClick() {
@@ -129,16 +124,10 @@ bool MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
     //qDebug (userName_.toLatin1());
     currentUserName = userName;
     currentPassword = password;
-    if(userMap.value(userName) == currentPassword){
+    if(userMap.value(currentUserName) == currentPassword){
         return true;
     }
 
     return false;
 }
 
-void MainPage::handleAddSave() {
-
-
-    this->show();
-    pages.at(index)->hide();
-}
