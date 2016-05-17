@@ -11,6 +11,19 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QCheckBox>
 
+//Checkboxes for left side
+QCheckBox *adfaerdsCheck = new QCheckBox("Adfærdsstyring");
+QCheckBox *lightCheck = new QCheckBox("Lysstyring");
+QCheckBox *activityCheck = new QCheckBox("Aktivitetssimulering");
+QCheckBox *unitCheck = new QCheckBox("Enhedshåndtering");
+QCheckBox *changeUserCheck = new QCheckBox("Ændre brugerprofil");
+QCheckBox *addUser = new QCheckBox("Tilføj bruger");
+
+//brugernavn
+QLineEdit *usernameInput = new QLineEdit;
+//kodeord
+QLineEdit *passwordInput = new QLineEdit;
+
 AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     this->setWindowTitle(name);
     //Create layouts for the page
@@ -42,24 +55,14 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     QPushButton *saveBtn = new QPushButton("Gem", this);
 
     //Left side inputBox
-    QLineEdit *usernameInput = new QLineEdit(this);
     // set guidance text
     usernameInput->setPlaceholderText("Indtast brugernavn her");
 
     //Right side Inputbox
-    QLineEdit *passwordInput = new QLineEdit(this);
     QLineEdit *NFCIDInput = new QLineEdit(this);
     // set guidance text
     passwordInput->setPlaceholderText("Indtast kodeord her");
     NFCIDInput->setPlaceholderText("Scannet NFC ID vises her");
-
-    //Checkboxes for left side
-    QCheckBox *adfaerdsCheck = new QCheckBox("Adfærdsstyring", this);
-    QCheckBox *lightCheck = new QCheckBox("Lysstyring", this);
-    QCheckBox *activityCheck = new QCheckBox("Aktivitetssimulering", this);
-    QCheckBox *unitCheck = new QCheckBox("Enhedshåndtering", this);
-    QCheckBox *changeUserCheck = new QCheckBox("Ændre brugerprofil", this);
-    QCheckBox *adduser = new QCheckBox("Tilføj bruger",this);
 
     //Add widgets for left side
     leftLayout->addWidget(username);
@@ -67,7 +70,7 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     leftLayout->addWidget(usernameInput);
     leftLayout->insertSpacing(20,10);
     leftLayout->addWidget(access);
-    leftLayout->addWidget(adduser);
+    leftLayout->addWidget(addUser);
     leftLayout->addWidget(adfaerdsCheck);
     leftLayout->addWidget(lightCheck);
     leftLayout->addWidget(activityCheck);
@@ -106,4 +109,23 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
 
 QString AddUser::getName() {
     return name;
+}
+
+vector<bool> AddUser::getStates() {
+    vector<bool> states;
+
+    states.push_back(addUser->isChecked());
+    states.push_back(changeUserCheck->isChecked());
+    states.push_back(activityCheck->isChecked());
+    states.push_back(lightCheck->isChecked());
+    states.push_back(adfaerdsCheck->isChecked());
+    states.push_back(unitCheck->isChecked());
+    return states;
+}
+
+QMap<QString,QString> AddUser::getLogin(){
+    QMap credentials<usernameInput,passwordInput>;
+    return credentials;
+
+
 }

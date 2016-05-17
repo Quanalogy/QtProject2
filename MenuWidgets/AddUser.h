@@ -13,6 +13,8 @@ Q_OBJECT
 public:
     AddUser(QWidget *parent = 0);
     QString getName();
+    vector<bool> getStates();
+    QMap<QString,QString> getLogin();
 
 signals:
     void onSaveClick();
