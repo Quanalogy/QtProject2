@@ -52,7 +52,7 @@ private:
     QList<QPushButton *> buttons;                   // a list of all the buttons the user can use
     int index;                                      // holds the current index in the menu that has
                                                     // been pressed
-    QMap<QString, QString> userMap;                 // holds all the users in our program
+    QHash<QString, QString> userMap;                 // holds all the users in our program
     QString currentUserName;                        // holds the current username try
     QString currentPassword;                        // holds the current password try
     vector<bool> rights;

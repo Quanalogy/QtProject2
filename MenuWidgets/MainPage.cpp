@@ -138,9 +138,10 @@ void MainPage::addUserSave() {
         errorMessage.setText("Du skal skrive både brugernavn og kodeord!");
         errorMessage.exec();
     } else {
-
+       // int userNumber=2;
         userMap.insert(*brugernavn,*kodeord);
         User *newUser = new User(*brugernavn,*kodeord);
+        //userNumber++;
         vector<bool> userPriv= addPage->getStates();
         newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
         this->show();
@@ -151,7 +152,9 @@ void MainPage::addUserSave() {
  void MainPage::changeProfileSave() {
      //bruger 1 ændring
      QString kodeOrd= changeProfilePage->getNewPassword();
-     userMap.insert("Admin",kodeOrd);
+     //QList<> liste;
+     //liste= (userMap.keys().at(0));
+     userMap.insert((userMap.keys().at(0)),kodeOrd);
     qDebug()<<userMap;
 
 
