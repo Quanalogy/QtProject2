@@ -17,6 +17,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtCore/QMap>
 #include <vector>
+#include "../LoginDialog.h"
 
 using namespace std;
 class MainPage : public MenuWidget{
@@ -38,7 +39,7 @@ private:
     QList<MenuWidget *> pages;                      // All the pages avialable
     QList<MenuWidget *> userMenuPages;              // an of accessible menupages, costumized to the users
                                                     // rights
-    LoginDialog* loginDialog
+    LoginDialog* loginDialog;
     QGridLayout *gridLayout;
     AddUser *addPage;
     AendreBrugerprofil *changeProfilePage;
