@@ -35,6 +35,7 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     QCheckBox *activitySimCheck = new QCheckBox("Aktivitetssimulering");
     QCheckBox *unitControlCheck = new QCheckBox("Enhedshåndtering");
     QCheckBox *changeUserCheck = new QCheckBox("Ændre brugerprofil");
+    QCheckBox *addUserCheck = new QCheckBox("Tilføj brugerprofil");
 
     //Pushbuttons
     QPushButton *saveBtn = new QPushButton("Gem", this);
@@ -56,6 +57,7 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     mainLayout->addWidget(password,0,Qt::AlignTop);
     mainLayout->addWidget(userAccess,0,Qt::AlignTop);
     mainLayout->addWidget(adfaerdsCheck,0,Qt::AlignTop);
+    mainLayout->addWidget(addUserCheck,0,Qt::AlignTop);
     mainLayout->addWidget(lightCheck,0,Qt::AlignTop);
     mainLayout->addWidget(activitySimCheck,0,Qt::AlignTop);
     mainLayout->addWidget(unitControlCheck,0,Qt::AlignTop);
