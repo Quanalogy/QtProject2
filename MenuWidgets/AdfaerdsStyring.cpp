@@ -38,15 +38,14 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     //Line edits
 
     //Dags edit boxes til interval
-    QLineEdit *dagFraTime = new QLineEdit(this);
-    QLineEdit *dagFraMin = new QLineEdit(this);
-    QLineEdit *dagTilTime = new QLineEdit(this);
-    QLineEdit *dagTilMin = new QLineEdit(this);
-    QLineEdit *natFraTime = new QLineEdit(this);
-    QLineEdit *natFraMin = new QLineEdit(this);
-    QLineEdit *natTilTime = new QLineEdit(this);
-    QLineEdit *natTilMin = new QLineEdit(this);
-
+    dagFraTime = new QLineEdit(this);
+    dagFraMin = new QLineEdit(this);
+    dagTilTime = new QLineEdit(this);
+    dagTilMin = new QLineEdit(this);
+    natFraTime = new QLineEdit(this);
+    natFraMin = new QLineEdit(this);
+    natTilTime = new QLineEdit(this);
+    natTilMin = new QLineEdit(this);
 
     //Tids-editlines bredde sættes
     dagFraTime->setFixedWidth(width()/16);
@@ -104,6 +103,8 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     intervalDag->setAlignment(Qt::AlignTop);
     natProfil->setAlignment(Qt::AlignTop);
     intervalNat->setAlignment(Qt::AlignTop);
+
+    // Set af horizontal tids bokse layouts
 
     timeDagFraHorizontalLayout->addWidget(timeDagFra);
     timeDagFraHorizontalLayout->addWidget(dagFraTime);
@@ -166,6 +167,7 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
 
     connect(save,&QPushButton::clicked,this,&AdfaerdsStyring::onSaveClick);
     connect(cancel,&QPushButton::clicked,this,&AdfaerdsStyring::onCancelClick);
+    connect(save,&QPushButton::clicked,this,&AdfaerdsStyring::saveIntervals);
 
     controlHorizontalLayout->addLayout(lefVertivalLayout);
     controlHorizontalLayout->addSpacing(4);
@@ -173,6 +175,17 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
 
     setLayout(controlHorizontalLayout);
 
+}
+
+void AdfaerdsStyring::saveIntervals() {
+    idagFraTime = dagFraTime->text().toInt();
+    idagFraMin = dagFraMin->text().toInt();
+    idagTilTime = dagTilTime->text().toInt();
+    idagTilMin = dagTilMin->text().toInt();
+    inatFraTime = natFraTime->text().toInt();
+    inatFraMin = natFraMin->text().toInt();
+    inatTilTime = natTilTime->text().toInt();
+    inatTilMin = natTilMin->text().toInt();
 }
 
 QString AdfaerdsStyring::getName() {
