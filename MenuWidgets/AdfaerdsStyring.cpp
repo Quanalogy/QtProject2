@@ -6,6 +6,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QLabel>
 #include "AdfaerdsStyring.h"
 
 AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
@@ -39,10 +40,10 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     leftList << dagProfil << intervalDag << profilgaelder1;
     rightList << natProfil << intervalNat << profilgaelder2;
     //tekst til labels
-    dagProfil->setText("<h1>Dags profil</h1>");
+    dagProfil->setText("<h1>Dagsprofil</h1>");
     intervalDag->setText("<h2>Interval</h2>");
     profilgaelder1->setText("<h3>Profilen gælder for</h3>");
-    natProfil->setText("<h1>Nat Profil</h1>");
+    natProfil->setText("<h1>Aftenprofil</h1>");
     intervalNat->setText("<h2>Interval</h2>");
     profilgaelder2->setText("<h3>Profilen gælder for</h3>");
 
