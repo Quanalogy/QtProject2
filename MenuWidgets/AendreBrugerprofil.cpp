@@ -8,12 +8,15 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include "AendreBrugerprofil.h"
+//#include "../Globals.h"
+
 
 AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     this->setWindowTitle(name);
     //Add layouts
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    QHBoxLayout *mainLayout = new QHBoxLayout(this);
     QHBoxLayout *buttonLayout = new QHBoxLayout;
+    QVBoxLayout *userLayout = new QVBoxLayout[5];
     //Labels
     QLabel *user = new QLabel(this);
     QLabel *changePass = new QLabel(this);
@@ -53,19 +56,25 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     connect(cancelBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onCancelClick);
     connect(saveBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onSaveClick);
 
-    //Add to main layout
-    mainLayout->addWidget(user,0,Qt::AlignTop);
-    mainLayout->addWidget(userLockedCheck,0,Qt::AlignTop);
-    mainLayout->addWidget(deleteUserCheck,0,Qt::AlignTop);
-    mainLayout->addWidget(changePass,0,Qt::AlignCenter);
-    mainLayout->addWidget(password,0,Qt::AlignTop);
-    mainLayout->addWidget(userAccess,0,Qt::AlignTop);
-    mainLayout->addWidget(adfaerdsCheck,0,Qt::AlignTop);
-    mainLayout->addWidget(addUserCheck,0,Qt::AlignTop);
-    mainLayout->addWidget(lightCheck,0,Qt::AlignTop);
-    mainLayout->addWidget(activitySimCheck,0,Qt::AlignTop);
-    mainLayout->addWidget(unitControlCheck,0,Qt::AlignTop);
-    mainLayout->addWidget(changeUserCheck,0,Qt::AlignTop);
+    //Add to userlayout
+   /* for (int i = 0; i <=userCount ; ++i) {
+
+
+        userLayout[i].addWidget(user, 0, Qt::AlignTop);
+        userLayout[i].addWidget(userLockedCheck, 0, Qt::AlignTop);
+        userLayout[i].addWidget(deleteUserCheck, 0, Qt::AlignTop);
+        userLayout[i].addWidget(changePass, 0, Qt::AlignCenter);
+        userLayout[i].addWidget(password, 0, Qt::AlignTop);
+        userLayout[i].addWidget(userAccess, 0, Qt::AlignTop);
+        userLayout[i].addWidget(adfaerdsCheck, 0, Qt::AlignTop);
+        userLayout[i].addWidget(addUserCheck, 0, Qt::AlignTop);
+        userLayout[i].addWidget(lightCheck, 0, Qt::AlignTop);
+        userLayout[i].addWidget(activitySimCheck, 0, Qt::AlignTop);
+        userLayout[i].addWidget(unitControlCheck, 0, Qt::AlignTop);
+        userLayout[i].addWidget(changeUserCheck, 0, Qt::AlignTop);
+        mainLayout->addLayout(userLayout);
+
+    }*/
     mainLayout->addLayout(buttonLayout);
 }
 
@@ -75,12 +84,22 @@ QString AendreBrugerprofil::getName() {
 
 vector<bool> AendreBrugerprofil::getStates(){
         vector<bool> states;
-
-
-
+    states.push_back(checkList.at(0));
+    states.push_back(checkList.at(1));
+    states.push_back(checkList.at(2));
+    states.push_back(checkList.at(3));
+    states.push_back(checkList.at(4));
+    states.push_back(checkList.at(5));
+    return states;
 }
 
 QString AendreBrugerprofil::getNewPassword() {
    QString kodeOrd= password->text();
     return kodeOrd;
+}
+
+QList<QString> getPasswords(){
+    QList<QString> kodeListe;
+
+    return  kodeListe;
 }

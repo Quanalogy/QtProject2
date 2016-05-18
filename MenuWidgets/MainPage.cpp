@@ -8,10 +8,10 @@
 #include "MainPage.h"
 #include "../User.h"
 #include "../QMainApp.h"
+#include "../Globals.h"
 
 
 MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
-
     this->setWindowTitle(name);
 
     //Test with users
@@ -57,7 +57,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
     //Connect the buttons with the
     //connect(addPage, &AddUser::onSaveClick, this, &MainPage::handleSaveClick);
-    connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::handleSaveClick);
+    connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
     connect(aktivitetssimuleringPage,&Aktivitetssimulering::onSaveClick,this,&MainPage::handleSaveClick);
     connect(lysstyringPage,&Lysstyring::onSaveClick,this,&MainPage::handleSaveClick);
     connect(adfaerdsPage,&AdfaerdsStyring::onSaveClick,this,&MainPage::handleSaveClick);
@@ -124,12 +124,22 @@ void MainPage::addUserSave() {
         User *newUser = new User(*brugernavn,*kodeord);
         static_cast<QMainApp *> qApp->addUserToList(newUser);
         vector<bool> userPriv= addPage->getStates();
+        userCount++;
         newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
         this->show();
         pages.at(index)->hide();
     }
 
-
-
-
 }
+ void MainPage::changeProfileSave() {
+     //bruger 1 ændring
+     QString kodeOrd= changeProfilePage->getNewPassword();
+     //QList<> liste;
+     //liste= (userMap.keys().at(0));
+     userMap.insert((userMap.keys().at(0)),kodeOrd);
+    qDebug()<<userMap;
+
+
+     this->show();
+     pages.at(index)->hide();
+ }

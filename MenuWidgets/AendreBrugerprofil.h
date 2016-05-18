@@ -15,6 +15,7 @@ public:
     QString getName();
     vector<bool> getStates();
     QString getNewPassword();
+    QList<QString> getPasswords();
 
 private:
     QString name = "Ændre brugerprofil";
@@ -28,6 +29,7 @@ private:
     QCheckBox *addUserCheck;
     QLineEdit *password;
     QList<QCheckBox *> checkList;
+
 
 signals:
     void onSaveClick();
