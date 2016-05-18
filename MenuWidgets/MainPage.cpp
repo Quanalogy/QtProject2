@@ -144,7 +144,7 @@ void MainPage::addUserSave() {
         User *newUser = new User(*brugernavn,*kodeord);
         //userNumber++;
         vector<bool> userPriv= addPage->getStates();
-        userCount++;
+        //userCount++;
         newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
         this->show();
         pages.at(index)->hide();
@@ -153,10 +153,11 @@ void MainPage::addUserSave() {
 }
  void MainPage::changeProfileSave() {
      //bruger 1 ændring
-     QString kodeOrd= changeProfilePage->getNewPassword();
+     QList<QString> kodeOrd= changeProfilePage->getPasswords();
      //QList<> liste;
      //liste= (userMap.keys().at(0));
-     userMap.insert((userMap.keys().at(0)),kodeOrd);
+     userMap.insert((userMap.keys().at(0)),kodeOrd.at(0));
+
     qDebug()<<userMap;
 
 
