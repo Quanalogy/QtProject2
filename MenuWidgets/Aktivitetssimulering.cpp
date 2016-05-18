@@ -67,7 +67,7 @@ QString Aktivitetssimulering::getName() {
     return name;
 }
 
-bool actSimOn(){
+bool Aktivitetssimulering::actSimOn(){
 
 
 }

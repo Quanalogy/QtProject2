@@ -139,8 +139,6 @@ void MainPage::addUserSave() {
      userMap.insert((userMap.keys().at(0)),kodeOrd.at(0));
 
     qDebug()<<userMap;
-
-
      this->show();
      pages.at(index)->hide();
  }

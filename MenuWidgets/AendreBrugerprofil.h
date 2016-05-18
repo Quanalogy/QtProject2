@@ -8,6 +8,7 @@
 
 #include "MenuWidget.h"
 
+
 class AendreBrugerprofil : public MenuWidget {
 Q_OBJECT
 public:
@@ -19,19 +20,36 @@ public:
 
 private:
     QString name = "Ændre brugerprofil";
-    QCheckBox *userLockedCheck[];
-    QCheckBox *deleteUserCheck[];
-    QCheckBox *adfaerdsCheck[];
-    QCheckBox *lightCheck[];
-    QCheckBox *activitySimCheck[];
-    QCheckBox *unitControlCheck[];
-    QCheckBox *changeUserCheck[];
-    QCheckBox *addUserCheck[];
-    QLineEdit *password[];
-    QList<QCheckBox *> checkList[5];
-    QLabel *user[];
-    QLabel *changePass[];
-    QLabel *userAccess[];
+    QStringList userPages;
+    QCheckBox *userLockedCheck;
+    QCheckBox *deleteUserCheck;
+    QCheckBox *adfaerdsCheck;
+    QCheckBox *lightCheck;
+    QCheckBox *activitySimCheck;
+    QCheckBox *unitControlCheck;
+    QCheckBox *changeUserCheck;
+    QCheckBox *addUserCheck;
+    QList<QLineEdit> *passwordList;
+    QList<QCheckBox *> checkList;
+    QLineEdit *password;
+    QLabel *user;
+    QLabel *changePass;
+    QLabel *userAccess;
+
+    QCheckBox *userLockedCheck1;
+    QCheckBox *deleteUserCheck1;
+    QCheckBox *adfaerdsCheck1;
+    QCheckBox *lightCheck1;
+    QCheckBox *activitySimCheck1;
+    QCheckBox *unitControlCheck1;
+    QCheckBox *changeUserCheck1;
+    QCheckBox *addUserCheck1;
+    QLineEdit *password1;
+    QList<QCheckBox *> checkList1;
+    QLabel *user1;
+    QLabel *changePass1;
+    QLabel *userAccess1;
+    //QList<QList *> labels;
 
 
 
