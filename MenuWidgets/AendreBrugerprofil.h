@@ -30,7 +30,7 @@ private:
     QCheckBox *changeUserCheck;
     QCheckBox *addUserCheck;
     QList<QLineEdit> *passwordList;
-    QList<QCheckBox *> checkList;
+    QList<QCheckBox *> checkList[];
     QLineEdit *password;
     QLabel *user;
     QLabel *changePass;
@@ -52,9 +52,7 @@ private:
     //QList<QList *> labels;
 
 
-signals:
-    void onSaveClick();
-    void onCancelClick();
+
 };
 
 

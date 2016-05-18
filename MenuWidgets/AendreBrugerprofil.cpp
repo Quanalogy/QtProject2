@@ -32,15 +32,22 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
 
     //set text on labels
     //  for (int j = 0; j <=size ; ++j) {
-   /* QList<User *> brugerliste =  static_cast<QMainApp *> qApp->getUserList();
-    if(brugerliste.first().)
-    {
+    QList<User *> brugerliste =  static_cast<QMainApp *> qApp->getUserList();
+   /* if(brugerliste.first().)
+    {*/
+    if(!brugerliste.isEmpty()){
+        QString brugerNavn= brugerliste.first()->getName();
+        user->setText(brugerNavn);
+        qDebug()<<brugerNavn;
+        changePass->setText("<h2>Skift kodeord</h2>");
+        userAccess->setText("<h2>Bruger har adgang til</h2>");
+    }
+    else{
+        cout<<"den er tom"<<endl;
+    }
 
-  QString brugerNavn= brugerliste.first()->getName();
-    user->setText(brugerNavn);
-    changePass->setText("<h2>Skift kodeord</h2>");
-    userAccess->setText("<h2>Bruger har adgang til</h2>");
-    }//} */
+
+    //}//}
 
 
     //inputbox for new password
@@ -134,16 +141,16 @@ QString AendreBrugerprofil::getName() {
     return name;
 }
 
-/*vector<bool> AendreBrugerprofil::getStates(int userNum){
+vector<bool> AendreBrugerprofil::getStates(int userNum){
     vector<bool> states;
-    states.push_back(checkList[userNum].at(0));
-    states.push_back(checkList[userNum].at(1));
-    states.push_back(checkList[userNum].at(2));
-    states.push_back(checkList[userNum].at(3));
-    states.push_back(checkList[userNum].at(4));
-    states.push_back(checkList[userNum].at(5));
+    states.push_back(checkList[userNum].at(0)->isChecked());
+    states.push_back(checkList[userNum].at(1)->isChecked());
+    states.push_back(checkList[userNum].at(2)->isChecked());
+    states.push_back(checkList[userNum].at(3)->isChecked());
+    states.push_back(checkList[userNum].at(4)->isChecked());
+    states.push_back(checkList[userNum].at(5)->isChecked());
     return states;
-}*/
+}
 
 //QString AendreBrugerprofil::getNewPassword() {
 //QString kodeOrd= password->text();
@@ -151,9 +158,9 @@ QString AendreBrugerprofil::getName() {
 //}
 
 QList<QString> AendreBrugerprofil::getPasswords(){
-    QList<QString> kodeListe;
-    kodeListe<<passwordList->at(0).text()<<passwordList->at(1).text()<<passwordList->at(2).text()<<passwordList->at(3).text()
-            <<passwordList->at(4).text();
+   QList<QString> kodeListe;
+    //kodeListe<<passwordList->at(0).text()<<passwordList->at(1).text()<<passwordList->at(2).text()<<passwordList->at(3).text()
+   //         <<passwordList->at(4).text();
     return  kodeListe;
 }
 
