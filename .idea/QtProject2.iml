@@ -23,23 +23,25 @@
       <sourceFolder url="file://$MODULE_DIR$/StackedLayout.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/VerticalBox.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/QMainApp.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/WriteFromPi.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/User.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/WriteFromPi.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/QMainApp.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Nesting.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Nesting.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Lysstyring.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/EnhedsHaandtering.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AddUser.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Lysstyring.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AendreBrugerprofil.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/EnhedsHaandtering.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Aktivitetssimulering.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MainPage.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Aktivitetssimulering.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AddUser.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MenuWidget.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AendreBrugerprofil.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MainPage.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MainPage.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AendreBrugerprofil.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MenuWidget.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AdfaerdsStyring.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AdfaerdsStyring.cpp" isTestSource="false" />

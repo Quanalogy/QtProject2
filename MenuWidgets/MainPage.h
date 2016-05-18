@@ -25,6 +25,7 @@ class MainPage : public MenuWidget{
 public:
     MainPage(QWidget *parent = 0);
     QString getName(){return name;};
+    void setupPages(User *currentUser_);
 
 public slots:
     void ChangeView();                              // a slot to handle when a button on the main window
@@ -55,7 +56,6 @@ private:
     QString currentUserName;                        // holds the current username try
     QString currentPassword;                        // holds the current password try
     vector<bool> rights;
-    void setupPages(User *currentUser_);
 };
 
 
