@@ -156,3 +156,4 @@ QList<QString> AendreBrugerprofil::getPasswords(){
             <<passwordList->at(4).text();
     return  kodeListe;
 }
+

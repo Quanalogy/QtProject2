@@ -19,6 +19,8 @@ public:
 
 private:
     QString name = "Aktivitetssimulering";
+    void toggleButtonColor();
+    QPushButton *onOff;
     bool actSimstate;
     QPushButton *on;
     QPushButton *off;

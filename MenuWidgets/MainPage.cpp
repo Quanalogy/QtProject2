@@ -6,7 +6,6 @@
 #include <QtCore/QCoreApplication>
 #include <QtWidgets/QMessageBox>
 #include "MainPage.h"
-#include "../User.h"
 #include "../QMainApp.h"
 #include "../Globals.h"
 
@@ -33,27 +32,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     pages << addPage << changeProfilePage << aktivitetssimuleringPage << lysstyringPage
             << adfaerdsPage << enhedsHaandteringPage;
 
-    rights = adminUser->getRights();
-    // start on finding the relevant menupages for the user
-    int pos = 0;
-    for (auto i = pages.begin(); i != pages.end(); ++i,++pos) {
-        if(rights.at(pos)){
-            userMenuPages << pages.at(pos);
-        }
-    }
-    //Begin to add buttons, that map to the menupages the user has access to
-    pos =0;
-    for (auto i = userMenuPages.begin(); i != userMenuPages.end(); ++i,++pos) {
 
-            QPushButton *btn = new QPushButton(userMenuPages[pos]->getName(), this);
-            buttons << btn;
-            if(pos%2 == 0){
-                gridLayout->addWidget(btn, (int)floor(pos/2), 0, 0);
-            } else {
-                gridLayout->addWidget(btn, (int)floor(pos/2), 1, 0);
-            }
-            connect(buttons.at(pos), &QPushButton::clicked, this, &MainPage::ChangeView);
-    }
 
     //Connect the buttons with the
     //connect(addPage, &AddUser::onSaveClick, this, &MainPage::handleSaveClick);
@@ -71,9 +50,9 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     connect(lysstyringPage, &Lysstyring::onCancelClick, this, &MainPage::handleCancelClick);
     connect(adfaerdsPage, &AdfaerdsStyring::onCancelClick, this, &MainPage::handleCancelClick);
     connect(enhedsHaandteringPage, &EnhedsHaandtering::onCancelClick, this, &MainPage::handleCancelClick);
-
     connect(addPage, &AddUser::onSaveClick, this, &MainPage::addUserSave);
 
+    setupPages(adminUser);
     setLayout(gridLayout);
 }
 
@@ -142,3 +121,27 @@ void MainPage::addUserSave() {
      this->show();
      pages.at(index)->hide();
  }
+
+void MainPage::setupPages(User *currentUser_) {
+    rights = currentUser_->getRights();
+    // start on finding the relevant menupages for the user
+    int pos = 0;
+    for (auto i = pages.begin(); i != pages.end(); ++i,++pos) {
+        if(rights.at(pos)){
+            userMenuPages << pages.at(pos);
+        }
+    }
+    //Begin to add buttons, that map to the menupages the user has access to
+    pos =0;
+    for (auto i = userMenuPages.begin(); i != userMenuPages.end(); ++i,++pos) {
+
+        QPushButton *btn = new QPushButton(userMenuPages[pos]->getName(), this);
+        buttons << btn;
+        if(pos%2 == 0){
+            gridLayout->addWidget(btn, (int)floor(pos/2), 0, 0);
+        } else {
+            gridLayout->addWidget(btn, (int)floor(pos/2), 1, 0);
+        }
+        connect(buttons.at(pos), &QPushButton::clicked, this, &MainPage::ChangeView);
+    }
+}

@@ -52,7 +52,6 @@ private:
     //QList<QList *> labels;
 
 
-
 signals:
     void onSaveClick();
     void onCancelClick();

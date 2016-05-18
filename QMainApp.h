@@ -18,6 +18,7 @@ public:
     void reset();
     QList<User *> getUserList();
     void addUserToList(User *newUser);
+
 private:
     LoginDialog *loginDialog;
     MainPage *mainPage;
