@@ -176,6 +176,13 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     setLayout(controlHorizontalLayout);
 
 }
+bool AdfaerdsStyring::notNull(){
+    if (dagFraTime->text().toInt() > 0 && natFraTime->text().toInt() > 0){
+        return false;
+    } else {
+        return true;
+    }
+}
 
 void AdfaerdsStyring::saveIntervals() {
     idagFraTime = dagFraTime->text().toInt();

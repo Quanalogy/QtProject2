@@ -14,6 +14,7 @@ Q_OBJECT
 public:
     AdfaerdsStyring(QWidget *parent = 0);
     QString getName();
+    bool notNull();
 
 private:
     QString name = "Adfærdsstyring";
