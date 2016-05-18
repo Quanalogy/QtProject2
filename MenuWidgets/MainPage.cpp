@@ -6,8 +6,8 @@
 #include <QtCore/QCoreApplication>
 #include <QtWidgets/QMessageBox>
 #include "MainPage.h"
-#include "../LoginDialog.h"
 #include "../User.h"
+#include "../QMainApp.h"
 #include "../Globals.h"
 
 
@@ -18,27 +18,6 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
     User *adminUser = new User((QString)"Admin",(QString) "Password");
     adminUser->setRights(true, true, true, true, true, true);
-
-    // setup the login dialoag
-    loginDialog = new LoginDialog( this );
-    QString username = "Admin";
-    loginDialog->setUsername(username); // optional
-    userMap["Admin"] = "Password";
-
-    connect( loginDialog,
-             SIGNAL (acceptLogin(QString&,QString&,int&)),
-             this,
-             SLOT (slotAcceptUserLogin(QString&,QString&)));
-    loginDialog->exec();
-
-    //Keep it running while the username or / and password is wrong
-    while(!slotAcceptUserLogin(currentUserName, currentPassword)){
-        QMessageBox errorMessage;
-        errorMessage.setText("Dit log-in forsøg er blevet afvist!");
-        errorMessage.exec();
-        loginDialog->exec();
-    }
-    //now we can make the rest when the user is logged in
 
     //Create layouts
     gridLayout = new QGridLayout(this);
@@ -117,6 +96,8 @@ void MainPage::handleCancelClick() {
 
 bool MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
     //qDebug (userName_.toLatin1());
+    this->show();
+    cout << "Works" << endl;
     currentUserName = userName;
     currentPassword = password;
 
@@ -139,10 +120,9 @@ void MainPage::addUserSave() {
         errorMessage.setText("Du skal skrive både brugernavn og kodeord!");
         errorMessage.exec();
     } else {
-       // int userNumber=2;
         userMap.insert(*brugernavn,*kodeord);
         User *newUser = new User(*brugernavn,*kodeord);
-        //userNumber++;
+        static_cast<QMainApp *> qApp->addUserToList(newUser);
         vector<bool> userPriv= addPage->getStates();
         //userCount++;
         newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));

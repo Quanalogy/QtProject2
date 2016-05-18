@@ -1,0 +1,30 @@
+//
+// Created by Munke on 17-05-2016.
+//
+
+#include "QMainApp.h"
+
+QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
+    mainPage = new MainPage;
+    mainPage->hide();
+    LoginDialog *loginDialog = new LoginDialog;
+    loginDialog->show();
+    QObject::connect(loginDialog, SIGNAL (acceptLogin(QString&,QString&)),
+                     mainPage,
+                     SLOT (slotAcceptUserLogin(QString&,QString&)));
+}
+
+QList<User *> QMainApp::getUserList() {
+    return userList;
+}
+
+void QMainApp::addUserToList(User *newUser) {
+    userList << newUser;
+    //qDebug (userName_.toLatin1());
+    qDebug(newUser->getName().toLatin1());
+    cout << "The size of the userList is " << userList.size() << endl;
+}
+
+void QMainApp::reset() {
+
+}

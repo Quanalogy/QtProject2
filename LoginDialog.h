@@ -41,8 +41,8 @@ private:
  * An editable combo box for allowing the user
  * to enter his username or select it from a list.
  */
-    QComboBox *comboUsername;
-
+    //QComboBox *comboUsername;
+    QLineEdit *editUsername;
 /*!
  * A field to let the user enters his password.
  */
@@ -62,13 +62,7 @@ private:
 public:
     explicit LoginDialog(QWidget *parent = 0);
 
-    /*!
-    * Sets the proposed username, that can come for instance
-    * from a shared setting.
-    '''username the string that represents the current username
-   ''' to display
-    */
-    void setUsername(QString &username);
+
 
     /*!
     * Sets the current password to propose to the user for the login.
@@ -76,13 +70,8 @@ public:
     */
     void setPassword(QString &password);
 
-    /*!
-    * Sets a list of allowed usernames from which the user
-    * can pick one if he does not want to directly edit it.
-    '''usernames a list of usernames
-   */
-    void setUsernamesList(const QStringList &usernames);
 
+    bool userAccepted();
 signals:
 
 /*!
@@ -91,7 +80,7 @@ signals:
  * password the password entered in the dialog
  * index the number of the username selected in the combobox
  */
-    void acceptLogin(QString &username, QString &password, int &indexNumber);
+    void acceptLogin(QString &username, QString &password);
 
 public slots:
 
