@@ -13,7 +13,7 @@ Q_OBJECT
 public:
     AendreBrugerprofil(QWidget *parent = 0);
     QString getName();
-    vector<bool> getStates();
+    vector<bool> getStates(int userNum);
     QString getNewPassword();
     QList<QString> getPasswords();
 
@@ -29,6 +29,9 @@ private:
     QCheckBox *addUserCheck[];
     QLineEdit *password[];
     QList<QCheckBox *> checkList[5];
+    QLabel *user[];
+    QLabel *changePass[];
+    QLabel *userAccess[];
 
 
 
