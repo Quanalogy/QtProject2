@@ -13,10 +13,16 @@
 
 AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     this->setWindowTitle(name);
+    int tempUCount=2;
     //Add layouts
-    QHBoxLayout *mainLayout = new QHBoxLayout(this);
+    QHBoxLayout *subMainLayout = new QHBoxLayout();
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
     QHBoxLayout *buttonLayout = new QHBoxLayout;
-    QVBoxLayout *userLayout = new QVBoxLayout[5];
+    QVBoxLayout *userLayout = new QVBoxLayout;
+    QVBoxLayout *userLayout2 = new QVBoxLayout;
+    QVBoxLayout *userLayout3 = new QVBoxLayout;
+    QVBoxLayout *userLayout4 = new QVBoxLayout;
+    QVBoxLayout *userLayout5 = new QVBoxLayout;
     //Labels
     QLabel *user = new QLabel(this);
     QLabel *changePass = new QLabel(this);
@@ -57,25 +63,86 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     connect(saveBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onSaveClick);
 
     //Add to userlayout
-   /* for (int i = 0; i <=userCount ; ++i) {
 
-
-        userLayout[i].addWidget(user, 0, Qt::AlignTop);
-        userLayout[i].addWidget(userLockedCheck, 0, Qt::AlignTop);
-        userLayout[i].addWidget(deleteUserCheck, 0, Qt::AlignTop);
-        userLayout[i].addWidget(changePass, 0, Qt::AlignCenter);
-        userLayout[i].addWidget(password, 0, Qt::AlignTop);
-        userLayout[i].addWidget(userAccess, 0, Qt::AlignTop);
-        userLayout[i].addWidget(adfaerdsCheck, 0, Qt::AlignTop);
-        userLayout[i].addWidget(addUserCheck, 0, Qt::AlignTop);
-        userLayout[i].addWidget(lightCheck, 0, Qt::AlignTop);
-        userLayout[i].addWidget(activitySimCheck, 0, Qt::AlignTop);
-        userLayout[i].addWidget(unitControlCheck, 0, Qt::AlignTop);
-        userLayout[i].addWidget(changeUserCheck, 0, Qt::AlignTop);
-        mainLayout->addLayout(userLayout);
-
-    }*/
-    mainLayout->addLayout(buttonLayout);
+        userLayout->addWidget(user, 0, Qt::AlignTop);
+        userLayout->addWidget(userLockedCheck, 0, Qt::AlignTop);
+        userLayout->addWidget(deleteUserCheck, 0, Qt::AlignTop);
+        userLayout->addWidget(changePass, 0, Qt::AlignCenter);
+        userLayout->addWidget(password, 0, Qt::AlignTop);
+        userLayout->addWidget(userAccess, 0, Qt::AlignTop);
+        userLayout->addWidget(adfaerdsCheck, 0, Qt::AlignTop);
+        userLayout->addWidget(addUserCheck, 0, Qt::AlignTop);
+        userLayout->addWidget(lightCheck, 0, Qt::AlignTop);
+        userLayout->addWidget(activitySimCheck, 0, Qt::AlignTop);
+        userLayout->addWidget(unitControlCheck, 0, Qt::AlignTop);
+        userLayout->addWidget(changeUserCheck, 0, Qt::AlignTop);
+        subMainLayout->addLayout(userLayout);
+    if(tempUCount>=2)
+    {
+        userLayout2->addWidget(user, 0, Qt::AlignTop);
+        userLayout2->addWidget(userLockedCheck, 0, Qt::AlignTop);
+        userLayout2->addWidget(deleteUserCheck, 0, Qt::AlignTop);
+        userLayout2->addWidget(changePass, 0, Qt::AlignCenter);
+        userLayout2->addWidget(password, 0, Qt::AlignTop);
+        userLayout2->addWidget(userAccess, 0, Qt::AlignTop);
+        userLayout2->addWidget(adfaerdsCheck, 0, Qt::AlignTop);
+        userLayout2->addWidget(addUserCheck, 0, Qt::AlignTop);
+        userLayout2->addWidget(lightCheck, 0, Qt::AlignTop);
+        userLayout2->addWidget(activitySimCheck, 0, Qt::AlignTop);
+        userLayout2->addWidget(unitControlCheck, 0, Qt::AlignTop);
+        userLayout2->addWidget(changeUserCheck, 0, Qt::AlignTop);
+        subMainLayout->addLayout(userLayout2);
+        if(tempUCount>=3)
+        {
+            userLayout3->addWidget(user, 0, Qt::AlignTop);
+            userLayout3->addWidget(userLockedCheck, 0, Qt::AlignTop);
+            userLayout3->addWidget(deleteUserCheck, 0, Qt::AlignTop);
+            userLayout3->addWidget(changePass, 0, Qt::AlignCenter);
+            userLayout3->addWidget(password, 0, Qt::AlignTop);
+            userLayout3->addWidget(userAccess, 0, Qt::AlignTop);
+            userLayout3->addWidget(adfaerdsCheck, 0, Qt::AlignTop);
+            userLayout3->addWidget(addUserCheck, 0, Qt::AlignTop);
+            userLayout3->addWidget(lightCheck, 0, Qt::AlignTop);
+            userLayout3->addWidget(activitySimCheck, 0, Qt::AlignTop);
+            userLayout3->addWidget(unitControlCheck, 0, Qt::AlignTop);
+            userLayout3->addWidget(changeUserCheck, 0, Qt::AlignTop);
+            subMainLayout->addLayout(userLayout3);
+            if(tempUCount>=4)
+            {
+                userLayout4->addWidget(user, 0, Qt::AlignTop);
+                userLayout4->addWidget(userLockedCheck, 0, Qt::AlignTop);
+                userLayout4->addWidget(deleteUserCheck, 0, Qt::AlignTop);
+                userLayout4->addWidget(changePass, 0, Qt::AlignCenter);
+                userLayout4->addWidget(password, 0, Qt::AlignTop);
+                userLayout4->addWidget(userAccess, 0, Qt::AlignTop);
+                userLayout4->addWidget(adfaerdsCheck, 0, Qt::AlignTop);
+                userLayout4->addWidget(addUserCheck, 0, Qt::AlignTop);
+                userLayout4->addWidget(lightCheck, 0, Qt::AlignTop);
+                userLayout4->addWidget(activitySimCheck, 0, Qt::AlignTop);
+                userLayout4->addWidget(unitControlCheck, 0, Qt::AlignTop);
+                userLayout4->addWidget(changeUserCheck, 0, Qt::AlignTop);
+                subMainLayout->addLayout(userLayout4);
+                if(tempUCount>=5)
+                {
+                    userLayout5->addWidget(user, 0, Qt::AlignTop);
+                    userLayout5->addWidget(userLockedCheck, 0, Qt::AlignTop);
+                    userLayout5->addWidget(deleteUserCheck, 0, Qt::AlignTop);
+                    userLayout5->addWidget(changePass, 0, Qt::AlignCenter);
+                    userLayout5->addWidget(password, 0, Qt::AlignTop);
+                    userLayout5->addWidget(userAccess, 0, Qt::AlignTop);
+                    userLayout5->addWidget(adfaerdsCheck, 0, Qt::AlignTop);
+                    userLayout5->addWidget(addUserCheck, 0, Qt::AlignTop);
+                    userLayout5->addWidget(lightCheck, 0, Qt::AlignTop);
+                    userLayout5->addWidget(activitySimCheck, 0, Qt::AlignTop);
+                    userLayout5->addWidget(unitControlCheck, 0, Qt::AlignTop);
+                    userLayout5->addWidget(changeUserCheck, 0, Qt::AlignTop);
+                    subMainLayout->addLayout(userLayout5);
+                }
+            }
+        }
+    }
+        mainLayout->addLayout(subMainLayout);
+        mainLayout->addLayout(buttonLayout);
 }
 
 QString AendreBrugerprofil::getName() {

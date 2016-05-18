@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/Debug/QtProject2_automoc.cpp">
-      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/Debug/QtProject2_automoc.cpp" isTestSource="false" />
+    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2_ny_-a2bd08d8/a2bd08d8/Debug/QtProject2_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2_ny_-a2bd08d8/a2bd08d8/Debug/QtProject2_automoc.cpp" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/MinSizeRel/QtProject2_automoc.cpp">
-      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/MinSizeRel/QtProject2_automoc.cpp" isTestSource="false" />
+    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2_ny_-a2bd08d8/a2bd08d8/MinSizeRel/QtProject2_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2_ny_-a2bd08d8/a2bd08d8/MinSizeRel/QtProject2_automoc.cpp" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/RelWithDebInfo/QtProject2_automoc.cpp">
-      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/RelWithDebInfo/QtProject2_automoc.cpp" isTestSource="false" />
+    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2_ny_-a2bd08d8/a2bd08d8/RelWithDebInfo/QtProject2_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2_ny_-a2bd08d8/a2bd08d8/RelWithDebInfo/QtProject2_automoc.cpp" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/Release/QtProject2_automoc.cpp">
-      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2-456e9f42/456e9f42/Release/QtProject2_automoc.cpp" isTestSource="false" />
+    <content url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2_ny_-a2bd08d8/a2bd08d8/Release/QtProject2_automoc.cpp">
+      <sourceFolder url="file://$USER_HOME$/.CLion2016.1/system/cmake/generated/QtProject2_ny_-a2bd08d8/a2bd08d8/Release/QtProject2_automoc.cpp" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/VerticalBox.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/LoginDialog.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/LoginDialog.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Globals.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Nesting.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/StackedLayout.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/StackedLayout.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/User.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/User.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Nesting.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/LoginDialog.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Nesting.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Aktivitetssimulering.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/EnhedsHaandtering.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Lysstyring.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AendreBrugerprofil.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MainPage.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Aktivitetssimulering.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Lysstyring.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AddUser.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Lysstyring.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/EnhedsHaandtering.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Aktivitetssimulering.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MainPage.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/Aktivitetssimulering.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AddUser.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MenuWidget.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AendreBrugerprofil.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AddUser.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MainPage.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MainPage.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AendreBrugerprofil.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/MenuWidget.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AdfaerdsStyring.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MenuWidgets/AdfaerdsStyring.cpp" isTestSource="false" />
