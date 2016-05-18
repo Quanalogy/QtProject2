@@ -19,6 +19,28 @@ private:
     QString name = "Adfærdsstyring";
     QList<QLabel *> leftList;
     QList<QLabel *> rightList;
+
+    QLineEdit *dagFraTime;
+    QLineEdit *dagFraMin;
+    QLineEdit *dagTilTime;
+    QLineEdit *dagTilMin;
+    QLineEdit *natFraTime;
+    QLineEdit *natFraMin;
+    QLineEdit *natTilTime;
+    QLineEdit *natTilMin;
+
+
+    int idagFraTime;
+    int idagFraMin;
+    int idagTilTime;
+    int idagTilMin;
+    int inatFraTime;
+    int inatFraMin;
+    int inatTilTime;
+    int inatTilMin;
+
+public slots:
+    void saveIntervals();
 };
 
 
