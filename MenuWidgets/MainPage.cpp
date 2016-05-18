@@ -15,8 +15,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
     //Test with users
 
-    User *adminUser = new User((QString)"Admin",(QString) "Password");
-    adminUser->setRights(true, true, true, true, true, true);
+
 
     //Create layouts
     gridLayout = new QGridLayout(this);
@@ -52,7 +51,6 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     connect(enhedsHaandteringPage, &EnhedsHaandtering::onCancelClick, this, &MainPage::handleCancelClick);
     connect(addPage, &AddUser::onSaveClick, this, &MainPage::addUserSave);
 
-    setupPages(adminUser);
     setLayout(gridLayout);
 }
 
