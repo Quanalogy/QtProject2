@@ -7,15 +7,21 @@
 
 
 #include "MenuWidget.h"
+#include <QtWidgets/QPushButton>
 
 class Aktivitetssimulering : public MenuWidget{
 Q_OBJECT
 public:
     Aktivitetssimulering(QWidget *parent = 0);
     QString getName();
+    bool actSimOn();
+    bool acSimOff();
 
 private:
     QString name = "Aktivitetssimulering";
+    bool actSimstate;
+    QPushButton *on;
+    QPushButton *off;
 
 signals:
     void onSaveClick();

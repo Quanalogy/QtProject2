@@ -25,7 +25,7 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     QVBoxLayout *userLayout5 = new QVBoxLayout;
     //Labels
     QLabel *user = new QLabel(this);
-    QLabel *changePass = new QLabel(this);
+    QLabel *changePass[] = new QLabel(this);
     QLabel *userAccess = new QLabel(this);
     //set text on labels
     user->setText("<h1>Bruger 1</h1>");
@@ -33,21 +33,24 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     userAccess->setText("<h2>Bruger har adgang til</h2>");
 
     //inputbox for new password
-    password = new QLineEdit(this);
-    password->setPlaceholderText("Indtast nyt kodeord her");
+    password[5] = new QLineEdit(this);
+    for (auto i = 0; i <=5 ; ++i) {
+        password[i]->setPlaceholderText("Indtast nyt kodeord her");
+    }
 
     //Add checkboxes
-    userLockedCheck = new QCheckBox("Bruger låst");
-    deleteUserCheck = new QCheckBox("Markér for sletning");
-    adfaerdsCheck = new QCheckBox("Adfærdsstyring");
-    lightCheck = new QCheckBox("Lysstyring");
-    activitySimCheck = new QCheckBox("Aktivitetssimulering");
-    unitControlCheck = new QCheckBox("Enhedshåndtering");
-    changeUserCheck = new QCheckBox("Ændre brugerprofil");
-    addUserCheck = new QCheckBox("Tilføj brugerprofil");
-
-    checkList<<addUserCheck<<changeUserCheck<<activitySimCheck<<lightCheck<<adfaerdsCheck
-    << unitControlCheck;
+    userLockedCheck[5] = new QCheckBox("Bruger låst");
+    deleteUserCheck[5] = new QCheckBox("Markér for sletning");
+    adfaerdsCheck[5] = new QCheckBox("Adfærdsstyring");
+    lightCheck[5] = new QCheckBox("Lysstyring");
+    activitySimCheck[5] = new QCheckBox("Aktivitetssimulering");
+    unitControlCheck[5] = new QCheckBox("Enhedshåndtering");
+    changeUserCheck[5] = new QCheckBox("Ændre brugerprofil");
+    addUserCheck[5] = new QCheckBox("Tilføj brugerprofil");
+    for (int i = 0; i <=5 ; ++i) {
+        checkList[i]<<addUserCheck[i]<<changeUserCheck[i]<<activitySimCheck[i]<<lightCheck[i]
+        <<adfaerdsCheck[i] << unitControlCheck[i];
+    }
 
 
     //Pushbuttons
@@ -65,8 +68,8 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     //Add to userlayout
 
         userLayout->addWidget(user, 0, Qt::AlignTop);
-        userLayout->addWidget(userLockedCheck, 0, Qt::AlignTop);
-        userLayout->addWidget(deleteUserCheck, 0, Qt::AlignTop);
+        userLayout->addWidget(userLockedCheck[0], 0, Qt::AlignTop);
+        userLayout->addWidget(deleteUserCheck[0], 0, Qt::AlignTop);
         userLayout->addWidget(changePass, 0, Qt::AlignCenter);
         userLayout->addWidget(password, 0, Qt::AlignTop);
         userLayout->addWidget(userAccess, 0, Qt::AlignTop);
@@ -143,6 +146,7 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     }
         mainLayout->addLayout(subMainLayout);
         mainLayout->addLayout(buttonLayout);
+        setLayout(mainLayout);
 }
 
 QString AendreBrugerprofil::getName() {

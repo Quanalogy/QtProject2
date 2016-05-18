@@ -19,16 +19,17 @@ public:
 
 private:
     QString name = "Ændre brugerprofil";
-    QCheckBox *userLockedCheck;
-    QCheckBox *deleteUserCheck;
-    QCheckBox *adfaerdsCheck;
-    QCheckBox *lightCheck;
-    QCheckBox *activitySimCheck;
-    QCheckBox *unitControlCheck;
-    QCheckBox *changeUserCheck;
-    QCheckBox *addUserCheck;
-    QLineEdit *password;
-    QList<QCheckBox *> checkList;
+    QCheckBox *userLockedCheck[];
+    QCheckBox *deleteUserCheck[];
+    QCheckBox *adfaerdsCheck[];
+    QCheckBox *lightCheck[];
+    QCheckBox *activitySimCheck[];
+    QCheckBox *unitControlCheck[];
+    QCheckBox *changeUserCheck[];
+    QCheckBox *addUserCheck[];
+    QLineEdit *password[];
+    QList<QCheckBox *> checkList[5];
+
 
 
 signals:
