@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.3)
-project(QtProject)
+project(QtProject2)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui)
