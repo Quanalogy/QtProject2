@@ -32,11 +32,11 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
 
     //set text on labels
     //  for (int j = 0; j <=size ; ++j) {
-    QList<User *> brugerliste =  static_cast<QMainApp *> qApp->getUserList();
+    userList =  static_cast<QMainApp *> qApp->getUserList();
    /* if(brugerliste.first().)
     {*/
-    if(!brugerliste.isEmpty()){
-        QString brugerNavn= brugerliste.first()->getName();
+    if(!userList.isEmpty()){
+        QString brugerNavn= userList.first()->getName();
         user->setText(brugerNavn);
         qDebug()<<brugerNavn;
         changePass->setText("<h2>Skift kodeord</h2>");
@@ -46,41 +46,26 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
         cout<<"den er tom"<<endl;
     }
 
-
-    //}//}
+    //A list of names of the checkboxes
+    userPages<<"Bruger låst"<<"Tilføj brugerprofil"<<"Ændre brugerprofil"<<"Aktivitetssimulering"
+    <<"Lysstyring"<<"Adfærdsstyring"<<"Enhedshåndtering"<<"Fjern bruger";
+    //A loop to map the users with thier checkboxes
+    for(int i = 0;i<size;++i){ //user loop
+        QList<QCheckBox *> checkboxList;
+        for(int j = 0; j<7; ++j){ //checkbox loop
+            QCheckBox *checkBox = new QCheckBox(userPages.at(j));
+            checkboxList<<checkBox;
+        }
+        checkMap[i] = checkboxList; // add the completed checkboxes to the map
+    }
 
 
     //inputbox for new password
     password = new QLineEdit(this);
     // for (auto i = 0; i <=5 ; ++i) {
     password->setPlaceholderText("Indtast nyt kodeord her");
-    // }
 
-    //Add checkboxes
-    userLockedCheck= new QCheckBox("Bruger låst");
-    //userLockedCheck1= new QCheckBox("Bruger låst");
-    addUserCheck= new QCheckBox("Tilføj brugerprofil");
-    //addUserCheck1= new QCheckBox("Tilføj brugerprofil");
-    changeUserCheck= new QCheckBox("Ændre brugerprofil");
-    //changeUserCheck1= new QCheckBox("Ændre brugerprofil");
-    activitySimCheck= new QCheckBox("Aktivitetssimulering");
-    //activitySimCheck1= new QCheckBox("Aktivitetssimulering");
-    lightCheck= new QCheckBox("Lysstyring");
-    //lightCheck1= new QCheckBox("Lysstyring");
-    adfaerdsCheck= new QCheckBox("Adfærdsstyring");
-   // adfaerdsCheck1= new QCheckBox("Adfærdsstyring");
-    unitControlCheck= new QCheckBox("Enhedshåndtering");
-   // unitControlCheck1= new QCheckBox("Enhedshåndtering");
-    deleteUserCheck= new QCheckBox("Fjern bruger");
-   // deleteUserCheck1= new QCheckBox("Fjern bruger");
-userPages<<"Bruger låst"<<"Tilføj brugerprofil"<<"Ændre brugerprofil"<<"Aktivitetssimulering"
-<<"Lysstyring"<<"Adfærdsstyring"<<"Enhedshåndtering"<<"Fjern bruger";
 
-   /* for (int i = 0; i <size; ++i) {
-        checkList<<addUserCheck<<changeUserCheck<<activitySimCheck<<lightCheck
-        <<adfaerdsCheck << unitControlCheck<<userLockedCheck;
-    }
-*/
 
     //Pushbuttons
     QPushButton *saveBtn = new QPushButton("Gem", this);
@@ -94,42 +79,32 @@ userPages<<"Bruger låst"<<"Tilføj brugerprofil"<<"Ændre brugerprofil"<<"Aktiv
     connect(cancelBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onCancelClick);
     connect(saveBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onSaveClick);
 
-    //Add to userlayout
-   // for (int l = 0; l <size; ++l) {
-   /* int u=0;
-    for (auto j = userPages.begin(); j !=userPages.end() ; ++j,++u) {
-        userLockedCheck = new QCheckBox(userPages.at(u));
-        deleteUserCheck = new QCheckBox(userPages.at(u));
-    }*/
 
-        userLayout->addWidget(user, 0, Qt::AlignTop);
-        userLayout->addWidget(userLockedCheck, 0, Qt::AlignTop);
-        userLayout->addWidget(deleteUserCheck, 0, Qt::AlignTop);
-        userLayout->addWidget(changePass, 0, Qt::AlignCenter);
-        userLayout->addWidget(password, 0, Qt::AlignTop);
-        userLayout->addWidget(userAccess, 0, Qt::AlignTop);
-        userLayout->addWidget(adfaerdsCheck, 0, Qt::AlignTop);
-        userLayout->addWidget(addUserCheck, 0, Qt::AlignTop);
-        userLayout->addWidget(lightCheck, 0, Qt::AlignTop);
-        userLayout->addWidget(activitySimCheck, 0, Qt::AlignTop);
-        userLayout->addWidget(unitControlCheck, 0, Qt::AlignTop);
-        userLayout->addWidget(changeUserCheck, 0, Qt::AlignTop);
-        subMainLayout->addLayout(userLayout);
 
-    /*
-    userLayout->addWidget(user1, 0, Qt::AlignTop);
-    userLayout->addWidget(userLockedCheck1, 0, Qt::AlignTop);
-    userLayout->addWidget(deleteUserCheck1, 0, Qt::AlignTop);
-    userLayout->addWidget(changePass, 0, Qt::AlignCenter);
-    userLayout->addWidget(password, 0, Qt::AlignTop);
-    userLayout->addWidget(userAccess, 0, Qt::AlignTop);
-    userLayout->addWidget(adfaerdsCheck, 0, Qt::AlignTop);
-    userLayout->addWidget(addUserCheck, 0, Qt::AlignTop);
-    userLayout->addWidget(lightCheck, 0, Qt::AlignTop);
-    userLayout->addWidget(activitySimCheck, 0, Qt::AlignTop);
-    userLayout->addWidget(unitControlCheck, 0, Qt::AlignTop);
-    userLayout->addWidget(changeUserCheck, 0, Qt::AlignTop);
-    */
+
+
+    for(int i = 0; i < size; ++i){//user loop
+        QList<QCheckBox *> tempList = checkMap[i];
+        for (int j = 0; j <7 ; ++j) {//checkbox loop
+            if(j==0){
+                userLayout->addWidget(user, 0, Qt::AlignTop);
+            } else if(j==2){
+                userLayout->addWidget(changePass, 0, Qt::AlignCenter);
+                userLayout->addWidget(password, 0, Qt::AlignTop);
+                userLayout->addWidget(userAccess, 0, Qt::AlignTop);
+            }
+            //QList<QCheckBox *> hej2 = checkMap.values(i);
+            QCheckBox *tempBox = tempList.at(j);
+            userLayout->addWidget(tempBox);
+        }
+
+
+    }
+
+
+    subMainLayout->addLayout(userLayout);
+
+
     subMainLayout->addLayout(userLayout);
         mainLayout->addLayout(subMainLayout);
         mainLayout->addLayout(buttonLayout);
@@ -142,14 +117,14 @@ QString AendreBrugerprofil::getName() {
 }
 
 vector<bool> AendreBrugerprofil::getStates(int userNum){
-    vector<bool> states;
-    states.push_back(checkList[userNum].at(0)->isChecked());
-    states.push_back(checkList[userNum].at(1)->isChecked());
-    states.push_back(checkList[userNum].at(2)->isChecked());
-    states.push_back(checkList[userNum].at(3)->isChecked());
-    states.push_back(checkList[userNum].at(4)->isChecked());
-    states.push_back(checkList[userNum].at(5)->isChecked());
-    return states;
+
+    userList= static_cast<QMainApp *> qApp->getUserList();
+    int pos=0;
+    for (auto i = userList.first(); i !=userList.last() ; ++i, ++pos) {
+        vector<bool> states=userList.at(pos)->getRights();
+
+    }
+
 }
 
 //QString AendreBrugerprofil::getNewPassword() {
