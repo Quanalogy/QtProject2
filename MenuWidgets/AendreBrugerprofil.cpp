@@ -47,12 +47,12 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     }
 
     //A list of names of the checkboxes
-    userPages<<"Bruger låst"<<"Tilføj brugerprofil"<<"Ændre brugerprofil"<<"Aktivitetssimulering"
-    <<"Lysstyring"<<"Adfærdsstyring"<<"Enhedshåndtering"<<"Fjern bruger";
+    userPages<<"Bruger låst"<<"Fjern bruger"<<"Tilføj brugerprofil"<<"Ændre brugerprofil"<<"Aktivitetssimulering"
+    <<"Lysstyring"<<"Adfærdsstyring"<<"Enhedshåndtering";
     //A loop to map the users with thier checkboxes
     for(int i = 0;i<size;++i){ //user loop
         QList<QCheckBox *> checkboxList;
-        for(int j = 0; j<7; ++j){ //checkbox loop
+        for(int j = 0; j<8; ++j){ //checkbox loop
             QCheckBox *checkBox = new QCheckBox(userPages.at(j));
             checkboxList<<checkBox;
         }
@@ -85,7 +85,7 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
 
     for(int i = 0; i < size; ++i){//user loop
         QList<QCheckBox *> tempList = checkMap[i];
-        for (int j = 0; j <7 ; ++j) {//checkbox loop
+        for (int j = 0; j <8 ; ++j) {//checkbox loop
             if(j==0){
                 userLayout->addWidget(user, 0, Qt::AlignTop);
             } else if(j==2){
