@@ -10,6 +10,7 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QLineEdit>
 #include "MenuWidget.h"
+
 class AddUser : public MenuWidget{
 Q_OBJECT
 public:
