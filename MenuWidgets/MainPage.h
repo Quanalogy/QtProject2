@@ -14,6 +14,7 @@
 #include "Aktivitetssimulering.h"
 #include "Lysstyring.h"
 #include "EnhedsHaandtering.h"
+#include "../User.h"
 #include <QtWidgets/QPushButton>
 #include <QtCore/QMap>
 #include <vector>
@@ -54,6 +55,7 @@ private:
     QString currentUserName;                        // holds the current username try
     QString currentPassword;                        // holds the current password try
     vector<bool> rights;
+    void setupPages(User *currentUser_);
 };
 
 

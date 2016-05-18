@@ -6,7 +6,6 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QCheckBox>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QLabel>
 
 Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent){
@@ -29,9 +28,14 @@ Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent)
     QPushButton *off = new QPushButton("Sluk aktivitetssimulering",this);
     QPushButton *save = new QPushButton("Gem",this);
     QPushButton *cancel = new QPushButton("Annuller",this);
-    QPushButton *onOff = new QPushButton("Tændt/slukket",this);
+    onOff = new QPushButton("Tændt/slukket",this);
     onOff->setCheckable(true);
-    onOff->setStyleSheet("background-color:red;");
+
+    //Set color of button
+    QPalette *red = new QPalette();
+    red->setColor(QPalette::ButtonText, Qt::red);
+    onOff->setPalette(*red);
+    //onOff->setStyleSheet("background-color:red;");
 
     //tekst til labels og inputboks
     timeBAct->setText("Tid før automatisk aktivering");
@@ -49,7 +53,7 @@ Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent)
 
     connect(save, &QPushButton::clicked,this, &Aktivitetssimulering::onSaveClick);
     connect(cancel, &QPushButton::clicked, this, &Aktivitetssimulering::onCancelClick);
-
+    connect(onOff, &QPushButton::clicked, this, &Aktivitetssimulering::toggleButtonColor);
 
     //bund box
     bottom->addWidget(cancel);
@@ -66,4 +70,16 @@ Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent)
 
 QString Aktivitetssimulering::getName() {
     return name;
+}
+
+void Aktivitetssimulering::toggleButtonColor() {
+    if(onOff->isChecked()){
+        QPalette *green = new QPalette();
+        green->setColor(QPalette::ButtonText, Qt::darkGreen);
+        onOff->setPalette(*green);
+    } else {
+        QPalette *red = new QPalette();
+        red->setColor(QPalette::ButtonText, Qt::red);
+        onOff->setPalette(*red);
+    }
 }

@@ -7,6 +7,7 @@
 
 
 #include "MenuWidget.h"
+#include <QtWidgets/QPushButton>
 
 class Aktivitetssimulering : public MenuWidget{
 Q_OBJECT
@@ -16,7 +17,8 @@ public:
 
 private:
     QString name = "Aktivitetssimulering";
-
+    void toggleButtonColor();
+    QPushButton *onOff;
 signals:
     void onSaveClick();
     void onCancelClick();

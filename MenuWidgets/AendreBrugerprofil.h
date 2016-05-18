@@ -30,7 +30,6 @@ private:
     QLineEdit *password;
     QList<QCheckBox *> checkList;
 
-
 signals:
     void onSaveClick();
     void onCancelClick();
