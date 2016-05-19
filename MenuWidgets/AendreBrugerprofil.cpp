@@ -118,11 +118,17 @@ QString AendreBrugerprofil::getName() {
 
 vector<bool> AendreBrugerprofil::getStates(int userNum){
 
-    userList= static_cast<QMainApp *> qApp->getUserList();
+   /* userList= static_cast<QMainApp *> qApp->getUserList();
     int pos=0;
     for (auto i = userList.first(); i !=userList.last() ; ++i, ++pos) {
         vector<bool> states=userList.at(pos)->getRights();
 
+    }
+*/
+    //QList<QCheckBox *> tempList=checkMap[userNum];
+    int size = static_cast<QMainApp *> qApp->getUserList().size();
+    for (int i = 0; i < 8; ++i) {
+        checkMap[userNum].at(i)->isChecked();
     }
 
 }
