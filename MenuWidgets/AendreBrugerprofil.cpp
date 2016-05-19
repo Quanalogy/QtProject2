@@ -126,22 +126,23 @@ vector<bool> AendreBrugerprofil::getStates(int userNum){
     }
 */
     //QList<QCheckBox *> tempList=checkMap[userNum];
-    int size = static_cast<QMainApp *> qApp->getUserList().size();
     for (int i = 0; i < 8; ++i) {
         checkMap[userNum].at(i)->isChecked();
     }
 
 }
 
-//QString AendreBrugerprofil::getNewPassword() {
-//QString kodeOrd= password->text();
-//return kodeOrd;
-//}
+QString AendreBrugerprofil::getNewPassword() {
+QString kodeOrd= password->text();
+return kodeOrd;
+}
 
 QList<QString> AendreBrugerprofil::getPasswords(){
    QList<QString> kodeListe;
-    //kodeListe<<passwordList->at(0).text()<<passwordList->at(1).text()<<passwordList->at(2).text()<<passwordList->at(3).text()
-   //         <<passwordList->at(4).text();
+    int size = static_cast<QMainApp *> qApp->getUserList().size();
+    for (int i = 0; i < size; ++i) {
+        kodeListe<<passwordList->at(i).text();
+    }
     return  kodeListe;
 }
 
