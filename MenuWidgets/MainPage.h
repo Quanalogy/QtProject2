@@ -15,6 +15,7 @@
 #include "Lysstyring.h"
 #include "EnhedsHaandtering.h"
 #include "../User.h"
+#include "../Unit.h"
 #include <QtWidgets/QPushButton>
 #include <QtCore/QMap>
 #include <vector>
@@ -37,8 +38,10 @@ public slots:
     void addUserSave();
     void changeAdfaerdsStyringSave();
     void changeProfileSave();
+    void changeUnitsSave();
 
 private:
+    QList<Unit *> unitsList;
     QString name = "Hovedmenu";                     // the window title name
     QList<MenuWidget *> pages;                      // All the pages avialable
     QList<MenuWidget *> userMenuPages;              // an of accessible menupages, costumized to the users

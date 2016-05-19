@@ -7,11 +7,13 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QPushButton>
 #include "EnhedsHaandtering.h"
+#include "MainPage.h"
 
 EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
     //Add layouts to design from
+    this->setWindowTitle(name);
     QVBoxLayout *lVerticalLayout = new QVBoxLayout;
-    QVBoxLayout *rVerticalLayout = new QVBoxLayout;
+    rVerticalLayout = new QVBoxLayout;
     QHBoxLayout *horizontalLayout = new QHBoxLayout(this);
 
     //Begin with labels on left side
@@ -19,16 +21,11 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
     QLabel *serienummer = new QLabel(this);
     QLabel *rum = new QLabel(this);
     //Add some input boxes
-    QLineEdit *serienummerInput = new QLineEdit(this);
-    //Add some checkboxes
-    QCheckBox *stueCheck = new QCheckBox("Stue", this);
-    QCheckBox *sovevaerelseCheck1 = new QCheckBox("Soveværelse 1", this);
-    QCheckBox *sovevaerelseCheck2 = new QCheckBox("Soveværelse 2", this);
-    QCheckBox *rStueCheck = new QCheckBox("Stue", this);
-    QCheckBox *rSovevaerelseCheck1 = new QCheckBox("Soveværelse 1", this);
-    QCheckBox *rSovevaerelseCheck2 = new QCheckBox("Soveværelse 2", this);
+    serienummerInput = new QLineEdit(this);
+    unitNameInput = new QLineEdit(this);
+
     //Add some Pushbuttons
-    QPushButton *save = new QPushButton("Gem", this);
+    save = new QPushButton("Gem", this);
     QPushButton *cancel = new QPushButton("Annuller", this);
 
     //Begin with labels on right side
@@ -56,26 +53,24 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
         if(*i == serienummer){
             lVerticalLayout->addWidget(serienummerInput);
         } else if(*i == rum){
-            lVerticalLayout->addWidget(stueCheck);
-            lVerticalLayout->addWidget(sovevaerelseCheck1);
-            lVerticalLayout->addWidget(sovevaerelseCheck2);
+            lVerticalLayout->addWidget(unitNameInput);
         }
     }
     lVerticalLayout->addWidget(cancel);
     pos = 0;
     for (auto j = rightList.begin(); j != rightList.end() ; ++j, ++pos) {
         rVerticalLayout->addWidget(rightList.at(pos));
-        if(*j == angiv){
-            rVerticalLayout->addWidget(rStueCheck);
-            rVerticalLayout->addWidget(rSovevaerelseCheck1);
-            rVerticalLayout->addWidget(rSovevaerelseCheck2);
-        }
+
     }
     rVerticalLayout->addWidget(save);
 
     serienummerInput->setPlaceholderText("Indsæt serienummer");
 
     serienummerInput->show();
+
+    unitNameInput->setPlaceholderText("Angiv rum/lokation");
+
+    unitNameInput->show();
 
     //connect buttons
     connect(save, &QPushButton::clicked, this, &EnhedsHaandtering::onSaveClick);
@@ -89,6 +84,103 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
 
 }
 
+bool EnhedsHaandtering::notNull(){
+    if (serienummerInput->text().size() > 0 && unitNameInput->text().size() > 0 || EnhedsHaandtering::isChecked()){
+        return false;
+    } else {
+        return true;
+    }
+}
+
+QList<Unit *> EnhedsHaandtering::getUnitsList(){
+    return unitsList;
+}
+
+
+bool EnhedsHaandtering::isChecked() {
+
+    for (int i = 0 ;  i < checkBoxes.size() ; i ++){
+        if (checkBoxes.at(i)->isChecked()){
+            cout << "test 1" << endl;
+            return true;
+        }
+        cout << "test 2" << endl;
+    }
+    return false;
+}
+
 QString EnhedsHaandtering::getName() {
     return name;
+}
+
+int EnhedsHaandtering::getEditLineID() {
+    return serienummerInput->text().toInt();
+}
+
+QString EnhedsHaandtering::getEditLineName() {
+    return unitNameInput->text();
+}
+
+void EnhedsHaandtering::setUnitsList(QList<Unit *> list) {
+    unitsList = list;
+}
+
+void EnhedsHaandtering::addBox(){
+    cout << "test22" << "  " << checkBoxes.size() << unitsList.size() << endl;
+
+    if (checkBoxes.size() < unitsList.size()  ) {
+            rVerticalLayout->removeWidget(save);
+            QCheckBox *box = new QCheckBox(unitsList.last()->getUnitName(), this);
+            checkBoxes.append(box);
+            //Skal connectes
+            cout << "Box:" << box << endl;
+            rVerticalLayout->addWidget(box);
+            rVerticalLayout->addWidget(save);
+            serienummerInput->clear();
+            unitNameInput->clear();
+    } else {
+        return;
+    }
+}
+
+void EnhedsHaandtering::removeBox(){
+
+    if (unitsList.size() > 0) {
+
+        for (int i = 0; i < checkBoxes.size(); i++) {
+            cout << "fjernerTest" << endl;
+            if (checkBoxes.at(i)->isChecked()) {
+                cout << "fjerner" << endl;
+                QCheckBox *box = checkBoxes.at(i);
+                rVerticalLayout->removeWidget(box);
+                delete checkBoxes.at(i);
+                checkBoxes.removeAt(i);
+
+                cout << "box list change to:" << checkBoxes.size() << endl;
+            }
+        }
+    }
+    else {
+        return;
+    }
+}
+
+
+void EnhedsHaandtering::removeIfChecked(){
+        if (unitsList.size() > 0 && isChecked()) {
+            if (unitsList.size() == 1){
+                unitsList.clear();
+                checkBoxes.clear();
+            } else {
+            for (int i = 0; i < checkBoxes.size()-1; i++) {
+                if (checkBoxes.at(i)->isChecked()) {
+                        delete unitsList.at(i);
+                        unitsList.removeAt(i);
+                        cout << "test22" << "  " << checkBoxes.at(i) << checkBoxes.size() << unitsList.size() << endl;
+                }
+            }
+        }
+        }
+
+
 }

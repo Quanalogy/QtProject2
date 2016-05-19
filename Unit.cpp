@@ -6,7 +6,7 @@
 
 
 Unit::Unit(int id_, QString unitName_) {
-    if(id_ != NULL && unitName_ != NULL){
+    if(id_ !=NULL && unitName_ != NULL){
         id = id_;
         unitName = unitName_;
     } else {

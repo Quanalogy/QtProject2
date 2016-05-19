@@ -177,10 +177,10 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
 
 }
 bool AdfaerdsStyring::notNull(){
-    if (dagFraTime->text().toInt() > 0 && natFraTime->text().toInt() > 0){
-        return false;
-    } else {
+    if (dagFraTime->text().toInt() > 0){
         return true;
+    } else {
+        return false;
     }
 }
 

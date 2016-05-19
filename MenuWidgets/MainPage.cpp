@@ -39,7 +39,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     connect(aktivitetssimuleringPage,&Aktivitetssimulering::onSaveClick,this,&MainPage::handleSaveClick);
     connect(lysstyringPage,&Lysstyring::onSaveClick,this,&MainPage::handleSaveClick);
     connect(adfaerdsPage,&AdfaerdsStyring::onSaveClick,this,&MainPage::changeAdfaerdsStyringSave);
-    connect(enhedsHaandteringPage,&EnhedsHaandtering::onSaveClick,this,&MainPage::handleSaveClick);
+    connect(enhedsHaandteringPage,&EnhedsHaandtering::onSaveClick,this,&MainPage::changeUnitsSave);
     connect(addPage, &AddUser::onSaveClick, this, &MainPage::addUserSave);
 
 
@@ -56,6 +56,19 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
 void MainPage::ChangeView() {
     index = buttons.indexOf((QPushButton*)QObject::sender());
+    QString temp = "Enhedshåndtering";
+    qDebug() << pages.at(index) << temp;
+    if (pages.at(index)->getName() == temp){
+        cout << "to change, size:" << unitsList.size() << endl;
+        if (enhedsHaandteringPage->isChecked()) {
+            enhedsHaandteringPage->removeBox();
+            this->hide();
+        } else {
+            enhedsHaandteringPage->setUnitsList(unitsList);
+            enhedsHaandteringPage->addBox();
+        }
+
+    }
     pages.at(index)->show();
     this->hide();
 }
@@ -110,9 +123,9 @@ void MainPage::addUserSave() {
 }
 
 void MainPage::changeAdfaerdsStyringSave()  {
-    if(adfaerdsPage->notNull()){
+    if(!adfaerdsPage->notNull()){
         QMessageBox errorMessage;
-        errorMessage.setText("Du skal angive starttid for både dag- og aftenprofil!");
+        errorMessage.setText("Stattiden for dagsprofil må ikke være 0!");
         errorMessage.exec();
     } else {
         this->show();
@@ -120,6 +133,7 @@ void MainPage::changeAdfaerdsStyringSave()  {
     }
 
 }
+
  void MainPage::changeProfileSave() {
      //bruger 1 ændring
      QList<QString> kodeOrd= changeProfilePage->getPasswords();
@@ -143,6 +157,29 @@ void MainPage::changeAdfaerdsStyringSave()  {
      this->show();
      pages.at(index)->hide();
  }
+
+void MainPage::changeUnitsSave()  {
+    if(enhedsHaandteringPage->notNull()){
+        QMessageBox errorMessage;
+        errorMessage.setText("Du skal angive serienummer og rum/lokation for at tilføje, eller krydse af for at fjerne");
+        errorMessage.exec();
+    } else {
+        int ID = enhedsHaandteringPage->getEditLineID();
+        QString Name = enhedsHaandteringPage->getEditLineName();
+        qDebug() << Name << ID;
+        if (ID >= 0 && Name.toStdString().size() > 0 ) {
+            cout << "test1" << endl;
+            unitsList.append(new Unit(ID, Name));
+            enhedsHaandteringPage->setUnitsList(unitsList);
+        }
+        cout << unitsList.size() << endl;
+        cout << "test2" << endl;
+        enhedsHaandteringPage->removeIfChecked();
+        unitsList = enhedsHaandteringPage->getUnitsList();
+        this->show();
+        pages.at(index)->hide();
+    }
+}
 
 void MainPage::setupPages(User *currentUser_) {
     rights = currentUser_->getRights();

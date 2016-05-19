@@ -8,6 +8,7 @@
 
 //#include <QtWidgets/QWidget>
 #include "MenuWidget.h"
+#include "../Unit.h"
 #include <QtWidgets/QLabel>
 
 class EnhedsHaandtering : public MenuWidget{
@@ -15,11 +16,29 @@ class EnhedsHaandtering : public MenuWidget{
 public:
     EnhedsHaandtering(QWidget *parent = 0);
     QString getName();
+    bool notNull();
+    int getEditLineID();
+    QString getEditLineName();
+    void setUnitsList(QList<Unit *> list);
+    QList<Unit *> getUnitsList();
+    void addBox();
+    void removeBox();
+    bool isChecked();
+    void removeIfChecked();
 
 private:
+    int unitCount;
     QString name = "Enhedshåndtering";
     QList<QLabel *> leftList;
     QList<QLabel *> rightList;
+    QLineEdit *serienummerInput;
+    QLineEdit *unitNameInput;
+    void addUnitsToList();
+    QList<Unit *> unitsList;
+    QList<QCheckBox *> checkBoxes;
+    QVBoxLayout *rVerticalLayout;
+    QPushButton *save;
+
 
 signals:
     void onSaveClick();

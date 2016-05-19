@@ -5,8 +5,6 @@
 #ifndef QTPROJECT2_UNIT_H
 #define QTPROJECT2_UNIT_H
 
-#endif //QTPROJECT2_UNIT_H
-
 #include <QtCore/QString>
 
 using namespace std;
@@ -20,3 +18,5 @@ private:
     int id;
     QString unitName;
 };
+
+#endif
