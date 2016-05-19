@@ -24,8 +24,8 @@ Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent)
     QCheckBox *autAct = new QCheckBox("Automatisk aktivitetssimulering",this);
 
     //push buttons
-    QPushButton *on = new QPushButton("Tænd aktivitetssmulering",this);
-    QPushButton *off = new QPushButton("Sluk aktivitetssimulering",this);
+    on = new QPushButton("Tænd aktivitetssmulering",this);
+    off = new QPushButton("Sluk aktivitetssimulering",this);
     QPushButton *save = new QPushButton("Gem",this);
     QPushButton *cancel = new QPushButton("Annuller",this);
     onOff = new QPushButton("Tændt/slukket",this);
