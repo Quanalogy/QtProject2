@@ -4,7 +4,7 @@
 
 #include "QMainApp.h"
 QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
-    User *adminUser = new User((QString)"Admin",(QString) "Password");
+    User *adminUser = new User((QString)"a", (QString) "p");
     adminUser->setRights(true, true, true, true, true, true);
     addUserToList(adminUser);
     mainPage = new MainPage;
