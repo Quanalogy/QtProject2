@@ -37,6 +37,7 @@ public slots:
     void addUserSave();
     void changeAdfaerdsStyringSave();
     void changeProfileSave();
+    void logOut();
 
 private:
     QString name = "Hovedmenu";                     // the window title name
@@ -58,6 +59,7 @@ private:
     QString currentUserName;                        // holds the current username try
     QString currentPassword;                        // holds the current password try
     vector<bool> rights;
+    QPushButton *logout;
 };
 
 

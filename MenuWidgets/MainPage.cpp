@@ -16,7 +16,6 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     //Test with users
 
 
-
     //Create layouts
     gridLayout = new QGridLayout(this);
     //create pages that needs connections to the buttons
@@ -72,7 +71,7 @@ void MainPage::handleCancelClick() {
 }
 
 bool MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
-    //qDebug (userName_.toLatin1());
+    qDebug() << userName.toLatin1();
     this->show();
     cout << "Works" << endl;
     currentUserName = userName;
@@ -153,6 +152,7 @@ void MainPage::setupPages(User *currentUser_) {
             userMenuPages << pages.at(pos);
         }
     }
+    logout  = new QPushButton("Log ud", this);
     //Begin to add buttons, that map to the menupages the user has access to
     pos =0;
     for (auto i = userMenuPages.begin(); i != userMenuPages.end(); ++i,++pos) {
@@ -166,4 +166,11 @@ void MainPage::setupPages(User *currentUser_) {
         }
         connect(buttons.at(pos), &QPushButton::clicked, this, &MainPage::ChangeView);
     }
+    gridLayout->addWidget(logout);
+    connect(logout, &QPushButton::clicked, this, &logOut);
+}
+
+void MainPage::logOut() {
+    this->hide();
+    static_cast<QMainApp *>qApp->getLogin()->show();
 }

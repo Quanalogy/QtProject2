@@ -29,6 +29,10 @@ void QMainApp::addUserToList(User *newUser) {
     cout << "The size of the userList is " << userList.size() << endl;
 }
 
-void QMainApp::reset() {
+LoginDialog* QMainApp::getLogin() {
+    return loginDialog;
+}
 
+MainPage* QMainApp::getMain() {
+    return mainPage;
 }

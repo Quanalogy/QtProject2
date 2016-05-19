@@ -14,6 +14,7 @@ class User {
 public:
     User(QString userName_, QString password_);
     QString getName();
+    QString getPass();
     void setRights(bool tilfoej_, bool aendreBrugerprofil_, bool aktivitet_, bool lysstyring_, bool adfaerd_ , bool enhed_ );
     vector<bool> getRights();
 private:
