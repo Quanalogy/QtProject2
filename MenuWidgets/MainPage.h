@@ -35,7 +35,9 @@ public slots:
                                                     // on one of the views
     bool slotAcceptUserLogin(QString&,QString&);    //checks if the username and password is known
     void addUserSave();
+    void changeAdfaerdsStyringSave();
     void changeProfileSave();
+
 private:
     QString name = "Hovedmenu";                     // the window title name
     QList<MenuWidget *> pages;                      // All the pages avialable

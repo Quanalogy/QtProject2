@@ -38,8 +38,9 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
     connect(aktivitetssimuleringPage,&Aktivitetssimulering::onSaveClick,this,&MainPage::handleSaveClick);
     connect(lysstyringPage,&Lysstyring::onSaveClick,this,&MainPage::handleSaveClick);
-    connect(adfaerdsPage,&AdfaerdsStyring::onSaveClick,this,&MainPage::handleSaveClick);
+    connect(adfaerdsPage,&AdfaerdsStyring::onSaveClick,this,&MainPage::changeAdfaerdsStyringSave);
     connect(enhedsHaandteringPage,&EnhedsHaandtering::onSaveClick,this,&MainPage::handleSaveClick);
+    connect(addPage, &AddUser::onSaveClick, this, &MainPage::addUserSave);
 
 
     //Connect annuller knap
@@ -49,7 +50,6 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     connect(lysstyringPage, &Lysstyring::onCancelClick, this, &MainPage::handleCancelClick);
     connect(adfaerdsPage, &AdfaerdsStyring::onCancelClick, this, &MainPage::handleCancelClick);
     connect(enhedsHaandteringPage, &EnhedsHaandtering::onCancelClick, this, &MainPage::handleCancelClick);
-    connect(addPage, &AddUser::onSaveClick, this, &MainPage::addUserSave);
 
     setLayout(gridLayout);
 }
@@ -103,6 +103,18 @@ void MainPage::addUserSave() {
         vector<bool> userPriv= addPage->getStates();
         //userCount++;
         newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
+        this->show();
+        pages.at(index)->hide();
+    }
+
+}
+
+void MainPage::changeAdfaerdsStyringSave()  {
+    if(adfaerdsPage->notNull()){
+        QMessageBox errorMessage;
+        errorMessage.setText("Du skal angive starttid for både dag- og aftenprofil!");
+        errorMessage.exec();
+    } else {
         this->show();
         pages.at(index)->hide();
     }

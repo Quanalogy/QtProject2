@@ -78,7 +78,7 @@ void LoginDialog::slotAcceptLogin() {
         return;
     }
 
-    if(username == "Admin" && password == "Password"){
+    if(username == "a" && password == "p"){
         emit acceptLogin(username, // current username
                          password // current password
 
