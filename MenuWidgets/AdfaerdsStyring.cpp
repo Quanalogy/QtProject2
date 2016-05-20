@@ -203,8 +203,8 @@ void AdfaerdsStyring::addBox(){
 void AdfaerdsStyring::removeBox(){
     if (lefCheckBoxes.size() > unitsList.size()) {
         for (int i = 0 ; i < lefCheckBoxes.size() ; i++){
-            delete lefCheckBoxes.at(i);
-            delete rigCheckBoxes.at(i);
+            lefCheckBoxes.at(i)->deleteLater();
+            rigCheckBoxes.at(i)->deleteLater();
         }
         lefCheckBoxes.clear();
         rigCheckBoxes.clear();

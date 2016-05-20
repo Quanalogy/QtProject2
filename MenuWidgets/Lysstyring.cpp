@@ -73,8 +73,8 @@ void Lysstyring::addBox(){
 void Lysstyring::removeBox(){
     if (checkBoxes.size() > unitsList.size()) {
         for (int i = 0 ; i < checkBoxes.size() ; i++){
-            delete checkBoxes.at(i);
-            delete editLines.at(i);
+            checkBoxes.at(i)->deleteLater();
+            editLines.at(i)->deleteLater();
         }
         checkBoxes.clear();
         editLines.clear();

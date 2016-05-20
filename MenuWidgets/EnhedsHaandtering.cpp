@@ -153,10 +153,10 @@ void EnhedsHaandtering::removeBox(){
                 QCheckBox *box = checkBoxes.at(i);
                 rVerticalLayout->removeWidget(box);
                 if (checkBoxes.size() == 1) {
-                    delete checkBoxes.at(i);
+                    checkBoxes.at(i)->deleteLater();
                     checkBoxes.clear();
                 } else {
-                    delete checkBoxes.at(i);
+                    checkBoxes.at(i)->deleteLater();
                     checkBoxes.removeAt(i);
                 }
             }
