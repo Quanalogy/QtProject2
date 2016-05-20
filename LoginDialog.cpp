@@ -58,8 +58,9 @@ void LoginDialog::setUpGUI() {
 
 
 
-void LoginDialog::setPassword(QString &password) {
-    editPassword->setText(password);
+void LoginDialog::clearInput() {
+    editPassword->setText("");
+    editUsername->setText("");
 }
 
 void LoginDialog::slotAcceptLogin() {
@@ -85,5 +86,6 @@ void LoginDialog::slotAcceptLogin() {
 }
 
 void LoginDialog::showMe() {
+    clearInput();
     this->show();
 }

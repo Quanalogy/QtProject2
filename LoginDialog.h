@@ -68,7 +68,7 @@ public:
     * Sets the current password to propose to the user for the login.
     * password the password to fill into the dialog form
     */
-    void setPassword(QString &password);
+    void clearInput();
     void showMe();
 
 
