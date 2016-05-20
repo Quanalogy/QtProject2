@@ -28,6 +28,8 @@ void LoginDialog::setUpGUI() {
     labelUsername->setBuddy(editUsername);
     labelPassword->setText(tr("Kodeord"));
     labelPassword->setBuddy(editPassword);
+    editUsername->setPlaceholderText("Brugernavn");
+    editPassword->setPlaceholderText("Kodeord");
 
 // initialize buttons
     buttons = new QDialogButtonBox(this);
