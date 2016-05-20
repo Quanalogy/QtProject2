@@ -37,3 +37,7 @@ vector<bool> User::getRights() {
     rights.push_back(enhed);
     return rights;
 }
+
+QString User::getPass() {
+    return password;
+}

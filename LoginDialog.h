@@ -71,7 +71,6 @@ public:
     void setPassword(QString &password);
 
 
-    bool userAccepted();
 signals:
 
 /*!

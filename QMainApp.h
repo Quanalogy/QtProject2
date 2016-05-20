@@ -15,10 +15,10 @@ class QMainApp : public QApplication{
 
 public:
     QMainApp(int &argc, char *argv[]);
-    void reset();
     QList<User *> getUserList();
     void addUserToList(User *newUser);
-
+    LoginDialog* getLogin();
+    MainPage* getMain();
 private:
     LoginDialog *loginDialog;
     MainPage *mainPage;

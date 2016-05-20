@@ -3,7 +3,9 @@
 // This has been taken partly from https://wiki.qt.io/User_Login_Dialog
 //
 
+#include <QtWidgets/QMessageBox>
 #include "LoginDialog.h"
+#include "QMainApp.h"
 
 LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent) {
     setUpGUI();
@@ -15,12 +17,7 @@ void LoginDialog::setUpGUI() {
     // set up the layout
     QGridLayout *formGridLayout = new QGridLayout(this);
 
-// initialize the username combo box so that it is editable
-    //comboUsername = new QComboBox(this);
-    //comboUsername->setEditable(true);
     editUsername = new QLineEdit(this);
-    // initialize the password field so that it does not echo
-    // characters
     editPassword = new QLineEdit(this);
     editPassword->setEchoMode(QLineEdit::Password);
 
@@ -35,21 +32,17 @@ void LoginDialog::setUpGUI() {
 // initialize buttons
     buttons = new QDialogButtonBox(this);
     buttons->addButton(QDialogButtonBox::Ok);
-    //buttons->addButton(QDialogButtonBox::Cancel);
     buttons->button(QDialogButtonBox::Ok)->setText(tr("Log ind"));
-    //buttons->button(QDialogButtonBox::Cancel)->setText(tr("Annuller"));
+
 
     // connects slots
-    /*connect(buttons->button(QDialogButtonBox::Cancel),
-            SIGNAL (clicked()),
-            this,
-            SLOT (close())
-    );*/
-
     connect(buttons->button(QDialogButtonBox::Ok),
             SIGNAL (clicked()),
             this,
-            SLOT (slotAcceptLogin()));
+            SLOT(slotAcceptLogin()));
+
+    MainPage *mainPage = static_cast<QMainApp *> qApp->getMain();
+
 
 // place components into the dialog
     formGridLayout->addWidget(labelUsername, 0, 0);
@@ -74,26 +67,21 @@ void LoginDialog::slotAcceptLogin() {
     QString username = editUsername->text();
     QString password = editPassword->text();
 
-    if(username == NULL || password == NULL){
+    QList<User *> userList = static_cast<QMainApp *>qApp->getUserList();
+    if(username == "" || password == ""){
         return;
+    } else {
+        for (int i = 0; i < userList.size() ; ++i) {
+            if(userList.at(i)->getName() == username && userList.at(i)->getPass() == password){
+                cout << "It's true bro" << endl;
+                emit acceptLogin(username, // current username
+                                 password // current password
+
+                );
+                //close();
+                this->hide();
+            }
+        }
     }
-
-    if(username == "a" && password == "p"){
-        emit acceptLogin(username, // current username
-                         password // current password
-
-        );
-        close();
-    }
-
 }
 
-bool LoginDialog::userAccepted() {
-    if(editUsername->text() == NULL || editPassword == NULL){
-        return false;
-    }
-    if(editUsername->text() == "Admin" && editPassword->text() == "Password"){
-        return true;
-    }
-    return false;
-}
