@@ -25,3 +25,7 @@ int Unit::getId() {
 void Unit::setUnitName(QString name) {
     unitName = name;
 }
+
+void Unit::setVolume(int vol) {
+    volume = vol;
+}

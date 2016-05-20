@@ -56,13 +56,20 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
 void MainPage::ChangeView() {
     index = buttons.indexOf((QPushButton*)QObject::sender());
-    QString temp = "Enhedshåndtering";
-    if (pages.at(index)->getName() == temp){
-            cout << "tester i change" << endl;
+    QString enhed = "Enhedshåndtering";
+    QString lys = "Lysstyring";
+    if (pages.at(index)->getName() == enhed){
 
             enhedsHaandteringPage->setUnitsList(unitsList);
             enhedsHaandteringPage->removeBox();
             enhedsHaandteringPage->addBox();
+
+    }
+    if (pages.at(index)->getName() == lys){
+
+        lysstyringPage->setUnitsList(unitsList);
+        lysstyringPage->removeBox();
+        lysstyringPage->addBox();
 
     }
     pages.at(index)->show();

@@ -40,6 +40,7 @@ public slots:
     void changeProfileSave();
     void logOut();
     void changeUnitsSave();
+    void changeLightVolumeSave();
 
 private:
     QList<Unit *> unitsList;
