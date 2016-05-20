@@ -13,9 +13,6 @@
 MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     this->setWindowTitle(name);
 
-    //Test with users
-
-
     //Create layouts
     gridLayout = new QGridLayout(this);
     //create pages that needs connections to the buttons
@@ -28,12 +25,9 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
     //input pages into QList
     pages << addPage << changeProfilePage << aktivitetssimuleringPage << lysstyringPage
-            << adfaerdsPage << enhedsHaandteringPage;
-
-
+    << adfaerdsPage << enhedsHaandteringPage;
 
     //Connect the buttons with the
-    //connect(addPage, &AddUser::onSaveClick, this, &MainPage::handleSaveClick);
     connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
     connect(aktivitetssimuleringPage,&Aktivitetssimulering::onSaveClick,this,&MainPage::handleSaveClick);
     connect(lysstyringPage,&Lysstyring::onSaveClick,this,&MainPage::handleSaveClick);
@@ -58,11 +52,11 @@ void MainPage::ChangeView() {
     index = buttons.indexOf((QPushButton*)QObject::sender());
     QString temp = "Enhedshåndtering";
     if (pages.at(index)->getName() == temp){
-            cout << "tester i change" << endl;
+        cout << "tester i change" << endl;
 
-            enhedsHaandteringPage->setUnitsList(unitsList);
-            enhedsHaandteringPage->removeBox();
-            enhedsHaandteringPage->addBox();
+        enhedsHaandteringPage->setUnitsList(unitsList);
+        enhedsHaandteringPage->removeBox();
+        enhedsHaandteringPage->addBox();
 
     }
     pages.at(index)->show();
@@ -88,15 +82,14 @@ void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
 
 
 
-
-        for (int i = 0; i <tempUserList.size() ; ++i) {
-            if(tempUserList.at(i)->getName()==currentUserName){
-                setupPages(tempUserList.at(i));
-                qDebug() << tempUserList.at(i);
-                qDebug() << tempUserList.size();
-            }
+    for (int i = 0; i <tempUserList.size() ; ++i) {
+        if(tempUserList.at(i)->getName()==currentUserName){
+            setupPages(tempUserList.at(i));
+            qDebug() << tempUserList.at(i);
+            qDebug() << tempUserList.size();
         }
-        this->show();
+    }
+    this->show();
     //return false;
 
 
@@ -137,29 +130,25 @@ void MainPage::changeAdfaerdsStyringSave()  {
 
 }
 
- void MainPage::changeProfileSave() {
-     //bruger 1 ændring
-     QList<QString> kodeOrd= changeProfilePage->getPasswords();
-     //QList<> liste;
-     //liste= (userMap.keys().at(0));
-     //userMap.insert((userMap.keys().at(0)),kodeOrd.at(0));
+void MainPage::changeProfileSave() {
+    //bruger 1 ændring
+    QList<QString> kodeOrd= changeProfilePage->getPasswords();
 
-    //qDebug()<<userMap;
-     int size = static_cast<QMainApp *> qApp->getUserList().size();
-     QList<User *> bruger=static_cast<QMainApp *> qApp->getUserList();
-     vector<bool> userPriv;
-     QList<QString > userPassword=(changeProfilePage->getPasswords());
-     for (int i = 0; i < size; ++i) {
-         userPriv=changeProfilePage->getStates(i);
-         if(userPassword.at(i)!=NULL) {
-             bruger.at(i)->setRights(userPriv.at(2), userPriv.at(3), userPriv.at(4), userPriv.at(5), userPriv.at(6), userPriv.at(7));
-             QString brugerNavn=bruger.at(i)->getName();
-             userMap.insert(brugerNavn,userPassword.at(i));
-         }
-     }
-     this->show();
-     pages.at(index)->hide();
- }
+    int size = static_cast<QMainApp *> qApp->getUserList().size();
+    QList<User *> bruger=static_cast<QMainApp *> qApp->getUserList();
+    vector<bool> userPriv;
+    QList<QString > userPassword=(changeProfilePage->getPasswords());
+    for (int i = 0; i < size; ++i) {
+        userPriv=changeProfilePage->getStates(i);
+        if(userPassword.at(i)!=NULL) {
+            bruger.at(i)->setRights(userPriv.at(2), userPriv.at(3), userPriv.at(4), userPriv.at(5), userPriv.at(6), userPriv.at(7));
+            QString brugerNavn=bruger.at(i)->getName();
+            userMap.insert(brugerNavn,userPassword.at(i));
+        }
+    }
+    this->show();
+    pages.at(index)->hide();
+}
 
 void MainPage::changeUnitsSave()  {
     if(enhedsHaandteringPage->notNull()){
@@ -182,8 +171,10 @@ void MainPage::changeUnitsSave()  {
 
 void MainPage::setupPages(User *currentUser_) {
     rights = currentUser_->getRights();
-    // start on finding the relevant menupages for the user
     int pos = 0;
+
+    // start on finding the relevant menupages for the user
+    pos = 0;
     for (auto i = pages.begin(); i != pages.end(); ++i,++pos) {
         if(rights.at(pos)){
             userMenuPages << pages.at(pos);
@@ -204,10 +195,17 @@ void MainPage::setupPages(User *currentUser_) {
         connect(buttons.at(pos), &QPushButton::clicked, this, &MainPage::ChangeView);
     }
     gridLayout->addWidget(logout);
+
     connect(logout, &QPushButton::clicked, this, &logOut);
 }
 
 void MainPage::logOut() {
+    for(QPushButton *pushButton : buttons ){ // loop to remove the extras buttons
+        pushButton->deleteLater();
+    }
+    logout->deleteLater();
+    buttons.clear();
+    userMenuPages.clear();
     this->hide();
-    static_cast<QMainApp *>qApp->getLogin()->show();
+    static_cast<QMainApp *>qApp->getLogin()->showMe();
 }

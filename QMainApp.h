@@ -18,9 +18,8 @@ public:
     QList<User *> getUserList();
     void addUserToList(User *newUser);
     LoginDialog* getLogin();
-    MainPage* getMain();
 private:
-    LoginDialog *loginDialog;
+    LoginDialog *loginDialog = new LoginDialog;
     MainPage *mainPage;
     QList<User *> userList;
 };

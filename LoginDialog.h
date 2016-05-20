@@ -69,6 +69,7 @@ public:
     * password the password to fill into the dialog form
     */
     void setPassword(QString &password);
+    void showMe();
 
 
 signals:

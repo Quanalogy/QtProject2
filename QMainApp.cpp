@@ -9,14 +9,14 @@ QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
     addUserToList(adminUser);
 
     User *noviceUser = new User("Abe", "Kat");
-    noviceUser->setRights(false, false, false, false, false, true);
+    noviceUser->setRights(true, false, false, false, false, true);
     addUserToList(noviceUser);
 
 
     mainPage = new MainPage;
     //mainPage->setupPages(adminUser);
     mainPage->hide();
-    LoginDialog *loginDialog = new LoginDialog;
+    //LoginDialog *loginDialog = new LoginDialog;
     loginDialog->show();
     QObject::connect(loginDialog, SIGNAL (acceptLogin(QString&,QString&)),
                      mainPage,
@@ -36,9 +36,12 @@ void QMainApp::addUserToList(User *newUser) {
 }
 
 LoginDialog* QMainApp::getLogin() {
+            foreach(QWidget *widget, findChildren<QWidget *>()){
+            if(!widget->windowFlags() & Qt::Window){
+                delete widget;
+            }
+        }
     return loginDialog;
+
 }
 
-MainPage* QMainApp::getMain() {
-    return mainPage;
-}

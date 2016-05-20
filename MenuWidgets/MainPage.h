@@ -63,6 +63,7 @@ private:
     QString currentPassword;                        // holds the current password try
     vector<bool> rights;
     QPushButton *logout;
+    bool firstTimeLogin;
 };
 
 

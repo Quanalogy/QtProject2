@@ -41,7 +41,6 @@ void LoginDialog::setUpGUI() {
             this,
             SLOT(slotAcceptLogin()));
 
-    MainPage *mainPage = static_cast<QMainApp *> qApp->getMain();
 
 
 // place components into the dialog
@@ -85,3 +84,6 @@ void LoginDialog::slotAcceptLogin() {
     }
 }
 
+void LoginDialog::showMe() {
+    this->show();
+}

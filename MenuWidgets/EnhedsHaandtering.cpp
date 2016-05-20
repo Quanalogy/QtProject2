@@ -135,14 +135,14 @@ void EnhedsHaandtering::setUnitsList(QList<Unit *> list) {
 
 void EnhedsHaandtering::addBox(){
     if (checkBoxes.size() < unitsList.size()  ) {
-            rVerticalLayout->removeWidget(save);
-            QCheckBox *box = new QCheckBox(unitsList.last()->getUnitName(), this);
-            checkBoxes.append(box);
-            //Skal connectes
-            rVerticalLayout->addWidget(box);
-            rVerticalLayout->addWidget(save);
-            serienummerInput->clear();
-            unitNameInput->clear();
+        rVerticalLayout->removeWidget(save);
+        QCheckBox *box = new QCheckBox(unitsList.last()->getUnitName(), this);
+        checkBoxes.append(box);
+        //Skal connectes
+        rVerticalLayout->addWidget(box);
+        rVerticalLayout->addWidget(save);
+        serienummerInput->clear();
+        unitNameInput->clear();
     } else {
         return;
     }
@@ -161,7 +161,6 @@ void EnhedsHaandtering::removeBox(){
                     delete checkBoxes.at(i);
                     checkBoxes.removeAt(i);
                 }
-
             }
         }
     }
@@ -172,18 +171,16 @@ void EnhedsHaandtering::removeBox(){
 
 
 void EnhedsHaandtering::removeIfChecked(){
-        if (unitsList.size() > 0 && isChecked()) {
-            if (unitsList.size() == 1){
-                unitsList.clear();
-            } else {
+    if (unitsList.size() > 0 && isChecked()) {
+        if (unitsList.size() == 1){
+            unitsList.clear();
+        } else {
             for (int i = 0; i < checkBoxes.size(); i++) {
                 if (checkBoxes.at(i)->isChecked()) {
-                        delete unitsList.at(i);
-                        unitsList.removeAt(i);
+                    delete unitsList.at(i);
+                    unitsList.removeAt(i);
                 }
             }
         }
-        }
-
-
+    }
 }
