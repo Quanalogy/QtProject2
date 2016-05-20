@@ -36,7 +36,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     //connect(addPage, &AddUser::onSaveClick, this, &MainPage::handleSaveClick);
     connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
     connect(aktivitetssimuleringPage,&Aktivitetssimulering::onSaveClick,this,&MainPage::handleSaveClick);
-    connect(lysstyringPage,&Lysstyring::onSaveClick,this,&MainPage::handleSaveClick);
+    connect(lysstyringPage,&Lysstyring::onSaveClick,this,&MainPage::changeLightVolumeSave);
     connect(adfaerdsPage,&AdfaerdsStyring::onSaveClick,this,&MainPage::changeAdfaerdsStyringSave);
     connect(enhedsHaandteringPage,&EnhedsHaandtering::onSaveClick,this,&MainPage::changeUnitsSave);
     connect(addPage, &AddUser::onSaveClick, this, &MainPage::addUserSave);
@@ -185,6 +185,12 @@ void MainPage::changeUnitsSave()  {
         this->show();
         pages.at(index)->hide();
     }
+}
+
+void MainPage::changeLightVolumeSave() {
+    lysstyringPage->checkIfCheckedAddVolume();
+    this->show();
+    pages.at(index)->hide();
 }
 
 void MainPage::setupPages(User *currentUser_) {

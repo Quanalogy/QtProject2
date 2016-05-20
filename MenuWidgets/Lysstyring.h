@@ -22,6 +22,7 @@ public:
     void setUnitsList(QList<Unit *> list);
     void addBox();
     void removeBox();
+    void checkIfCheckedAddVolume();
 
 private:
     QString name = "Lysstyring";

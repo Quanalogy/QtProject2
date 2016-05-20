@@ -7,6 +7,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QPushButton>
+#include <QtGui/QIntValidator>
 
 Lysstyring::Lysstyring(QWidget *parent) : MenuWidget(parent){
     this->setWindowTitle(name);
@@ -56,6 +57,8 @@ void Lysstyring::addBox(){
         rigVerticalLayout->removeWidget(save);
         QCheckBox *box = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
         QLineEdit *line = new QLineEdit("", this);
+        QValidator *validator = new QIntValidator(0,100,this);
+        line->setValidator(validator);
         line->setPlaceholderText("lysstyrke %");
         checkBoxes.append(box);
         editLines.append(line);
@@ -63,7 +66,7 @@ void Lysstyring::addBox(){
         rigVerticalLayout->addWidget(line);
         lefVerticalLayout->addWidget(cancel);
         rigVerticalLayout->addWidget(save);
-        pos ++;
+        pos++;
     }
 }
 
@@ -86,5 +89,14 @@ void Lysstyring::removeBox(){
     }
     else {
         return;
+    }
+}
+
+void Lysstyring::checkIfCheckedAddVolume() {
+    for (int i = 0 ; i < unitsList.size() ; i++){
+        if (checkBoxes.at(i)->isChecked()){
+            unitsList.at(i)->setVolume(editLines.at(i)->text().toInt());
+            cout << "lysstyrke:" << unitsList.at(i)->getVolume() << endl;
+        }
     }
 }

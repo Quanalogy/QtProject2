@@ -29,3 +29,7 @@ void Unit::setUnitName(QString name) {
 void Unit::setVolume(int vol) {
     volume = vol;
 }
+
+int Unit::getVolume(){
+    return volume;
+}
