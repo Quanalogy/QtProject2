@@ -7,8 +7,14 @@ QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
     User *adminUser = new User((QString)"a", (QString) "p");
     adminUser->setRights(true, true, true, true, true, true);
     addUserToList(adminUser);
+
+    User *noviceUser = new User("Abe", "Kat");
+    noviceUser->setRights(false, false, false, false, false, true);
+    addUserToList(noviceUser);
+
+
     mainPage = new MainPage;
-    mainPage->setupPages(adminUser);
+    //mainPage->setupPages(adminUser);
     mainPage->hide();
     LoginDialog *loginDialog = new LoginDialog;
     loginDialog->show();

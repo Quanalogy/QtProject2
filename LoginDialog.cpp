@@ -3,6 +3,7 @@
 // This has been taken partly from https://wiki.qt.io/User_Login_Dialog
 //
 
+#include <QtWidgets/QMessageBox>
 #include "LoginDialog.h"
 #include "QMainApp.h"
 
@@ -40,6 +41,8 @@ void LoginDialog::setUpGUI() {
             this,
             SLOT(slotAcceptLogin()));
 
+    MainPage *mainPage = static_cast<QMainApp *> qApp->getMain();
+
 
 // place components into the dialog
     formGridLayout->addWidget(labelUsername, 0, 0);
@@ -65,28 +68,20 @@ void LoginDialog::slotAcceptLogin() {
     QString password = editPassword->text();
 
     QList<User *> userList = static_cast<QMainApp *>qApp->getUserList();
-
-    if(username == NULL || password == NULL){
+    if(username == "" || password == ""){
         return;
     } else {
         for (int i = 0; i < userList.size() ; ++i) {
             if(userList.at(i)->getName() == username && userList.at(i)->getPass() == password){
+                cout << "It's true bro" << endl;
                 emit acceptLogin(username, // current username
                                  password // current password
 
                 );
-                close();
+                //close();
+                this->hide();
             }
         }
     }
 }
 
-bool LoginDialog::userAccepted() {
-    if(editUsername->text() == NULL || editPassword == NULL){
-        return false;
-    }
-    if(editUsername->text() == "Admin" && editPassword->text() == "Password"){
-        return true;
-    }
-    return false;
-}

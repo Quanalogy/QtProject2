@@ -50,6 +50,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     connect(adfaerdsPage, &AdfaerdsStyring::onCancelClick, this, &MainPage::handleCancelClick);
     connect(enhedsHaandteringPage, &EnhedsHaandtering::onCancelClick, this, &MainPage::handleCancelClick);
 
+
     setLayout(gridLayout);
 }
 
@@ -70,19 +71,26 @@ void MainPage::handleCancelClick() {
     pages.at(index)->hide();
 }
 
-bool MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
-    qDebug() << userName.toLatin1();
-    this->show();
-    cout << "Works" << endl;
+void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
+    cout << "Welcome to MainPage" << endl;
     currentUserName = userName;
     currentPassword = password;
+    QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
 
 
-    if(userMap.value(currentUserName) == currentPassword){
-        return true;
-    }
 
-    return false;
+
+        for (int i = 0; i <tempUserList.size() ; ++i) {
+            if(tempUserList.at(i)->getName()==currentUserName){
+                setupPages(tempUserList.at(i));
+                qDebug() << tempUserList.at(i);
+                qDebug() << tempUserList.size();
+            }
+        }
+        this->show();
+    //return false;
+
+
 }
 
 void MainPage::addUserSave() {

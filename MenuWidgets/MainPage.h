@@ -33,7 +33,7 @@ public slots:
     void handleSaveClick();
     void handleCancelClick();                       // a slot to handle when cancel has been pressed
                                                     // on one of the views
-    bool slotAcceptUserLogin(QString&,QString&);    //checks if the username and password is known
+    void slotAcceptUserLogin(QString&,QString&);    //checks if the username and password is known
     void addUserSave();
     void changeAdfaerdsStyringSave();
     void changeProfileSave();
