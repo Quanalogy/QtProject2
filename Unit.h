@@ -14,9 +14,13 @@ public:
     int getId();
     QString getUnitName();
     void setUnitName(QString name);
+    void setVolume(int vol);
+    int getVolume();
+
 private:
     int id;
     QString unitName;
+    int volume;
 };
 
 #endif

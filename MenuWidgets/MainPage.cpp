@@ -25,12 +25,14 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
     //input pages into QList
     pages << addPage << changeProfilePage << aktivitetssimuleringPage << lysstyringPage
-    << adfaerdsPage << enhedsHaandteringPage;
+            << adfaerdsPage << enhedsHaandteringPage;
+
+
 
     //Connect the buttons with the
     connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
     connect(aktivitetssimuleringPage,&Aktivitetssimulering::onSaveClick,this,&MainPage::handleSaveClick);
-    connect(lysstyringPage,&Lysstyring::onSaveClick,this,&MainPage::handleSaveClick);
+    connect(lysstyringPage,&Lysstyring::onSaveClick,this,&MainPage::changeLightVolumeSave);
     connect(adfaerdsPage,&AdfaerdsStyring::onSaveClick,this,&MainPage::changeAdfaerdsStyringSave);
     connect(enhedsHaandteringPage,&EnhedsHaandtering::onSaveClick,this,&MainPage::changeUnitsSave);
     connect(addPage, &AddUser::onSaveClick, this, &MainPage::addUserSave);
@@ -50,13 +52,20 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
 void MainPage::ChangeView() {
     index = buttons.indexOf((QPushButton*)QObject::sender());
-    QString temp = "Enhedshåndtering";
-    if (pages.at(index)->getName() == temp){
-        cout << "tester i change" << endl;
+    QString enhed = "Enhedshåndtering";
+    QString lys = "Lysstyring";
+    if (pages.at(index)->getName() == enhed){
 
         enhedsHaandteringPage->setUnitsList(unitsList);
         enhedsHaandteringPage->removeBox();
         enhedsHaandteringPage->addBox();
+
+    }
+    if (pages.at(index)->getName() == lys){
+
+        lysstyringPage->setUnitsList(unitsList);
+        lysstyringPage->removeBox();
+        lysstyringPage->addBox();
 
     }
     pages.at(index)->show();
@@ -167,6 +176,12 @@ void MainPage::changeUnitsSave()  {
         this->show();
         pages.at(index)->hide();
     }
+}
+
+void MainPage::changeLightVolumeSave() {
+    lysstyringPage->checkIfCheckedAddVolume();
+    this->show();
+    pages.at(index)->hide();
 }
 
 void MainPage::setupPages(User *currentUser_) {

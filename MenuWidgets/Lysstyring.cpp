@@ -7,52 +7,32 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QPushButton>
+#include <QtGui/QIntValidator>
 
 Lysstyring::Lysstyring(QWidget *parent) : MenuWidget(parent){
     this->setWindowTitle(name);
 
-    QVBoxLayout *lefVerticalLayout = new QVBoxLayout;
-    QVBoxLayout *rigVerticalLayout = new QVBoxLayout;
-    QHBoxLayout *controlLayout = new QHBoxLayout(this);
-
-    //check boxes
-    QCheckBox *stue = new QCheckBox("Stue",this);
-    QCheckBox *sove1 = new QCheckBox("Soveværelse 1",this);
-    QCheckBox *sove2 = new QCheckBox("Soveværelse 2",this);
-
-    //Line edits
-    QLineEdit *lysStue = new QLineEdit(this);
-    QLineEdit *lysSove1 = new QLineEdit(this);
-    QLineEdit *lysSove2 = new QLineEdit(this);
+    lefVerticalLayout = new QVBoxLayout;
+    rigVerticalLayout = new QVBoxLayout;
+    controlLayout = new QHBoxLayout(this);
 
     //Push buttons
-    QPushButton *save = new QPushButton("Gem",this);
-    QPushButton *cancel = new QPushButton("Annuller",this);
+    save = new QPushButton("Gem",this);
+    cancel = new QPushButton("Annuller",this);
 
 //left layout
-    lefVerticalLayout->addWidget(stue);
-    lefVerticalLayout->addWidget(sove1);
-    lefVerticalLayout->addWidget(sove2);
-    lefVerticalLayout->addSpacing(10);
     lefVerticalLayout->addWidget(cancel);
 
 
     //right layout
-    rigVerticalLayout->addWidget(lysStue);
-    rigVerticalLayout->addWidget(lysSove1);
-    rigVerticalLayout->addWidget(lysSove2);
     rigVerticalLayout->addWidget(save);
 
-    // placeholder text for input
-    lysStue->setPlaceholderText("lysstyrke %");
-    lysSove1->setPlaceholderText("lysstyrke %");
-    lysSove2->setPlaceholderText("lysstyrke %");
-
+    //connects
     connect(save,&QPushButton::clicked,this,&Lysstyring::onSaveClick);
     connect(cancel,&QPushButton::clicked,this,&Lysstyring::onSaveClick);
 
 
-
+    //setup conrol layout
     controlLayout->addLayout(lefVerticalLayout);
     controlLayout->addSpacing(4);
     controlLayout->addLayout(rigVerticalLayout);
@@ -64,4 +44,59 @@ Lysstyring::Lysstyring(QWidget *parent) : MenuWidget(parent){
 
 QString Lysstyring::getName() {
     return name;
+}
+
+void Lysstyring::setUnitsList(QList<Unit *> list) {
+    unitsList = list;
+}
+
+void Lysstyring::addBox(){
+    int pos = checkBoxes.size();
+    while (checkBoxes.size() < unitsList.size()  ) {
+        lefVerticalLayout->removeWidget(cancel);
+        rigVerticalLayout->removeWidget(save);
+        QCheckBox *box = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
+        QLineEdit *line = new QLineEdit("", this);
+        QValidator *validator = new QIntValidator(0,100,this);
+        line->setValidator(validator);
+        line->setPlaceholderText("lysstyrke %");
+        checkBoxes.append(box);
+        editLines.append(line);
+        lefVerticalLayout->addWidget(box);
+        rigVerticalLayout->addWidget(line);
+        lefVerticalLayout->addWidget(cancel);
+        rigVerticalLayout->addWidget(save);
+        pos++;
+    }
+}
+
+void Lysstyring::removeBox(){
+    if (checkBoxes.size() > unitsList.size()) {
+        for (int i = 0 ; i < checkBoxes.size() ; i++){
+            delete checkBoxes.at(i);
+            delete editLines.at(i);
+        }
+        checkBoxes.clear();
+        editLines.clear();
+        lefVerticalLayout = new QVBoxLayout;
+        rigVerticalLayout = new QVBoxLayout;
+        addBox();
+        controlLayout->addLayout(lefVerticalLayout);
+        controlLayout->addSpacing(4);
+        controlLayout->addLayout(rigVerticalLayout);
+
+        setLayout(controlLayout);
+    }
+    else {
+        return;
+    }
+}
+
+void Lysstyring::checkIfCheckedAddVolume() {
+    for (int i = 0 ; i < unitsList.size() ; i++){
+        if (checkBoxes.at(i)->isChecked()){
+            unitsList.at(i)->setVolume(editLines.at(i)->text().toInt());
+            cout << "lysstyrke:" << unitsList.at(i)->getVolume() << endl;
+        }
+    }
 }

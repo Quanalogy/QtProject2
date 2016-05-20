@@ -109,10 +109,8 @@ bool EnhedsHaandtering::isChecked() {
 
     for (int i = 0 ;  i < checkBoxes.size() ; i ++){
         if (checkBoxes.at(i)->isChecked()){
-            cout << "test 1" << endl;
             return true;
         }
-        cout << "test 2" << endl;
     }
     return false;
 }
