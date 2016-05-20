@@ -48,12 +48,18 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
 
     setLayout(gridLayout);
+
+    //[[TESTER]] Adder 3 enheder
+    unitsList.append(new Unit(1337, "Stuen"));
+    unitsList.append(new Unit(666, "Toilet"));
+    unitsList.append(new Unit(101010, "Sovevaerelse"));
 }
 
 void MainPage::ChangeView() {
     index = buttons.indexOf((QPushButton*)QObject::sender());
     QString enhed = "Enhedshåndtering";
     QString lys = "Lysstyring";
+    QString adfaerd = "Adfærdsstyring";
     if (pages.at(index)->getName() == enhed){
 
         enhedsHaandteringPage->setUnitsList(unitsList);
@@ -66,6 +72,13 @@ void MainPage::ChangeView() {
         lysstyringPage->setUnitsList(unitsList);
         lysstyringPage->removeBox();
         lysstyringPage->addBox();
+
+    }
+    if (pages.at(index)->getName() == adfaerd){
+
+        adfaerdsPage->setUnitsList(unitsList);
+        adfaerdsPage->removeBox();
+        adfaerdsPage->addBox();
 
     }
     pages.at(index)->show();

@@ -78,14 +78,7 @@ void Lysstyring::removeBox(){
         }
         checkBoxes.clear();
         editLines.clear();
-        lefVerticalLayout = new QVBoxLayout;
-        rigVerticalLayout = new QVBoxLayout;
         addBox();
-        controlLayout->addLayout(lefVerticalLayout);
-        controlLayout->addSpacing(4);
-        controlLayout->addLayout(rigVerticalLayout);
-
-        setLayout(controlLayout);
     }
     else {
         return;

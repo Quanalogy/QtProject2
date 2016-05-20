@@ -5,26 +5,25 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QCheckBox>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QLabel>
 #include <QtGui/QIntValidator>
 #include "AdfaerdsStyring.h"
 
 AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     this->setWindowTitle(name);
-    QVBoxLayout *lefVertivalLayout = new QVBoxLayout;
-    QVBoxLayout *rigVerticalLayout = new QVBoxLayout;
-    QHBoxLayout *controlHorizontalLayout = new QHBoxLayout(this);
-    QHBoxLayout *timeDagFraHorizontalLayout = new QHBoxLayout;
-    QHBoxLayout *timeDagTilHorizontalLayout = new QHBoxLayout;
-    QHBoxLayout *timeNatFraHorizontalLayout = new QHBoxLayout;
-    QHBoxLayout *timeNatTilHorizontalLayout = new QHBoxLayout;
+    lefVertivalLayout = new QVBoxLayout;
+    rigVerticalLayout = new QVBoxLayout;
+    controlHorizontalLayout = new QHBoxLayout(this);
+    timeDagFraHorizontalLayout = new QHBoxLayout;
+    timeDagTilHorizontalLayout = new QHBoxLayout;
+    timeNatFraHorizontalLayout = new QHBoxLayout;
+    timeNatTilHorizontalLayout = new QHBoxLayout;
 
     //labels
     QLabel *dagProfil = new QLabel(this);
     QLabel *natProfil = new QLabel(this);
-    QLabel *intervalNat = new QLabel(this);
-    QLabel *intervalDag = new QLabel(this);
+    intervalNat = new QLabel(this);
+    intervalDag = new QLabel(this);
     QLabel *profilgaelder1 = new QLabel(this);
     QLabel *profilgaelder2 = new QLabel(this);
     QLabel *timeDagTil = new QLabel(this);
@@ -35,7 +34,6 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     QLabel *semicolon2 = new QLabel(this);
     QLabel *semicolon3 = new QLabel(this);
     QLabel *semicolon4 = new QLabel(this);
-    //Line edits
 
     //Dags edit boxes til interval
     dagFraTime = new QLineEdit(this);
@@ -70,19 +68,13 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     natTilTime->setValidator(timeValidator);
     natTilMin->setValidator(minValidator);
 
-    //check boxes
-    QCheckBox *stueDag = new QCheckBox("Stue",this);
-    QCheckBox *soveDag1 = new QCheckBox("Soveværelse 1",this);
-    QCheckBox *soveDag2 = new QCheckBox("Soveværelse 2",this);
-    QCheckBox *stueNat = new QCheckBox("Stue",this);
-    QCheckBox *soveNat1 = new QCheckBox("Soveværelse 1",this);
-    QCheckBox *soveNat2 = new QCheckBox("Soveværelse 2",this);
     //Push buttons
-    QPushButton *save = new QPushButton("Gem",this);
-    QPushButton *cancel = new QPushButton("Annuller",this);
+    save = new QPushButton("Gem",this);
+    cancel = new QPushButton("Annuller",this);
 
     leftList << dagProfil << intervalDag << profilgaelder1;
     rightList << natProfil << intervalNat << profilgaelder2;
+
     //tekst til labels
     dagProfil->setText("<h1>Dagsprofil</h1>");
     intervalDag->setText("<h2>Interval</h2>");
@@ -135,12 +127,6 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
            lefVertivalLayout->addLayout(timeDagFraHorizontalLayout);
             lefVertivalLayout->addLayout(timeDagTilHorizontalLayout);
         }
-        else if(*i==profilgaelder1)
-        {
-            lefVertivalLayout->addWidget(stueDag);
-            lefVertivalLayout->addWidget(soveDag1);
-            lefVertivalLayout->addWidget(soveDag2);
-        }
     }
     lefVertivalLayout->addWidget(cancel);
 
@@ -153,12 +139,6 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
         {
             rigVerticalLayout->addLayout(timeNatFraHorizontalLayout);
             rigVerticalLayout->addLayout(timeNatTilHorizontalLayout);
-        }
-        else if(*j==profilgaelder2)
-        {
-            rigVerticalLayout->addWidget(stueNat);
-            rigVerticalLayout->addWidget(soveNat1);
-            rigVerticalLayout->addWidget(soveNat2);
         }
 
     }
@@ -197,4 +177,40 @@ void AdfaerdsStyring::saveIntervals() {
 
 QString AdfaerdsStyring::getName() {
     return name;
+}
+
+void AdfaerdsStyring::setUnitsList(QList<Unit *> list) {
+    unitsList = list;
+}
+
+void AdfaerdsStyring::addBox(){
+    int pos = lefCheckBoxes.size();
+    while (lefCheckBoxes.size() < unitsList.size()  ) {
+        lefVertivalLayout->removeWidget(cancel);
+        rigVerticalLayout->removeWidget(save);
+        QCheckBox *box = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
+        QCheckBox *box2 = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
+        lefCheckBoxes.append(box);
+        rigCheckBoxes.append(box2);
+        lefVertivalLayout->addWidget(box);
+        rigVerticalLayout->addWidget(box2);
+        lefVertivalLayout->addWidget(cancel);
+        rigVerticalLayout->addWidget(save);
+        pos++;
+    }
+}
+
+void AdfaerdsStyring::removeBox(){
+    if (lefCheckBoxes.size() > unitsList.size()) {
+        for (int i = 0 ; i < lefCheckBoxes.size() ; i++){
+            delete lefCheckBoxes.at(i);
+            delete rigCheckBoxes.at(i);
+        }
+        lefCheckBoxes.clear();
+        rigCheckBoxes.clear();
+        addBox();
+    }
+    else {
+        return;
+    }
 }

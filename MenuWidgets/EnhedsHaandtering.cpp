@@ -132,17 +132,17 @@ void EnhedsHaandtering::setUnitsList(QList<Unit *> list) {
 }
 
 void EnhedsHaandtering::addBox(){
-    if (checkBoxes.size() < unitsList.size()  ) {
+    int pos = checkBoxes.size();
+    while (checkBoxes.size() < unitsList.size()  ) {
         rVerticalLayout->removeWidget(save);
-        QCheckBox *box = new QCheckBox(unitsList.last()->getUnitName(), this);
+        QCheckBox *box = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
         checkBoxes.append(box);
         //Skal connectes
         rVerticalLayout->addWidget(box);
         rVerticalLayout->addWidget(save);
         serienummerInput->clear();
         unitNameInput->clear();
-    } else {
-        return;
+        pos++;
     }
 }
 
