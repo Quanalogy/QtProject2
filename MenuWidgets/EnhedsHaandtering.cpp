@@ -6,6 +6,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QPushButton>
+#include <QtGui/QIntValidator>
 #include "EnhedsHaandtering.h"
 #include "MainPage.h"
 
@@ -23,6 +24,13 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
     //Add some input boxes
     serienummerInput = new QLineEdit(this);
     unitNameInput = new QLineEdit(this);
+
+    //Validators
+    QValidator *serieNummerValidator = new QIntValidator(1,INT_MAX,this);
+    QValidator *unitNameValidator = new QRegExpValidator( QRegExp("[A-Za-z0-9_]+"), this );
+
+    serienummerInput->setValidator(serieNummerValidator);
+    unitNameInput->setValidator(unitNameValidator);
 
     //Add some Pushbuttons
     save = new QPushButton("Gem", this);
@@ -126,14 +134,11 @@ void EnhedsHaandtering::setUnitsList(QList<Unit *> list) {
 }
 
 void EnhedsHaandtering::addBox(){
-    cout << "test22" << "  " << checkBoxes.size() << unitsList.size() << endl;
-
     if (checkBoxes.size() < unitsList.size()  ) {
             rVerticalLayout->removeWidget(save);
             QCheckBox *box = new QCheckBox(unitsList.last()->getUnitName(), this);
             checkBoxes.append(box);
             //Skal connectes
-            cout << "Box:" << box << endl;
             rVerticalLayout->addWidget(box);
             rVerticalLayout->addWidget(save);
             serienummerInput->clear();
@@ -144,19 +149,19 @@ void EnhedsHaandtering::addBox(){
 }
 
 void EnhedsHaandtering::removeBox(){
-
-    if (unitsList.size() > 0) {
-
+    if (checkBoxes.size() > unitsList.size()) {
         for (int i = 0; i < checkBoxes.size(); i++) {
-            cout << "fjernerTest" << endl;
             if (checkBoxes.at(i)->isChecked()) {
-                cout << "fjerner" << endl;
                 QCheckBox *box = checkBoxes.at(i);
                 rVerticalLayout->removeWidget(box);
-                delete checkBoxes.at(i);
-                checkBoxes.removeAt(i);
+                if (checkBoxes.size() == 1) {
+                    delete checkBoxes.at(i);
+                    checkBoxes.clear();
+                } else {
+                    delete checkBoxes.at(i);
+                    checkBoxes.removeAt(i);
+                }
 
-                cout << "box list change to:" << checkBoxes.size() << endl;
             }
         }
     }
@@ -170,13 +175,11 @@ void EnhedsHaandtering::removeIfChecked(){
         if (unitsList.size() > 0 && isChecked()) {
             if (unitsList.size() == 1){
                 unitsList.clear();
-                checkBoxes.clear();
             } else {
-            for (int i = 0; i < checkBoxes.size()-1; i++) {
+            for (int i = 0; i < checkBoxes.size(); i++) {
                 if (checkBoxes.at(i)->isChecked()) {
                         delete unitsList.at(i);
                         unitsList.removeAt(i);
-                        cout << "test22" << "  " << checkBoxes.at(i) << checkBoxes.size() << unitsList.size() << endl;
                 }
             }
         }

@@ -57,16 +57,12 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 void MainPage::ChangeView() {
     index = buttons.indexOf((QPushButton*)QObject::sender());
     QString temp = "Enhedshåndtering";
-    qDebug() << pages.at(index) << temp;
     if (pages.at(index)->getName() == temp){
-        cout << "to change, size:" << unitsList.size() << endl;
-        if (enhedsHaandteringPage->isChecked()) {
-            enhedsHaandteringPage->removeBox();
-            this->hide();
-        } else {
+            cout << "tester i change" << endl;
+
             enhedsHaandteringPage->setUnitsList(unitsList);
+            enhedsHaandteringPage->removeBox();
             enhedsHaandteringPage->addBox();
-        }
 
     }
     pages.at(index)->show();
@@ -166,14 +162,10 @@ void MainPage::changeUnitsSave()  {
     } else {
         int ID = enhedsHaandteringPage->getEditLineID();
         QString Name = enhedsHaandteringPage->getEditLineName();
-        qDebug() << Name << ID;
         if (ID >= 0 && Name.toStdString().size() > 0 ) {
-            cout << "test1" << endl;
             unitsList.append(new Unit(ID, Name));
             enhedsHaandteringPage->setUnitsList(unitsList);
         }
-        cout << unitsList.size() << endl;
-        cout << "test2" << endl;
         enhedsHaandteringPage->removeIfChecked();
         unitsList = enhedsHaandteringPage->getUnitsList();
         this->show();
