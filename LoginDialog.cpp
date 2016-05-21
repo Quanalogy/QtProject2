@@ -74,7 +74,7 @@ void LoginDialog::slotAcceptLogin() {
         return;
     } else {
         for (int i = 0; i < userList.size() ; ++i) {
-            if(userList.at(i)->getName() == username && userList.at(i)->getPass() == password){
+            if(userList.at(i)->getName() == username && userList.at(i)->getPass() == password && !userList.at(i)->getLock()){
                 cout << "It's true bro" << endl;
                 emit acceptLogin(username, // current username
                                  password // current password
