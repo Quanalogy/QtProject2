@@ -150,7 +150,7 @@ void AendreBrugerprofil::addLayouts(){
         password->setPlaceholderText("Indtast nyt kodeord her");
         changePass->setText("<h2>Skift kodeord</h2>");
         userAccess->setText("<h2>Bruger har adgang til</h2>");
-        user->setText(brugerNavn);
+        user->setText("<h1>" + brugerNavn + "</h1>");
 
         userLabels.append(user);
         changePassLabels.append(changePass);
