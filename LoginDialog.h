@@ -53,6 +53,9 @@ private:
  */
     QDialogButtonBox *buttons;
 
+    // attempts, 3 strikes and out!!
+    int att;
+
 /*!
  * A method to set up all dialog components and
  * initialize them.

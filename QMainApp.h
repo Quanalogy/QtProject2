@@ -20,6 +20,8 @@ public:
     LoginDialog* getLogin();
     void setUserList(QList<User *> list);
     void removeUser(int userIndex);
+    void lockUser(int userIndex);
+    void unLockUser (int userIndex);
 
 private:
     LoginDialog *loginDialog = new LoginDialog;

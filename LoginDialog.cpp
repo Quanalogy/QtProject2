@@ -56,6 +56,8 @@ void LoginDialog::setUpGUI() {
     setUsername(userName);
   */  setLayout(formGridLayout);
 
+    att = 0;
+
 }
 
 
@@ -68,8 +70,12 @@ void LoginDialog::clearInput() {
 void LoginDialog::slotAcceptLogin() {
     QString username = editUsername->text();
     QString password = editPassword->text();
+    QString tempUserName;
 
     QList<User *> userList = static_cast<QMainApp *>qApp->getUserList();
+    if (username == tempUserName){
+        att = 0;
+    }
     if(username == "" || password == ""){
         return;
     } else {
@@ -80,10 +86,40 @@ void LoginDialog::slotAcceptLogin() {
                                  password // current password
 
                 );
-                //close();
                 this->hide();
+                return;
             }
+            if (userList.at(i)->getLock()){
+                QMessageBox errorMessage;
+                errorMessage.setText("Brugeren er låst, kontakt administrator");
+                errorMessage.exec();
+                return;
+            }
+            // 3 forsøg og derefter låses brugeren.
+            if (userList.at(i)->getName() == username){
+                att++;
+                tempUserName = username;
+                editPassword->clear();
+                if (att == 3){
+                    userList.at(i)->setLock(true);
+
+                    static_cast<QMainApp *> qApp->lockUser(i);
+
+                    QMessageBox errorMessage;
+                    errorMessage.setText("Du har forsøgt med 3 forkerte password, brugeren er nu låst, kontakt administrator");
+                    errorMessage.exec();
+                }
+                if (att < 3) {
+                    QMessageBox errorMessage;
+                    QString temp = "Forkert password!";
+                    errorMessage.setText(temp);
+                    errorMessage.exec();
+                }
+            }
+
         }
+
+
     }
 }
 

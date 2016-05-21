@@ -58,3 +58,12 @@ void QMainApp::removeUser(int userIndex) {
     cout << "Qmain siger:" << userList.size() << "uI:" << userIndex << endl;
 }
 
+void QMainApp::lockUser(int userIndex) {
+    cout << "locked" << endl;
+    userList.at(userIndex)->setLock(true);
+}
+
+void QMainApp::unLockUser(int userIndex) {
+    cout << "unlocked" << endl;
+    userList.at(userIndex)->setLock(false);
+}

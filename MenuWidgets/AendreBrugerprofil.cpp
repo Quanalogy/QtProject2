@@ -184,6 +184,9 @@ void AendreBrugerprofil::removeLayouts(){
         if (passwords.at(k)->text() != NULL) {
             passwords.at(k)->clear();
         }
+        if (userList.at(k)->getLock()){
+            listCheckboxList.at(k).at(0)->setChecked(true);
+        }
     }
 
     if (userLayouts.size() > userList.size()) {
@@ -220,8 +223,10 @@ for (int i = 0 ; i < userList.size() ; i ++){
     }
     if (listCheckboxList.at(i).at(0)->isChecked()){
         userList.at(i)->setLock(true);
+        static_cast<QMainApp *> qApp->lockUser(i);
     } else {
         userList.at(i)->setLock(false);
+        static_cast<QMainApp *> qApp->unLockUser(i);
     }
     if (listCheckboxList.at(i).at(1)->isChecked()){
         static_cast<QMainApp *> qApp->removeUser(i);
