@@ -19,14 +19,18 @@ public:
     QString getName();
     vector<bool> getStates(int userNum);
     QString getNewPassword();
-    QList<QString> getPasswords();
+    QList<QString *> getPasswords();
+    void setUserList(QList<User * > list);
+    void addLayouts();
+    void removeLayouts();
 
 private:
     QString name = "Ændre brugerprofil";
     QStringList userPages;
     QList<QLineEdit> *passwordList;
-    QList<QList<QCheckBox *> *> checkList;
     QMap<int, QList<QCheckBox *>> checkMap;
+    QList<QCheckBox *> checkboxList;
+    QList<QList<QCheckBox *>> listCheckboxList;
     QCheckBox *userLockedCheck;
     QCheckBox *deleteUserCheck;
     QCheckBox *adfaerdsCheck;
@@ -39,8 +43,28 @@ private:
     QLabel *user;
     QLabel *changePass;
     QLabel *userAccess;
+
+    QHBoxLayout *subMainLayout;
+    QVBoxLayout *mainLayout;
+
+    QList<QVBoxLayout *> userLayouts;
+
+    QList<QLabel *> userLabels;
+    QList<QLabel *> changePassLabels;
+    QList<QLabel *> userAccessLabels;
+    QList<QLineEdit *> passwords;
+
+
     QList<vector<bool>> stateList;
-    QList<User *> userList;
+
+    QList<User * > userList;                 // holds all the users in our program
+    QString currentUserName;                        // holds the current username try
+    QString currentPassword;                        // holds the current password try
+    vector<bool> rights;
+    QPushButton *logout;
+    bool firstTimeLogin;
+
+    int layoutsCount;
 
 
 

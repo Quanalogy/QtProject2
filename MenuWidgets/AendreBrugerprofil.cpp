@@ -7,6 +7,7 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtCore/QList>
 #include "AendreBrugerprofil.h"
 #include "../QMainApp.h"
 //#include "../Globals.h"
@@ -15,55 +16,29 @@
 AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     this->setWindowTitle(name);
     int tempUCount=2;
+
     //Add layouts
-    QHBoxLayout *subMainLayout = new QHBoxLayout;
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    subMainLayout = new QHBoxLayout;
+    mainLayout = new QVBoxLayout(this);
     QHBoxLayout *buttonLayout = new QHBoxLayout;
-    QVBoxLayout *userLayout = new QVBoxLayout;
-    QVBoxLayout *userLayout2 = new QVBoxLayout;
-    QVBoxLayout *userLayout3 = new QVBoxLayout;
-    QVBoxLayout *userLayout4 = new QVBoxLayout;
-    QVBoxLayout *userLayout5 = new QVBoxLayout;
     int size = static_cast<QMainApp *> qApp->getUserList().size();
     //Labels
-    user= new QLabel(this);
-    changePass= new QLabel(this);
-    userAccess=new QLabel(this);
+    user = new QLabel(this);
+    changePass = new QLabel(this);
+    userAccess =new QLabel(this);
 
     //set text on labels
     //  for (int j = 0; j <=size ; ++j) {
-    userList =  static_cast<QMainApp *> qApp->getUserList();
    /* if(brugerliste.first().)
     {*/
-    if(!userList.isEmpty()){
-        QString brugerNavn= userList.first()->getName();
-        user->setText(brugerNavn);
-        qDebug()<<brugerNavn;
-        changePass->setText("<h2>Skift kodeord</h2>");
-        userAccess->setText("<h2>Bruger har adgang til</h2>");
-    }
-    else{
-        cout<<"den er tom"<<endl;
-    }
+
 
     //A list of names of the checkboxes
     userPages<<"Bruger låst"<<"Fjern bruger"<<"Tilføj brugerprofil"<<"Ændre brugerprofil"<<"Aktivitetssimulering"
     <<"Lysstyring"<<"Adfærdsstyring"<<"Enhedshåndtering";
     //A loop to map the users with thier checkboxes
-    for(int i = 0;i<size;++i){ //user loop
-        QList<QCheckBox *> checkboxList;
-        for(int j = 0; j<8; ++j){ //checkbox loop
-            QCheckBox *checkBox = new QCheckBox(userPages.at(j));
-            checkboxList<<checkBox;
-        }
-        checkMap[i] = checkboxList; // add the completed checkboxes to the map
-    }
 
 
-    //inputbox for new password
-    password = new QLineEdit(this);
-    // for (auto i = 0; i <=5 ; ++i) {
-    password->setPlaceholderText("Indtast nyt kodeord her");
 
 
 
@@ -83,7 +58,7 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
 
 
 
-    for(int i = 0; i < size; ++i){//user loop
+    /*for(int i = 0; i < size; ++i){//user loop
         QList<QCheckBox *> tempList = checkMap[i];
         for (int j = 0; j <8 ; ++j) {//checkbox loop
             if(j==0){
@@ -99,17 +74,16 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
         }
 
 
-    }
+    }*/
 
 
-    subMainLayout->addLayout(userLayout);
 
+    //subMainLayout->addLayout(userLayout);
 
-    subMainLayout->addLayout(userLayout);
         mainLayout->addLayout(subMainLayout);
         mainLayout->addLayout(buttonLayout);
         setLayout(mainLayout);
-   // }
+
 }
 
 QString AendreBrugerprofil::getName() {
@@ -137,12 +111,90 @@ QString kodeOrd= password->text();
 return kodeOrd;
 }
 
-QList<QString> AendreBrugerprofil::getPasswords(){
+QList<QString *> AendreBrugerprofil::getPasswords(){
    QList<QString> kodeListe;
     int size = static_cast<QMainApp *> qApp->getUserList().size();
     for (int i = 0; i < size; ++i) {
         kodeListe<<passwordList->at(i).text();
     }
-    return  kodeListe;
+    //return  kodeListe;
 }
 
+void AendreBrugerprofil::setUserList(QList<User * > list) {
+    userList = list;
+}
+
+void AendreBrugerprofil::addLayouts(){
+    int pos = userLayouts.size();
+    while(userLayouts.size() < userList.size()){
+
+        QList<QCheckBox *> *checkboxList = new QList<QCheckBox *>();
+
+        for(int j = 0; j<8; ++j){ //checkbox loop
+            QCheckBox *checkBox = new QCheckBox(userPages.at(j));
+            checkboxList->append(checkBox);
+        }
+
+        listCheckboxList.append(*checkboxList); // add the completed checkboxes to the map
+
+        QString brugerNavn= userList.at(pos)->getName();
+        qDebug()<<brugerNavn;
+        QVBoxLayout *layout = new QVBoxLayout();
+        userLayouts.append(layout);
+
+        QLabel *user = new QLabel();
+        QLabel *changePass = new QLabel();
+        QLabel *userAccess = new QLabel();
+        QLineEdit *password = new QLineEdit();
+
+        password->setPlaceholderText("Indtast nyt kodeord her");
+        changePass->setText("<h2>Skift kodeord</h2>");
+        userAccess->setText("<h2>Bruger har adgang til</h2>");
+        user->setText(brugerNavn);
+
+        userLabels.append(user);
+        changePassLabels.append(changePass);
+        userAccessLabels.append(userAccess);
+        passwords.append(password);
+
+        userLayouts.at(pos)->addWidget(userLabels.at(pos), 0, Qt::AlignTop);
+        userLayouts.at(pos)->addWidget(changePassLabels.at(pos), 0, Qt::AlignCenter);
+        userLayouts.at(pos)->addWidget(passwords.at(pos), 0, Qt::AlignTop);
+        userLayouts.at(pos)->addWidget(userAccessLabels.at(pos), 0, Qt::AlignTop);
+
+        for (int j = 0; j <8 ; ++j) {//checkbox loop
+            userLayouts.at(pos)->addWidget(listCheckboxList.at(pos).at(j));
+        }
+
+        cout << "tester" << userLayouts.size() << "  " << userLayouts.at(pos) << endl;
+        subMainLayout->addLayout(userLayouts.at(pos));
+        cout << subMainLayout->count() << endl;
+                //subMainLayout->addLayout(userLayout);
+        pos++;
+
+    }
+}
+
+void AendreBrugerprofil::removeLayouts(){
+    if (userLayouts.size() > userList.size()) {
+        for (int i = 0 ; i < userLayouts.size() ; i++){
+            userLayouts.at(i)->deleteLater();
+            //delete listCheckboxList.at(i);
+            userLabels.at(i)->deleteLater();
+            changePassLabels.at(i)->deleteLater();
+            userAccessLabels.at(i)->deleteLater();
+            passwords.at(i)->deleteLater();
+        }
+        userLayouts.clear();
+        listCheckboxList.clear();
+        userLabels.clear();
+        changePassLabels.clear();
+        userAccessLabels.clear();
+        passwords.clear();
+        addLayouts();
+
+    }
+    else {
+        return;
+    }
+}

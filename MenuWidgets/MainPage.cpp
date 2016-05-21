@@ -60,6 +60,7 @@ void MainPage::ChangeView() {
     QString enhed = "Enhedshåndtering";
     QString lys = "Lysstyring";
     QString adfaerd = "Adfærdsstyring";
+    QString Aendre = "Ændre brugerprofil";
     if (pages.at(index)->getName() == enhed){
 
         enhedsHaandteringPage->setUnitsList(unitsList);
@@ -79,6 +80,20 @@ void MainPage::ChangeView() {
         adfaerdsPage->setUnitsList(unitsList);
         adfaerdsPage->removeBox();
         adfaerdsPage->addBox();
+
+    }
+    if (pages.at(index)->getName() == adfaerd){
+
+        adfaerdsPage->setUnitsList(unitsList);
+        adfaerdsPage->removeBox();
+        adfaerdsPage->addBox();
+
+    }
+    if (pages.at(index)->getName() == Aendre){
+        QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
+        changeProfilePage->setUserList(tempUserList);
+        changeProfilePage->addLayouts();
+        changeProfilePage->removeLayouts();
 
     }
     pages.at(index)->show();
@@ -130,10 +145,10 @@ void MainPage::addUserSave() {
     } else {
         userMap.insert(*brugernavn,*kodeord);
         User *newUser = new User(*brugernavn,*kodeord);
-        static_cast<QMainApp *> qApp->addUserToList(newUser);
         vector<bool> userPriv= addPage->getStates();
-        //userCount++;
         newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
+        static_cast<QMainApp *> qApp->addUserToList(newUser);
+        //userCount++;
         this->show();
         pages.at(index)->hide();
     }
@@ -154,18 +169,18 @@ void MainPage::changeAdfaerdsStyringSave()  {
 
 void MainPage::changeProfileSave() {
     //bruger 1 ændring
-    QList<QString> kodeOrd= changeProfilePage->getPasswords();
+    QList<QString *> kodeOrd= changeProfilePage->getPasswords();
 
     int size = static_cast<QMainApp *> qApp->getUserList().size();
     QList<User *> bruger=static_cast<QMainApp *> qApp->getUserList();
     vector<bool> userPriv;
-    QList<QString > userPassword=(changeProfilePage->getPasswords());
+    QList<QString *> userPassword=(changeProfilePage->getPasswords());
     for (int i = 0; i < size; ++i) {
         userPriv=changeProfilePage->getStates(i);
         if(userPassword.at(i)!=NULL) {
             bruger.at(i)->setRights(userPriv.at(2), userPriv.at(3), userPriv.at(4), userPriv.at(5), userPriv.at(6), userPriv.at(7));
             QString brugerNavn=bruger.at(i)->getName();
-            userMap.insert(brugerNavn,userPassword.at(i));
+            userMap.insert(brugerNavn,*userPassword.at(i));
         }
     }
     this->show();

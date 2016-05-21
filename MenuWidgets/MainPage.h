@@ -44,6 +44,7 @@ public slots:
 
 private:
     QList<Unit *> unitsList;
+    QList<User *> userList;
     QString name = "Hovedmenu";                     // the window title name
     QList<MenuWidget *> pages;                      // All the pages avialable
     QList<MenuWidget *> userMenuPages;              // an of accessible menupages, costumized to the users
