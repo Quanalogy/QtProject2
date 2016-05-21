@@ -18,6 +18,7 @@ public:
     QString getName();
     vector<bool> getStates();
     QMap<QString,QString> getLogin();
+    void clear();
 
 private:
     QString usernameInputString;

@@ -61,6 +61,7 @@ void MainPage::ChangeView() {
     QString lys = "Lysstyring";
     QString adfaerd = "Adfærdsstyring";
     QString Aendre = "Ændre brugerprofil";
+    QString adduser = "Tilføj bruger";
     if (pages.at(index)->getName() == enhed){
 
         enhedsHaandteringPage->setUnitsList(unitsList);
@@ -96,6 +97,9 @@ void MainPage::ChangeView() {
         changeProfilePage->removeLayouts();
 
 
+    }
+    if (pages.at(index)->getName() == adduser){
+        addPage->clear();
     }
     pages.at(index)->show();
     this->hide();

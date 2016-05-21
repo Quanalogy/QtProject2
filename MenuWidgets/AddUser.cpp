@@ -136,6 +136,19 @@ QMap<QString,QString> AddUser::getLogin(){
     QMap<QString,QString> credentials;
     credentials[usernameInputString] = passwordInputString;
     return credentials;
+}
 
+void AddUser::clear() {
+    for (int i = 0 ; i < lineList.size() ; i++){
+        if (lineList.at(i)->text() != NULL){
+            lineList.at(i)->clear();
+        }
 
+    }
+    for (int i = 0 ; i < checkList.size() ; i++){
+        if (checkList.at(i)->isChecked()){
+            checkList.at(i)->setChecked(false);
+        }
+
+    }
 }
