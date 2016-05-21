@@ -11,7 +11,10 @@ QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
     User *noviceUser = new User("Abe", "Kat");
     noviceUser->setRights(true, false, false, false, false, true);
     addUserToList(noviceUser);
-
+/*
+ *
+ *
+ */
 
     mainPage = new MainPage;
     //mainPage->setupPages(adminUser);
