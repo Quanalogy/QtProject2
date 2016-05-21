@@ -21,8 +21,10 @@ public:
     QString getNewPassword();
     QList<QString *> getPasswords();
     void setUserList(QList<User * > list);
+    QList<User * > getUserlist();
     void addLayouts();
     void removeLayouts();
+    void makeChanges();
 
 private:
     QString name = "Ændre brugerprofil";

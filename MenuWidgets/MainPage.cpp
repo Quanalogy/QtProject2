@@ -95,6 +95,7 @@ void MainPage::ChangeView() {
         changeProfilePage->addLayouts();
         changeProfilePage->removeLayouts();
 
+
     }
     pages.at(index)->show();
     this->hide();
@@ -168,21 +169,7 @@ void MainPage::changeAdfaerdsStyringSave()  {
 }
 
 void MainPage::changeProfileSave() {
-    //bruger 1 ændring
-    QList<QString *> kodeOrd= changeProfilePage->getPasswords();
-
-    int size = static_cast<QMainApp *> qApp->getUserList().size();
-    QList<User *> bruger=static_cast<QMainApp *> qApp->getUserList();
-    vector<bool> userPriv;
-    QList<QString *> userPassword=(changeProfilePage->getPasswords());
-    for (int i = 0; i < size; ++i) {
-        userPriv=changeProfilePage->getStates(i);
-        if(userPassword.at(i)!=NULL) {
-            bruger.at(i)->setRights(userPriv.at(2), userPriv.at(3), userPriv.at(4), userPriv.at(5), userPriv.at(6), userPriv.at(7));
-            QString brugerNavn=bruger.at(i)->getName();
-            userMap.insert(brugerNavn,*userPassword.at(i));
-        }
-    }
+    changeProfilePage->makeChanges();
     this->show();
     pages.at(index)->hide();
 }

@@ -48,3 +48,13 @@ LoginDialog* QMainApp::getLogin() {
 
 }
 
+void QMainApp::setUserList(QList<User *> list) {
+     userList = list;
+}
+
+void QMainApp::removeUser(int userIndex) {
+    delete userList.at(userIndex);
+    userList.removeAt(userIndex);
+    cout << "Qmain siger:" << userList.size() << "uI:" << userIndex << endl;
+}
+

@@ -26,9 +26,9 @@ WriteFromPi::WriteFromPi(QWidget *parent) : QWidget(parent){
     mainLayout->addWidget(sendSignal);
     mainLayout->addWidget(stopSignal);
     mainLayout->addWidget(getInt);
-    connect(sendSignal, &QPushButton::clicked, this, &WriteFromPi::RestartSignal);
-    connect(stopSignal, &QPushButton::clicked, this, &WriteFromPi::StopSignal);
-    connect(getInt, &QPushButton::clicked, this, &WriteFromPi::HandleInputInt);
+    //connect(sendSignal, &QPushButton::clicked, this, &WriteFromPi::RestartSignal);
+    //connect(stopSignal, &QPushButton::clicked, this, &WriteFromPi::StopSignal);
+    //connect(getInt, &QPushButton::clicked, this, &WriteFromPi::HandleInputInt);
     setLayout(mainLayout);
 }
 

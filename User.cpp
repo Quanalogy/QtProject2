@@ -9,6 +9,7 @@ User::User(QString userName_, QString password_) {
     if(userName_ != NULL && password_ != NULL){
         userName = userName_;
         password = password_;
+        isLock = false;
     } else {
         exit(0);
     }
@@ -40,4 +41,16 @@ vector<bool> User::getRights() {
 
 QString User::getPass() {
     return password;
+}
+
+void User::setPassword(QString newpassword) {
+    password = newpassword;
+}
+
+void User::setLock(bool newlock) {
+    isLock = newlock;
+}
+
+bool User::getLock() {
+    return isLock;
 }
