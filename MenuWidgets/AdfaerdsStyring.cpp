@@ -99,24 +99,43 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     // Set af horizontal tids bokse layouts
 
     timeDagFraHorizontalLayout->addWidget(timeDagFra);
+    timeDagFraHorizontalLayout->addSpacing(width()/32);
     timeDagFraHorizontalLayout->addWidget(dagFraTime);
+    timeDagFraHorizontalLayout->addSpacing(width()/128);
     timeDagFraHorizontalLayout->addWidget(semicolon1);
+    timeDagFraHorizontalLayout->addSpacing(width()/128);
     timeDagFraHorizontalLayout->addWidget(dagFraMin);
+    timeDagFraHorizontalLayout->addSpacing(width()/12);
 
     timeDagTilHorizontalLayout->addWidget(timeDagTil);
+    timeDagTilHorizontalLayout->addSpacing(width()/32);
     timeDagTilHorizontalLayout->addWidget(dagTilTime);
+    timeDagTilHorizontalLayout->addSpacing(width()/128);
     timeDagTilHorizontalLayout->addWidget(semicolon2);
+    timeDagTilHorizontalLayout->addSpacing(width()/128);
     timeDagTilHorizontalLayout->addWidget(dagTilMin);
+    timeDagTilHorizontalLayout->addSpacing(width()/12);
 
     timeNatFraHorizontalLayout->addWidget(timeNatFra);
+    timeNatFraHorizontalLayout->addSpacing(width()/32);
     timeNatFraHorizontalLayout->addWidget(natFraTime);
+    timeNatFraHorizontalLayout->addSpacing(width()/128);
     timeNatFraHorizontalLayout->addWidget(semicolon3);
+    timeNatFraHorizontalLayout->addSpacing(width()/128);
     timeNatFraHorizontalLayout->addWidget(natFraMin);
+    timeNatFraHorizontalLayout->addSpacing(width()/12);
 
     timeNatTilHorizontalLayout->addWidget(timeNatTil);
+    timeNatTilHorizontalLayout->addSpacing(width()/32);
     timeNatTilHorizontalLayout->addWidget(natTilTime);
+    timeNatTilHorizontalLayout->addSpacing(width()/128);
     timeNatTilHorizontalLayout->addWidget(semicolon4);
+    timeNatTilHorizontalLayout->addSpacing(width()/128);
     timeNatTilHorizontalLayout->addWidget(natTilMin);
+    timeNatTilHorizontalLayout->addSpacing(width()/12);
+
+
+
 
     int pos=0;
     for (auto i = leftList.begin(); i != leftList.end() ; ++i,++pos)
@@ -149,9 +168,15 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     connect(cancel,&QPushButton::clicked,this,&AdfaerdsStyring::onCancelClick);
     connect(save,&QPushButton::clicked,this,&AdfaerdsStyring::saveIntervals);
 
+
+    lefVertivalLayout->setAlignment(dagProfil,Qt::AlignCenter);
+    rigVerticalLayout->setAlignment(natProfil,Qt::AlignCenter);
+
     controlHorizontalLayout->addLayout(lefVertivalLayout);
     controlHorizontalLayout->addSpacing(4);
     controlHorizontalLayout->addLayout(rigVerticalLayout);
+
+    controlHorizontalLayout->setStretchFactor(timeDagFraHorizontalLayout,0);
 
     setLayout(controlHorizontalLayout);
 
@@ -165,14 +190,14 @@ bool AdfaerdsStyring::notNull(){
 }
 
 void AdfaerdsStyring::saveIntervals() {
-    idagFraTime = dagFraTime->text().toInt();
-    idagFraMin = dagFraMin->text().toInt();
-    idagTilTime = dagTilTime->text().toInt();
-    idagTilMin = dagTilMin->text().toInt();
-    inatFraTime = natFraTime->text().toInt();
-    inatFraMin = natFraMin->text().toInt();
-    inatTilTime = natTilTime->text().toInt();
-    inatTilMin = natTilMin->text().toInt();
+    idagFraTime = new int(dagFraTime->text().toInt());
+    idagFraMin = new int(dagFraMin->text().toInt());
+    idagTilTime = new int(dagTilTime->text().toInt());
+    idagTilMin = new int(dagTilMin->text().toInt());
+    inatFraTime = new int(natFraTime->text().toInt());
+    inatFraMin = new int(natFraMin->text().toInt());
+    inatTilTime = new int(natTilTime->text().toInt());
+    inatTilMin = new int(natTilMin->text().toInt());
 }
 
 QString AdfaerdsStyring::getName() {
@@ -188,12 +213,45 @@ void AdfaerdsStyring::addBox(){
     while (lefCheckBoxes.size() < unitsList.size()  ) {
         lefVertivalLayout->removeWidget(cancel);
         rigVerticalLayout->removeWidget(save);
-        QCheckBox *box = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
-        QCheckBox *box2 = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
-        lefCheckBoxes.append(box);
-        rigCheckBoxes.append(box2);
-        lefVertivalLayout->addWidget(box);
-        rigVerticalLayout->addWidget(box2);
+        QCheckBox *lefBox = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
+        QCheckBox *rigBox = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
+        QLineEdit *lefStyrke = new QLineEdit("", this);
+        QLineEdit *rigStyrke = new QLineEdit("", this);
+
+
+        // Auto set, virker ikke rigtig.
+        /*if(dagUnits->at(pos)->getId() == unitsList.at(pos)->getId() ){
+            lefBox->setChecked(true);
+            int *temp = dagStyrker->at(pos);
+            QString newdagTemp = QString::number(*temp);
+            lefStyrke->setText(newdagTemp);
+        }
+        if(aftenUnits->at(pos)->getId() == unitsList.at(pos)->getId() ){
+            lefBox->setChecked(true);
+            int *temp = aftenStyrker->at(pos);
+            QString newaftenTemp = QString::number(*temp);
+            lefStyrke->setText(newaftenTemp);
+        }*/
+
+        QHBoxLayout *lefLayout = new QHBoxLayout();
+        QHBoxLayout *rigLayout = new QHBoxLayout();
+        lefStyrke->setPlaceholderText("lysstyrke %");
+        rigStyrke->setPlaceholderText("lysstyrke %");
+        lefStyrke->setFixedWidth(width()/8);
+        rigStyrke->setFixedWidth(width()/8);
+        lefCheckBoxes.append(lefBox);
+        rigCheckBoxes.append(rigBox);
+        lefLineEdits.append(lefStyrke);
+        rigLineEdits.append(rigStyrke);
+        lefLayout->addWidget(lefBox);
+        lefLayout->addWidget(lefStyrke);
+        rigLayout->addWidget(rigBox);
+        rigLayout->addWidget(rigStyrke);
+        lefLayout->setAlignment(lefStyrke,Qt::AlignRight);
+        rigLayout->setAlignment(rigStyrke,Qt::AlignRight);
+
+        lefVertivalLayout->addLayout(lefLayout);
+        rigVerticalLayout->addLayout(rigLayout);
         lefVertivalLayout->addWidget(cancel);
         rigVerticalLayout->addWidget(save);
         pos++;
@@ -213,4 +271,43 @@ void AdfaerdsStyring::removeBox(){
     else {
         return;
     }
+}
+
+void AdfaerdsStyring::changeSave() {
+    dagTider = new QList<int *>;
+    aftenTider = new QList<int *>;
+    dagUnits = new QList<Unit *>;
+    aftenUnits = new QList<Unit *>;
+    dagStyrker = new QList<int *>;
+    aftenStyrker = new QList<int *>;
+
+    dagTider->append(idagFraTime);
+    dagTider->append(idagFraMin);
+    dagTider->append(idagTilTime);
+    dagTider->append(idagTilMin);
+
+    aftenTider->append(inatFraTime);
+    aftenTider->append(inatFraMin);
+    aftenTider->append(inatTilTime);
+    aftenTider->append(inatTilMin);
+
+    for (int i = 0 ; i < unitsList.size() ; i++){
+        cout << "tester 1" << endl;
+        if (lefCheckBoxes.at(i)->isChecked()){
+            cout << "tester 2" << endl;
+            dagUnits->append(unitsList.at(i));
+            int *dagtemp = new int(lefLineEdits.at(i)->text().toInt());
+            dagStyrker->append(dagtemp);
+        }
+        if (rigCheckBoxes.at(i)->isChecked()){
+            cout << "tester 3" << endl;
+            aftenUnits->append(unitsList.at(i));
+            int *aftentemp = new int(rigLineEdits.at(i)->text().toInt());
+            aftenStyrker->append(aftentemp);
+        }
+        cout << "tester 4" << endl;
+    }
+
+    cout << "tester 5" << endl;
+
 }

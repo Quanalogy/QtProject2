@@ -12,7 +12,7 @@
 using namespace std;
 class User {
 public:
-    User(QString userName_, QString password_);
+    User(QString userName_, QString password_, bool admin);
     QString getName();
     QString getPass();
     void setRights(bool tilfoej_, bool aendreBrugerprofil_, bool aktivitet_, bool lysstyring_, bool adfaerd_ , bool enhed_ );
@@ -20,11 +20,13 @@ public:
     void setPassword(QString newpassword);
     void setLock(bool newlock);
     bool getLock();
+    bool getAdmin();
 
 private:
     QString userName, password;
     bool adfaerd, lysstyring, aktivitet, enhed, aendreBrugerprofil, tilfoej;
     bool isLock;
+    bool isAdmin;
 
 };
 

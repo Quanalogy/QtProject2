@@ -57,6 +57,14 @@ void Lysstyring::addBox(){
         rigVerticalLayout->removeWidget(save);
         QCheckBox *box = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
         QLineEdit *line = new QLineEdit("", this);
+
+        //Krydser boksen af hvis ikke den er 70 som std. skal laves om når der kommer et ur.
+        if (unitsList.at(pos)->getVolume() != 70){
+            box->setChecked(true);
+        }
+        int tempint = unitsList.at(pos)->getVolume();
+        QString temp = QString::number(tempint);
+        line->setText(temp);
         QValidator *validator = new QIntValidator(0,100,this);
         line->setValidator(validator);
         line->setPlaceholderText("lysstyrke %");
@@ -70,26 +78,20 @@ void Lysstyring::addBox(){
     }
 }
 
-void Lysstyring::removeBox(){
-    if (checkBoxes.size() > unitsList.size()) {
-        for (int i = 0 ; i < checkBoxes.size() ; i++){
-            checkBoxes.at(i)->deleteLater();
-            editLines.at(i)->deleteLater();
-        }
-        checkBoxes.clear();
-        editLines.clear();
-        addBox();
+void Lysstyring::removeBox() {
+    for (int i = 0; i < checkBoxes.size(); i++) {
+        delete checkBoxes.at(i);
+        delete editLines.at(i);
     }
-    else {
-        return;
-    }
+    checkBoxes.clear();
+    editLines.clear();
+    addBox();
 }
 
 void Lysstyring::checkIfCheckedAddVolume() {
     for (int i = 0 ; i < unitsList.size() ; i++){
         if (checkBoxes.at(i)->isChecked()){
             unitsList.at(i)->setVolume(editLines.at(i)->text().toInt());
-            cout << "lysstyrke:" << unitsList.at(i)->getVolume() << endl;
         }
     }
 }

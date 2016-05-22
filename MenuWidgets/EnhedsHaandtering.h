@@ -37,7 +37,9 @@ private:
     QList<Unit *> unitsList;
     QList<QCheckBox *> checkBoxes;
     QVBoxLayout *rVerticalLayout;
+    QVBoxLayout *lVerticalLayout;
     QPushButton *save;
+    QPushButton *cancel;
 
 
 signals:

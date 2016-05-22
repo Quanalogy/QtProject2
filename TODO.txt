@@ -1,29 +1,13 @@
 Fejl i GUI
 
--- Generelt når der annulleres skal der cleares
+-- Generelt n?r der annulleres skal der cleares
 
-1. Når bruger er låst, er der ingen som kan logge ind. dette giver ikke mening. 
-Der skal være koncept om Admin som ikke kan låses og altid har mulighed for alt
 
-2. Tilføj bruger:
-- layout
+2. Tilf?j bruger:
 - nfc
-
-3. Ændre brugerprofil
-- centrer brugernavn
-- fjern "Bruger låst" og "fjern bruger" for admin
 
 4. Aktivitetssimulering mangler funktionalitet 
 
-5. Lysstyring
-- værdien for enheden skal være skrevet på forhånd 
 
-6. Adfærdsstyring
--Mulighed for at sætte lysstyrke værdi
-- Allerede satte værdier vises for enhed
-- layout
-
-7.Enhedshåndtering 
-- !!!!! mulighed for at fjerne flere endheder på samme tid. !!!!!!!
-- layout når ingen enheder er der. 
-- generelt layout overvejes. 
+6. MainPage
+- Det er ikke altid de rigtige pages der Ã¥bnes.

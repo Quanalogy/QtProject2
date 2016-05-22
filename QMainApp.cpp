@@ -4,11 +4,11 @@
 
 #include "QMainApp.h"
 QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
-    User *adminUser = new User((QString)"a", (QString) "p");
+    User *adminUser = new User((QString)"a", (QString) "p",true);
     adminUser->setRights(true, true, true, true, true, true);
     addUserToList(adminUser);
 
-    User *noviceUser = new User("Abe", "Kat");
+    User *noviceUser = new User("Abe", "Kat",false);
     noviceUser->setRights(true, false, false, false, false, true);
     addUserToList(noviceUser);
 /*
@@ -66,4 +66,16 @@ void QMainApp::lockUser(int userIndex) {
 void QMainApp::unLockUser(int userIndex) {
     cout << "unlocked" << endl;
     userList.at(userIndex)->setLock(false);
+}
+
+void QMainApp::setCurrentUser(QString userName) {
+    for (int i = 0 ; i < userList.size() ; i++){
+        if (userList.at(i)->getName() == userName){
+            currentUser = userList.at(i);
+        }
+    }
+}
+
+User QMainApp::getCurrentUser() {
+    return *currentUser;
 }

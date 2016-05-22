@@ -8,6 +8,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtCore/QList>
+#include <QtWidgets/QMessageBox>
 #include "AendreBrugerprofil.h"
 #include "../QMainApp.h"
 //#include "../Globals.h"
@@ -54,32 +55,6 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     connect(cancelBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onCancelClick);
     connect(saveBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onSaveClick);
 
-
-
-
-
-    /*for(int i = 0; i < size; ++i){//user loop
-        QList<QCheckBox *> tempList = checkMap[i];
-        for (int j = 0; j <8 ; ++j) {//checkbox loop
-            if(j==0){
-                userLayout->addWidget(user, 0, Qt::AlignTop);
-            } else if(j==2){
-                userLayout->addWidget(changePass, 0, Qt::AlignCenter);
-                userLayout->addWidget(password, 0, Qt::AlignTop);
-                userLayout->addWidget(userAccess, 0, Qt::AlignTop);
-            }
-            //QList<QCheckBox *> hej2 = checkMap.values(i);
-            QCheckBox *tempBox = tempList.at(j);
-            userLayout->addWidget(tempBox);
-        }
-
-
-    }*/
-
-
-
-    //subMainLayout->addLayout(userLayout);
-
         mainLayout->addLayout(subMainLayout);
         mainLayout->addLayout(buttonLayout);
         setLayout(mainLayout);
@@ -122,23 +97,33 @@ void AendreBrugerprofil::addLayouts(){
         QList<QCheckBox *> *checkboxList = new QList<QCheckBox *>();
 
         for(int j = 0; j<8; ++j){ //checkbox loop
-            QCheckBox *checkBox = new QCheckBox(userPages.at(j));
-            if (j == 0){
-                if (userList.at(pos)->getLock()){
-                    checkBox->setChecked(true);
-                } else {
-                    checkBox->setChecked(false);
+                QCheckBox *checkBox = new QCheckBox(userPages.at(j));
+                if (j == 0) {
+                    if (userList.at(pos)->getLock()) {
+                        checkBox->setChecked(true);
+                    } else {
+                        checkBox->setChecked(false);
+                    }
+                    if (userList.at(pos)->getAdmin()){
+                        checkBox->setDisabled(true);
+                    }
                 }
-            }
-            if (j > 1){
-                vector<bool> temp = userList.at(pos)->getRights();
-                if (temp.at(j-2)){
-                    checkBox->setChecked(true);
-                } else {
-                    checkBox->setChecked(false);
+                if (j == 1 && userList.at(pos)->getAdmin()){
+                    checkBox->setDisabled(true);
                 }
-            }
-            checkboxList->append(checkBox);
+                if (j > 1) {
+                    vector<bool> temp = userList.at(pos)->getRights();
+                    if (temp.at(j - 2)) {
+                        checkBox->setChecked(true);
+                    } else {
+                        checkBox->setChecked(false);
+                    }
+                    if (userList.at(pos)->getAdmin()){
+                        checkBox->setDisabled(true);
+                    }
+                }
+                checkboxList->append(checkBox);
+
         }
 
         listCheckboxList.append(*checkboxList); // add the completed checkboxes to the map
@@ -163,14 +148,15 @@ void AendreBrugerprofil::addLayouts(){
         userAccessLabels.append(userAccess);
         passwords.append(password);
 
-        userLayouts.at(pos)->addWidget(userLabels.at(pos), 0, Qt::AlignTop);
+        userLayouts.at(pos)->addWidget(userLabels.at(pos), 0, Qt::AlignCenter);
         userLayouts.at(pos)->addWidget(changePassLabels.at(pos), 0, Qt::AlignCenter);
         userLayouts.at(pos)->addWidget(passwords.at(pos), 0, Qt::AlignTop);
         userLayouts.at(pos)->addWidget(userAccessLabels.at(pos), 0, Qt::AlignTop);
 
-        for (int j = 0; j <8 ; ++j) {//checkbox loop
+        for (int j = 0; j < listCheckboxList.at(pos).size() ; ++j) {//checkbox loop
             userLayouts.at(pos)->addWidget(listCheckboxList.at(pos).at(j));
         }
+        userLayouts.at(pos)->setAlignment(Qt::AlignTop);
         subMainLayout->addLayout(userLayouts.at(pos));
         cout << subMainLayout->count() << endl;
                 //subMainLayout->addLayout(userLayout);
@@ -218,7 +204,7 @@ void AendreBrugerprofil::removeLayouts(){
 
 void AendreBrugerprofil::makeChanges() {
 for (int i = 0 ; i < userList.size() ; i ++){
-    if (passwords.at(i)->text() != NULL){
+    if (passwords.at(i)->text() != NULL ) {
         userList.at(i)->setPassword(passwords.at(i)->text());
     }
     if (listCheckboxList.at(i).at(0)->isChecked()){
@@ -249,4 +235,27 @@ for (int i = 0 ; i < userList.size() ; i ++){
 
 QList<User *> AendreBrugerprofil::getUserlist() {
     return userList;
+}
+
+bool AendreBrugerprofil::adminCheck(){
+    for (int i = 0 ; i < userList.size() ; i ++){
+        if (passwords.at(i)->text() != NULL){
+            if (static_cast<QMainApp *>qApp->getCurrentUser().getAdmin()){
+                return true;
+            } else {
+                if (!userList.at(i)->getAdmin()){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+
+void AendreBrugerprofil::clear(){
+    for (int i = 0 ; i < passwords.size() ; i++) {
+        passwords.at(i)->clear();
+    }
 }

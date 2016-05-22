@@ -13,9 +13,11 @@
 EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
     //Add layouts to design from
     this->setWindowTitle(name);
-    QVBoxLayout *lVerticalLayout = new QVBoxLayout;
+    lVerticalLayout = new QVBoxLayout;
     rVerticalLayout = new QVBoxLayout;
-    QHBoxLayout *horizontalLayout = new QHBoxLayout(this);
+    QHBoxLayout *horizontalLayout = new QHBoxLayout();
+    QHBoxLayout *boxlayout = new QHBoxLayout;
+    QVBoxLayout *mainlayout = new QVBoxLayout(this);
 
     //Begin with labels on left side
     QLabel *tilfoej = new QLabel(this);
@@ -34,14 +36,14 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
 
     //Add some Pushbuttons
     save = new QPushButton("Gem", this);
-    QPushButton *cancel = new QPushButton("Annuller", this);
+    cancel = new QPushButton("Annuller", this);
 
     //Begin with labels on right side
     QLabel *fjern = new QLabel(this);
     QLabel *angiv = new QLabel(this);
 
     //Add elements on each lists
-    leftList << tilfoej << serienummer << rum ;
+    leftList << tilfoej << rum << serienummer ;
     rightList << fjern << angiv;
 
     // add text to elements
@@ -53,7 +55,9 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
 
     fjern->setAlignment(Qt::AlignTop);
     tilfoej->setAlignment(Qt::AlignTop);
-    angiv->setAlignment(Qt::AlignBottom);
+
+
+
     //Add elements to layouts
     int pos = 0;
     for (auto i = leftList.begin(); i != leftList.end() ; ++i, ++pos) {
@@ -64,13 +68,11 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
             lVerticalLayout->addWidget(unitNameInput);
         }
     }
-    lVerticalLayout->addWidget(cancel);
     pos = 0;
     for (auto j = rightList.begin(); j != rightList.end() ; ++j, ++pos) {
         rVerticalLayout->addWidget(rightList.at(pos));
 
     }
-    rVerticalLayout->addWidget(save);
 
     serienummerInput->setPlaceholderText("Indsæt serienummer");
 
@@ -84,11 +86,20 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
     connect(save, &QPushButton::clicked, this, &EnhedsHaandtering::onSaveClick);
     connect(cancel, &QPushButton::clicked, this, &EnhedsHaandtering::onCancelClick);
 
+    lVerticalLayout->setAlignment(Qt::AlignTop);
+    rVerticalLayout->setAlignment(Qt::AlignTop);
+
+    boxlayout->addWidget(cancel);
+    boxlayout->addWidget(save);
+
     horizontalLayout->addLayout(lVerticalLayout);
     horizontalLayout->addSpacing(4);
     horizontalLayout->addLayout(rVerticalLayout);
 
-    setLayout(horizontalLayout);
+    mainlayout->addLayout(horizontalLayout);
+    mainlayout->addLayout(boxlayout);
+
+    setLayout(mainlayout);
 
 }
 
@@ -134,12 +145,12 @@ void EnhedsHaandtering::setUnitsList(QList<Unit *> list) {
 void EnhedsHaandtering::addBox(){
     int pos = checkBoxes.size();
     while (checkBoxes.size() < unitsList.size()  ) {
-        rVerticalLayout->removeWidget(save);
+        //rVerticalLayout->removeWidget(save);
         QCheckBox *box = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
         checkBoxes.append(box);
         //Skal connectes
         rVerticalLayout->addWidget(box);
-        rVerticalLayout->addWidget(save);
+        // rVerticalLayout->addWidget(save);
         serienummerInput->clear();
         unitNameInput->clear();
         pos++;
@@ -147,7 +158,7 @@ void EnhedsHaandtering::addBox(){
 }
 
 void EnhedsHaandtering::removeBox(){
-    if (checkBoxes.size() > unitsList.size()) {
+    while (checkBoxes.size() > unitsList.size()) {
         for (int i = 0; i < checkBoxes.size(); i++) {
             if (checkBoxes.at(i)->isChecked()) {
                 QCheckBox *box = checkBoxes.at(i);
@@ -162,9 +173,6 @@ void EnhedsHaandtering::removeBox(){
             }
         }
     }
-    else {
-        return;
-    }
 }
 
 
@@ -173,11 +181,16 @@ void EnhedsHaandtering::removeIfChecked(){
         if (unitsList.size() == 1){
             unitsList.clear();
         } else {
-            for (int i = 0; i < checkBoxes.size(); i++) {
-                if (checkBoxes.at(i)->isChecked()) {
+            int size = checkBoxes.size();
+            int pos = 0;
+            for (int i = 0; i < size; i++) {
+                if (checkBoxes.at(pos)->isChecked()) {
                     delete unitsList.at(i);
                     unitsList.removeAt(i);
+                    size = size - 1;
+                    i--;
                 }
+                pos++;
             }
         }
     }
