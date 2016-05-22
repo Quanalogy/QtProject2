@@ -63,28 +63,28 @@ void MainPage::ChangeView() {
     QString adfaerd = "Adfærdsstyring";
     QString Aendre = "Ændre brugerprofil";
     QString adduser = "Tilføj bruger";
-    if (pages.at(index)->getName() == enhed){
+    if (userMenuPages.at(index)->getName() == enhed){
 
         enhedsHaandteringPage->setUnitsList(unitsList);
         enhedsHaandteringPage->removeBox();
         enhedsHaandteringPage->addBox();
 
     }
-    if (pages.at(index)->getName() == lys){
+    if (userMenuPages.at(index)->getName() == lys){
 
         lysstyringPage->setUnitsList(unitsList);
         lysstyringPage->removeBox();
         lysstyringPage->addBox();
 
     }
-    if (pages.at(index)->getName() == adfaerd){
+    if (userMenuPages.at(index)->getName() == adfaerd){
 
         adfaerdsPage->setUnitsList(unitsList);
         adfaerdsPage->removeBox();
         adfaerdsPage->addBox();
 
     }
-    if (pages.at(index)->getName() == Aendre){
+    if (userMenuPages.at(index)->getName() == Aendre){
         QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
         changeProfilePage->setUserList(tempUserList);
         changeProfilePage->addLayouts();
@@ -92,22 +92,24 @@ void MainPage::ChangeView() {
 
 
     }
-    if (pages.at(index)->getName() == adduser){
+    if (userMenuPages.at(index)->getName() == adduser){
         addPage->clear();
     }
-    pages.at(index)->show();
+    userMenuPages.at(index)->show();
     this->hide();
 }
 
 void MainPage::handleSaveClick() {
+
+    userMenuPages.at(index)->hide();
     this->show();
-    pages.at(index)->hide();
 
 }
 
 void MainPage::handleCancelClick() {
+
+    userMenuPages.at(index)->hide();
     this->show();
-    pages.at(index)->hide();
 }
 
 void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
@@ -149,7 +151,7 @@ void MainPage::addUserSave() {
         static_cast<QMainApp *> qApp->addUserToList(newUser);
         //userCount++;
         this->show();
-        pages.at(index)->hide();
+        userMenuPages.at(index)->hide();
     }
 
 }
@@ -166,7 +168,7 @@ void MainPage::changeAdfaerdsStyringSave()  {
         adfaerdsPage->changeSave();
 
         this->show();
-        pages.at(index)->hide();
+        userMenuPages.at(index)->hide();
     }
 
 }
@@ -180,7 +182,7 @@ void MainPage::changeProfileSave() {
     } else {
         changeProfilePage->makeChanges();
         this->show();
-        pages.at(index)->hide();
+        userMenuPages.at(index)->hide();
     }
 }
 
@@ -200,17 +202,26 @@ void MainPage::changeUnitsSave()  {
         unitsList = enhedsHaandteringPage->getUnitsList();
         cout << "unit list size:" << unitsList.size() << endl;
         this->show();
-        pages.at(index)->hide();
+        userMenuPages.at(index)->hide();
     }
 }
 
 void MainPage::changeLightVolumeSave() {
     lysstyringPage->checkIfCheckedAddVolume();
     this->show();
-    pages.at(index)->hide();
+    userMenuPages.at(index)->hide();
 }
 
 void MainPage::setupPages(User *currentUser_) {
+    cout << "tester 1 :" << buttons.size() << endl;
+    int x = buttons.size();
+    for (int i = 0 ; i < x ; i++){
+        cout << "tester 2" << endl;
+        delete buttons.at(i);
+        buttons.removeAt(i);
+        x--;
+        i--;
+    }
     rights = currentUser_->getRights();
     int pos = 0;
 
@@ -227,7 +238,7 @@ void MainPage::setupPages(User *currentUser_) {
     for (auto i = userMenuPages.begin(); i != userMenuPages.end(); ++i,++pos) {
 
         QPushButton *btn = new QPushButton(userMenuPages[pos]->getName(), this);
-        buttons << btn;
+        buttons.append(btn);
         if(pos%2 == 0){
             gridLayout->addWidget(btn, (int)floor(pos/2), 0, 0);
         } else {
@@ -238,6 +249,7 @@ void MainPage::setupPages(User *currentUser_) {
     gridLayout->addWidget(logout);
 
     connect(logout, &QPushButton::clicked, this, &logOut);
+    cout << "tester 3 :" << buttons.size() << endl;
 }
 
 void MainPage::logOut() {

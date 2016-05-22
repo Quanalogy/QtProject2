@@ -55,8 +55,8 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     QCheckBox *unitCheck = new QCheckBox("Enhedshåndtering");
     QCheckBox *changeUserCheck = new QCheckBox("Ændre brugerprofil");
     QCheckBox *addUser = new QCheckBox("Tilføj bruger");
-    checkList << adfaerdsCheck <<lightCheck<<activityCheck<<unitCheck<<changeUserCheck
-              << addUser;
+    checkList << addUser << changeUserCheck << activityCheck << lightCheck << adfaerdsCheck << unitCheck;
+
 
     //Left side inputBox
     QLineEdit *usernameInput = new QLineEdit;
@@ -77,13 +77,9 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     leftLayout->addWidget(username);
     leftLayout->addWidget(usernameInput);
     leftLayout->addWidget(access);
-    leftLayout->addWidget(addUser);
-    leftLayout->addWidget(adfaerdsCheck);
-    leftLayout->addWidget(lightCheck);
-    leftLayout->addWidget(activityCheck);
-    leftLayout->addWidget(unitCheck);
-    leftLayout->addWidget(changeUserCheck);
-
+    for (int i = 0 ; i < checkList.size() ; i++){
+        leftLayout->addWidget(checkList.at(i));
+    }
 
     //Add widgets for right side
     rightLayout->addWidget(password);
