@@ -263,9 +263,15 @@ void AdfaerdsStyring::removeBox(){
         for (int i = 0 ; i < lefCheckBoxes.size() ; i++){
             lefCheckBoxes.at(i)->deleteLater();
             rigCheckBoxes.at(i)->deleteLater();
+            lefLineEdits.at(i)->deleteLater();
+            rigLineEdits.at(i)->deleteLater();
+            lefVertivalLayout->deleteLater();
+            rigVerticalLayout->deleteLater();
         }
         lefCheckBoxes.clear();
         rigCheckBoxes.clear();
+        lefLineEdits.clear();
+        rigLineEdits.clear();
         addBox();
     }
     else {

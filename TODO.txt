@@ -7,3 +7,6 @@ Fejl i GUI
 
 4. Aktivitetssimulering mangler funktionalitet 
 
+5. Adfærdsstyring
+Bokse der ikke er checket, skal clears.
+og enehder skal sættes til en standard værdi.
