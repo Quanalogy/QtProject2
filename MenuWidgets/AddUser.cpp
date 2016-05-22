@@ -88,7 +88,6 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     //Add widgets for right side
     rightLayout->addWidget(password);
     rightLayout->addWidget(passwordInput);
-    rightLayout->alignment();
     rightLayout->addWidget(connectNFC);
     rightLayout->addWidget(scanNFC);
     rightLayout->addWidget(NFCID);
