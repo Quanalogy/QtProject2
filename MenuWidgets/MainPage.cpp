@@ -93,6 +93,8 @@ void MainPage::ChangeView() {
 
     }
     if (userMenuPages.at(index)->getName() == adduser){
+        User *tempUser = new User(static_cast<QMainApp *>qApp->getCurrentUser());
+        addPage->setCurrenUser(tempUser);
         addPage->clear();
     }
     userMenuPages.at(index)->show();
@@ -161,8 +163,6 @@ void MainPage::changeAdfaerdsStyringSave()  {
         QMessageBox errorMessage;
         errorMessage.setText("Stattiden for dagsprofil må ikke være 0!");
         errorMessage.exec();
-        cout << "tester ikke" << endl;
-        return;
     } else {
         adfaerdsPage->saveIntervals();
         adfaerdsPage->changeSave();
@@ -200,7 +200,6 @@ void MainPage::changeUnitsSave()  {
         }
         enhedsHaandteringPage->removeIfChecked();
         unitsList = enhedsHaandteringPage->getUnitsList();
-        cout << "unit list size:" << unitsList.size() << endl;
         this->show();
         userMenuPages.at(index)->hide();
     }
@@ -213,15 +212,6 @@ void MainPage::changeLightVolumeSave() {
 }
 
 void MainPage::setupPages(User *currentUser_) {
-    cout << "tester 1 :" << buttons.size() << endl;
-    int x = buttons.size();
-    for (int i = 0 ; i < x ; i++){
-        cout << "tester 2" << endl;
-        delete buttons.at(i);
-        buttons.removeAt(i);
-        x--;
-        i--;
-    }
     rights = currentUser_->getRights();
     int pos = 0;
 
@@ -249,7 +239,6 @@ void MainPage::setupPages(User *currentUser_) {
     gridLayout->addWidget(logout);
 
     connect(logout, &QPushButton::clicked, this, &logOut);
-    cout << "tester 3 :" << buttons.size() << endl;
 }
 
 void MainPage::logOut() {

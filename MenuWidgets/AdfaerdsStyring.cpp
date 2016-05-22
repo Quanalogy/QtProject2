@@ -292,22 +292,17 @@ void AdfaerdsStyring::changeSave() {
     aftenTider->append(inatTilMin);
 
     for (int i = 0 ; i < unitsList.size() ; i++){
-        cout << "tester 1" << endl;
         if (lefCheckBoxes.at(i)->isChecked()){
-            cout << "tester 2" << endl;
             dagUnits->append(unitsList.at(i));
             int *dagtemp = new int(lefLineEdits.at(i)->text().toInt());
             dagStyrker->append(dagtemp);
         }
         if (rigCheckBoxes.at(i)->isChecked()){
-            cout << "tester 3" << endl;
             aftenUnits->append(unitsList.at(i));
             int *aftentemp = new int(rigLineEdits.at(i)->text().toInt());
             aftenStyrker->append(aftentemp);
         }
-        cout << "tester 4" << endl;
     }
 
-    cout << "tester 5" << endl;
 
 }

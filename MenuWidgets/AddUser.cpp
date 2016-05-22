@@ -77,7 +77,10 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     leftLayout->addWidget(username);
     leftLayout->addWidget(usernameInput);
     leftLayout->addWidget(access);
+
     for (int i = 0 ; i < checkList.size() ; i++){
+
+
         leftLayout->addWidget(checkList.at(i));
     }
 
@@ -124,12 +127,12 @@ vector<bool> AddUser::getStates() {
     vector<bool> states;
 
 
-    states.push_back(checkList.at(5)->isChecked());
-    states.push_back(checkList.at(4)->isChecked());
-    states.push_back(checkList.at(2)->isChecked());
-    states.push_back(checkList.at(1)->isChecked());
     states.push_back(checkList.at(0)->isChecked());
+    states.push_back(checkList.at(1)->isChecked());
+    states.push_back(checkList.at(2)->isChecked());
     states.push_back(checkList.at(3)->isChecked());
+    states.push_back(checkList.at(4)->isChecked());
+    states.push_back(checkList.at(5)->isChecked());
     return states;
 }
 
@@ -142,6 +145,7 @@ QMap<QString,QString> AddUser::getLogin(){
 }
 
 void AddUser::clear() {
+    vector<bool> temp = currentUser_->getRights();
     for (int i = 0 ; i < lineList.size() ; i++){
         if (lineList.at(i)->text() != NULL){
             lineList.at(i)->clear();
@@ -152,6 +156,15 @@ void AddUser::clear() {
         if (checkList.at(i)->isChecked()){
             checkList.at(i)->setChecked(false);
         }
+        if(temp.at(i) || currentUser_->getAdmin()){
+            checkList.at(i)->setDisabled(false);
+        } else {
+            checkList.at(i)->setDisabled(true);
+        }
 
     }
+}
+
+void AddUser::setCurrenUser(User *user) {
+    currentUser_ = user;
 }

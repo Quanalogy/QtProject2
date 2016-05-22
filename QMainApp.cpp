@@ -35,7 +35,6 @@ void QMainApp::addUserToList(User *newUser) {
     userList << newUser;
     //qDebug (userName_.toLatin1());
     qDebug(newUser->getName().toLatin1());
-    cout << "The size of the userList is " << userList.size() << endl;
 }
 
 LoginDialog* QMainApp::getLogin() {
@@ -55,7 +54,6 @@ void QMainApp::setUserList(QList<User *> list) {
 void QMainApp::removeUser(int userIndex) {
     delete userList.at(userIndex);
     userList.removeAt(userIndex);
-    cout << "Qmain siger:" << userList.size() << "uI:" << userIndex << endl;
 }
 
 void QMainApp::lockUser(int userIndex) {
