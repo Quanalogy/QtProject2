@@ -145,6 +145,9 @@ void AendreBrugerprofil::addLayouts(){
                     } else {
                         checkBox->setChecked(false);
                     }
+                    if (userList.at(pos)->getAdmin()){
+                        checkBox->setDisabled(true);
+                    }
                 }
                 checkboxList->append(checkBox);
 
@@ -275,6 +278,7 @@ bool AendreBrugerprofil::adminCheck(){
                 }
             }
         }
+        return true;
     }
 }
 

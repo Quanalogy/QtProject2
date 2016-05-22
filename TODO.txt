@@ -9,10 +9,6 @@ Der skal v?re koncept om Admin som ikke kan l?ses og altid har mulighed for alt
 - layout
 - nfc
 
-3. ?ndre brugerprofil
-- centrer brugernavn
-- fjern "Bruger l?st" og "fjern bruger" for admin
-
 4. Aktivitetssimulering mangler funktionalitet 
 
 5. Lysstyring

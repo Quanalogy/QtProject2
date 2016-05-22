@@ -30,14 +30,22 @@ void User::setRights(bool tilfoej_, bool aendreBrugerprofil_, bool aktivitet_, b
 }
 
 vector<bool> User::getRights() {
-    vector<bool> rights;
-    rights.push_back(tilfoej);
-    rights.push_back(aendreBrugerprofil);
-    rights.push_back(aktivitet);
-    rights.push_back(lysstyring);
-    rights.push_back(adfaerd);
-    rights.push_back(enhed);
-    return rights;
+    if (isAdmin){
+        vector<bool> rights;
+        for (int i = 0 ; i < 6 ; i ++){
+            rights.push_back(true);
+        }
+        return rights;
+    } else {
+        vector<bool> rights;
+        rights.push_back(tilfoej);
+        rights.push_back(aendreBrugerprofil);
+        rights.push_back(aktivitet);
+        rights.push_back(lysstyring);
+        rights.push_back(adfaerd);
+        rights.push_back(enhed);
+        return rights;
+    }
 }
 
 QString User::getPass() {
