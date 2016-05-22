@@ -20,7 +20,10 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     //Create layouts for the page
     QVBoxLayout *leftLayout = new QVBoxLayout();
     QVBoxLayout *rightLayout = new QVBoxLayout();
-    QHBoxLayout *mainLayout = new QHBoxLayout(this);
+    QHBoxLayout *horizontelLayout = new QHBoxLayout();
+    QHBoxLayout *boxLayout = new QHBoxLayout();
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+
 
     //Begin with labels for left side
     QLabel *username = new QLabel(this);
@@ -72,9 +75,7 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
 
     //Add widgets for left side
     leftLayout->addWidget(username);
-    leftLayout->insertSpacing(10,15);
     leftLayout->addWidget(usernameInput);
-    leftLayout->insertSpacing(20,10);
     leftLayout->addWidget(access);
     leftLayout->addWidget(addUser);
     leftLayout->addWidget(adfaerdsCheck);
@@ -82,7 +83,7 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     leftLayout->addWidget(activityCheck);
     leftLayout->addWidget(unitCheck);
     leftLayout->addWidget(changeUserCheck);
-    leftLayout->addWidget(cancelBtn);
+
 
     //Add widgets for right side
     rightLayout->addWidget(password);
@@ -92,22 +93,29 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     rightLayout->addWidget(scanNFC);
     rightLayout->addWidget(NFCID);
     rightLayout->addWidget(NFCIDInput);
-    rightLayout->addWidget(saveBtn);
+
+    boxLayout->addWidget(cancelBtn);
+    boxLayout->addWidget(saveBtn);
 
     //Alignment to make it look not so horrible.
-    username->setAlignment(Qt::AlignTop);
+    /*username->setAlignment(Qt::AlignTop);
     usernameInput->setAlignment(Qt::AlignTop);
     password->setAlignment(Qt::AlignTop);
     passwordInput->setAlignment(Qt::AlignTop);
-    NFCID->setAlignment(Qt::AlignBottom);
+    NFCID->setAlignment(Qt::AlignBottom);*/
 
     //Connect buttons
     connect(saveBtn, &QPushButton::clicked, this, &AddUser::onSaveClick);
     connect(cancelBtn, &QPushButton::clicked, this, &AddUser::onCancelClick);
 
     //Add layouts
-    mainLayout->addLayout(leftLayout);
-    mainLayout->addLayout(rightLayout);
+    leftLayout->setAlignment(Qt::AlignTop);
+    rightLayout->setAlignment(Qt::AlignTop);
+    horizontelLayout->addLayout(leftLayout);
+    horizontelLayout->addLayout(rightLayout);
+    mainLayout->addLayout(horizontelLayout);
+    mainLayout->addLayout(boxLayout);
+
     setLayout(mainLayout);
 
 

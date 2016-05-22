@@ -16,8 +16,3 @@ Fejl i GUI
 - Mulighed for at s?tte lysstyrke v?rdi
 - Allerede satte v?rdier vises for enhed
 - layout
-
-7.Enhedsh?ndtering 
-- !!!!! mulighed for at fjerne flere endheder p? samme tid. !!!!!!!
-- layout n?r ingen enheder er der. 
-- generelt layout overvejes. 
