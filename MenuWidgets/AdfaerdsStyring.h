@@ -20,6 +20,7 @@ public:
     void setUnitsList(QList<Unit *> list);
     void addBox();
     void removeBox();
+    void changeSave();
 
 private:
     QString name = "Adfærdsstyring";
@@ -47,14 +48,14 @@ private:
     QLineEdit *natTilMin;
 
 
-    int idagFraTime;
-    int idagFraMin;
-    int idagTilTime;
-    int idagTilMin;
-    int inatFraTime;
-    int inatFraMin;
-    int inatTilTime;
-    int inatTilMin;
+    int *idagFraTime;
+    int *idagFraMin;
+    int *idagTilTime;
+    int *idagTilMin;
+    int *inatFraTime;
+    int *inatFraMin;
+    int *inatTilTime;
+    int *inatTilMin;
 
     QList<Unit *> unitsList;
     QList<QCheckBox *> lefCheckBoxes;
@@ -62,6 +63,14 @@ private:
     QList<QLineEdit *> lefLineEdits;
     QList<QLineEdit *> rigLineEdits;
 
+    QList<int *> *dagTider;
+    QList<int *> *aftenTider;
+
+    QList<Unit *> *dagUnits;
+    QList<Unit *> *aftenUnits;
+
+    QList<int *> *dagStyrker;
+    QList<int *> *aftenStyrker;
 
     QLabel *intervalNat;
     QLabel *intervalDag;

@@ -84,13 +84,6 @@ void MainPage::ChangeView() {
         adfaerdsPage->addBox();
 
     }
-    if (pages.at(index)->getName() == adfaerd){
-
-        adfaerdsPage->setUnitsList(unitsList);
-        adfaerdsPage->removeBox();
-        adfaerdsPage->addBox();
-
-    }
     if (pages.at(index)->getName() == Aendre){
         QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
         changeProfilePage->setUserList(tempUserList);
@@ -166,7 +159,12 @@ void MainPage::changeAdfaerdsStyringSave()  {
         QMessageBox errorMessage;
         errorMessage.setText("Stattiden for dagsprofil må ikke være 0!");
         errorMessage.exec();
+        cout << "tester ikke" << endl;
+        return;
     } else {
+        adfaerdsPage->saveIntervals();
+        adfaerdsPage->changeSave();
+
         this->show();
         pages.at(index)->hide();
     }

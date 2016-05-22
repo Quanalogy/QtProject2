@@ -190,14 +190,14 @@ bool AdfaerdsStyring::notNull(){
 }
 
 void AdfaerdsStyring::saveIntervals() {
-    idagFraTime = dagFraTime->text().toInt();
-    idagFraMin = dagFraMin->text().toInt();
-    idagTilTime = dagTilTime->text().toInt();
-    idagTilMin = dagTilMin->text().toInt();
-    inatFraTime = natFraTime->text().toInt();
-    inatFraMin = natFraMin->text().toInt();
-    inatTilTime = natTilTime->text().toInt();
-    inatTilMin = natTilMin->text().toInt();
+    idagFraTime = new int(dagFraTime->text().toInt());
+    idagFraMin = new int(dagFraMin->text().toInt());
+    idagTilTime = new int(dagTilTime->text().toInt());
+    idagTilMin = new int(dagTilMin->text().toInt());
+    inatFraTime = new int(natFraTime->text().toInt());
+    inatFraMin = new int(natFraMin->text().toInt());
+    inatTilTime = new int(natTilTime->text().toInt());
+    inatTilMin = new int(natTilMin->text().toInt());
 }
 
 QString AdfaerdsStyring::getName() {
@@ -217,6 +217,22 @@ void AdfaerdsStyring::addBox(){
         QCheckBox *rigBox = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
         QLineEdit *lefStyrke = new QLineEdit("", this);
         QLineEdit *rigStyrke = new QLineEdit("", this);
+
+
+        // Auto set, virker ikke rigtig.
+        /*if(dagUnits->at(pos)->getId() == unitsList.at(pos)->getId() ){
+            lefBox->setChecked(true);
+            int *temp = dagStyrker->at(pos);
+            QString newdagTemp = QString::number(*temp);
+            lefStyrke->setText(newdagTemp);
+        }
+        if(aftenUnits->at(pos)->getId() == unitsList.at(pos)->getId() ){
+            lefBox->setChecked(true);
+            int *temp = aftenStyrker->at(pos);
+            QString newaftenTemp = QString::number(*temp);
+            lefStyrke->setText(newaftenTemp);
+        }*/
+
         QHBoxLayout *lefLayout = new QHBoxLayout();
         QHBoxLayout *rigLayout = new QHBoxLayout();
         lefStyrke->setPlaceholderText("lysstyrke %");
@@ -255,4 +271,43 @@ void AdfaerdsStyring::removeBox(){
     else {
         return;
     }
+}
+
+void AdfaerdsStyring::changeSave() {
+    dagTider = new QList<int *>;
+    aftenTider = new QList<int *>;
+    dagUnits = new QList<Unit *>;
+    aftenUnits = new QList<Unit *>;
+    dagStyrker = new QList<int *>;
+    aftenStyrker = new QList<int *>;
+
+    dagTider->append(idagFraTime);
+    dagTider->append(idagFraMin);
+    dagTider->append(idagTilTime);
+    dagTider->append(idagTilMin);
+
+    aftenTider->append(inatFraTime);
+    aftenTider->append(inatFraMin);
+    aftenTider->append(inatTilTime);
+    aftenTider->append(inatTilMin);
+
+    for (int i = 0 ; i < unitsList.size() ; i++){
+        cout << "tester 1" << endl;
+        if (lefCheckBoxes.at(i)->isChecked()){
+            cout << "tester 2" << endl;
+            dagUnits->append(unitsList.at(i));
+            int *dagtemp = new int(lefLineEdits.at(i)->text().toInt());
+            dagStyrker->append(dagtemp);
+        }
+        if (rigCheckBoxes.at(i)->isChecked()){
+            cout << "tester 3" << endl;
+            aftenUnits->append(unitsList.at(i));
+            int *aftentemp = new int(rigLineEdits.at(i)->text().toInt());
+            aftenStyrker->append(aftentemp);
+        }
+        cout << "tester 4" << endl;
+    }
+
+    cout << "tester 5" << endl;
+
 }
