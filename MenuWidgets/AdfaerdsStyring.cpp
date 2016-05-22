@@ -217,6 +217,9 @@ void AdfaerdsStyring::addBox(){
         QCheckBox *rigBox = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
         QLineEdit *lefStyrke = new QLineEdit("", this);
         QLineEdit *rigStyrke = new QLineEdit("", this);
+        QValidator *validator = new QIntValidator(0,100,this);
+        rigStyrke->setValidator(validator);
+        lefStyrke->setValidator(validator);
 
 
         // Auto set, virker ikke rigtig.
