@@ -25,6 +25,8 @@ public:
     void addLayouts();
     void removeLayouts();
     void makeChanges();
+    bool adminCheck();
+    void clear();
 
 private:
     QString name = "Ændre brugerprofil";

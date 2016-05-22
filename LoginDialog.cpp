@@ -86,6 +86,7 @@ void LoginDialog::slotAcceptLogin() {
                                  password // current password
 
                 );
+                static_cast<QMainApp *>qApp->setCurrentUser(username);
                 this->hide();
                 return;
             }
@@ -102,6 +103,7 @@ void LoginDialog::slotAcceptLogin() {
                 tempUserName = username;
                 editPassword->clear();
                 if (att == 3){
+
                     userList.at(i)->setLock(true);
 
                     static_cast<QMainApp *> qApp->lockUser(i);
@@ -115,6 +117,9 @@ void LoginDialog::slotAcceptLogin() {
                     QString temp = "Forkert password!";
                     errorMessage.setText(temp);
                     errorMessage.exec();
+                    if (userList.at(i)->getAdmin()){
+                        att = 0;
+                    }
                 }
             }
 

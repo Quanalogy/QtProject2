@@ -5,11 +5,12 @@
 #include "User.h"
 
 
-User::User(QString userName_, QString password_) {
-    if(userName_ != NULL && password_ != NULL){
+User::User(QString userName_, QString password_, bool admin) {
+    if (userName_ != NULL && password_ != NULL) {
         userName = userName_;
         password = password_;
         isLock = false;
+        isAdmin = admin;
     } else {
         exit(0);
     }
@@ -52,5 +53,12 @@ void User::setLock(bool newlock) {
 }
 
 bool User::getLock() {
+    if (isAdmin){
+        return false;
+    }
     return isLock;
+}
+
+bool User::getAdmin() {
+    return isAdmin;
 }

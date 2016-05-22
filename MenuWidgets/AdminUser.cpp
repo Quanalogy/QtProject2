@@ -5,7 +5,7 @@
 #include "AdminUser.h"
 
 
-AdminUser::AdminUser(QString userName_, QString password_) : User(userName_, password_){
+AdminUser::AdminUser(QString userName_, QString password_, bool isAdmin_) : User(userName_, password_, isAdmin_){
 
 }
 

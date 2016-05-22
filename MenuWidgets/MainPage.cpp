@@ -8,6 +8,7 @@
 #include "MainPage.h"
 #include "../QMainApp.h"
 #include "../Globals.h"
+#include "AdminUser.h"
 
 
 MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
@@ -149,7 +150,7 @@ void MainPage::addUserSave() {
         errorMessage.exec();
     } else {
         userMap.insert(*brugernavn,*kodeord);
-        User *newUser = new User(*brugernavn,*kodeord);
+        User *newUser = new User(*brugernavn,*kodeord,false);
         vector<bool> userPriv= addPage->getStates();
         newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
         static_cast<QMainApp *> qApp->addUserToList(newUser);
@@ -173,9 +174,16 @@ void MainPage::changeAdfaerdsStyringSave()  {
 }
 
 void MainPage::changeProfileSave() {
-    changeProfilePage->makeChanges();
-    this->show();
-    pages.at(index)->hide();
+    if (!changeProfilePage->adminCheck()){
+        changeProfilePage->clear();
+        QMessageBox errorMessage;
+        errorMessage.setText("Kun admin kan sætte nyt admin password!");
+        errorMessage.exec();
+    } else {
+        changeProfilePage->makeChanges();
+        this->show();
+        pages.at(index)->hide();
+    }
 }
 
 void MainPage::changeUnitsSave()  {

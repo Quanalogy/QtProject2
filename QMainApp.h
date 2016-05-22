@@ -22,11 +22,14 @@ public:
     void removeUser(int userIndex);
     void lockUser(int userIndex);
     void unLockUser (int userIndex);
+    void setCurrentUser(QString userName);
+    User getCurrentUser();
 
 private:
     LoginDialog *loginDialog = new LoginDialog;
     MainPage *mainPage;
     QList<User *> userList;
+    User *currentUser;
 };
 
 

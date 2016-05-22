@@ -10,7 +10,7 @@
 
 class AdminUser : User{
 public:
-    AdminUser(QString userName_, QString password_);
+    AdminUser(QString userName_, QString password_, bool isAdmin_);
 
     bool getLock();
 };
