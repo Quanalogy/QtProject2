@@ -158,7 +158,7 @@ void EnhedsHaandtering::addBox(){
 }
 
 void EnhedsHaandtering::removeBox(){
-    if (checkBoxes.size() > unitsList.size()) {
+    while (checkBoxes.size() > unitsList.size()) {
         for (int i = 0; i < checkBoxes.size(); i++) {
             if (checkBoxes.at(i)->isChecked()) {
                 QCheckBox *box = checkBoxes.at(i);
@@ -173,9 +173,6 @@ void EnhedsHaandtering::removeBox(){
             }
         }
     }
-    else {
-        return;
-    }
 }
 
 
@@ -184,11 +181,16 @@ void EnhedsHaandtering::removeIfChecked(){
         if (unitsList.size() == 1){
             unitsList.clear();
         } else {
-            for (int i = 0; i < checkBoxes.size(); i++) {
-                if (checkBoxes.at(i)->isChecked()) {
+            int size = checkBoxes.size();
+            int pos = 0;
+            for (int i = 0; i < size; i++) {
+                if (checkBoxes.at(pos)->isChecked()) {
                     delete unitsList.at(i);
                     unitsList.removeAt(i);
+                    size = size - 1;
+                    i--;
                 }
+                pos++;
             }
         }
     }

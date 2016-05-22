@@ -181,7 +181,6 @@ void AendreBrugerprofil::addLayouts(){
         userLayouts.at(pos)->addWidget(userAccessLabels.at(pos), 0, Qt::AlignTop);
 
         for (int j = 0; j < listCheckboxList.at(pos).size() ; ++j) {//checkbox loop
-            cout << "Tester loop2" << endl;
             userLayouts.at(pos)->addWidget(listCheckboxList.at(pos).at(j));
         }
         userLayouts.at(pos)->setAlignment(Qt::AlignTop);

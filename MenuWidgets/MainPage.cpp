@@ -200,6 +200,7 @@ void MainPage::changeUnitsSave()  {
         }
         enhedsHaandteringPage->removeIfChecked();
         unitsList = enhedsHaandteringPage->getUnitsList();
+        cout << "unit list size:" << unitsList.size() << endl;
         this->show();
         pages.at(index)->hide();
     }
