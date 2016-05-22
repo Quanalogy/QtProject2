@@ -75,5 +75,6 @@ void QMainApp::setCurrentUser(QString userName) {
 }
 
 User QMainApp::getCurrentUser() {
+    cout << "tester 3.1" << endl;
     return *currentUser;
 }

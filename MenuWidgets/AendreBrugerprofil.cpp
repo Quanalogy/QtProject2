@@ -91,6 +91,7 @@ void AendreBrugerprofil::setUserList(QList<User * > list) {
 }
 
 void AendreBrugerprofil::addLayouts(){
+    vector<bool> tempRights = currentUser->getRights();
     int pos = userLayouts.size();
     while(userLayouts.size() < userList.size()){
 
@@ -117,6 +118,11 @@ void AendreBrugerprofil::addLayouts(){
                         checkBox->setChecked(true);
                     } else {
                         checkBox->setChecked(false);
+                    }
+                    if(tempRights.at(j-2)){
+                        checkBox->setDisabled(false);
+                    } else {
+                        checkBox->setDisabled(true);
                     }
                     if (userList.at(pos)->getAdmin()){
                         checkBox->setDisabled(true);
@@ -240,7 +246,7 @@ QList<User *> AendreBrugerprofil::getUserlist() {
 bool AendreBrugerprofil::adminCheck(){
     for (int i = 0 ; i < userList.size() ; i ++){
         if (passwords.at(i)->text() != NULL){
-            if (static_cast<QMainApp *>qApp->getCurrentUser().getAdmin()){
+            if (currentUser->getAdmin()){
                 return true;
             } else {
                 if (!userList.at(i)->getAdmin()){
@@ -249,6 +255,7 @@ bool AendreBrugerprofil::adminCheck(){
                     return false;
                 }
             }
+            return false;
         }
         return true;
     }
@@ -258,4 +265,8 @@ void AendreBrugerprofil::clear(){
     for (int i = 0 ; i < passwords.size() ; i++) {
         passwords.at(i)->clear();
     }
+}
+
+void AendreBrugerprofil::setCurrenUser(User *user) {
+    currentUser = user;
 }

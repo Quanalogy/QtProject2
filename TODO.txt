@@ -1,6 +1,5 @@
 Fejl i GUI
 
--- Generelt n?r der annulleres skal der cleares
 
 
 2. Tilf?j bruger:
@@ -8,6 +7,3 @@ Fejl i GUI
 
 4. Aktivitetssimulering mangler funktionalitet 
 
-
-6. MainPage
-- Det er ikke altid de rigtige pages der åbnes.

@@ -85,10 +85,13 @@ void MainPage::ChangeView() {
 
     }
     if (userMenuPages.at(index)->getName() == Aendre){
+        User *tempUser = new User(static_cast<QMainApp *>qApp->getCurrentUser());
+        changeProfilePage->setCurrenUser(tempUser);
         QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
         changeProfilePage->setUserList(tempUserList);
         changeProfilePage->addLayouts();
         changeProfilePage->removeLayouts();
+
 
 
     }
