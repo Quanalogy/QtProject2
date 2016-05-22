@@ -220,26 +220,30 @@ void AendreBrugerprofil::removeLayouts(){
 }
 
 void AendreBrugerprofil::makeChanges() {
-for (int i = 0 ; i < userList.size() ; i ++){
-    if (passwords.at(i)->text() != NULL ) {
+    int x = userList.size();
+    int pos = 0;
+for (int i = 0 ; i < x ; i ++){
+    if (passwords.at(pos)->text() != NULL ) {
         userList.at(i)->setPassword(passwords.at(i)->text());
     }
-    if (listCheckboxList.at(i).at(0)->isChecked()){
+    if (listCheckboxList.at(pos).at(0)->isChecked()){
         userList.at(i)->setLock(true);
         static_cast<QMainApp *> qApp->lockUser(i);
     } else {
         userList.at(i)->setLock(false);
         static_cast<QMainApp *> qApp->unLockUser(i);
     }
-    if (listCheckboxList.at(i).at(1)->isChecked()){
+    if (listCheckboxList.at(pos).at(1)->isChecked()){
         static_cast<QMainApp *> qApp->removeUser(i);
-        //userList.removeAt(i);
+        delete userList.at(i);
+        userList.removeAt(i);
+        x--;
+        i--;
         //static_cast<QMainApp *> qApp->setUserList(userList);
-        return;
     }
     vector<bool> *temp = new vector<bool>;
     for (int j = 2 ; j < listCheckboxList.at(i).size() ; j++){
-        if(!listCheckboxList.at(i).at(j)->isChecked()){
+        if(!listCheckboxList.at(pos).at(j)->isChecked()){
             temp->push_back(false);
         } else {
             temp->push_back(true);
@@ -247,6 +251,7 @@ for (int i = 0 ; i < userList.size() ; i ++){
     }
     userList.at(i)->setRights(temp->at(0),temp->at(1),temp->at(2),temp->at(3),temp->at(4),temp->at(5));
     static_cast<QMainApp *> qApp->setUserList(userList);
+    pos++;
 }
 }
 
