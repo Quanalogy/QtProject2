@@ -89,6 +89,7 @@ void LoginDialog::slotAcceptLogin() {
                 this->hide();
                 return;
             }
+
             if (userList.at(i)->getLock()){
                 QMessageBox errorMessage;
                 errorMessage.setText("Brugeren er låst, kontakt administrator");

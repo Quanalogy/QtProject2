@@ -163,7 +163,7 @@ void AendreBrugerprofil::addLayouts(){
         userAccessLabels.append(userAccess);
         passwords.append(password);
 
-        userLayouts.at(pos)->addWidget(userLabels.at(pos), 0, Qt::AlignTop);
+        userLayouts.at(pos)->addWidget(userLabels.at(pos), 0, Qt::AlignCenter);
         userLayouts.at(pos)->addWidget(changePassLabels.at(pos), 0, Qt::AlignCenter);
         userLayouts.at(pos)->addWidget(passwords.at(pos), 0, Qt::AlignTop);
         userLayouts.at(pos)->addWidget(userAccessLabels.at(pos), 0, Qt::AlignTop);
