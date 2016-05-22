@@ -8,10 +8,6 @@ Fejl i GUI
 
 4. Aktivitetssimulering mangler funktionalitet 
 
-5. Lysstyring
-- v?rdien for enheden skal v?re skrevet p? forh?nd 
 
-6. Adf?rdsstyring
-- Mulighed for at s?tte lysstyrke v?rdi
-- Allerede satte v?rdier vises for enhed
-- layout
+6. MainPage
+- Det er ikke altid de rigtige pages der åbnes.
