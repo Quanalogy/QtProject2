@@ -172,12 +172,23 @@ void AendreBrugerprofil::addLayouts(){
 }
 
 void AendreBrugerprofil::removeLayouts(){
+    vector<bool> tempRights = currentUser->getRights();
     for (int k = 0 ; k < userList.size() ; k++){
         if (passwords.at(k)->text() != NULL) {
             passwords.at(k)->clear();
         }
         if (userList.at(k)->getLock()){
             listCheckboxList.at(k).at(0)->setChecked(true);
+        }
+        for (int y = 2 ; y < listCheckboxList.at(k).size(); y++){
+            if(tempRights.at(y-2)){
+                listCheckboxList.at(k).at(y)->setDisabled(false);
+            } else {
+                listCheckboxList.at(k).at(y)->setDisabled(true);
+            }
+            if (userList.at(k)->getAdmin()){
+                listCheckboxList.at(k).at(y)->setDisabled(true);
+            }
         }
     }
 

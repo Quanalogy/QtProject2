@@ -94,6 +94,7 @@ void MainPage::ChangeView() {
 
 
 
+
     }
     if (userMenuPages.at(index)->getName() == adduser){
         User *tempUser = new User(static_cast<QMainApp *>qApp->getCurrentUser());
