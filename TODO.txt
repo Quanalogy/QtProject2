@@ -2,8 +2,6 @@ Fejl i GUI
 
 -- Generelt n?r der annulleres skal der cleares
 
-1. N?r bruger er l?st, er der ingen som kan logge ind. dette giver ikke mening. 
-Der skal v?re koncept om Admin som ikke kan l?ses og altid har mulighed for alt
 
 2. Tilf?j bruger:
 - layout
