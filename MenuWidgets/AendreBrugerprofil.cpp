@@ -55,32 +55,6 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     connect(cancelBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onCancelClick);
     connect(saveBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onSaveClick);
 
-
-
-
-
-    /*for(int i = 0; i < size; ++i){//user loop
-        QList<QCheckBox *> tempList = checkMap[i];
-        for (int j = 0; j <8 ; ++j) {//checkbox loop
-            if(j==0){
-                userLayout->addWidget(user, 0, Qt::AlignTop);
-            } else if(j==2){
-                userLayout->addWidget(changePass, 0, Qt::AlignCenter);
-                userLayout->addWidget(password, 0, Qt::AlignTop);
-                userLayout->addWidget(userAccess, 0, Qt::AlignTop);
-            }
-            //QList<QCheckBox *> hej2 = checkMap.values(i);
-            QCheckBox *tempBox = tempList.at(j);
-            userLayout->addWidget(tempBox);
-        }
-
-
-    }*/
-
-
-
-    //subMainLayout->addLayout(userLayout);
-
         mainLayout->addLayout(subMainLayout);
         mainLayout->addLayout(buttonLayout);
         setLayout(mainLayout);
@@ -123,7 +97,6 @@ void AendreBrugerprofil::addLayouts(){
         QList<QCheckBox *> *checkboxList = new QList<QCheckBox *>();
 
         for(int j = 0; j<8; ++j){ //checkbox loop
-                cout << "Tester loop" << endl;
                 QCheckBox *checkBox = new QCheckBox(userPages.at(j));
                 if (j == 0) {
                     if (userList.at(pos)->getLock()) {

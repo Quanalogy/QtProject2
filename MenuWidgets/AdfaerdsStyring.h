@@ -59,6 +59,8 @@ private:
     QList<Unit *> unitsList;
     QList<QCheckBox *> lefCheckBoxes;
     QList<QCheckBox *> rigCheckBoxes;
+    QList<QLineEdit *> lefLineEdits;
+    QList<QLineEdit *> rigLineEdits;
 
 
     QLabel *intervalNat;

@@ -4,7 +4,6 @@ Fejl i GUI
 
 
 2. Tilf?j bruger:
-- layout
 - nfc
 
 4. Aktivitetssimulering mangler funktionalitet 
