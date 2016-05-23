@@ -278,7 +278,6 @@ void MainPage::changeUnitsSave()  {
                 errorMessage.exec();
             }
         }
-        saveMessege();
         this->show();
         userMenuPages.at(index)->hide();
     }
