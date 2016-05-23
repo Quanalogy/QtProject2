@@ -117,7 +117,7 @@ void MainPage::handleSaveClick() {
 
 void MainPage::handleCancelClick() {
     QMessageBox errorMessage;
-    errorMessage.setText("Ændringer ikke gemt!");
+    errorMessage.setText("Ændringer IKKE gemt!");
     errorMessage.setStandardButtons(QMessageBox::Ok);
     errorMessage.button(QMessageBox::Ok)->animateClick(3000);
     errorMessage.exec();
