@@ -8,6 +8,7 @@
 
 #include "MenuWidget.h"
 #include "../User.h"
+#include "../Clock.h"
 #include <vector>
 using namespace std;
 
@@ -36,14 +37,6 @@ private:
     QMap<int, QList<QCheckBox *>> checkMap;
     QList<QCheckBox *> checkboxList;
     QList<QList<QCheckBox *>> listCheckboxList;
-    QCheckBox *userLockedCheck;
-    QCheckBox *deleteUserCheck;
-    QCheckBox *adfaerdsCheck;
-    QCheckBox *lightCheck;
-    QCheckBox *activitySimCheck;
-    QCheckBox *unitControlCheck;
-    QCheckBox *changeUserCheck;
-    QCheckBox *addUserCheck;
     QLineEdit *password;
     QLabel *user;
     QLabel *changePass;
@@ -71,7 +64,12 @@ private:
 
     int layoutsCount;
 
-
+    QHBoxLayout *buttonLayout;
+    QHBoxLayout *topLayout;
+    QLabel *userName;
+    QLabel *time;
+    Clock *tempClock;
+    QWidget *horizontalLineWidget;
 
 
 

@@ -9,15 +9,16 @@
 #include <QtGui/QIntValidator>
 #include "EnhedsHaandtering.h"
 #include "MainPage.h"
+#include "../QMainApp.h"
 
 EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
     //Add layouts to design from
     this->setWindowTitle(name);
     lVerticalLayout = new QVBoxLayout;
     rVerticalLayout = new QVBoxLayout;
-    QHBoxLayout *horizontalLayout = new QHBoxLayout();
-    QHBoxLayout *boxlayout = new QHBoxLayout;
-    QVBoxLayout *mainlayout = new QVBoxLayout(this);
+    horizontalLayout = new QHBoxLayout();
+    boxlayout = new QHBoxLayout;
+    mainlayout = new QVBoxLayout(this);
 
     //Begin with labels on left side
     QLabel *tilfoej = new QLabel(this);
@@ -96,8 +97,7 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
     horizontalLayout->addSpacing(4);
     horizontalLayout->addLayout(rVerticalLayout);
 
-    mainlayout->addLayout(horizontalLayout);
-    mainlayout->addLayout(boxlayout);
+
 
     setLayout(mainlayout);
 
@@ -155,6 +155,44 @@ void EnhedsHaandtering::addBox(){
         unitNameInput->clear();
         pos++;
     }
+    //Laver TopLayout med brugernavn og ur.
+    if(mainlayout->count() == 4){
+        mainlayout->removeWidget(horizontalLineWidget);
+        mainlayout->removeItem(topLayout);
+        mainlayout->removeItem(horizontalLayout);
+        mainlayout->removeItem(boxlayout);
+
+        horizontalLineWidget->deleteLater();
+        topLayout->deleteLater();
+        time->deleteLater();
+        userName->deleteLater();
+        tempClock->deleteLater();
+
+
+    }
+    topLayout = new QHBoxLayout();
+    userName = new QLabel();
+    time = new QLabel();
+    tempClock = new Clock();
+    horizontalLineWidget = new QWidget();
+
+    userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>"  );
+    time->setText("<h4>" + tempClock->showTime() + "</h4>" );
+    userName->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+    time->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+
+    topLayout->addWidget(userName);
+    topLayout->addWidget(time);
+    horizontalLineWidget->setFixedHeight(3);
+    horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    horizontalLineWidget->setStyleSheet(QString("background-color: #c0c0c0;"));
+    topLayout->setAlignment(userName,Qt::AlignLeft);
+    topLayout->setAlignment(time,Qt::AlignRight);
+
+    mainlayout->addLayout(topLayout);
+    mainlayout->addWidget(horizontalLineWidget);
+    mainlayout->addLayout(horizontalLayout);
+    mainlayout->addLayout(boxlayout);
 }
 
 void EnhedsHaandtering::removeBox(){

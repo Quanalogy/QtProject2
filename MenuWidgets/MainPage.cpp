@@ -6,6 +6,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtWidgets/QMessageBox>
 #include <QtCore/QObject>
+#include <QtGui/QTextLine>
 #include "MainPage.h"
 #include "../QMainApp.h"
 #include "../Globals.h"
@@ -16,7 +17,8 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     this->setWindowTitle(name);
 
     //Create layouts
-    gridLayout = new QGridLayout(this);
+    mainLayout = new QVBoxLayout(this);
+    gridLayout = new QGridLayout();
     //create pages that needs connections to the buttons
     addPage = new AddUser;
     changeProfilePage = new AendreBrugerprofil;
@@ -49,7 +51,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     connect(enhedsHaandteringPage, &EnhedsHaandtering::onCancelClick, this, &MainPage::handleCancelClick);
 
 
-    setLayout(gridLayout);
+    setLayout(mainLayout);
 
     //[[TESTER]] Adder 3 enheder
     unitsList.append(new Unit(1337, "Stuen"));
@@ -64,6 +66,7 @@ void MainPage::ChangeView() {
     QString adfaerd = "Adfærdsstyring";
     QString Aendre = "Ændre brugerprofil";
     QString adduser = "Tilføj bruger";
+    QString aktivi = "Aktivitetssimulering";
     if (userMenuPages.at(index)->getName() == enhed){
 
         enhedsHaandteringPage->setUnitsList(unitsList);
@@ -75,7 +78,7 @@ void MainPage::ChangeView() {
 
         lysstyringPage->setUnitsList(unitsList);
         lysstyringPage->removeBox();
-        lysstyringPage->addBox();
+
 
     }
     if (userMenuPages.at(index)->getName() == adfaerd){
@@ -92,10 +95,6 @@ void MainPage::ChangeView() {
         changeProfilePage->setUserList(tempUserList);
         changeProfilePage->addLayouts();
         changeProfilePage->removeLayouts();
-
-
-
-
     }
     if (userMenuPages.at(index)->getName() == adduser){
         User *tempUser = new User(static_cast<QMainApp *>qApp->getCurrentUser());
@@ -103,6 +102,10 @@ void MainPage::ChangeView() {
         QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
         addPage->setUserList(tempUserList);
         addPage->clear();
+        addPage->setInfo();
+    }
+    if(userMenuPages.at(index)->getName() == aktivi){
+        aktivitetssimuleringPage->setInfo();
     }
     userMenuPages.at(index)->show();
     this->hide();
@@ -306,6 +309,42 @@ void MainPage::setupPages(User *currentUser_) {
         }
     }
     logout  = new QPushButton("Log ud", this);
+
+
+    //Laver TopLayout med brugernavn og ur.
+    if(mainLayout->count() == 3){
+        mainLayout->removeWidget(horizontalLineWidget);
+        mainLayout->removeItem(topLayout);
+        mainLayout->removeItem(gridLayout);
+
+        horizontalLineWidget->deleteLater();
+        topLayout->deleteLater();
+        userName->deleteLater();
+        time->deleteLater();
+        tempClock->deleteLater();
+
+
+    }
+    topLayout = new QHBoxLayout();
+    userName = new QLabel();
+    time = new QLabel();
+    tempClock = new Clock();
+    horizontalLineWidget = new QWidget();
+
+    userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>"  );
+    time->setText("<h4>" + tempClock->showTime() + "</h4>" );
+    userName->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+    time->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+
+    topLayout->addWidget(userName);
+    topLayout->addWidget(time);
+    horizontalLineWidget->setFixedHeight(3);
+    horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    horizontalLineWidget->setStyleSheet(QString("background-color: #c0c0c0;"));
+    topLayout->setAlignment(userName,Qt::AlignLeft);
+    topLayout->setAlignment(time,Qt::AlignRight);
+
+
     //Begin to add buttons, that map to the menupages the user has access to
     pos =0;
     for (auto i = userMenuPages.begin(); i != userMenuPages.end(); ++i,++pos) {
@@ -320,6 +359,10 @@ void MainPage::setupPages(User *currentUser_) {
         connect(buttons.at(pos), &QPushButton::clicked, this, &MainPage::ChangeView);
     }
     gridLayout->addWidget(logout);
+
+    mainLayout->addLayout(topLayout);
+    mainLayout->addWidget(horizontalLineWidget);
+    mainLayout->addLayout(gridLayout);
 
     connect(logout, &QPushButton::clicked, this, &logOut);
 }

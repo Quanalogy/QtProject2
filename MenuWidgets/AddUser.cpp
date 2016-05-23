@@ -5,6 +5,8 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtGui/QStaticText>
 #include "AddUser.h"
+#include "../Clock.h"
+#include "../QMainApp.h"
 #include <QDialog>
 #include <QtWidgets/QInputDialog>
 #include <QtWidgets/QPushButton>
@@ -20,9 +22,9 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     //Create layouts for the page
     QVBoxLayout *leftLayout = new QVBoxLayout();
     QVBoxLayout *rightLayout = new QVBoxLayout();
-    QHBoxLayout *horizontelLayout = new QHBoxLayout();
-    QHBoxLayout *boxLayout = new QHBoxLayout();
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    horizontelLayout = new QHBoxLayout();
+    boxLayout = new QHBoxLayout();
+    mainLayout = new QVBoxLayout(this);
 
 
     //Begin with labels for left side
@@ -111,8 +113,8 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     rightLayout->setAlignment(Qt::AlignTop);
     horizontelLayout->addLayout(leftLayout);
     horizontelLayout->addLayout(rightLayout);
-    mainLayout->addLayout(horizontelLayout);
-    mainLayout->addLayout(boxLayout);
+
+
 
     setLayout(mainLayout);
 
@@ -180,4 +182,44 @@ bool AddUser::checkIfUserExist() {
         }
     }
     return false;
+}
+
+void AddUser::setInfo(){
+    if(mainLayout->count() == 4){
+        mainLayout->removeWidget(horizontalLineWidget);
+        mainLayout->removeItem(topLayout);
+        mainLayout->removeItem(horizontelLayout);
+        mainLayout->removeItem(boxLayout);
+
+        horizontalLineWidget->deleteLater();
+        topLayout->deleteLater();
+        time->deleteLater();
+        userName->deleteLater();
+        tempClock->deleteLater();
+
+
+    }
+    topLayout = new QHBoxLayout();
+    userName = new QLabel();
+    time = new QLabel();
+    tempClock = new Clock();
+    horizontalLineWidget = new QWidget();
+
+    userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>"  );
+    time->setText("<h4>" + tempClock->showTime() + "</h4>" );
+    userName->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+    time->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+
+    topLayout->addWidget(userName);
+    topLayout->addWidget(time);
+    horizontalLineWidget->setFixedHeight(3);
+    horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    horizontalLineWidget->setStyleSheet(QString("background-color: #c0c0c0;"));
+    topLayout->setAlignment(userName,Qt::AlignLeft);
+    topLayout->setAlignment(time,Qt::AlignRight);
+
+    mainLayout->addLayout(topLayout);
+    mainLayout->addWidget(horizontalLineWidget);
+    mainLayout->addLayout(horizontelLayout);
+    mainLayout->addLayout(boxLayout);
 }

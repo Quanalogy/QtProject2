@@ -9,8 +9,10 @@
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QLabel>
 #include "MenuWidget.h"
 #include "../User.h"
+#include "../Clock.h"
 
 class AddUser : public MenuWidget{
 Q_OBJECT
@@ -23,6 +25,7 @@ public:
     void setCurrenUser(User *user);
     void setUserList(QList< User *> list);
     bool checkIfUserExist();
+    void setInfo();
 
 private:
     QString usernameInputString;
@@ -31,6 +34,16 @@ private:
     QList<QLineEdit *> lineList;
     User *currentUser_;
     QList<User *> userList;
+
+    QHBoxLayout *horizontelLayout;
+    QHBoxLayout *boxLayout;
+    QVBoxLayout *mainLayout;
+    QHBoxLayout *topLayout;
+    QLabel *userName;
+    QLabel *time;
+    Clock *tempClock;
+    QWidget *horizontalLineWidget;
+
 
 signals:
     void onSaveClick();

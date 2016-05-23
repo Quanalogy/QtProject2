@@ -13,6 +13,7 @@
 #include "MenuWidget.h"
 #include "QLabel.h"
 #include "../Unit.h"
+#include "../Clock.h"
 
 class Lysstyring : public MenuWidget{
 Q_OBJECT
@@ -29,11 +30,18 @@ private:
     QVBoxLayout *lefVerticalLayout;
     QVBoxLayout *rigVerticalLayout;
     QHBoxLayout *controlLayout;
+    QVBoxLayout *mainLayout;
     QPushButton *save;
     QPushButton *cancel;
     QList<Unit *> unitsList;
     QList<QCheckBox *> checkBoxes;
     QList<QLineEdit *> editLines;
+
+    QLabel *userName;
+    QHBoxLayout *topLayout;
+    QLabel *time;
+    Clock *tempClock;
+    QWidget *horizontalLineWidget;
 
 };
 

@@ -3,6 +3,8 @@
 //
 
 #include "Lysstyring.h"
+#include "../Clock.h"
+#include "../QMainApp.h"
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QCheckBox>
@@ -14,7 +16,8 @@ Lysstyring::Lysstyring(QWidget *parent) : MenuWidget(parent){
 
     lefVerticalLayout = new QVBoxLayout;
     rigVerticalLayout = new QVBoxLayout;
-    controlLayout = new QHBoxLayout(this);
+    controlLayout = new QHBoxLayout();
+    mainLayout = new QVBoxLayout(this);
 
     //Push buttons
     save = new QPushButton("Gem",this);
@@ -37,7 +40,7 @@ Lysstyring::Lysstyring(QWidget *parent) : MenuWidget(parent){
     controlLayout->addSpacing(4);
     controlLayout->addLayout(rigVerticalLayout);
 
-    setLayout(controlLayout);
+    setLayout(mainLayout);
 
 
 }
@@ -76,6 +79,46 @@ void Lysstyring::addBox(){
         rigVerticalLayout->addWidget(save);
         pos++;
     }
+    //Laver TopLayout med brugernavn og ur.
+    if(mainLayout->count() == 3){
+        mainLayout->removeWidget(horizontalLineWidget);
+        mainLayout->removeItem(topLayout);
+        mainLayout->removeItem(controlLayout);
+
+        horizontalLineWidget->deleteLater();
+        topLayout->deleteLater();
+        userName->deleteLater();
+        time->deleteLater();
+        tempClock->deleteLater();
+
+
+    }
+    topLayout = new QHBoxLayout();
+
+    userName = new QLabel();
+    time = new QLabel();
+    tempClock = new Clock();
+    horizontalLineWidget = new QWidget;
+
+    userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>"  );
+    time->setText("<h4>" + tempClock->showTime() + "</h4>" );
+    userName->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+    time->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+
+    topLayout->addWidget(userName);
+    topLayout->addWidget(time);
+
+    horizontalLineWidget->setFixedHeight(3);
+    horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    horizontalLineWidget->setStyleSheet(QString("background-color: #c0c0c0;"));
+    topLayout->setAlignment(userName,Qt::AlignLeft);
+    topLayout->setAlignment(time,Qt::AlignRight);
+
+
+    mainLayout->addLayout(topLayout);
+    mainLayout->addWidget(horizontalLineWidget);
+    mainLayout->addLayout(controlLayout);
+
 }
 
 void Lysstyring::removeBox() {

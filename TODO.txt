@@ -5,7 +5,4 @@ Fejl i GUI
 2. Tilf?j bruger:
 - nfc
 
-4. Aktivitetssimulering mangler funktionalitet 
-
-5. Ændrebrugerprofil
-- Kan kun fjerne en bruger af gangen
+4. Aktivitetssimulering mangler funktionalitet

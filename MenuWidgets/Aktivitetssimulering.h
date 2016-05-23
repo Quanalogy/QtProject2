@@ -7,7 +7,10 @@
 
 
 #include "MenuWidget.h"
+#include "../Clock.h"
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
 
 class Aktivitetssimulering : public MenuWidget{
 Q_OBJECT
@@ -16,6 +19,7 @@ public:
     QString getName();
     bool actSimOn();
     bool acSimOff();
+    void setInfo();
 
 private:
     QString name = "Aktivitetssimulering";
@@ -24,6 +28,16 @@ private:
     bool actSimstate;
     QPushButton *on;
     QPushButton *off;
+
+    QVBoxLayout *mainLayout;
+    QVBoxLayout *top;
+    QHBoxLayout *bottom;
+
+    QHBoxLayout *topLayout;
+    QLabel *userName;
+    QLabel *time;
+    Clock *tempClock;
+    QWidget *horizontalLineWidget;
 
 signals:
     void onSaveClick();

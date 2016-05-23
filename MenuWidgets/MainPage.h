@@ -16,6 +16,7 @@
 #include "EnhedsHaandtering.h"
 #include "../User.h"
 #include "../Unit.h"
+#include "../Clock.h"
 #include <QtWidgets/QPushButton>
 #include <QtCore/QMap>
 #include <vector>
@@ -50,6 +51,8 @@ private:
     QList<MenuWidget *> userMenuPages;              // an of accessible menupages, costumized to the users
                                                     // rights
     QGridLayout *gridLayout;
+    QVBoxLayout *mainLayout;
+
     AddUser *addPage;
     AendreBrugerprofil *changeProfilePage;
     Aktivitetssimulering *aktivitetssimuleringPage;
@@ -69,6 +72,12 @@ private:
 
     QObject timer;
     void saveMessege();
+
+    QHBoxLayout *topLayout;
+    QLabel *userName;
+    QLabel *time;
+    Clock *tempClock;
+    QWidget *horizontalLineWidget;
 };
 
 

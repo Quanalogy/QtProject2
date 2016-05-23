@@ -8,16 +8,19 @@
 #include <QtWidgets/QLabel>
 #include <QtGui/QIntValidator>
 #include "AdfaerdsStyring.h"
+#include "../Clock.h"
+#include "../QMainApp.h"
 
 AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     this->setWindowTitle(name);
     lefVertivalLayout = new QVBoxLayout;
     rigVerticalLayout = new QVBoxLayout;
-    controlHorizontalLayout = new QHBoxLayout(this);
+    controlHorizontalLayout = new QHBoxLayout();
     timeDagFraHorizontalLayout = new QHBoxLayout;
     timeDagTilHorizontalLayout = new QHBoxLayout;
     timeNatFraHorizontalLayout = new QHBoxLayout;
     timeNatTilHorizontalLayout = new QHBoxLayout;
+    mainLayout = new QVBoxLayout(this);
 
     //labels
     QLabel *dagProfil = new QLabel(this);
@@ -178,7 +181,7 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
 
     controlHorizontalLayout->setStretchFactor(timeDagFraHorizontalLayout,0);
 
-    setLayout(controlHorizontalLayout);
+    setLayout(mainLayout);
 
 }
 bool AdfaerdsStyring::notNull(){
@@ -259,6 +262,44 @@ void AdfaerdsStyring::addBox(){
         rigVerticalLayout->addWidget(save);
         pos++;
     }
+
+    //Laver TopLayout med brugernavn og ur.
+    if(mainLayout->count() == 3){
+        mainLayout->removeWidget(horizontalLineWidget);
+        mainLayout->removeItem(topLayout);
+        mainLayout->removeItem(controlHorizontalLayout);
+
+        horizontalLineWidget->deleteLater();
+        topLayout->deleteLater();
+        time->deleteLater();
+        userName->deleteLater();
+        tempClock->deleteLater();
+
+
+    }
+    topLayout = new QHBoxLayout();
+    userName = new QLabel();
+    time = new QLabel();
+    tempClock = new Clock();
+    horizontalLineWidget = new QWidget();
+
+    userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>"  );
+    time->setText("<h4>" + tempClock->showTime() + "</h4>" );
+    userName->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+    time->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+
+    topLayout->addWidget(userName);
+    topLayout->addWidget(time);
+    horizontalLineWidget->setFixedHeight(3);
+    horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    horizontalLineWidget->setStyleSheet(QString("background-color: #c0c0c0;"));
+    topLayout->setAlignment(userName,Qt::AlignLeft);
+    topLayout->setAlignment(time,Qt::AlignRight);
+
+    mainLayout->addLayout(topLayout);
+    mainLayout->addWidget(horizontalLineWidget);
+    mainLayout->addLayout(controlHorizontalLayout);
+
 }
 
 void AdfaerdsStyring::removeBox(){

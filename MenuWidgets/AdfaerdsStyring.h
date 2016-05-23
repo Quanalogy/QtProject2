@@ -8,6 +8,7 @@
 
 #include "MenuWidget.h"
 #include "../Unit.h"
+#include "../Clock.h"
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 
@@ -34,6 +35,7 @@ private:
     QHBoxLayout *timeDagTilHorizontalLayout;
     QHBoxLayout *timeNatFraHorizontalLayout;
     QHBoxLayout *timeNatTilHorizontalLayout;
+    QVBoxLayout *mainLayout;
 
     QPushButton *save;
     QPushButton *cancel;
@@ -74,6 +76,12 @@ private:
 
     QLabel *intervalNat;
     QLabel *intervalDag;
+
+    QHBoxLayout *topLayout;
+    QLabel *userName;
+    QLabel *time;
+    Clock *tempClock;
+    QWidget *horizontalLineWidget;
 
 public slots:
     void saveIntervals();

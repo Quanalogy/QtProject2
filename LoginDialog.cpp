@@ -82,11 +82,11 @@ void LoginDialog::slotAcceptLogin() {
         for (int i = 0; i < userList.size() ; ++i) {
             if(userList.at(i)->getName() == username && userList.at(i)->getPass() == password && !userList.at(i)->getLock()){
                 cout << "It's true bro" << endl;
+                static_cast<QMainApp *>qApp->setCurrentUser(username);
                 emit acceptLogin(username, // current username
                                  password // current password
 
                 );
-                static_cast<QMainApp *>qApp->setCurrentUser(username);
                 this->hide();
                 return;
             }

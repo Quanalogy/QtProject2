@@ -3,6 +3,7 @@
 //
 
 #include "Aktivitetssimulering.h"
+#include "../QMainApp.h"
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QCheckBox>
@@ -10,9 +11,9 @@
 
 Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent){
    this->setWindowTitle(name);
-    QVBoxLayout *control= new QVBoxLayout(this);
-    QVBoxLayout *top= new QVBoxLayout;
-    QHBoxLayout *bottom = new QHBoxLayout;
+    mainLayout = new QVBoxLayout(this);
+    top= new QVBoxLayout;
+    bottom = new QHBoxLayout;
 
     //labels
     QLabel *timeBAct = new QLabel(this);
@@ -59,10 +60,8 @@ Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent)
     bottom->addWidget(cancel);
     bottom->addWidget(save);
 
-    control->addLayout(top);
-    control->addLayout(bottom);
 
-    setLayout(control);
+    setLayout(mainLayout);
 
 
 
@@ -82,4 +81,44 @@ void Aktivitetssimulering::toggleButtonColor() {
         red->setColor(QPalette::ButtonText, Qt::red);
         onOff->setPalette(*red);
     }
+}
+
+void Aktivitetssimulering::setInfo(){
+    if(mainLayout->count() == 4){
+        mainLayout->removeWidget(horizontalLineWidget);
+        mainLayout->removeItem(topLayout);
+        mainLayout->removeItem(top);
+        mainLayout->removeItem(bottom);
+
+        horizontalLineWidget->deleteLater();
+        topLayout->deleteLater();
+        time->deleteLater();
+        userName->deleteLater();
+        tempClock->deleteLater();
+
+
+    }
+    topLayout = new QHBoxLayout();
+    userName = new QLabel();
+    time = new QLabel();
+    tempClock = new Clock();
+    horizontalLineWidget = new QWidget();
+
+    userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>"  );
+    time->setText("<h4>" + tempClock->showTime() + "</h4>" );
+    userName->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+    time->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+
+    topLayout->addWidget(userName);
+    topLayout->addWidget(time);
+    horizontalLineWidget->setFixedHeight(3);
+    horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    horizontalLineWidget->setStyleSheet(QString("background-color: #c0c0c0;"));
+    topLayout->setAlignment(userName,Qt::AlignLeft);
+    topLayout->setAlignment(time,Qt::AlignRight);
+
+    mainLayout->addLayout(topLayout);
+    mainLayout->addWidget(horizontalLineWidget);
+    mainLayout->addLayout(top);
+    mainLayout->addLayout(bottom);
 }

@@ -9,6 +9,7 @@
 //#include <QtWidgets/QWidget>
 #include "MenuWidget.h"
 #include "../Unit.h"
+#include "../Clock.h"
 #include <QtWidgets/QLabel>
 
 class EnhedsHaandtering : public MenuWidget{
@@ -43,6 +44,15 @@ private:
     QVBoxLayout *lVerticalLayout;
     QPushButton *save;
     QPushButton *cancel;
+
+    QHBoxLayout *horizontalLayout;
+    QHBoxLayout *boxlayout;
+    QVBoxLayout *mainlayout;
+    QHBoxLayout *topLayout;
+    QLabel *userName;
+    QLabel *time;
+    Clock *tempClock;
+    QWidget *horizontalLineWidget;
 
 
 signals:

@@ -21,7 +21,7 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     //Add layouts
     subMainLayout = new QHBoxLayout;
     mainLayout = new QVBoxLayout(this);
-    QHBoxLayout *buttonLayout = new QHBoxLayout;
+    buttonLayout = new QHBoxLayout;
     int size = static_cast<QMainApp *> qApp->getUserList().size();
     //Labels
     user = new QLabel(this);
@@ -55,8 +55,7 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     connect(cancelBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onCancelClick);
     connect(saveBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onSaveClick);
 
-        mainLayout->addLayout(subMainLayout);
-        mainLayout->addLayout(buttonLayout);
+
         setLayout(mainLayout);
 
 }
@@ -169,6 +168,45 @@ void AendreBrugerprofil::addLayouts(){
         pos++;
 
     }
+
+    //Laver toplayout med brugernavn og klokken
+    if(mainLayout->count() == 4){
+        mainLayout->removeWidget(horizontalLineWidget);
+        mainLayout->removeItem(topLayout);
+        mainLayout->removeItem(subMainLayout);
+        mainLayout->removeItem(buttonLayout);
+
+        horizontalLineWidget->deleteLater();
+        topLayout->deleteLater();
+        time->deleteLater();
+        userName->deleteLater();
+        tempClock->deleteLater();
+
+
+    }
+    topLayout = new QHBoxLayout();
+    userName = new QLabel();
+    time = new QLabel();
+    tempClock = new Clock();
+    horizontalLineWidget = new QWidget();
+
+    userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>"  );
+    time->setText("<h4>" + tempClock->showTime() + "</h4>" );
+    userName->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+    time->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+
+    topLayout->addWidget(userName);
+    topLayout->addWidget(time);
+    horizontalLineWidget->setFixedHeight(3);
+    horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    horizontalLineWidget->setStyleSheet(QString("background-color: #c0c0c0;"));
+    topLayout->setAlignment(userName,Qt::AlignLeft);
+    topLayout->setAlignment(time,Qt::AlignRight);
+
+    mainLayout->addLayout(topLayout);
+    mainLayout->addWidget(horizontalLineWidget);
+    mainLayout->addLayout(subMainLayout);
+    mainLayout->addLayout(buttonLayout);
 }
 
 void AendreBrugerprofil::removeLayouts(){
@@ -286,3 +324,4 @@ void AendreBrugerprofil::clear(){
 void AendreBrugerprofil::setCurrenUser(User *user) {
     currentUser = user;
 }
+
