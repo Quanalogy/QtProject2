@@ -213,3 +213,10 @@ bool EnhedsHaandtering::checkIfNavnExist() {
     }
     return false;
 }
+
+bool EnhedsHaandtering::somethingWritten(){
+    if(serienummerInput->text() != NULL && unitNameInput->text() != NULL ){
+        return true;
+    }
+    return false;
+}

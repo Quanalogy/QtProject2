@@ -27,6 +27,7 @@ public:
     void removeIfChecked();
     bool checkIfSerieExist();
     bool checkIfNavnExist();
+    bool somethingWritten();
 
 private:
     int unitCount;

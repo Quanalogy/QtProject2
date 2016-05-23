@@ -66,6 +66,9 @@ private:
     vector<bool> rights;
     QPushButton *logout;
     bool firstTimeLogin;
+
+    QObject timer;
+    void saveMessege();
 };
 
 

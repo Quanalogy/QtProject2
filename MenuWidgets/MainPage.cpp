@@ -5,6 +5,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtCore/QCoreApplication>
 #include <QtWidgets/QMessageBox>
+#include <QtCore/QObject>
 #include "MainPage.h"
 #include "../QMainApp.h"
 #include "../Globals.h"
@@ -150,11 +151,15 @@ void MainPage::addUserSave() {
     if(brugernavn == NULL || *brugernavn == "" || kodeord == NULL || *kodeord == "" ){
         QMessageBox errorMessage;
         errorMessage.setText("Du skal skrive både brugernavn og kodeord!");
+        errorMessage.setStandardButtons(QMessageBox::Ok);
+        errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
     }
     if(addPage->checkIfUserExist()){
         QMessageBox errorMessage;
         errorMessage.setText("Brugernavnet er optaget!");
+        errorMessage.setStandardButtons(QMessageBox::Ok);
+        errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
 
     }
@@ -164,7 +169,11 @@ void MainPage::addUserSave() {
         vector<bool> userPriv= addPage->getStates();
         newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
         static_cast<QMainApp *> qApp->addUserToList(newUser);
-        //userCount++;
+        QMessageBox errorMessage;
+        errorMessage.setText("Bruger oprettet!");
+        errorMessage.setStandardButtons(QMessageBox::Ok);
+        errorMessage.button(QMessageBox::Ok)->animateClick(3000);
+        errorMessage.exec();
         this->show();
         userMenuPages.at(index)->hide();
     }
@@ -175,11 +184,14 @@ void MainPage::changeAdfaerdsStyringSave()  {
     if(!adfaerdsPage->notNull()){
         QMessageBox errorMessage;
         errorMessage.setText("Stattiden for dagsprofil må ikke være 0!");
+        errorMessage.setStandardButtons(QMessageBox::Ok);
+        errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
+
     } else {
         adfaerdsPage->saveIntervals();
         adfaerdsPage->changeSave();
-
+        saveMessege();
         this->show();
         userMenuPages.at(index)->hide();
     }
@@ -191,9 +203,12 @@ void MainPage::changeProfileSave() {
         changeProfilePage->clear();
         QMessageBox errorMessage;
         errorMessage.setText("Kun admin kan sætte nyt admin password!");
+        errorMessage.setStandardButtons(QMessageBox::Ok);
+        errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
     } else {
         changeProfilePage->makeChanges();
+        saveMessege();
         this->show();
         userMenuPages.at(index)->hide();
     }
@@ -203,23 +218,31 @@ void MainPage::changeUnitsSave()  {
     if(enhedsHaandteringPage->notNull()){
         QMessageBox errorMessage;
         errorMessage.setText("Du skal angive serienummer og rum/lokation for at tilføje, eller krydse af for at fjerne");
+        errorMessage.setStandardButtons(QMessageBox::Ok);
+        errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
     }
     if (enhedsHaandteringPage->checkIfSerieExist() || enhedsHaandteringPage->checkIfNavnExist()) {
         if (enhedsHaandteringPage->checkIfSerieExist() && enhedsHaandteringPage->checkIfNavnExist()) {
             QMessageBox errorMessage;
             errorMessage.setText("Enhedens navn og serienummer er allerede i brug!");
+            errorMessage.setStandardButtons(QMessageBox::Ok);
+            errorMessage.button(QMessageBox::Ok)->animateClick(3000);
             errorMessage.exec();
             return;
         }
         if (enhedsHaandteringPage->checkIfSerieExist()) {
             QMessageBox errorMessage;
             errorMessage.setText("Serienummer er allerede i brug!");
+            errorMessage.setStandardButtons(QMessageBox::Ok);
+            errorMessage.button(QMessageBox::Ok)->animateClick(3000);
             errorMessage.exec();
         }
         if (enhedsHaandteringPage->checkIfNavnExist()) {
             QMessageBox errorMessage;
             errorMessage.setText("Enhedens navn er allerede i brug!");
+            errorMessage.setStandardButtons(QMessageBox::Ok);
+            errorMessage.button(QMessageBox::Ok)->animateClick(3000);
             errorMessage.exec();
         }
     }
@@ -232,6 +255,30 @@ void MainPage::changeUnitsSave()  {
         }
         enhedsHaandteringPage->removeIfChecked();
         unitsList = enhedsHaandteringPage->getUnitsList();
+        if (enhedsHaandteringPage->somethingWritten() || enhedsHaandteringPage->isChecked()){
+            if (enhedsHaandteringPage->somethingWritten() && enhedsHaandteringPage->isChecked()){
+                QMessageBox errorMessage;
+                errorMessage.setText("Enhed tilføjet og enhed slettet!");
+                errorMessage.setStandardButtons(QMessageBox::Ok);
+                errorMessage.button(QMessageBox::Ok)->animateClick(3000);
+                errorMessage.exec();
+            }
+            if(enhedsHaandteringPage->somethingWritten()){
+                QMessageBox errorMessage;
+                errorMessage.setText("Enhed tilføjet!");
+                errorMessage.setStandardButtons(QMessageBox::Ok);
+                errorMessage.button(QMessageBox::Ok)->animateClick(3000);
+                errorMessage.exec();
+            }
+            if (enhedsHaandteringPage->isChecked()){
+                QMessageBox errorMessage;
+                errorMessage.setText("Enhed slettet!");
+                errorMessage.setStandardButtons(QMessageBox::Ok);
+                errorMessage.button(QMessageBox::Ok)->animateClick(3000);
+                errorMessage.exec();
+            }
+        }
+        saveMessege();
         this->show();
         userMenuPages.at(index)->hide();
     }
@@ -239,6 +286,7 @@ void MainPage::changeUnitsSave()  {
 
 void MainPage::changeLightVolumeSave() {
     lysstyringPage->checkIfCheckedAddVolume();
+    saveMessege();
     this->show();
     userMenuPages.at(index)->hide();
 }
@@ -282,4 +330,12 @@ void MainPage::logOut() {
     userMenuPages.clear();
     this->hide();
     static_cast<QMainApp *>qApp->getLogin()->showMe();
+}
+
+void MainPage::saveMessege(){
+    QMessageBox errorMessage;
+    errorMessage.setText("Ændringer gemt!");
+    errorMessage.setStandardButtons(QMessageBox::Ok);
+    errorMessage.button(QMessageBox::Ok)->animateClick(3000);
+    errorMessage.exec();
 }

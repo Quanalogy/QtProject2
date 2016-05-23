@@ -7,7 +7,7 @@ find_package(Qt5 REQUIRED COMPONENTS Core Widgets Gui)
 
 include_directories(MenuWidgets)
 
-set(SOURCE_FILES main.cpp MenuWidgets/MainPage.cpp MenuWidgets/MainPage.h MenuWidgets/AdfaerdsStyring.cpp MenuWidgets/AdfaerdsStyring.h MenuWidgets/AddUser.cpp MenuWidgets/AddUser.h MenuWidgets/MenuWidget.cpp MenuWidgets/MenuWidget.h MenuWidgets/AendreBrugerprofil.cpp MenuWidgets/AendreBrugerprofil.h MenuWidgets/Aktivitetssimulering.cpp MenuWidgets/Aktivitetssimulering.h MenuWidgets/Lysstyring.cpp MenuWidgets/Lysstyring.h MenuWidgets/EnhedsHaandtering.cpp MenuWidgets/EnhedsHaandtering.h LoginDialog.cpp LoginDialog.h User.cpp User.h QMainApp.cpp QMainApp.h Globals.h WriteFromPi.cpp WriteFromPi.h Unit.cpp Unit.h MenuWidgets/AdminUser.cpp MenuWidgets/AdminUser.h)
+set(SOURCE_FILES main.cpp MenuWidgets/MainPage.cpp MenuWidgets/MainPage.h MenuWidgets/AdfaerdsStyring.cpp MenuWidgets/AdfaerdsStyring.h MenuWidgets/AddUser.cpp MenuWidgets/AddUser.h MenuWidgets/MenuWidget.cpp MenuWidgets/MenuWidget.h MenuWidgets/AendreBrugerprofil.cpp MenuWidgets/AendreBrugerprofil.h MenuWidgets/Aktivitetssimulering.cpp MenuWidgets/Aktivitetssimulering.h MenuWidgets/Lysstyring.cpp MenuWidgets/Lysstyring.h MenuWidgets/EnhedsHaandtering.cpp MenuWidgets/EnhedsHaandtering.h LoginDialog.cpp LoginDialog.h User.cpp User.h QMainApp.cpp QMainApp.h Globals.h WriteFromPi.cpp WriteFromPi.h Unit.cpp Unit.h MenuWidgets/AdminUser.cpp MenuWidgets/AdminUser.h MenuWidgets/MessegeBox.cpp MenuWidgets/MessegeBox.h)
 add_executable(QtProject2 ${SOURCE_FILES} Globals.h)
 
 target_link_libraries(QtProject2 Qt5::Core Qt5::Widgets Qt5::Gui)
