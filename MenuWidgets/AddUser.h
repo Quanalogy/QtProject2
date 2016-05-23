@@ -21,6 +21,8 @@ public:
     QMap<QString,QString> getLogin();
     void clear();
     void setCurrenUser(User *user);
+    void setUserList(QList< User *> list);
+    bool checkIfUserExist();
 
 private:
     QString usernameInputString;
@@ -28,6 +30,7 @@ private:
     QList<QCheckBox *> checkList;
     QList<QLineEdit *> lineList;
     User *currentUser_;
+    QList<User *> userList;
 
 signals:
     void onSaveClick();

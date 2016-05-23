@@ -168,3 +168,16 @@ void AddUser::clear() {
 void AddUser::setCurrenUser(User *user) {
     currentUser_ = user;
 }
+
+void AddUser::setUserList(QList<User *> list) {
+    userList = list;
+}
+
+bool AddUser::checkIfUserExist() {
+    for (int i = 0 ; i < userList.size() ; i++){
+        if (userList.at(i)->getName() == usernameInputString){
+            return true;
+        }
+    }
+    return false;
+}

@@ -99,6 +99,8 @@ void MainPage::ChangeView() {
     if (userMenuPages.at(index)->getName() == adduser){
         User *tempUser = new User(static_cast<QMainApp *>qApp->getCurrentUser());
         addPage->setCurrenUser(tempUser);
+        QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
+        addPage->setUserList(tempUserList);
         addPage->clear();
     }
     userMenuPages.at(index)->show();
@@ -149,7 +151,14 @@ void MainPage::addUserSave() {
         QMessageBox errorMessage;
         errorMessage.setText("Du skal skrive både brugernavn og kodeord!");
         errorMessage.exec();
-    } else {
+    }
+    if(addPage->checkIfUserExist()){
+        QMessageBox errorMessage;
+        errorMessage.setText("Brugernavnet er optaget!");
+        errorMessage.exec();
+
+    }
+    else {
         userMap.insert(*brugernavn,*kodeord);
         User *newUser = new User(*brugernavn,*kodeord,false);
         vector<bool> userPriv= addPage->getStates();
