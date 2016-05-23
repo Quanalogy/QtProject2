@@ -25,6 +25,8 @@ public:
     void removeBox();
     bool isChecked();
     void removeIfChecked();
+    bool checkIfSerieExist();
+    bool checkIfNavnExist();
 
 private:
     int unitCount;

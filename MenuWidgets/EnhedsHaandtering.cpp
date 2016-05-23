@@ -195,3 +195,21 @@ void EnhedsHaandtering::removeIfChecked(){
         }
     }
 }
+
+bool EnhedsHaandtering::checkIfSerieExist() {
+    for (int i = 0 ; i < unitsList.size() ; i++){
+        if (unitsList.at(i)->getId() == serienummerInput->text().toInt()){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool EnhedsHaandtering::checkIfNavnExist() {
+    for (int i = 0 ; i < unitsList.size() ; i++){
+        if (unitsList.at(i)->getUnitName() == unitNameInput->text()){
+            return true;
+        }
+    }
+    return false;
+}

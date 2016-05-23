@@ -204,7 +204,26 @@ void MainPage::changeUnitsSave()  {
         QMessageBox errorMessage;
         errorMessage.setText("Du skal angive serienummer og rum/lokation for at tilføje, eller krydse af for at fjerne");
         errorMessage.exec();
-    } else {
+    }
+    if (enhedsHaandteringPage->checkIfSerieExist() || enhedsHaandteringPage->checkIfNavnExist()) {
+        if (enhedsHaandteringPage->checkIfSerieExist() && enhedsHaandteringPage->checkIfNavnExist()) {
+            QMessageBox errorMessage;
+            errorMessage.setText("Enhedens navn og serienummer er allerede i brug!");
+            errorMessage.exec();
+            return;
+        }
+        if (enhedsHaandteringPage->checkIfSerieExist()) {
+            QMessageBox errorMessage;
+            errorMessage.setText("Serienummer er allerede i brug!");
+            errorMessage.exec();
+        }
+        if (enhedsHaandteringPage->checkIfNavnExist()) {
+            QMessageBox errorMessage;
+            errorMessage.setText("Enhedens navn er allerede i brug!");
+            errorMessage.exec();
+        }
+    }
+    else {
         int ID = enhedsHaandteringPage->getEditLineID();
         QString Name = enhedsHaandteringPage->getEditLineName();
         if (ID >= 0 && Name.toStdString().size() > 0 ) {
