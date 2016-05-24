@@ -205,7 +205,12 @@ void AddUser::setInfo(){
     tempClock = new Clock();
     horizontalLineWidget = new QWidget();
 
-    userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>"  );
+    if(static_cast<QMainApp *>qApp->getCurrentUser().getAdmin()){
+        QString temp = static_cast<QMainApp *>qApp->getCurrentUser().getName() + "  (Admin)";
+        userName->setText(temp);
+    } else {
+        userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>");
+    }
     time->setText("<h4>" + tempClock->showTime() + "</h4>" );
     userName->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
     time->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
@@ -222,4 +227,16 @@ void AddUser::setInfo(){
     mainLayout->addWidget(horizontalLineWidget);
     mainLayout->addLayout(horizontelLayout);
     mainLayout->addLayout(boxLayout);
+}
+
+bool AddUser::checkAdminUser(){
+    if (usernameInputString != "") {
+        cout << "test" << endl;
+        if (usernameInputString.startsWith("admin5555admin")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return false;
 }

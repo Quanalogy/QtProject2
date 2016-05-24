@@ -26,6 +26,7 @@ public:
     void setUserList(QList< User *> list);
     bool checkIfUserExist();
     void setInfo();
+    bool checkAdminUser();
 
 private:
     QString usernameInputString;

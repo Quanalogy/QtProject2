@@ -162,7 +162,7 @@ void MainPage::addUserSave() {
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
     }
-    if(addPage->checkIfUserExist()){
+    if(addPage->checkIfUserExist()) {
         QMessageBox errorMessage;
         errorMessage.setText("Brugernavnet er optaget!");
         errorMessage.setStandardButtons(QMessageBox::Ok);
@@ -170,6 +170,19 @@ void MainPage::addUserSave() {
         errorMessage.exec();
 
     }
+    /*if(addPage->checkAdminUser) {
+        brugernavn->remove("admin5555admin");
+        userMap.insert(*brugernavn,*kodeord);
+        User *newUser = new User(*brugernavn,*kodeord,true);
+        vector<bool> userPriv= addPage->getStates();
+        newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
+        static_cast<QMainApp *> qApp->addUserToList(newUser);
+        QMessageBox errorMessage;
+        errorMessage.setText("Admin bruger oprettet!");
+        errorMessage.setStandardButtons(QMessageBox::Ok);
+        errorMessage.button(QMessageBox::Ok)->animateClick(3000);
+        errorMessage.exec();
+    }*/
     else {
         userMap.insert(*brugernavn,*kodeord);
         User *newUser = new User(*brugernavn,*kodeord,false);
@@ -181,10 +194,9 @@ void MainPage::addUserSave() {
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
-        this->show();
-        userMenuPages.at(index)->hide();
     }
-
+    this->show();
+    userMenuPages.at(index)->hide();
 }
 
 void MainPage::changeAdfaerdsStyringSave()  {
@@ -331,7 +343,14 @@ void MainPage::setupPages(User *currentUser_) {
     tempClock = new Clock();
     horizontalLineWidget = new QWidget();
 
-    userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>"  );
+
+    if(static_cast<QMainApp *>qApp->getCurrentUser().getAdmin()){
+        QString temp = static_cast<QMainApp *>qApp->getCurrentUser().getName() + "  (Admin)";
+        userName->setText(temp);
+    } else {
+        userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>");
+    }
+
     time->setText("<h4>" + tempClock->showTime() + "</h4>" );
     userName->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
     time->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");

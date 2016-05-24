@@ -100,7 +100,12 @@ void Lysstyring::addBox(){
     tempClock = new Clock();
     horizontalLineWidget = new QWidget;
 
-    userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>"  );
+    if(static_cast<QMainApp *>qApp->getCurrentUser().getAdmin()){
+        QString temp = static_cast<QMainApp *>qApp->getCurrentUser().getName() + "  (Admin)";
+        userName->setText(temp);
+    } else {
+        userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>");
+    }
     time->setText("<h4>" + tempClock->showTime() + "</h4>" );
     userName->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
     time->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
