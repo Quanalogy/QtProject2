@@ -44,8 +44,8 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
 
 
     //Pushbuttons
-    QPushButton *saveBtn = new QPushButton("Gem", this);
-    QPushButton *cancelBtn = new QPushButton("Annuller", this);
+    saveBtn = new QPushButton("Gem", this);
+    cancelBtn = new QPushButton("Annuller", this);
 
     //Add buttons to horizontal layout
     buttonLayout->addWidget(cancelBtn);
@@ -207,6 +207,10 @@ void AendreBrugerprofil::addLayouts(){
     mainLayout->addLayout(topLayout);
     mainLayout->addWidget(horizontalLineWidget);
     mainLayout->addLayout(subMainLayout);
+    if (firstTime){
+        cancelBtn->hide();
+        saveBtn->setText("Næste");
+    }
     mainLayout->addLayout(buttonLayout);
 }
 
@@ -326,3 +330,6 @@ void AendreBrugerprofil::setCurrenUser(User *user) {
     currentUser = user;
 }
 
+void AendreBrugerprofil::setFirstTime(bool set) {
+    firstTime = set;
+}

@@ -78,6 +78,10 @@ private:
     // QLabel *time;
     Clock *tempClock;
     QWidget *horizontalLineWidget;
+
+    void forsteGangsVisning();
+
+    bool firstTime;
 };
 
 

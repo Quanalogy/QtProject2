@@ -31,7 +31,12 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     pages << addPage << changeProfilePage << aktivitetssimuleringPage << lysstyringPage
             << adfaerdsPage << enhedsHaandteringPage;
 
+    //Sætter det til første gang programet opstartes
 
+    firstTime = true;
+    addPage->setFirstTime(true);
+    changeProfilePage->setFirstTime(true);
+    adfaerdsPage->setFirstTime(true);
 
     //Connect the buttons with the
     connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
@@ -120,12 +125,21 @@ void MainPage::handleSaveClick() {
 
 void MainPage::handleCancelClick() {
     QMessageBox errorMessage;
-    errorMessage.setText("Ændringer IKKE gemt!");
-    errorMessage.setStandardButtons(QMessageBox::Ok);
-    errorMessage.button(QMessageBox::Ok)->animateClick(3000);
-    errorMessage.exec();
-    userMenuPages.at(index)->hide();
-    this->show();
+    if(firstTime){
+        errorMessage.setText("Ændringer IKKE gemt, du logges nu ud!");
+        errorMessage.setStandardButtons(QMessageBox::Ok);
+        errorMessage.button(QMessageBox::Ok)->animateClick(3000);
+        errorMessage.exec();
+        userMenuPages.at(index)->hide();
+        logOut();
+    } else {
+        errorMessage.setText("Ændringer IKKE gemt!");
+        errorMessage.setStandardButtons(QMessageBox::Ok);
+        errorMessage.button(QMessageBox::Ok)->animateClick(3000);
+        errorMessage.exec();
+        userMenuPages.at(index)->hide();
+        this->show();
+    }
 }
 
 void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
@@ -143,9 +157,11 @@ void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
             qDebug() << tempUserList.size();
         }
     }
-    this->show();
-    //return false;
-
+    if (firstTime){
+        forsteGangsVisning();
+    } else {
+        this->show();
+    }
 
 }
 
@@ -168,6 +184,7 @@ void MainPage::addUserSave() {
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
+        return;
 
     }
     /*if(addPage->checkAdminUser) {
@@ -195,8 +212,20 @@ void MainPage::addUserSave() {
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
     }
-    this->show();
-    userMenuPages.at(index)->hide();
+    if(firstTime){
+        User *tempUser = new User(static_cast<QMainApp *>qApp->getCurrentUser());
+        changeProfilePage->setCurrenUser(tempUser);
+        QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
+        changeProfilePage->setUserList(tempUserList);
+        changeProfilePage->addLayouts();
+        changeProfilePage->removeLayouts();
+        userMenuPages.at(1)->show();
+        userMenuPages.at(index)->hide();
+        index = 1;
+    } else {
+        this->show();
+        userMenuPages.at(index)->hide();
+    }
 }
 
 void MainPage::changeAdfaerdsStyringSave()  {
@@ -211,8 +240,21 @@ void MainPage::changeAdfaerdsStyringSave()  {
         adfaerdsPage->saveIntervals();
         adfaerdsPage->changeSave();
         saveMessege();
-        this->show();
-        userMenuPages.at(index)->hide();
+        if (firstTime){
+            QMessageBox afslut;
+            afslut.setText("Du er nu klar til brug af systemet");
+            afslut.setStandardButtons(QMessageBox::Ok);
+            afslut.button(QMessageBox::Ok)->animateClick(3000);
+            afslut.exec();
+            addPage->setFirstTime(false);
+            changeProfilePage->setFirstTime(false);
+            firstTime = false;
+            this->show();
+            userMenuPages.at(index)->hide();
+        } else {
+            this->show();
+            userMenuPages.at(index)->hide();
+        }
     }
 
 }
@@ -228,8 +270,18 @@ void MainPage::changeProfileSave() {
     } else {
         changeProfilePage->makeChanges();
         saveMessege();
-        this->show();
-        userMenuPages.at(index)->hide();
+        if(firstTime){
+            adfaerdsPage->setUnitsList(unitsList);
+            adfaerdsPage->removeBox();
+            adfaerdsPage->addBox();
+            userMenuPages.at(4)->show();
+            userMenuPages.at(index)->hide();
+            index = 4;
+        } else {
+            this->show();
+            userMenuPages.at(index)->hide();
+        }
+
     }
 }
 
@@ -384,6 +436,7 @@ void MainPage::setupPages(User *currentUser_) {
     mainLayout->addWidget(horizontalLineWidget);
     mainLayout->addLayout(gridLayout);
 
+
     connect(logout, &QPushButton::clicked, this, &logOut);
 }
 
@@ -404,4 +457,34 @@ void MainPage::saveMessege(){
     errorMessage.setStandardButtons(QMessageBox::Ok);
     errorMessage.button(QMessageBox::Ok)->animateClick(3000);
     errorMessage.exec();
+}
+
+void MainPage::forsteGangsVisning() {
+    QMessageBox velkomst;
+    velkomst.setText(
+                    "Velkommen til Home Automation System \n"
+                    "                                     \n"
+                    "Dette er en førstegangs intro for nye\n"
+                    "brugere. Du vil nu komme igennem:    \n"
+                    "   1. Tilføj brugerprofil            \n"
+                    "   2. Ændre brugerprofil             \n"
+                    "   3. AdfærdsStyring                 \n"
+                    "                                     \n"
+                    "                                     \n"
+                    "                                     \n"
+                    "                                     \n"
+                    "                                     \n"
+
+
+                             );
+    velkomst.exec();
+    User *tempUser = new User(static_cast<QMainApp *>qApp->getCurrentUser());
+    addPage->setCurrenUser(tempUser);
+    QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
+    addPage->setUserList(tempUserList);
+    addPage->clear();
+    addPage->setInfo();
+    index = 0;
+    userMenuPages.at(0)->show();
+
 }

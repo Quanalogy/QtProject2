@@ -30,6 +30,7 @@ private:
     MainPage *mainPage;
     QList<User *> userList;
     User *currentUser;
+
 };
 
 

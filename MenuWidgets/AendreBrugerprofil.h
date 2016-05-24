@@ -29,6 +29,7 @@ public:
     bool adminCheck();
     void clear();
     void setCurrenUser(User *user);
+    void setFirstTime(bool set);
 
 private:
     QString name = "Ændre brugerprofil";
@@ -41,6 +42,9 @@ private:
     QLabel *user;
     QLabel *changePass;
     QLabel *userAccess;
+
+    QPushButton *saveBtn;
+    QPushButton *cancelBtn;
 
     QHBoxLayout *subMainLayout;
     QVBoxLayout *mainLayout;
@@ -69,6 +73,7 @@ private:
     QLabel *userName;
     Clock *tempClock;
     QWidget *horizontalLineWidget;
+    bool firstTime;
 
 
 

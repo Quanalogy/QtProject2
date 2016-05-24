@@ -22,6 +22,7 @@ public:
     void addBox();
     void removeBox();
     void changeSave();
+    void setFirstTime(bool set);
 
 private:
     QString name = "Adfærdsstyring";
@@ -81,6 +82,8 @@ private:
     QLabel *userName;
     Clock *tempClock;
     QWidget *horizontalLineWidget;
+
+    bool firstTime;
 
 public slots:
     void saveIntervals();

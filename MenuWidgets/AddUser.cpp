@@ -44,11 +44,11 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     NFCID->setText("<h2>Scannet NFC ID</h2>");
 
     //Pushbuttons for left side
-    QPushButton *cancelBtn = new QPushButton("Annuller", this);
+    cancelBtn = new QPushButton("Annuller", this);
 
     //Pushbuttons for right side
     QPushButton *scanNFC = new QPushButton("Klik for at scanne NFC", this);
-    QPushButton *saveBtn = new QPushButton("Gem", this);
+    saveBtn = new QPushButton("Gem", this);
 
     //Checkboxes for left side
     QCheckBox *adfaerdsCheck = new QCheckBox("Adfærdsstyring");
@@ -221,6 +221,11 @@ void AddUser::setInfo(){
     mainLayout->addLayout(topLayout);
     mainLayout->addWidget(horizontalLineWidget);
     mainLayout->addLayout(horizontelLayout);
+    if (firstTime){
+        cancelBtn->hide();
+        saveBtn->setText("Næste");
+    }
+
     mainLayout->addLayout(boxLayout);
 }
 
@@ -234,4 +239,8 @@ bool AddUser::checkAdminUser(){
         }
     }
     return false;
+}
+
+void AddUser::setFirstTime(bool set) {
+    firstTime = set;
 }

@@ -10,6 +10,7 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include "MenuWidget.h"
 #include "../User.h"
 #include "../Clock.h"
@@ -27,6 +28,7 @@ public:
     bool checkIfUserExist();
     void setInfo();
     bool checkAdminUser();
+    void setFirstTime(bool set);
 
 private:
     QString usernameInputString;
@@ -36,6 +38,9 @@ private:
     User *currentUser_;
     QList<User *> userList;
 
+    QPushButton *cancelBtn;
+    QPushButton *saveBtn;
+
     QHBoxLayout *horizontelLayout;
     QHBoxLayout *boxLayout;
     QVBoxLayout *mainLayout;
@@ -43,6 +48,8 @@ private:
     QLabel *userName;
     Clock *tempClock;
     QWidget *horizontalLineWidget;
+
+    bool firstTime;
 
 
 signals:

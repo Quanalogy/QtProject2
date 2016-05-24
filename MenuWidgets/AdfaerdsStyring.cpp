@@ -364,3 +364,7 @@ void AdfaerdsStyring::changeSave() {
 
 
 }
+
+void AdfaerdsStyring::setFirstTime(bool set) {
+    firstTime = set;
+}
