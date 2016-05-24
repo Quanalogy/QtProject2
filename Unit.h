@@ -16,11 +16,16 @@ public:
     void setUnitName(QString name);
     void setVolume(int vol);
     int getVolume();
+    void setToggle(bool toggle_);
+    bool getToggle();
+
+
 
 private:
     int id;
     QString unitName;
     int volume;
+    bool toggle;
 };
 
 #endif

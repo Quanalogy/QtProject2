@@ -67,7 +67,6 @@ private:
     QHBoxLayout *buttonLayout;
     QHBoxLayout *topLayout;
     QLabel *userName;
-    QLabel *time;
     Clock *tempClock;
     QWidget *horizontalLineWidget;
 

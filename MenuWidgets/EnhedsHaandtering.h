@@ -50,7 +50,6 @@ private:
     QVBoxLayout *mainlayout;
     QHBoxLayout *topLayout;
     QLabel *userName;
-    QLabel *time;
     Clock *tempClock;
     QWidget *horizontalLineWidget;
 

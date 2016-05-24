@@ -5,21 +5,21 @@
 #ifndef QTPROJECT2_CLOCK_H
 #define QTPROJECT2_CLOCK_H
 
-#include <QtWidgets/QLCDNumber>
-#include <QtCore/QTimer>
+#include <QWidget>
+#include <QLabel>
+#include <QtWidgets/QHBoxLayout>
 
-class Clock : public QLCDNumber
-{
-    Q_OBJECT
+class Clock : public QLabel {
 
 public:
-    Clock(QWidget *parent = 0);
-
-public slots:
-    QString showTime();
+    Clock(QLabel *parent = 0);
+    //QVBoxLayout *hbox;
+protected:
+    void timerEvent(QTimerEvent *e);
 
 private:
-    QTimer *timer;
+    QLabel *label;
+
 };
 
 #endif //QTPROJECT2_CLOCK_H

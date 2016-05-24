@@ -10,6 +10,7 @@ Unit::Unit(int id_, QString unitName_) {
         id = id_;
         unitName = unitName_;
         volume = 70;
+        toggle = false;
     } else {
         exit(0);
     }
@@ -33,4 +34,12 @@ void Unit::setVolume(int vol) {
 
 int Unit::getVolume(){
     return volume;
+}
+
+void Unit::setToggle(bool toggle_) {
+    toggle = toggle_;
+}
+
+bool Unit::getToggle(){
+    return toggle;
 }

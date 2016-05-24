@@ -2,28 +2,33 @@
 // Created by Virkman on 23-05-2016.
 //
 
-#include <QtCore/QTime>
 #include "Clock.h"
-Clock::Clock(QWidget *parent)
-        : QLCDNumber(parent)
-{
-    setSegmentStyle(Filled);
+#include <QHBoxLayout>
+#include <QTime>
+#include <QtGui/QtGui>
 
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(showTime()));
-    timer->start(1000);
+Clock::Clock(QLabel *parent)
+        : QLabel(parent) {
 
-    showTime();
+    //hbox = new QVBoxLayout(this);
+    //hbox->setSpacing(0);
 
-    setWindowTitle(tr("Digital Clock"));
-    resize(150, 60);
+
+    label = new QLabel("", this);
+    //hbox->addWidget(label);
+
+    QTime qtime = QTime::currentTime();
+    QString stime = qtime.toString();
+    label->setText("<h4>" + stime + "<h4\>");
+    label->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
+
+    startTimer(1000);
 }
 
-QString Clock::showTime()
-{
-    QTime time = QTime::currentTime();
-    QString text = time.toString("hh:mm");
-    if ((time.second() % 2) == 0)
-        text[2] = ' ';
-    return text;
+void Clock::timerEvent(QTimerEvent *e) {
+    Q_UNUSED(e);
+
+    QTime qtime = QTime::currentTime();
+    QString stime = qtime.toString();
+    label->setText("<h4>" + stime + "<h4\>");
 }

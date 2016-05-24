@@ -39,7 +39,6 @@ private:
 
     QLabel *userName;
     QHBoxLayout *topLayout;
-    QLabel *time;
     Clock *tempClock;
     QWidget *horizontalLineWidget;
 

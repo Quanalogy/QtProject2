@@ -193,7 +193,6 @@ void AddUser::setInfo(){
 
         horizontalLineWidget->deleteLater();
         topLayout->deleteLater();
-        time->deleteLater();
         userName->deleteLater();
         tempClock->deleteLater();
 
@@ -201,7 +200,6 @@ void AddUser::setInfo(){
     }
     topLayout = new QHBoxLayout();
     userName = new QLabel();
-    time = new QLabel();
     tempClock = new Clock();
     horizontalLineWidget = new QWidget();
 
@@ -211,17 +209,14 @@ void AddUser::setInfo(){
     } else {
         userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>");
     }
-    time->setText("<h4>" + tempClock->showTime() + "</h4>" );
     userName->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
-    time->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
 
     topLayout->addWidget(userName);
-    topLayout->addWidget(time);
+    topLayout->addWidget(tempClock);
     horizontalLineWidget->setFixedHeight(3);
     horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     horizontalLineWidget->setStyleSheet(QString("background-color: #c0c0c0;"));
     topLayout->setAlignment(userName,Qt::AlignLeft);
-    topLayout->setAlignment(time,Qt::AlignRight);
 
     mainLayout->addLayout(topLayout);
     mainLayout->addWidget(horizontalLineWidget);

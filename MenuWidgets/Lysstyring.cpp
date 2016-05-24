@@ -62,8 +62,10 @@ void Lysstyring::addBox(){
         QLineEdit *line = new QLineEdit("", this);
 
         //Krydser boksen af hvis ikke den er 70 som std. skal laves om når der kommer et ur.
-        if (unitsList.at(pos)->getVolume() != 70){
+        if (unitsList.at(pos)->getToggle()){
             box->setChecked(true);
+        } else {
+            box->setChecked(false);
         }
         int tempint = unitsList.at(pos)->getVolume();
         QString temp = QString::number(tempint);
@@ -88,7 +90,6 @@ void Lysstyring::addBox(){
         horizontalLineWidget->deleteLater();
         topLayout->deleteLater();
         userName->deleteLater();
-        time->deleteLater();
         tempClock->deleteLater();
 
 
@@ -96,7 +97,6 @@ void Lysstyring::addBox(){
     topLayout = new QHBoxLayout();
 
     userName = new QLabel();
-    time = new QLabel();
     tempClock = new Clock();
     horizontalLineWidget = new QWidget;
 
@@ -106,19 +106,16 @@ void Lysstyring::addBox(){
     } else {
         userName->setText("<h4>" + static_cast<QMainApp *>qApp->getCurrentUser().getName() + "</h4>");
     }
-    time->setText("<h4>" + tempClock->showTime() + "</h4>" );
+    //time->setText("<h4>" + tempClock->showTime() + "</h4>" );
     userName->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
-    time->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
 
     topLayout->addWidget(userName);
-    topLayout->addWidget(time);
+    topLayout->addWidget(tempClock);
 
     horizontalLineWidget->setFixedHeight(3);
     horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     horizontalLineWidget->setStyleSheet(QString("background-color: #c0c0c0;"));
     topLayout->setAlignment(userName,Qt::AlignLeft);
-    topLayout->setAlignment(time,Qt::AlignRight);
-
 
     mainLayout->addLayout(topLayout);
     mainLayout->addWidget(horizontalLineWidget);
@@ -138,8 +135,11 @@ void Lysstyring::removeBox() {
 
 void Lysstyring::checkIfCheckedAddVolume() {
     for (int i = 0 ; i < unitsList.size() ; i++){
+        unitsList.at(i)->setVolume(editLines.at(i)->text().toInt());
         if (checkBoxes.at(i)->isChecked()){
-            unitsList.at(i)->setVolume(editLines.at(i)->text().toInt());
+            unitsList.at(i)->setToggle(true);
+        } else {
+            unitsList.at(i)->setToggle(false);
         }
     }
 }
