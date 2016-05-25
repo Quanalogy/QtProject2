@@ -10,7 +10,6 @@
 #include "MainPage.h"
 #include "../QMainApp.h"
 #include "../Globals.h"
-#include "AdminUser.h"
 
 
 MainPage::MainPage(QWidget *parent) : MenuWidget(parent){

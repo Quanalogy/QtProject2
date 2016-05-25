@@ -203,14 +203,11 @@ void AdfaerdsStyring::saveIntervals() {
     inatFraMin.clear();
     inatTilTime.clear();
     inatTilMin.clear();
-    cout << "tester adada" << endl;
     if(dagFraTime->text() == "" ){
         idagFraTime.append("00");
     } else {
         idagFraTime.append(dagFraTime->text());
     }
-    cout << "tester adada" <<endl;
-    qDebug() << idagFraTime << endl;
     if(dagFraMin->text() == "" ){
         idagFraMin.append("00");
     } else {
@@ -251,7 +248,6 @@ void AdfaerdsStyring::saveIntervals() {
     dagTider.append(idagFraMin);
     dagTider.append(idagTilTime);
     dagTider.append(idagTilMin);
-    cout << "asdad" << dagTider.size() << endl;
     aftenTider.append(inatFraTime);
     aftenTider.append(inatFraMin);
     aftenTider.append(inatTilTime);
@@ -388,36 +384,36 @@ void AdfaerdsStyring::removeBox(){
 
 void AdfaerdsStyring::changeSave() {
 
-    cout << "asdad" << endl;
     for (int i = 0 ; i < 4 ; i++){
         dagTider.removeAt(i);
         aftenTider.removeAt(i);
     }
     dagTider.clear();
+    aftenTider.clear();
     for (int i = 0 ; i < dagUnits.size() ; i++){
         dagUnits.removeAt(i);
         dagStyrker.removeAt(i);
     }
+    dagUnits.clear();
+    dagStyrker.clear();
     for (int i = 0 ; i < aftenUnits.size() ; i++){
         aftenUnits.removeAt(i);
         aftenStyrker.removeAt(i);
     }
-    cout << "asdad" << endl;
+    aftenUnits.clear();
+    aftenStyrker.clear();
     saveIntervals();
-    cout << "asdad" << endl;
 
 
-    cout << "asdad" << endl;
     for (int i = 0 ; i < unitsList.size() ; i++){
         if (lefCheckBoxes.at(i)->isChecked()){
             dagUnits.append(unitsList.at(i));
-            QString *temp = new QString(lefLineEdits.at(i)->text());
+            QString temp = lefLineEdits.at(i)->text();
             dagStyrker.append(temp);
-            cout << "laver dag unit" << dagUnits.size() << endl;
         }
         if (rigCheckBoxes.at(i)->isChecked()){
             aftenUnits.append(unitsList.at(i));
-            QString *rigtemp = new QString(lefLineEdits.at(i)->text());
+            QString rigtemp = rigLineEdits.at(i)->text();
             aftenStyrker.append(rigtemp);
         }
     }
@@ -431,23 +427,17 @@ void AdfaerdsStyring::setFirstTime(bool set) {
 
 void AdfaerdsStyring::startWork() {
 
-    /*if(workCount > 0) {
+    if(workCount > 0) {
         worker->stopWork();
         workCount = 0;
-    }*/
+    }
 
     workerThread = new QThread();
     worker = new Worker;
-    cout << "tester" << endl;
     worker->setUnitList(unitsList);
-    cout << "tester ::" << dagUnits.size() << aftenUnits.size() << endl;
     worker->setDagAftenUnit(dagUnits,aftenUnits);
-    cout << "tester" << dagTider.size() << aftenTider.size() << endl;
     worker->setTider(dagTider,aftenTider);
-    cout << "tester" << endl;
     worker->setStyrker(dagStyrker,aftenStyrker);
-    cout << "tester" << endl;
-
 
     worker->moveToThread(workerThread);
     QThread::connect(workerThread, SIGNAL(started()), worker, SLOT(doWork()));

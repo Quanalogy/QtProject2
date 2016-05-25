@@ -16,7 +16,7 @@ public:
     Worker();
     void setUnitList(QList<Unit *> list);
     void setDagAftenUnit(QList<Unit *> daglist, QList<Unit *> aftenlist);
-    void setStyrker(QList<QString *> dagstyrker, QList<QString *> aftenstyrker );
+    void setStyrker(QList<QString> dagstyrker, QList<QString> aftenstyrker );
     void setTider(QList<QString> dagtider , QList<QString> aftentider);
     void setAAStime(int hour);
     void nfcChecked();
@@ -59,11 +59,14 @@ private:
     QList<int *> dagTider;
     QList<int *> aftenTider;
 
-    QList<QString *> dagStyrker;
-    QList<QString *> aftenStyrker;
+    QList<QString> dagStyrker;
+    QList<QString> aftenStyrker;
 
     bool controlAdfaerd();
     bool controlAktivitet();
+
+    bool isItDay;
+    bool isItNat;
 
 };
 

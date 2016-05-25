@@ -75,8 +75,8 @@ private:
     QList<Unit *> dagUnits;
     QList<Unit *> aftenUnits;
 
-    QList<QString *> dagStyrker;
-    QList<QString *> aftenStyrker;
+    QList<QString> dagStyrker;
+    QList<QString> aftenStyrker;
 
     QLabel *intervalNat;
     QLabel *intervalDag;
