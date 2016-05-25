@@ -176,8 +176,13 @@ void AddUser::setUserList(QList<User *> list) {
 }
 
 bool AddUser::checkIfUserExist() {
+    QString tempname = usernameInputString;
     for (int i = 0 ; i < userList.size() ; i++){
-        if (userList.at(i)->getName() == usernameInputString){
+        if (checkAdmin()){
+            tempname.remove("admin5555admin");
+
+        }
+        if (userList.at(i)->getName() == tempname){
             return true;
         }
     }
@@ -224,15 +229,18 @@ void AddUser::setInfo(){
     if (firstTime){
         cancelBtn->hide();
         saveBtn->setText("Næste");
+    } else {
+        cancelBtn->show();
+        saveBtn->setText("Gem");
     }
 
     mainLayout->addLayout(boxLayout);
 }
 
-bool AddUser::checkAdminUser(){
+bool AddUser::checkAdmin(){
     if (usernameInputString != "") {
-        cout << "test" << endl;
         if (usernameInputString.startsWith("admin5555admin")) {
+
             return true;
         } else {
             return false;

@@ -148,7 +148,6 @@ bool Worker::controlAdfaerd() {
             for(int j = 0 ; j < unitList.size() ; j++){
                 if (aftenList.at(i)->getId() == unitList.at(j)->getId()){
                     int temp = aftenStyrker.at(i).toInt();
-                    cout << temp << endl;
                     unitList.at(j)->setVolume(temp);
                     unitList.at(j)->setToggle(true);
 

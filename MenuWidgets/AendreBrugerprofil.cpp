@@ -163,7 +163,6 @@ void AendreBrugerprofil::addLayouts(){
         }
         userLayouts.at(pos)->setAlignment(Qt::AlignTop);
         subMainLayout->addLayout(userLayouts.at(pos));
-        cout << subMainLayout->count() << endl;
                 //subMainLayout->addLayout(userLayout);
         pos++;
 
@@ -210,6 +209,9 @@ void AendreBrugerprofil::addLayouts(){
     if (firstTime){
         cancelBtn->hide();
         saveBtn->setText("Næste");
+    } else {
+        cancelBtn->show();
+        saveBtn->setText("Gem");
     }
     mainLayout->addLayout(buttonLayout);
 }

@@ -187,7 +187,7 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
 
 }
 bool AdfaerdsStyring::notNull(){
-    if (dagFraTime->text().toInt() > 0){
+    if (dagFraTime->text() != "" && dagTilTime->text() != "" || natFraTime->text() != "" && natTilTime->text() != ""){
         return true;
     } else {
         return false;
@@ -350,6 +350,11 @@ void AdfaerdsStyring::addBox(){
     mainLayout->addLayout(topLayout);
     mainLayout->addWidget(horizontalLineWidget);
     mainLayout->addLayout(controlHorizontalLayout);
+    if (firstTime){
+        save->setText("Næste");
+    } else {
+        save->setText("Gem");
+    }
 
 }
 

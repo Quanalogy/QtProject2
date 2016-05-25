@@ -27,7 +27,7 @@ public:
     void setUserList(QList< User *> list);
     bool checkIfUserExist();
     void setInfo();
-    bool checkAdminUser();
+    bool checkAdmin();
     void setFirstTime(bool set);
 
 private:

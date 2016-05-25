@@ -31,10 +31,10 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
             << adfaerdsPage << enhedsHaandteringPage;
 
     //Sætter det til første gang programet opstartes
-    /*firstTime = true;
+    firstTime = true;
     addPage->setFirstTime(true);
     changeProfilePage->setFirstTime(true);
-    adfaerdsPage->setFirstTime(true);*/
+    adfaerdsPage->setFirstTime(true);
 
     //Connect the buttons with the
     connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
@@ -188,7 +188,7 @@ void MainPage::addUserSave() {
         return;
 
     }
-    /*if(addPage->checkAdminUser) {
+    if(addPage->checkAdmin() && !addPage->checkIfUserExist()) {
         brugernavn->remove("admin5555admin");
         userMap.insert(*brugernavn,*kodeord);
         User *newUser = new User(*brugernavn,*kodeord,true);
@@ -200,7 +200,7 @@ void MainPage::addUserSave() {
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
-    }*/
+    }
     else {
         userMap.insert(*brugernavn,*kodeord);
         User *newUser = new User(*brugernavn,*kodeord,false);
@@ -232,7 +232,7 @@ void MainPage::addUserSave() {
 void MainPage::changeAdfaerdsStyringSave()  {
     if(!adfaerdsPage->notNull()){
         QMessageBox errorMessage;
-        errorMessage.setText("Stattiden for dagsprofil må ikke være 0!");
+        errorMessage.setText("Tiden ikke indstillet, HUSK både fra og til!!");
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
@@ -249,6 +249,7 @@ void MainPage::changeAdfaerdsStyringSave()  {
             afslut.exec();
             addPage->setFirstTime(false);
             changeProfilePage->setFirstTime(false);
+            adfaerdsPage->setFirstTime(false);
             firstTime = false;
             adfaerdsPage->startWork();
             this->show();

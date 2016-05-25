@@ -32,7 +32,7 @@ Lysstyring::Lysstyring(QWidget *parent) : MenuWidget(parent){
 
     //connects
     connect(save,&QPushButton::clicked,this,&Lysstyring::onSaveClick);
-    connect(cancel,&QPushButton::clicked,this,&Lysstyring::onSaveClick);
+    connect(cancel,&QPushButton::clicked,this,&Lysstyring::onCancelClick);
 
 
     //setup conrol layout
