@@ -8,9 +8,11 @@
 
 #include "MenuWidget.h"
 #include "../Clock.h"
+#include "../Unit.h"
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QCheckBox>
 
 class Aktivitetssimulering : public MenuWidget{
 Q_OBJECT
@@ -20,10 +22,14 @@ public:
     bool actSimOn();
     bool acSimOff();
     void setInfo();
+    void setUnitList(QList<Unit *> list);
+
 
 private:
     QString name = "Aktivitetssimulering";
-    void toggleButtonColor();
+    void toggleButtonOn();
+    void toggleButtonOff();
+    void setAuto();
     QPushButton *onOff;
     bool actSimstate;
     QPushButton *on;
@@ -37,6 +43,9 @@ private:
     QLabel *userName;
     Clock *tempClock;
     QWidget *horizontalLineWidget;
+
+    QCheckBox *autAct;
+    QList<Unit *> unitList;
 
 signals:
     void onSaveClick();

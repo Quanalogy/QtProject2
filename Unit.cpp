@@ -37,9 +37,20 @@ int Unit::getVolume(){
 }
 
 void Unit::setToggle(bool toggle_) {
+    if (toggle_){
+        //WriteFromPi
+    }
     toggle = toggle_;
 }
 
 bool Unit::getToggle(){
     return toggle;
+}
+
+void Unit::setAS(bool as_) {
+    as = as_;
+}
+
+bool Unit::getAS() {
+    return as;
 }

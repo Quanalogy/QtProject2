@@ -77,3 +77,11 @@ void QMainApp::setCurrentUser(QString userName) {
 User QMainApp::getCurrentUser() {
     return *currentUser;
 }
+
+void QMainApp::setUnitList(QList<Unit *> list) {
+    unitList = list;
+}
+
+QList<Unit *> QMainApp::getUnitList() {
+    return unitList;
+}

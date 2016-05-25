@@ -18,14 +18,15 @@ public:
     int getVolume();
     void setToggle(bool toggle_);
     bool getToggle();
-
-
+    void setAS(bool as_);
+    bool getAS();
 
 private:
     int id;
     QString unitName;
     int volume;
     bool toggle;
+    bool as;
 };
 
 #endif

@@ -6,7 +6,9 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QLabel>
+#include <QThread>
 #include <QtGui/QIntValidator>
+#include <QtCore/QObject>
 #include "AdfaerdsStyring.h"
 #include "../Clock.h"
 #include "../QMainApp.h"
@@ -137,7 +139,7 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     timeNatTilHorizontalLayout->addWidget(natTilMin);
     timeNatTilHorizontalLayout->addSpacing(width()/12);
 
-
+    workCount = 0;
 
 
     int pos=0;
@@ -193,14 +195,67 @@ bool AdfaerdsStyring::notNull(){
 }
 
 void AdfaerdsStyring::saveIntervals() {
-    idagFraTime = new int(dagFraTime->text().toInt());
-    idagFraMin = new int(dagFraMin->text().toInt());
-    idagTilTime = new int(dagTilTime->text().toInt());
-    idagTilMin = new int(dagTilMin->text().toInt());
-    inatFraTime = new int(natFraTime->text().toInt());
-    inatFraMin = new int(natFraMin->text().toInt());
-    inatTilTime = new int(natTilTime->text().toInt());
-    inatTilMin = new int(natTilMin->text().toInt());
+    idagFraTime.clear();
+    idagFraMin.clear();
+    idagTilTime.clear();
+    idagTilMin.clear();
+    inatFraTime.clear();
+    inatFraMin.clear();
+    inatTilTime.clear();
+    inatTilMin.clear();
+    cout << "tester adada" << endl;
+    if(dagFraTime->text() == "" ){
+        idagFraTime.append("00");
+    } else {
+        idagFraTime.append(dagFraTime->text());
+    }
+    cout << "tester adada" <<endl;
+    qDebug() << idagFraTime << endl;
+    if(dagFraMin->text() == "" ){
+        idagFraMin.append("00");
+    } else {
+        idagFraMin.append(QString(dagFraMin->text()));
+    }
+    if(dagTilTime->text() == "" ){
+        idagTilTime.append("00");
+    } else {
+        idagTilTime.append(dagTilTime->text());
+    }
+    if(dagTilMin->text() == "" ){
+        idagTilMin.append("00");
+    } else {
+        idagTilMin.append(dagTilMin->text());
+    }
+    if(natFraTime->text() == "" ){
+        inatFraTime.append("00");
+    } else {
+        inatFraTime.append(natFraTime->text());
+    }
+    if(natFraMin->text() == "" ){
+        inatFraMin.append("00");
+    } else {
+        inatFraMin.append(natFraMin->text());
+    }
+    if(natTilTime->text() == "" ){
+        inatTilTime.append("00");
+    } else {
+        inatTilTime.append(natTilTime->text());
+    }
+    if(natTilMin->text() == "" ){
+        inatTilMin.append("00");
+    } else {
+        inatTilMin.append(natTilMin->text());
+    }
+
+    dagTider.append(idagFraTime);
+    dagTider.append(idagFraMin);
+    dagTider.append(idagTilTime);
+    dagTider.append(idagTilMin);
+    cout << "asdad" << dagTider.size() << endl;
+    aftenTider.append(inatFraTime);
+    aftenTider.append(inatFraMin);
+    aftenTider.append(inatTilTime);
+    aftenTider.append(inatTilMin);
 }
 
 QString AdfaerdsStyring::getName() {
@@ -332,33 +387,38 @@ void AdfaerdsStyring::removeBox(){
 }
 
 void AdfaerdsStyring::changeSave() {
-    dagTider = new QList<int *>;
-    aftenTider = new QList<int *>;
-    dagUnits = new QList<Unit *>;
-    aftenUnits = new QList<Unit *>;
-    dagStyrker = new QList<int *>;
-    aftenStyrker = new QList<int *>;
 
-    dagTider->append(idagFraTime);
-    dagTider->append(idagFraMin);
-    dagTider->append(idagTilTime);
-    dagTider->append(idagTilMin);
+    cout << "asdad" << endl;
+    for (int i = 0 ; i < 4 ; i++){
+        dagTider.removeAt(i);
+        aftenTider.removeAt(i);
+    }
+    dagTider.clear();
+    for (int i = 0 ; i < dagUnits.size() ; i++){
+        dagUnits.removeAt(i);
+        dagStyrker.removeAt(i);
+    }
+    for (int i = 0 ; i < aftenUnits.size() ; i++){
+        aftenUnits.removeAt(i);
+        aftenStyrker.removeAt(i);
+    }
+    cout << "asdad" << endl;
+    saveIntervals();
+    cout << "asdad" << endl;
 
-    aftenTider->append(inatFraTime);
-    aftenTider->append(inatFraMin);
-    aftenTider->append(inatTilTime);
-    aftenTider->append(inatTilMin);
 
+    cout << "asdad" << endl;
     for (int i = 0 ; i < unitsList.size() ; i++){
         if (lefCheckBoxes.at(i)->isChecked()){
-            dagUnits->append(unitsList.at(i));
-            int *dagtemp = new int(lefLineEdits.at(i)->text().toInt());
-            dagStyrker->append(dagtemp);
+            dagUnits.append(unitsList.at(i));
+            QString *temp = new QString(lefLineEdits.at(i)->text());
+            dagStyrker.append(temp);
+            cout << "laver dag unit" << dagUnits.size() << endl;
         }
         if (rigCheckBoxes.at(i)->isChecked()){
-            aftenUnits->append(unitsList.at(i));
-            int *aftentemp = new int(rigLineEdits.at(i)->text().toInt());
-            aftenStyrker->append(aftentemp);
+            aftenUnits.append(unitsList.at(i));
+            QString *rigtemp = new QString(lefLineEdits.at(i)->text());
+            aftenStyrker.append(rigtemp);
         }
     }
 
@@ -367,4 +427,33 @@ void AdfaerdsStyring::changeSave() {
 
 void AdfaerdsStyring::setFirstTime(bool set) {
     firstTime = set;
+}
+
+void AdfaerdsStyring::startWork() {
+
+    /*if(workCount > 0) {
+        worker->stopWork();
+        workCount = 0;
+    }*/
+
+    workerThread = new QThread();
+    worker = new Worker;
+    cout << "tester" << endl;
+    worker->setUnitList(unitsList);
+    cout << "tester ::" << dagUnits.size() << aftenUnits.size() << endl;
+    worker->setDagAftenUnit(dagUnits,aftenUnits);
+    cout << "tester" << dagTider.size() << aftenTider.size() << endl;
+    worker->setTider(dagTider,aftenTider);
+    cout << "tester" << endl;
+    worker->setStyrker(dagStyrker,aftenStyrker);
+    cout << "tester" << endl;
+
+
+    worker->moveToThread(workerThread);
+    QThread::connect(workerThread, SIGNAL(started()), worker, SLOT(doWork()));
+    connect(worker, SIGNAL(finished()), workerThread, SLOT(quit()));
+    connect(worker, SIGNAL(finished()), worker, SLOT(deleteLater()));
+    connect(workerThread, SIGNAL(finished()), workerThread, SLOT(deleteLater()));;
+    workerThread->start();
+    workCount++;
 }

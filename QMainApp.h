@@ -19,6 +19,8 @@ public:
     void addUserToList(User *newUser);
     LoginDialog* getLogin();
     void setUserList(QList<User *> list);
+    void setUnitList(QList<Unit *> list);
+    QList<Unit *> getUnitList();
     void removeUser(int userIndex);
     void lockUser(int userIndex);
     void unLockUser (int userIndex);
@@ -29,7 +31,9 @@ private:
     LoginDialog *loginDialog = new LoginDialog;
     MainPage *mainPage;
     QList<User *> userList;
+    QList<Unit *> unitList;
     User *currentUser;
+
 
 };
 

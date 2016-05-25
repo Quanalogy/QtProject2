@@ -9,6 +9,7 @@
 #include "MenuWidget.h"
 #include "../Unit.h"
 #include "../Clock.h"
+#include "../Worker.h"
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 
@@ -23,6 +24,8 @@ public:
     void removeBox();
     void changeSave();
     void setFirstTime(bool set);
+    void startWork();
+    void stopWork();
 
 private:
     QString name = "Adfærdsstyring";
@@ -51,14 +54,14 @@ private:
     QLineEdit *natTilMin;
 
 
-    int *idagFraTime;
-    int *idagFraMin;
-    int *idagTilTime;
-    int *idagTilMin;
-    int *inatFraTime;
-    int *inatFraMin;
-    int *inatTilTime;
-    int *inatTilMin;
+    QString idagFraTime;
+    QString idagFraMin;
+    QString idagTilTime;
+    QString idagTilMin;
+    QString inatFraTime;
+    QString inatFraMin;
+    QString inatTilTime;
+    QString inatTilMin;
 
     QList<Unit *> unitsList;
     QList<QCheckBox *> lefCheckBoxes;
@@ -66,14 +69,14 @@ private:
     QList<QLineEdit *> lefLineEdits;
     QList<QLineEdit *> rigLineEdits;
 
-    QList<int *> *dagTider;
-    QList<int *> *aftenTider;
+    QList<QString> dagTider;
+    QList<QString> aftenTider;
 
-    QList<Unit *> *dagUnits;
-    QList<Unit *> *aftenUnits;
+    QList<Unit *> dagUnits;
+    QList<Unit *> aftenUnits;
 
-    QList<int *> *dagStyrker;
-    QList<int *> *aftenStyrker;
+    QList<QString *> dagStyrker;
+    QList<QString *> aftenStyrker;
 
     QLabel *intervalNat;
     QLabel *intervalDag;
@@ -84,6 +87,11 @@ private:
     QWidget *horizontalLineWidget;
 
     bool firstTime;
+
+    QThread *workerThread;
+    Worker *worker;
+
+    int workCount;
 
 public slots:
     void saveIntervals();

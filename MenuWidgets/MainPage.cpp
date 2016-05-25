@@ -32,11 +32,10 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
             << adfaerdsPage << enhedsHaandteringPage;
 
     //Sætter det til første gang programet opstartes
-
-    firstTime = true;
+    /*firstTime = true;
     addPage->setFirstTime(true);
     changeProfilePage->setFirstTime(true);
-    adfaerdsPage->setFirstTime(true);
+    adfaerdsPage->setFirstTime(true);*/
 
     //Connect the buttons with the
     connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
@@ -62,6 +61,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     unitsList.append(new Unit(1337, "Stuen"));
     unitsList.append(new Unit(666, "Toilet"));
     unitsList.append(new Unit(101010, "Sovevaerelse"));
+    static_cast<QMainApp *>qApp->setUnitList(unitsList);
 }
 
 void MainPage::ChangeView() {
@@ -73,21 +73,21 @@ void MainPage::ChangeView() {
     QString adduser = "Tilføj bruger";
     QString aktivi = "Aktivitetssimulering";
     if (userMenuPages.at(index)->getName() == enhed){
-
+        unitsList = static_cast<QMainApp *>qApp->getUnitList();
         enhedsHaandteringPage->setUnitsList(unitsList);
         enhedsHaandteringPage->removeBox();
         enhedsHaandteringPage->addBox();
 
     }
     if (userMenuPages.at(index)->getName() == lys){
-
+        unitsList = static_cast<QMainApp *>qApp->getUnitList();
         lysstyringPage->setUnitsList(unitsList);
         lysstyringPage->removeBox();
 
 
     }
     if (userMenuPages.at(index)->getName() == adfaerd){
-
+        unitsList = static_cast<QMainApp *>qApp->getUnitList();
         adfaerdsPage->setUnitsList(unitsList);
         adfaerdsPage->removeBox();
         adfaerdsPage->addBox();
@@ -110,6 +110,8 @@ void MainPage::ChangeView() {
         addPage->setInfo();
     }
     if(userMenuPages.at(index)->getName() == aktivi){
+        unitsList = static_cast<QMainApp *>qApp->getUnitList();
+        aktivitetssimuleringPage->setUnitList(unitsList);
         aktivitetssimuleringPage->setInfo();
     }
     userMenuPages.at(index)->show();
@@ -249,9 +251,11 @@ void MainPage::changeAdfaerdsStyringSave()  {
             addPage->setFirstTime(false);
             changeProfilePage->setFirstTime(false);
             firstTime = false;
+            adfaerdsPage->startWork();
             this->show();
             userMenuPages.at(index)->hide();
         } else {
+            adfaerdsPage->startWork();
             this->show();
             userMenuPages.at(index)->hide();
         }
@@ -326,6 +330,7 @@ void MainPage::changeUnitsSave()  {
         }
         enhedsHaandteringPage->removeIfChecked();
         unitsList = enhedsHaandteringPage->getUnitsList();
+        static_cast<QMainApp *>qApp->setUnitList(unitsList);
         if (enhedsHaandteringPage->somethingWritten() || enhedsHaandteringPage->isChecked()){
             if (enhedsHaandteringPage->somethingWritten() && enhedsHaandteringPage->isChecked()){
                 QMessageBox errorMessage;
@@ -487,4 +492,8 @@ void MainPage::forsteGangsVisning() {
     index = 0;
     userMenuPages.at(0)->show();
 
+}
+
+void MainPage::setUnitList(QList<Unit *> list) {
+    unitsList = list;
 }

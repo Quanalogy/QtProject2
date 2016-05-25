@@ -22,14 +22,14 @@ Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent)
     QLineEdit *timer = new QLineEdit;
 
     //check boxes
-    QCheckBox *autAct = new QCheckBox("Automatisk aktivitetssimulering",this);
+    autAct = new QCheckBox("Automatisk aktivitetssimulering",this);
 
     //push buttons
     on = new QPushButton("Tænd aktivitetssmulering",this);
     off = new QPushButton("Sluk aktivitetssimulering",this);
     QPushButton *save = new QPushButton("Gem",this);
     QPushButton *cancel = new QPushButton("Annuller",this);
-    onOff = new QPushButton("Tændt/slukket",this);
+    onOff = new QPushButton("Slukket",this);
     onOff->setCheckable(true);
 
     //Set color of button
@@ -54,7 +54,11 @@ Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent)
 
     connect(save, &QPushButton::clicked,this, &Aktivitetssimulering::onSaveClick);
     connect(cancel, &QPushButton::clicked, this, &Aktivitetssimulering::onCancelClick);
-    connect(onOff, &QPushButton::clicked, this, &Aktivitetssimulering::toggleButtonColor);
+    //connect(onOff, &QPushButton::clicked, this, &Aktivitetssimulering::toggleButtonColor);
+    connect(on, &QPushButton::clicked, this, &Aktivitetssimulering::toggleButtonOn);
+    connect(off, &QPushButton::clicked, this, &Aktivitetssimulering::toggleButtonOff);
+    connect(autAct, &QCheckBox::clicked, this, &Aktivitetssimulering::setAuto);
+    onOff->setDisabled(true);
 
     //bund box
     bottom->addWidget(cancel);
@@ -71,15 +75,35 @@ QString Aktivitetssimulering::getName() {
     return name;
 }
 
-void Aktivitetssimulering::toggleButtonColor() {
-    if(onOff->isChecked()){
+void Aktivitetssimulering::toggleButtonOn() {
         QPalette *green = new QPalette();
         green->setColor(QPalette::ButtonText, Qt::darkGreen);
+        onOff->setText("Tændt");
         onOff->setPalette(*green);
-    } else {
+        off->setChecked(false);
+        for (int i = 0 ; i < unitList.size() ; i++){
+            unitList.at(i)->setAS(true);
+        }
+}
+
+void Aktivitetssimulering::toggleButtonOff() {
         QPalette *red = new QPalette();
+        onOff->setText("Slukket");
         red->setColor(QPalette::ButtonText, Qt::red);
         onOff->setPalette(*red);
+        on->setChecked(false);
+        for (int i = 0 ; i < unitList.size() ; i++){
+            unitList.at(i)->setAS(false);
+        }
+}
+
+void Aktivitetssimulering::setAuto(){
+    if(autAct->isChecked()){
+        on->setDisabled(true);
+        off->setDisabled(true);
+    } else {
+        on->setDisabled(false);
+        off->setDisabled(false);
     }
 }
 
@@ -122,4 +146,8 @@ void Aktivitetssimulering::setInfo(){
     mainLayout->addWidget(horizontalLineWidget);
     mainLayout->addLayout(top);
     mainLayout->addLayout(bottom);
+}
+
+void Aktivitetssimulering::setUnitList(QList<Unit *> list) {
+    unitList = list;
 }

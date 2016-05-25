@@ -28,6 +28,7 @@ public:
     MainPage(QWidget *parent = 0);
     QString getName(){return name;};
     void setupPages(User *currentUser_);
+    void setUnitList(QList<Unit *> list);
 
 public slots:
     void ChangeView();                              // a slot to handle when a button on the main window
@@ -82,6 +83,7 @@ private:
     void forsteGangsVisning();
 
     bool firstTime;
+
 };
 
 
