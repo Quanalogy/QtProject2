@@ -8,9 +8,9 @@ QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
     adminUser->setRights(true, true, true, true, true, true);
     addUserToList(adminUser);
 
-    User *noviceUser = new User("Abe", "Kat",false);
+    /*User *noviceUser = new User("Abe", "Kat",false);
     noviceUser->setRights(true, false, false, false, false, true);
-    addUserToList(noviceUser);
+    addUserToList(noviceUser);*/
 /*
  *
  *

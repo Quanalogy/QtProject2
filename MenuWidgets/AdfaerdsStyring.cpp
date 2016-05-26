@@ -60,6 +60,15 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     natTilTime->setFixedWidth(width()/16);
     natTilMin->setFixedWidth(width()/16);
 
+    dagFraTime->setMaxLength(2);
+    dagFraMin->setMaxLength(2);
+    dagTilTime->setMaxLength(2);
+    dagTilMin->setMaxLength(2);
+    natFraTime->setMaxLength(2);
+    natFraMin->setMaxLength(2);
+    natTilTime->setMaxLength(2);
+    natTilMin->setMaxLength(2);
+
     //Time og minut validators
     QValidator *timeValidator = new QIntValidator(0,23,this);
     QValidator *minValidator = new QIntValidator(0,59,this);
@@ -476,6 +485,17 @@ void AdfaerdsStyring::ifDagModified() {
         if (dagTilMin != natFraMin){
             natFraMin->setText(dagTilMin->text());
         }
+    QValidator *timeValidator = new QIntValidator(0,23,this);
+    QValidator *minValidator = new QIntValidator(0,59,this);
+
+    dagFraTime->setValidator(timeValidator);
+    dagFraMin->setValidator(minValidator);
+    dagTilTime->setValidator(timeValidator);
+    dagTilMin->setValidator(minValidator);
+    natFraTime->setValidator(timeValidator);
+    natFraMin->setValidator(minValidator);
+    natTilTime->setValidator(timeValidator);
+    natTilMin->setValidator(minValidator);
 }
 
 void AdfaerdsStyring::ifNatModified() {
@@ -491,4 +511,15 @@ void AdfaerdsStyring::ifNatModified() {
     if (natTilMin != dagFraMin){
         dagFraMin->setText(natTilMin->text());
     }
+    QValidator *timeValidator = new QIntValidator(0,23,this);
+    QValidator *minValidator = new QIntValidator(0,59,this);
+
+    dagFraTime->setValidator(timeValidator);
+    dagFraMin->setValidator(minValidator);
+    dagTilTime->setValidator(timeValidator);
+    dagTilMin->setValidator(minValidator);
+    natFraTime->setValidator(timeValidator);
+    natFraMin->setValidator(minValidator);
+    natTilTime->setValidator(timeValidator);
+    natTilMin->setValidator(minValidator);
 }
