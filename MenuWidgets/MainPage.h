@@ -86,6 +86,8 @@ private:
 
     bool firstTime;
 
+    bool running;
+
 };
 
 

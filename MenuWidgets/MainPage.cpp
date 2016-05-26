@@ -36,6 +36,9 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     changeProfilePage->setFirstTime(true);
     adfaerdsPage->setFirstTime(true);
 
+    //sætter running til false
+    running = false;
+
     //Connect the buttons with the
     connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
     connect(aktivitetssimuleringPage,&Aktivitetssimulering::onSaveClick,this,&MainPage::handleSaveClick);
@@ -256,10 +259,12 @@ void MainPage::changeAdfaerdsStyringSave()  {
             adfaerdsPage->setFirstTime(false);
             firstTime = false;
             adfaerdsPage->startWork();
+            running = true;
             this->show();
             userMenuPages.at(index)->hide();
         } else {
             adfaerdsPage->startWork();
+            running = true;
             this->show();
             userMenuPages.at(index)->hide();
         }
@@ -362,7 +367,9 @@ void MainPage::changeUnitsSave()  {
                 errorMessage.exec();
             }
         }
-        adfaerdsPage->updateWorker(unitsList);
+        if (running) {
+            adfaerdsPage->updateWorker(unitsList);
+        }
         this->show();
         userMenuPages.at(index)->hide();
     }

@@ -99,6 +99,8 @@ private:
     QHBoxLayout *rigLayout;
     QHBoxLayout *buttom;
 
+    int fixedWidth;
+
 
 public slots:
     void saveIntervals();;

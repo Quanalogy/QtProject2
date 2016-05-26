@@ -111,6 +111,10 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     natProfil->setAlignment(Qt::AlignTop);
     intervalNat->setAlignment(Qt::AlignTop);
 
+    //set fixed width
+
+    fixedWidth = width()/8;
+
     // Set af horizontal tids bokse layouts
 
     timeDagFraHorizontalLayout->addWidget(timeDagFra);
@@ -311,6 +315,7 @@ void AdfaerdsStyring::addBox(){
                         rigBox->setChecked(false);
                     }
                     rigStyrke->setText(aftenStyrker.at(i));
+
                 }
             }
         } else {
@@ -342,8 +347,8 @@ void AdfaerdsStyring::addBox(){
         rigLayout = new QHBoxLayout();
         lefStyrke->setPlaceholderText("lysstyrke %");
         rigStyrke->setPlaceholderText("lysstyrke %");
-        lefStyrke->setFixedWidth(width()/8);
-        rigStyrke->setFixedWidth(width()/8);
+        lefStyrke->setFixedWidth(fixedWidth);
+        rigStyrke->setFixedWidth(fixedWidth);
         lefCheckBoxes.append(lefBox);
         rigCheckBoxes.append(rigBox);
         lefLineEdits.append(lefStyrke);
