@@ -24,6 +24,7 @@ public:
     void addBox();
     void removeBox();
     void checkIfCheckedAddVolume();
+    void update();
 
 private:
     QString name = "Lysstyring";

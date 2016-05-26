@@ -62,7 +62,7 @@ void Lysstyring::addBox(){
         QLineEdit *line = new QLineEdit("", this);
 
         //Krydser boksen af hvis ikke den er 70 som std. skal laves om når der kommer et ur.
-        if (unitsList.at(pos)->getToggle()){
+        if (unitsList.at(pos)->getVolume() > 0){
             box->setChecked(true);
         } else {
             box->setChecked(false);
@@ -135,11 +135,26 @@ void Lysstyring::removeBox() {
 
 void Lysstyring::checkIfCheckedAddVolume() {
     for (int i = 0 ; i < unitsList.size() ; i++){
-        unitsList.at(i)->setVolume(editLines.at(i)->text().toInt());
         if (checkBoxes.at(i)->isChecked()){
-            unitsList.at(i)->setToggle(true);
+            unitsList.at(i)->setVolume(editLines.at(i)->text().toInt());
         } else {
-            unitsList.at(i)->setToggle(false);
+            unitsList.at(i)->setVolume(0);
         }
+    }
+    static_cast<QMainApp *>qApp->setUnitList(unitsList);
+}
+
+void Lysstyring::update(){
+    cout << "updater" << endl;
+    unitsList = static_cast<QMainApp *>qApp->getUnitList();
+    for (int i = 0 ; i < unitsList.size() ; i++){
+        if (unitsList.at(i)->getVolume() > 0){
+            checkBoxes.at(i)->setChecked(true);
+            editLines.at(i)->setText(QString::number(unitsList.at(i)->getVolume()));
+        } else {
+            checkBoxes.at(i)->setChecked(false);
+            editLines.at(i)->setText("0");
+        }
+
     }
 }

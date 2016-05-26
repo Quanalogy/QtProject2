@@ -117,57 +117,31 @@ bool Worker::controlAdfaerd() {
     QTime temptime = QTime::currentTime();
     QString tempStime = temptime.toString(); //.left(temptime.toString().size() - 3);
 
-    if (tempStime == dagFratid && !isItNat){
+    if (tempStime == dagFratid ){
         for (int i = 0 ; i < dagList.size() ; i++){
             for(int j = 0 ; j < unitList.size() ; j++){
                     if (dagList.at(i)->getId() == unitList.at(j)->getId() ) {
                         int temp = dagStyrker.at(i).toInt();
                         unitList.at(j)->setVolume(temp);
-                        unitList.at(j)->setToggle(true);
                     }
 
             }
         }
-        isItDay = true;
         static_cast<QMainApp *>qApp->setUnitList(unitList);
+        static_cast<QMainApp *>qApp->update();
     }
-    if (tempStime == dagTiltid && !isItNat){
-        for (int i = 0 ; i < dagList.size() ; i++){
-            for(int j = 0 ; j < unitList.size() ; j++){
-                if (dagList.at(i)->getId() == unitList.at(j)->getId()){
-                    unitList.at(j)->setVolume(70);
-                    unitList.at(j)->setToggle(false);
-                }
-            }
-        }
-        isItDay = false;
-        static_cast<QMainApp *>qApp->setUnitList(unitList);
-    }
-    if (tempStime == natFratid && !isItDay){
+    if (tempStime == natFratid){
         for (int i = 0 ; i < aftenList.size() ; i++){
             for(int j = 0 ; j < unitList.size() ; j++){
                 if (aftenList.at(i)->getId() == unitList.at(j)->getId()){
                     int temp = aftenStyrker.at(i).toInt();
                     unitList.at(j)->setVolume(temp);
-                    unitList.at(j)->setToggle(true);
 
                 }
             }
         }
-        isItNat = true;
         static_cast<QMainApp *>qApp->setUnitList(unitList);
-    }
-    if (tempStime == natTiltid && !isItDay){
-        for (int i = 0 ; i < aftenList.size() ; i++){
-            for(int j = 0 ; j < unitList.size() ; j++){
-                if (aftenList.at(i)->getId() == unitList.at(j)->getId()){
-                    unitList.at(j)->setVolume(70);
-                    unitList.at(j)->setToggle(false);
-                }
-            }
-        }
-        isItNat = false;
-        static_cast<QMainApp *>qApp->setUnitList(unitList);
+        static_cast<QMainApp *>qApp->update();
     }
 }
 

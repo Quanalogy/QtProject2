@@ -43,6 +43,8 @@ public slots:
     void logOut();
     void changeUnitsSave();
     void changeLightVolumeSave();
+    void updateLysSettings();
+    void notFirstTime();
 
 private:
     QList<Unit *> unitsList;

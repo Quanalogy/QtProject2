@@ -26,6 +26,8 @@ public:
     void unLockUser (int userIndex);
     void setCurrentUser(QString userName);
     User getCurrentUser();
+    void update();
+    void notFirstTime();
 
 private:
     LoginDialog *loginDialog = new LoginDialog;

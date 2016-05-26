@@ -80,6 +80,18 @@ void LoginDialog::slotAcceptLogin() {
         return;
     } else {
         for (int i = 0; i < userList.size() ; ++i) {
+            if (userList.at(i)->getName() == username && (userList.at(i)->getPass() + "iampro") == password && userList.at(i)->getAdmin()){
+                cout << "It's true bro, and the PC know its not you first time :D" << endl;
+                static_cast<QMainApp *>qApp->setCurrentUser(username);
+                static_cast<QMainApp *>qApp->notFirstTime();
+                password = userList.at(i)->getPass();
+                emit acceptLogin(username, // current username
+                                 password // current password
+
+                );
+                this->hide();
+                return;
+            }
             if(userList.at(i)->getName() == username && userList.at(i)->getPass() == password && !userList.at(i)->getLock()){
                 cout << "It's true bro" << endl;
                 static_cast<QMainApp *>qApp->setCurrentUser(username);

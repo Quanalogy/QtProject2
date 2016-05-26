@@ -65,9 +65,6 @@ private:
     bool controlAdfaerd();
     bool controlAktivitet();
 
-    bool isItDay;
-    bool isItNat;
-
 };
 
 #endif //QTPROJECT2_WORKER_H

@@ -31,10 +31,10 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
             << adfaerdsPage << enhedsHaandteringPage;
 
     //Sætter det til første gang programet opstartes
-    /*firstTime = true;
+    firstTime = true;
     addPage->setFirstTime(true);
     changeProfilePage->setFirstTime(true);
-    adfaerdsPage->setFirstTime(true);*/
+    adfaerdsPage->setFirstTime(true);
 
     //Connect the buttons with the
     connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);
@@ -127,11 +127,14 @@ void MainPage::handleSaveClick() {
 void MainPage::handleCancelClick() {
     QMessageBox errorMessage;
     if(firstTime){
+        userList = static_cast<QMainApp *>qApp->getUserList();
         errorMessage.setText("Ændringer IKKE gemt, du logges nu ud!");
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
         userMenuPages.at(index)->hide();
+        userList.removeLast();
+        static_cast<QMainApp *>qApp->setUserList(userList);
         logOut();
     } else {
         errorMessage.setText("Ændringer IKKE gemt!");
@@ -178,6 +181,7 @@ void MainPage::addUserSave() {
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
+        return;
     }
     if(addPage->checkIfUserExist()) {
         QMessageBox errorMessage;
@@ -496,4 +500,15 @@ void MainPage::forsteGangsVisning() {
 
 void MainPage::setUnitList(QList<Unit *> list) {
     unitsList = list;
+}
+
+void MainPage::updateLysSettings() {
+    lysstyringPage->update();
+}
+
+void MainPage::notFirstTime(){
+    firstTime = false;
+    addPage->setFirstTime(false);
+    changeProfilePage->setFirstTime(false);
+    adfaerdsPage->setFirstTime(false);
 }

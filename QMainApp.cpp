@@ -85,3 +85,11 @@ void QMainApp::setUnitList(QList<Unit *> list) {
 QList<Unit *> QMainApp::getUnitList() {
     return unitList;
 }
+
+void QMainApp::update(){
+    mainPage->updateLysSettings();
+}
+
+void QMainApp::notFirstTime(){
+    mainPage->notFirstTime();
+}
