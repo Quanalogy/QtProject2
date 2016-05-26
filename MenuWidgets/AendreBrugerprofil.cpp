@@ -256,8 +256,10 @@ void AendreBrugerprofil::removeLayouts(){
         changePassLabels.clear();
         userAccessLabels.clear();
         passwords.clear();
-        addLayouts();
 
+        mainLayout->removeItem(topLayout);
+        mainLayout->removeWidget(horizontalLineWidget);
+        addLayouts();
     }
     else {
         return;

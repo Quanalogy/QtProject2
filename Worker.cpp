@@ -118,11 +118,11 @@ bool Worker::controlAdfaerd() {
     QString tempStime = temptime.toString(); //.left(temptime.toString().size() - 3);
 
     if (tempStime == dagFratid ){
-        for (int i = 0 ; i < dagList.size() ; i++){
-            for(int j = 0 ; j < unitList.size() ; j++){
-                    if (dagList.at(i)->getId() == unitList.at(j)->getId() ) {
-                        int temp = dagStyrker.at(i).toInt();
-                        unitList.at(j)->setVolume(temp);
+        for (int i = 0 ; i < unitList.size() ; i++){
+            for(int j = 0 ; j < dagList.size() ; j++){
+                    if (unitList.at(i)->getId() == dagList.at(j)->getId() ) {
+                        int temp = dagStyrker.at(j).toInt();
+                        unitList.at(i)->setVolume(temp);
                     }
 
             }
@@ -131,11 +131,11 @@ bool Worker::controlAdfaerd() {
         static_cast<QMainApp *>qApp->update();
     }
     if (tempStime == natFratid){
-        for (int i = 0 ; i < aftenList.size() ; i++){
-            for(int j = 0 ; j < unitList.size() ; j++){
-                if (aftenList.at(i)->getId() == unitList.at(j)->getId()){
-                    int temp = aftenStyrker.at(i).toInt();
-                    unitList.at(j)->setVolume(temp);
+        for (int i = 0 ; i < unitList.size() ; i++){
+            for(int j = 0 ; j < aftenList.size() ; j++){
+                if (unitList.at(i)->getId() == aftenList.at(j)->getId()){
+                    int temp = aftenStyrker.at(j).toInt();
+                    unitList.at(i)->setVolume(temp);
 
                 }
             }

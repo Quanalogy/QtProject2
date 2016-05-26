@@ -26,6 +26,7 @@ public:
     void setFirstTime(bool set);
     void startWork();
     void stopWork();
+    void updateWorker(QList<Unit *> list);
 
 private:
     QString name = "Adfærdsstyring";
@@ -34,6 +35,7 @@ private:
 
     QVBoxLayout *lefVertivalLayout;
     QVBoxLayout *rigVerticalLayout;
+
     QHBoxLayout *controlHorizontalLayout;
     QHBoxLayout *timeDagFraHorizontalLayout;
     QHBoxLayout *timeDagTilHorizontalLayout;
@@ -92,6 +94,10 @@ private:
     Worker *worker;
 
     int workCount;
+
+    QHBoxLayout *lefLayout;
+    QHBoxLayout *rigLayout;
+    QHBoxLayout *buttom;
 
 
 public slots:

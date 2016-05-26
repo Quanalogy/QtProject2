@@ -22,6 +22,7 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     timeDagTilHorizontalLayout = new QHBoxLayout;
     timeNatFraHorizontalLayout = new QHBoxLayout;
     timeNatTilHorizontalLayout = new QHBoxLayout;
+    buttom = new QHBoxLayout;
     mainLayout = new QVBoxLayout(this);
 
     //labels
@@ -161,7 +162,6 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
             lefVertivalLayout->addLayout(timeDagTilHorizontalLayout);
         }
     }
-    lefVertivalLayout->addWidget(cancel);
 
     pos=0;
 
@@ -175,7 +175,6 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
         }
 
     }
-    rigVerticalLayout->addWidget(save);
 
 
     connect(dagFraTime,SIGNAL(textEdited(QString)),this,SLOT(ifDagModified()));
@@ -195,6 +194,9 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
 
     lefVertivalLayout->setAlignment(dagProfil,Qt::AlignCenter);
     rigVerticalLayout->setAlignment(natProfil,Qt::AlignCenter);
+
+    buttom->addWidget(cancel);
+    buttom->addWidget(save);
 
     controlHorizontalLayout->addLayout(lefVertivalLayout);
     controlHorizontalLayout->addSpacing(4);
@@ -284,8 +286,6 @@ void AdfaerdsStyring::setUnitsList(QList<Unit *> list) {
 void AdfaerdsStyring::addBox(){
     int pos = lefCheckBoxes.size();
     while (lefCheckBoxes.size() < unitsList.size()  ) {
-        lefVertivalLayout->removeWidget(cancel);
-        rigVerticalLayout->removeWidget(save);
         QCheckBox *lefBox = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
         QCheckBox *rigBox = new QCheckBox(unitsList.at(pos)->getUnitName(), this);
         QLineEdit *lefStyrke = new QLineEdit("", this);
@@ -293,8 +293,37 @@ void AdfaerdsStyring::addBox(){
         QValidator *validator = new QIntValidator(0,100,this);
         rigStyrke->setValidator(validator);
         lefStyrke->setValidator(validator);
-
-
+        if (dagUnits.size() > 0) {
+            for (int i = 0; i < dagUnits.size(); i++) {
+                if (unitsList.at(pos)->getId() == dagUnits.at(i)->getId()) {
+                    cout << dagUnits.at(i)->getVolume() << endl;
+                    if (dagUnits.at(i)->getVolume() > 0) {
+                        lefBox->setChecked(true);
+                    } else {
+                        lefBox->setChecked(false);
+                    }
+                    lefStyrke->setText(dagStyrker.at(i));
+                }
+                if (unitsList.at(pos)->getId() == aftenUnits.at(i)->getId()) {
+                    if (aftenUnits.at(i)->getVolume() > 0) {
+                        rigBox->setChecked(true);
+                    } else {
+                        rigBox->setChecked(false);
+                    }
+                    rigStyrke->setText(aftenStyrker.at(i));
+                }
+            }
+        } else {
+            if (unitsList.at(pos)->getVolume() > 0) {
+                lefBox->setChecked(true);
+                rigBox->setChecked(true);
+            } else {
+                lefBox->setChecked(false);
+                rigBox->setChecked(false);
+            }
+            lefStyrke->setText(QString::number(unitsList.at(pos)->getVolume()));
+            rigStyrke->setText(QString::number(unitsList.at(pos)->getVolume()));
+        }
         // Auto set, virker ikke rigtig.
         /*if(dagUnits->at(pos)->getId() == unitsList.at(pos)->getId() ){
             lefBox->setChecked(true);
@@ -309,8 +338,8 @@ void AdfaerdsStyring::addBox(){
             lefStyrke->setText(newaftenTemp);
         }*/
 
-        QHBoxLayout *lefLayout = new QHBoxLayout();
-        QHBoxLayout *rigLayout = new QHBoxLayout();
+        lefLayout = new QHBoxLayout();
+        rigLayout = new QHBoxLayout();
         lefStyrke->setPlaceholderText("lysstyrke %");
         rigStyrke->setPlaceholderText("lysstyrke %");
         lefStyrke->setFixedWidth(width()/8);
@@ -328,22 +357,20 @@ void AdfaerdsStyring::addBox(){
 
         lefVertivalLayout->addLayout(lefLayout);
         rigVerticalLayout->addLayout(rigLayout);
-        lefVertivalLayout->addWidget(cancel);
-        rigVerticalLayout->addWidget(save);
         pos++;
     }
 
     //Laver TopLayout med brugernavn og ur.
-    if(mainLayout->count() == 3){
-        mainLayout->removeWidget(horizontalLineWidget);
+    if(mainLayout->count() == 4){
         mainLayout->removeItem(topLayout);
+        mainLayout->removeWidget(horizontalLineWidget);
         mainLayout->removeItem(controlHorizontalLayout);
+        mainLayout->removeItem(buttom);
 
         horizontalLineWidget->deleteLater();
         topLayout->deleteLater();
         userName->deleteLater();
         tempClock->deleteLater();
-
 
     }
     topLayout = new QHBoxLayout();
@@ -364,11 +391,14 @@ void AdfaerdsStyring::addBox(){
     horizontalLineWidget->setFixedHeight(3);
     horizontalLineWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     horizontalLineWidget->setStyleSheet(QString("background-color: #c0c0c0;"));
-    topLayout->setAlignment(userName,Qt::AlignLeft);
+    topLayout->setAlignment(userName,Qt::AlignTop);
+    mainLayout->setAlignment(Qt::AlignTop);
+    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
 
     mainLayout->addLayout(topLayout);
     mainLayout->addWidget(horizontalLineWidget);
     mainLayout->addLayout(controlHorizontalLayout);
+    mainLayout->addLayout(buttom);
     if (firstTime){
         save->setText("Næste");
     } else {
@@ -378,23 +408,18 @@ void AdfaerdsStyring::addBox(){
 }
 
 void AdfaerdsStyring::removeBox(){
-    for (int i = 0 ; i < lefCheckBoxes.size() ; i++) {
-        if (!lefCheckBoxes.at(i)->isChecked()){
-            lefLineEdits.at(i)->clear();
-        }
-        if (!rigCheckBoxes.at(i)->isChecked()){
-            rigLineEdits.at(i)->clear();
-        }
-    }
     if (lefCheckBoxes.size() > unitsList.size()) {
         for (int i = 0 ; i < lefCheckBoxes.size() ; i++){
             lefCheckBoxes.at(i)->deleteLater();
             rigCheckBoxes.at(i)->deleteLater();
             lefLineEdits.at(i)->deleteLater();
             rigLineEdits.at(i)->deleteLater();
-            lefVertivalLayout->deleteLater();
-            rigVerticalLayout->deleteLater();
         }
+        /*lefLayout->deleteLater();
+        rigLayout->deleteLater();
+        lefVertivalLayout->deleteLater();
+        rigVerticalLayout->deleteLater();
+        controlHorizontalLayout->deleteLater();*/
         lefCheckBoxes.clear();
         rigCheckBoxes.clear();
         lefLineEdits.clear();
@@ -434,11 +459,17 @@ void AdfaerdsStyring::changeSave() {
             dagUnits.append(unitsList.at(i));
             QString temp = lefLineEdits.at(i)->text();
             dagStyrker.append(temp);
+        } else {
+            dagUnits.append(unitsList.at(i));
+            dagStyrker.append("0");
         }
         if (rigCheckBoxes.at(i)->isChecked()){
             aftenUnits.append(unitsList.at(i));
             QString rigtemp = rigLineEdits.at(i)->text();
             aftenStyrker.append(rigtemp);
+        } else {
+            aftenUnits.append(unitsList.at(i));
+            aftenStyrker.append("0");
         }
     }
 
@@ -522,4 +553,8 @@ void AdfaerdsStyring::ifNatModified() {
     natFraMin->setValidator(minValidator);
     natTilTime->setValidator(timeValidator);
     natTilMin->setValidator(minValidator);
+}
+
+void AdfaerdsStyring::updateWorker(QList<Unit *> list) {
+    worker->setUnitList(list);
 }

@@ -11,6 +11,16 @@ Unit::Unit(int id_, QString unitName_) {
         id = id_;
         unitName = unitName_;
         volume = 70;
+        as = false;
+
+
+        // Call til X.10
+        // Skrives her
+        cout << "X.10 command: id: " << this->getId() << ", AS=false, styrke:" << this->getVolume() <<
+        " : sendes her!!" << endl;
+
+
+
     } else {
         exit(0);
     }
@@ -31,6 +41,8 @@ void Unit::setUnitName(QString name) {
 void Unit::setVolume(int vol) {
     if (volume != vol) {
         volume = vol;
+        // Call til X.10
+        // Skrives her
         cout << "X.10 command: id: " << this->getId() << ", AS=false, styrke:" << this->getVolume() <<
         " : sendes her!!" << endl;
     }
@@ -43,8 +55,12 @@ int Unit::getVolume(){
 void Unit::setAS(bool as_) {
     as = as_;
     if (as_) {
+        // Call til X.10
+        // Skrives her
         cout << "X.10 command: id: " << this->getId() << ", AS=true, styrke:" << this->getVolume() << " : sendes her!!" << endl;
     } else {
+        // Call til X.10
+        // Skrives her
         cout << "X.10 command: id: " << this->getId() << ", AS=false, styrke:" << this->getVolume() << " : sendes her!!" << endl;
     }
 }

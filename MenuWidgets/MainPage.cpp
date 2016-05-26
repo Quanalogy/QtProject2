@@ -90,7 +90,6 @@ void MainPage::ChangeView() {
         adfaerdsPage->setUnitsList(unitsList);
         adfaerdsPage->removeBox();
         adfaerdsPage->addBox();
-
     }
     if (userMenuPages.at(index)->getName() == Aendre){
         User *tempUser = new User(static_cast<QMainApp *>qApp->getCurrentUser());
@@ -240,6 +239,7 @@ void MainPage::changeAdfaerdsStyringSave()  {
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
+        return;
 
     } else {
         adfaerdsPage->saveIntervals();
@@ -275,6 +275,7 @@ void MainPage::changeProfileSave() {
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
+        return;
     } else {
         changeProfilePage->makeChanges();
         saveMessege();
@@ -300,6 +301,7 @@ void MainPage::changeUnitsSave()  {
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
+        return;
     }
     if (enhedsHaandteringPage->checkIfSerieExist() || enhedsHaandteringPage->checkIfNavnExist()) {
         if (enhedsHaandteringPage->checkIfSerieExist() && enhedsHaandteringPage->checkIfNavnExist()) {
@@ -316,6 +318,7 @@ void MainPage::changeUnitsSave()  {
             errorMessage.setStandardButtons(QMessageBox::Ok);
             errorMessage.button(QMessageBox::Ok)->animateClick(3000);
             errorMessage.exec();
+            return;
         }
         if (enhedsHaandteringPage->checkIfNavnExist()) {
             QMessageBox errorMessage;
@@ -323,6 +326,7 @@ void MainPage::changeUnitsSave()  {
             errorMessage.setStandardButtons(QMessageBox::Ok);
             errorMessage.button(QMessageBox::Ok)->animateClick(3000);
             errorMessage.exec();
+            return;
         }
     }
     else {
@@ -358,6 +362,7 @@ void MainPage::changeUnitsSave()  {
                 errorMessage.exec();
             }
         }
+        adfaerdsPage->updateWorker(unitsList);
         this->show();
         userMenuPages.at(index)->hide();
     }

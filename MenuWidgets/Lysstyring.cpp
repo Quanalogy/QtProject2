@@ -145,7 +145,6 @@ void Lysstyring::checkIfCheckedAddVolume() {
 }
 
 void Lysstyring::update(){
-    cout << "updater" << endl;
     unitsList = static_cast<QMainApp *>qApp->getUnitList();
     for (int i = 0 ; i < unitsList.size() ; i++){
         if (unitsList.at(i)->getVolume() > 0){
