@@ -31,10 +31,10 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
             << adfaerdsPage << enhedsHaandteringPage;
 
     //Sætter det til første gang programet opstartes
-    firstTime = true;
+    /*firstTime = true;
     addPage->setFirstTime(true);
     changeProfilePage->setFirstTime(true);
-    adfaerdsPage->setFirstTime(true);
+    adfaerdsPage->setFirstTime(true);*/
 
     //Connect the buttons with the
     connect(changeProfilePage, &AendreBrugerprofil::onSaveClick, this, &MainPage::changeProfileSave);

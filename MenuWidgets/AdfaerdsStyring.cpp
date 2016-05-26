@@ -169,6 +169,16 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     rigVerticalLayout->addWidget(save);
 
 
+    connect(dagFraTime,SIGNAL(textEdited(QString)),this,SLOT(ifDagModified()));
+    connect(dagFraMin,SIGNAL(textEdited(QString)),this,SLOT(ifDagModified()));
+    connect(dagTilTime,SIGNAL(textEdited(QString)),this,SLOT(ifDagModified()));
+    connect(dagTilMin,SIGNAL(textEdited(QString)),this,SLOT(ifDagModified()));
+
+    connect(natFraTime,SIGNAL(textEdited(QString)),this,SLOT(ifNatModified()));
+    connect(natFraMin,SIGNAL(textEdited(QString)),this,SLOT(ifNatModified()));
+    connect(natTilTime,SIGNAL(textEdited(QString)),this,SLOT(ifNatModified()));
+    connect(natTilMin,SIGNAL(textEdited(QString)),this,SLOT(ifNatModified()));
+
     connect(save,&QPushButton::clicked,this,&AdfaerdsStyring::onSaveClick);
     connect(cancel,&QPushButton::clicked,this,&AdfaerdsStyring::onCancelClick);
     connect(save,&QPushButton::clicked,this,&AdfaerdsStyring::saveIntervals);
@@ -451,4 +461,34 @@ void AdfaerdsStyring::startWork() {
     connect(workerThread, SIGNAL(finished()), workerThread, SLOT(deleteLater()));;
     workerThread->start();
     workCount++;
+}
+
+void AdfaerdsStyring::ifDagModified() {
+        if (dagFraTime != natTilTime){
+            natTilTime->setText(dagFraTime->text());
+        }
+        if (dagFraMin !=natTilMin){
+            natTilMin->setText(dagFraMin->text());
+        }
+        if (dagTilTime != natFraTime){
+            natFraTime->setText(dagTilTime->text());
+        }
+        if (dagTilMin != natFraMin){
+            natFraMin->setText(dagTilMin->text());
+        }
+}
+
+void AdfaerdsStyring::ifNatModified() {
+    if (natFraTime != dagTilTime){
+        dagTilTime->setText(natFraTime->text());
+    }
+    if (natFraMin != dagTilMin){
+        dagTilMin->setText(natFraMin->text());
+    }
+    if (natTilTime != dagFraTime){
+        dagFraTime->setText(natTilTime->text());
+    }
+    if (natTilMin != dagFraMin){
+        dagFraMin->setText(natTilMin->text());
+    }
 }

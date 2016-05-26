@@ -93,8 +93,13 @@ private:
 
     int workCount;
 
+
 public slots:
-    void saveIntervals();
+    void saveIntervals();;
+
+private slots:
+    void ifDagModified();
+    void ifNatModified();
 };
 
 
