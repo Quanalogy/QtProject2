@@ -60,10 +60,10 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
     setLayout(mainLayout);
 
     //[[TESTER]] Adder 3 enheder
-    unitsList.append(new Unit(1337, "Stuen"));
+    /*unitsList.append(new Unit(1337, "Stuen"));
     unitsList.append(new Unit(666, "Toilet"));
     unitsList.append(new Unit(101010, "Sovevaerelse"));
-    static_cast<QMainApp *>qApp->setUnitList(unitsList);
+    static_cast<QMainApp *>qApp->setUnitList(unitsList);*/
 }
 
 void MainPage::ChangeView() {
