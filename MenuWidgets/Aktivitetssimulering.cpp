@@ -84,6 +84,16 @@ void Aktivitetssimulering::toggleButtonOn() {
         for (int i = 0 ; i < unitList.size() ; i++){
             unitList.at(i)->setAS(true);
         }
+
+
+
+        // Call til X.10
+        // Skrives her
+        cout << "Kommando til hver enkelt enhed, kan erstattes med:" << endl;
+        cout << "X.10 command: id: 0, AS=true, styrke: x : sendes her!!" << endl;
+        cout << "Kommando for alle enheder" << endl;
+
+
 }
 
 void Aktivitetssimulering::toggleButtonOff() {
@@ -95,6 +105,15 @@ void Aktivitetssimulering::toggleButtonOff() {
         for (int i = 0 ; i < unitList.size() ; i++){
             unitList.at(i)->setAS(false);
         }
+
+
+        // Call til X.10
+        // Skrives her
+        cout << "Kommando til hver enkelt enhed, kan erstattes med:" << endl;
+        cout << "X.10 command: id: 0, AS=false, styrke: x : sendes her!!" << endl;
+        cout << "Kommando for alle enheder" << endl;
+
+
 }
 
 void Aktivitetssimulering::setAuto(){
