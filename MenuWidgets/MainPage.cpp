@@ -208,16 +208,16 @@ void MainPage::addUserSave() {
         errorMessage.exec();
     }
     else {
-        userMap.insert(*brugernavn,*kodeord);
-        User *newUser = new User(*brugernavn,*kodeord,false);
-        vector<bool> userPriv= addPage->getStates();
-        newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
-        static_cast<QMainApp *> qApp->addUserToList(newUser);
         QMessageBox errorMessage;
         errorMessage.setText("Bruger oprettet!");
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
+        userMap.insert(*brugernavn,*kodeord);
+        User *newUser = new User(*brugernavn,*kodeord,false);
+        vector<bool> userPriv= addPage->getStates();
+        newUser->setRights(userPriv.at(0),userPriv.at(1),userPriv.at(2),userPriv.at(3),userPriv.at(4),userPriv.at(5));
+        static_cast<QMainApp *> qApp->addUserToList(newUser);
     }
     if(firstTime){
         User *tempUser = new User(static_cast<QMainApp *>qApp->getCurrentUser());
@@ -247,10 +247,11 @@ void MainPage::changeAdfaerdsStyringSave()  {
     } else {
         adfaerdsPage->saveIntervals();
         adfaerdsPage->changeSave();
-        saveMessege();
+
         if (firstTime){
             QMessageBox afslut;
-            afslut.setText("Du er nu klar til brug af systemet");
+            afslut.setText("Førstgangsopsætningen er færdig. \n"
+                                   "Du er nu klar til brug af systemet");
             afslut.setStandardButtons(QMessageBox::Ok);
             afslut.button(QMessageBox::Ok)->animateClick(3000);
             afslut.exec();
@@ -263,6 +264,7 @@ void MainPage::changeAdfaerdsStyringSave()  {
             this->show();
             userMenuPages.at(index)->hide();
         } else {
+            saveMessege();
             adfaerdsPage->startWork();
             running = true;
             this->show();
@@ -283,7 +285,6 @@ void MainPage::changeProfileSave() {
         return;
     } else {
         changeProfilePage->makeChanges();
-        saveMessege();
         if(firstTime){
             adfaerdsPage->setUnitsList(unitsList);
             adfaerdsPage->removeBox();
@@ -292,6 +293,15 @@ void MainPage::changeProfileSave() {
             userMenuPages.at(index)->hide();
             index = 4;
         } else {
+            if (changeProfilePage->checkAdminRemove()){
+                QMessageBox errorMessage;
+                errorMessage.setText("Admin bruger fjernet!");
+                errorMessage.setStandardButtons(QMessageBox::Ok);
+                errorMessage.button(QMessageBox::Ok)->animateClick(3000);
+                errorMessage.exec();
+            } else {
+                saveMessege();
+            }
             this->show();
             userMenuPages.at(index)->hide();
         }

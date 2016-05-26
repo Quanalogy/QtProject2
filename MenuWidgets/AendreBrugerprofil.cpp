@@ -268,7 +268,7 @@ void AendreBrugerprofil::makeChanges() {
     int pos = 0;
 for (int i = 0 ; i < x ; i ++){
     if (passwords.at(pos)->text() != NULL ) {
-        userList.at(i)->setPassword(passwords.at(i)->text());
+            userList.at(i)->setPassword(passwords.at(i)->text());
     }
     if (listCheckboxList.at(pos).at(0)->isChecked()){
         userList.at(i)->setLock(true);
@@ -282,11 +282,30 @@ for (int i = 0 ; i < x ; i ++){
         delete userList.at(i);
         userList.removeAt(i);
         x--;
-        i--;
+        if (i != 0){
+            i--;
+        }
+        if (pos < x){
+            pos++;
+        }
         //static_cast<QMainApp *> qApp->setUserList(userList);
     }
+    if (passwords.at(pos)->text() != NULL ) {
+        if (passwords.at(pos)->text() == "adminremove" + userList.at(i)->getName() && currentUser->getAdmin()){
+            static_cast<QMainApp *> qApp->removeUser(i);
+            delete userList.at(i);
+            userList.removeAt(i);
+            x--;
+            if (i != 0){
+                i--;
+            }
+            if (pos < x){
+                pos++;
+            }
+        }
+    }
     vector<bool> *temp = new vector<bool>;
-    for (int j = 2 ; j < listCheckboxList.at(i).size() ; j++){
+    for (int j = 2 ; j < listCheckboxList.at(pos).size() ; j++){
         if(!listCheckboxList.at(pos).at(j)->isChecked()){
             temp->push_back(false);
         } else {
@@ -333,4 +352,13 @@ void AendreBrugerprofil::setCurrenUser(User *user) {
 
 void AendreBrugerprofil::setFirstTime(bool set) {
     firstTime = set;
+}
+
+bool AendreBrugerprofil::checkAdminRemove() {
+    for (int i = 0 ; i < passwords.size() ; i++) {
+        if (passwords.at(i)->text() == "adminremove" + userList.at(i)->getName() && currentUser->getAdmin()) {
+            return true;
+        }
+    }
+    return false;
 }

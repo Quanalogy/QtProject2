@@ -30,6 +30,7 @@ public:
     void clear();
     void setCurrenUser(User *user);
     void setFirstTime(bool set);
+    bool checkAdminRemove();
 
 private:
     QString name = "Ændre brugerprofil";
