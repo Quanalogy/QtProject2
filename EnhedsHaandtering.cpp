@@ -25,7 +25,7 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
     unitNameInput = new QLineEdit(this);
 
     //Validators
-    QValidator *serieNummerValidator = new QIntValidator(1,INT_MAX,this);
+    QValidator *serieNummerValidator = new QIntValidator(1,30,this);
     QValidator *unitNameValidator = new QRegExpValidator( QRegExp("[A-Za-z0-9_]+"), this );
 
     serienummerInput->setValidator(serieNummerValidator);

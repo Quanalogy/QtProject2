@@ -3,6 +3,8 @@
 //
 
 #include "QMainApp.h"
+#include "CodeSender.h"
+
 #include "User.h"
 
 QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
@@ -18,7 +20,6 @@ QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
     QObject::connect(loginDialog, SIGNAL (acceptLogin(QString&,QString&)),
                      mainPage,
                      SLOT (slotAcceptUserLogin(QString&,QString&)));
-
 }
 
 QList<User *> QMainApp::getUserList() {
@@ -52,12 +53,7 @@ void QMainApp::removeUser(int userIndex) {
 
 void QMainApp::lockUser(int userIndex) {
     cout << "locked" << endl;
-    if(fuckdig){
-        fuckdig = 0;
-    } else {
-        userList.at(userIndex)->setLock(true);
-    }
-
+    userList.at(userIndex)->setLock(true);
 }
 
 void QMainApp::unLockUser(int userIndex) {

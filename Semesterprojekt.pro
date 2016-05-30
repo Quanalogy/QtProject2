@@ -19,9 +19,8 @@ LIBS += -L/usr/local/lib -lwiringPi
 
 SOURCES += main.cpp \
 	SendOnX10.cpp \
-	User.h \
-	Clock.h \
 	Worker.cpp \
+	CodeSender.cpp \
 	QMainApp.cpp \
 	LoginDialog.cpp\
     MenuWidget.cpp \
@@ -38,6 +37,7 @@ HEADERS  += SendOnX10.h \
 	User.h \
 	Clock.h \
 	Worker.h \
+	CodeSender.h \
 	Globals.h \
 	QMainApp.h \
 	LoginDialog.h \

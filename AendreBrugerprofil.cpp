@@ -124,6 +124,8 @@ void AendreBrugerprofil::addLayouts(){
         userAccessLabels.append(userAccess);
         passwords.append(password);
 
+        connect(passwords.at(pos),SIGNAL(textEdited(const QString &)),this,SLOT(setMaxLenght(const QString &) ));
+
         userLayouts.at(pos)->addWidget(userLabels.at(pos), 0, Qt::AlignCenter);
         userLayouts.at(pos)->addWidget(changePassLabels.at(pos), 0, Qt::AlignCenter);
         userLayouts.at(pos)->addWidget(passwords.at(pos), 0, Qt::AlignTop);
@@ -265,30 +267,34 @@ void AendreBrugerprofil::makeChanges() {
             }
             continue;
 
-        }
-        if (passwords.at(pos)->text() != NULL ) {
-            if (passwords.at(pos)->text() == "adminremove" + userList.at(i)->getName() && currentUser->getAdmin()){
-                static_cast<QMainApp *> qApp->removeUser(i);
-                delete userList.at(i);
-                userList.removeAt(i);
-                x--;
-                i--;
-                pos++;
-                continue;
-            }
-        }
-        vector<bool> *temp = new vector<bool>;
-        for (int j = 2 ; j < listCheckboxList.at(pos).size() ; j++){
-            if(!listCheckboxList.at(pos).at(j)->isChecked()){
-                temp->push_back(false);
-            } else {
-                temp->push_back(true);
-            }
-        }
-        userList.at(i)->setRights(temp->at(0),temp->at(1),temp->at(2),temp->at(3),temp->at(4),temp->at(5));
-        static_cast<QMainApp *> qApp->setUserList(userList);
-        pos++;
     }
+    if (passwords.at(pos)->text() != NULL ) {
+        if (passwords.at(pos)->text() == "adminremove" + userList.at(i)->getName() && currentUser->getAdmin()){
+
+            delete userList.at(i);
+            userList.removeAt(i);
+            i = i - 1;
+            pos ++;
+            static_cast<QMainApp *> qApp->setUserList(userList);
+            slettet = slettet + 1;
+            if (pos > x - slettet){
+                return;
+            }
+            continue;
+        }
+    }
+    vector<bool> *temp = new vector<bool>;
+    for (int j = 2 ; j < listCheckboxList.at(pos).size() ; j++){
+        if(!listCheckboxList.at(pos).at(j)->isChecked()){
+            temp->push_back(false);
+        } else {
+            temp->push_back(true);
+        }
+    }
+    userList.at(i)->setRights(temp->at(0),temp->at(1),temp->at(2),temp->at(3),temp->at(4),temp->at(5));
+    static_cast<QMainApp *> qApp->setUserList(userList);
+    pos++;
+}
 }
 
 
@@ -331,4 +337,18 @@ bool AendreBrugerprofil::checkAdminRemove() {
         }
     }
     return false;
+}
+
+void AendreBrugerprofil::setMaxLenght(const QString &text){
+
+    QString temp = *(QString*)&text;
+    if (text.startsWith("admin")){
+        for (int i = 0 ; i < passwords.size() ; i++){
+            passwords.at(i)->setMaxLength(30);
+        }
+    } else {
+        for (int i = 0 ; i < passwords.size() ; i++){
+            passwords.at(i)->setMaxLength(8);
+        }
+    }
 }
