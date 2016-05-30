@@ -17,7 +17,13 @@ INCLUDEPATH    += /usr/local/include
 # To link the wiringPi library when making the executable
 LIBS += -L/usr/local/lib -lwiringPi
 
-SOURCES += main.cpp\
+SOURCES += main.cpp \
+	SendOnX10.cpp \
+	User.h \
+	Clock.h \
+	Worker.cpp \
+	QMainApp.cpp \
+	LoginDialog.cpp\
     MenuWidgets/MenuWidget.cpp \
     MenuWidgets/AddUser.cpp \
     MenuWidgets/AdfaerdsStyring.cpp \
@@ -28,7 +34,14 @@ SOURCES += main.cpp\
     MenuWidgets/MainPage.cpp \
 
 
-HEADERS  += MenuWidgets/MenuWidget.h \
+HEADERS  += SendOnX10.h \
+	User.h \
+	Clock.h \
+	Worker.h \
+	Globals.h \
+	QMainApp.h \
+	LoginDialog.h \
+	MenuWidgets/MenuWidget.h \
     MenuWidgets/AddUser.h \
     MenuWidgets/AdfaerdsStyring.h \
     MenuWidgets/AendreBrugerprofil.h \
@@ -36,3 +49,4 @@ HEADERS  += MenuWidgets/MenuWidget.h \
     MenuWidgets/EnhedsHaandtering.h \
     MenuWidgets/Lysstyring.h \
     MenuWidgets/MainPage.h \
+	MenuWidgets/portablesleep.h \
