@@ -3,7 +3,6 @@
 //
 
 #include "QMainApp.h"
-#include "CodeSender.h"
 
 QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
     User *adminUser = new User((QString)"a", (QString) "p",true);

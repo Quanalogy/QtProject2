@@ -54,6 +54,7 @@ CSender::CSender(QString rightCode, QString tryCode){
     for (int m = 0 ; m < 130 ; m++){
         cout << completeCode[m];
     }
+    sendToDE2();
 }
 void CSender::sendToDE2(){
     cout << endl;
@@ -68,6 +69,5 @@ void CSender::sendToDE2(){
         }
         //delayMicroseconds(15);
     }
-
 }
 
