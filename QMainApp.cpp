@@ -3,7 +3,6 @@
 //
 
 #include "QMainApp.h"
-#include "CodeSender.h"
 
 #include "User.h"
 

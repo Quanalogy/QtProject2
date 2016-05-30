@@ -327,19 +327,6 @@ void AdfaerdsStyring::addBox(){
             lefStyrke->setText(QString::number(unitsList.at(pos)->getVolume()));
             rigStyrke->setText(QString::number(unitsList.at(pos)->getVolume()));
         }
-        // Auto set, virker ikke rigtig.
-        /*if(dagUnits->at(pos)->getId() == unitsList.at(pos)->getId() ){
-            lefBox->setChecked(true);
-            int *temp = dagStyrker->at(pos);
-            QString newdagTemp = QString::number(*temp);
-            lefStyrke->setText(newdagTemp);
-        }
-        if(aftenUnits->at(pos)->getId() == unitsList.at(pos)->getId() ){
-            lefBox->setChecked(true);
-            int *temp = aftenStyrker->at(pos);
-            QString newaftenTemp = QString::number(*temp);
-            lefStyrke->setText(newaftenTemp);
-        }*/
 
         lefLayout = new QHBoxLayout();
         rigLayout = new QHBoxLayout();
@@ -418,11 +405,7 @@ void AdfaerdsStyring::removeBox(){
             lefLineEdits.at(i)->deleteLater();
             rigLineEdits.at(i)->deleteLater();
         }
-        /*lefLayout->deleteLater();
-        rigLayout->deleteLater();
-        lefVertivalLayout->deleteLater();
-        rigVerticalLayout->deleteLater();
-        controlHorizontalLayout->deleteLater();*/
+
         lefCheckBoxes.clear();
         rigCheckBoxes.clear();
         lefLineEdits.clear();

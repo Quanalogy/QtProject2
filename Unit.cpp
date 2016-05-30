@@ -7,23 +7,18 @@
 
 
 Unit::Unit(int id_, QString unitName_) {
-    if(id_ !=NULL && unitName_ != NULL){
-        id = id_;
-        unitName = unitName_;
-        volume = 70;
-        as = false;
+    id = id_;
+    unitName = unitName_;
+    volume = 70;
+    as = false;
 
+    sendOnX10.SendCommunication(id, as, volume);
 
-        // Call til X.10
-        // Skrives her
-        cout << "X.10 command: id: " << this->getId() << ", AS=false, styrke:" << this->getVolume() <<
-        " : sendes her!!" << endl;
+    // Call til X.10
+    // Skrives her
+    cout << "X.10 command: id: " << this->getId() << ", AS=false, styrke:" << this->getVolume() <<
+    " : sendes her!!" << endl;
 
-
-
-    } else {
-        exit(0);
-    }
 }
 
 QString Unit::getUnitName() {

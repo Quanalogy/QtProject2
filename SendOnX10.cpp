@@ -16,15 +16,16 @@ int x10Communication[30] = {0};
 void writeX10Communication();
 
 SendOnX10::SendOnX10() {
-    printf ("Raspberry Pi wiringPi test program\n") ;
-/*    if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
+/*    printf ("Raspberry Pi wiringPi test program\n") ;
+    if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
         exit (1) ;
     }
-    wiringPiISR(24,INT_EDGE_BOTH,&writeX10Communication); //setup interrupt on pin 24 GPIO wise
     pinMode(18,PWM_OUTPUT);                                // set pwmoutput
+    wiringPiISR(24,INT_EDGE_BOTH,&writeX10Communication); //setup interrupt on pin 24 GPIO wise
     pwmSetClock(80);                                        // Clock and range set to make a 120kHz pwm signal
-    pwmSetRange (10);*/
-}
+    pwmSetRange (10);
+    pwmWrite(18, 0);
+*/}
 
 
 void SendOnX10::SendCommunication(int unitID, bool aktivSim, int lightLevel) {
@@ -56,11 +57,13 @@ void SendOnX10::SendCommunication(int unitID, bool aktivSim, int lightLevel) {
 }
 
 void writeX10Communication(){
-    if(x10Index > -1){
+    if(x10Index != -1){
         if(x10Communication[x10Index]){
             //pwmWrite(18, 5);
+            cout << 1;
         } else {
             //pwmWrite(18, 0);
+            cout << 1;
         }
     }
 
