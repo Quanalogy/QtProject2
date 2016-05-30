@@ -12,8 +12,8 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include "MenuWidget.h"
-#include "../User.h"
-#include "../Clock.h"
+#include "User.h"
+#include "Clock.h"
 
 class AddUser : public MenuWidget{
 Q_OBJECT

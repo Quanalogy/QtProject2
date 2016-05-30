@@ -7,7 +7,7 @@
 
 
 #include <QtWidgets/QApplication>
-#include <MainPage.h>
+#include "MainPage.h"
 #include "LoginDialog.h"
 #include "User.h"
 
@@ -35,6 +35,7 @@ private:
     QList<User *> userList;
     QList<Unit *> unitList;
     User *currentUser;
+    int fuckdig = 1;
 
 
 };

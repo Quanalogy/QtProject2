@@ -5,8 +5,8 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtGui/QStaticText>
 #include "AddUser.h"
-#include "../Clock.h"
-#include "../QMainApp.h"
+#include "Clock.h"
+#include "QMainApp.h"
 #include <QDialog>
 #include <QtWidgets/QInputDialog>
 #include <QtWidgets/QPushButton>

@@ -7,11 +7,13 @@
 
 
 #include "MenuWidget.h"
-#include "../Unit.h"
-#include "../Clock.h"
-#include "../Worker.h"
+#include "Unit.h"
+#include "Clock.h"
+#include "Worker.h"
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QCheckBox>
 
 class AdfaerdsStyring : public MenuWidget {
 Q_OBJECT

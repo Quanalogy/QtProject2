@@ -8,8 +8,8 @@
 #include <QtCore/QObject>
 #include <QtGui/QTextLine>
 #include "MainPage.h"
-#include "../QMainApp.h"
-#include "../Globals.h"
+#include "QMainApp.h"
+#include "Globals.h"
 
 
 MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
@@ -470,7 +470,7 @@ void MainPage::setupPages(User *currentUser_) {
     mainLayout->addLayout(gridLayout);
 
 
-    connect(logout, &QPushButton::clicked, this, &logOut);
+    connect(logout, &QPushButton::clicked, this, &MainPage::logOut);
 }
 
 void MainPage::logOut() {

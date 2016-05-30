@@ -2,28 +2,19 @@
 // Created by Munke on 23-04-2016.
 //
 
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QCheckBox>
-#include <QtWidgets/QLineEdit>
-#include <QtWidgets/QPushButton>
-#include <QtCore/QList>
-#include <QtWidgets/QMessageBox>
-#include <initguid.h>
+
 #include "AendreBrugerprofil.h"
-#include "../QMainApp.h"
+#include "QMainApp.h"
 //#include "../Globals.h"
 
 
 AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     this->setWindowTitle(name);
-    int tempUCount=2;
 
     //Add layouts
     subMainLayout = new QHBoxLayout;
     mainLayout = new QVBoxLayout(this);
     buttonLayout = new QHBoxLayout;
-    int size = static_cast<QMainApp *> qApp->getUserList().size();
     //Labels
     user = new QLabel(this);
     changePass = new QLabel(this);
@@ -31,8 +22,8 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
 
     //set text on labels
     //  for (int j = 0; j <=size ; ++j) {
-   /* if(brugerliste.first().)
-    {*/
+    /* if(brugerliste.first().)
+     {*/
 
 
     //A list of names of the checkboxes
@@ -57,33 +48,12 @@ AendreBrugerprofil::AendreBrugerprofil(QWidget *parent) : MenuWidget(parent) {
     connect(saveBtn, &QPushButton::clicked, this, &AendreBrugerprofil::onSaveClick);
 
 
-        setLayout(mainLayout);
+    setLayout(mainLayout);
 
 }
 
 QString AendreBrugerprofil::getName() {
     return name;
-}
-
-vector<bool> AendreBrugerprofil::getStates(int userNum){
-    for (int i = 0; i < 8; ++i) {
-        checkMap[userNum].at(i)->isChecked();
-    }
-
-}
-
-QString AendreBrugerprofil::getNewPassword() {
-QString kodeOrd= password->text();
-return kodeOrd;
-}
-
-QList<QString *> AendreBrugerprofil::getPasswords(){
-   QList<QString> kodeListe;
-    int size = static_cast<QMainApp *> qApp->getUserList().size();
-    for (int i = 0; i < size; ++i) {
-        kodeListe<<passwordList->at(i).text();
-    }
-    //return  kodeListe;
 }
 
 void AendreBrugerprofil::setUserList(QList<User * > list) {
@@ -98,37 +68,37 @@ void AendreBrugerprofil::addLayouts(){
         QList<QCheckBox *> *checkboxList = new QList<QCheckBox *>();
 
         for(int j = 0; j<8; ++j){ //checkbox loop
-                QCheckBox *checkBox = new QCheckBox(userPages.at(j));
-                if (j == 0) {
-                    if (userList.at(pos)->getLock()) {
-                        checkBox->setChecked(true);
-                    } else {
-                        checkBox->setChecked(false);
-                    }
-                    if (userList.at(pos)->getAdmin()){
-                        checkBox->setDisabled(true);
-                    }
+            QCheckBox *checkBox = new QCheckBox(userPages.at(j));
+            if (j == 0) {
+                if (userList.at(pos)->getLock()) {
+                    checkBox->setChecked(true);
+                } else {
+                    checkBox->setChecked(false);
                 }
-                if (j == 1 && userList.at(pos)->getAdmin()){
+                if (userList.at(pos)->getAdmin()){
                     checkBox->setDisabled(true);
                 }
-                if (j > 1) {
-                    vector<bool> temp = userList.at(pos)->getRights();
-                    if (temp.at(j - 2)) {
-                        checkBox->setChecked(true);
-                    } else {
-                        checkBox->setChecked(false);
-                    }
-                    if(tempRights.at(j-2)){
-                        checkBox->setDisabled(false);
-                    } else {
-                        checkBox->setDisabled(true);
-                    }
-                    if (userList.at(pos)->getAdmin()){
-                        checkBox->setDisabled(true);
-                    }
+            }
+            if (j == 1 && userList.at(pos)->getAdmin()){
+                checkBox->setDisabled(true);
+            }
+            if (j > 1) {
+                vector<bool> temp = userList.at(pos)->getRights();
+                if (temp.at(j - 2)) {
+                    checkBox->setChecked(true);
+                } else {
+                    checkBox->setChecked(false);
                 }
-                checkboxList->append(checkBox);
+                if(tempRights.at(j-2)){
+                    checkBox->setDisabled(false);
+                } else {
+                    checkBox->setDisabled(true);
+                }
+                if (userList.at(pos)->getAdmin()){
+                    checkBox->setDisabled(true);
+                }
+            }
+            checkboxList->append(checkBox);
 
         }
 
@@ -166,7 +136,7 @@ void AendreBrugerprofil::addLayouts(){
         }
         userLayouts.at(pos)->setAlignment(Qt::AlignTop);
         subMainLayout->addLayout(userLayouts.at(pos));
-                //subMainLayout->addLayout(userLayout);
+        //subMainLayout->addLayout(userLayout);
         pos++;
 
     }
@@ -270,32 +240,32 @@ void AendreBrugerprofil::makeChanges() {
     int slettet = 0;
     int x = userList.size();
     int pos = 0;
-for (int i = 0 ; i < x ; i ++){
-    if (passwords.at(pos)->text() != NULL ) {
+    for (int i = 0 ; i < x ; i ++){
+        if (passwords.at(pos)->text() != NULL ) {
             userList.at(i)->setPassword(passwords.at(i)->text());
-    }
-    if (listCheckboxList.at(pos).at(0)->isChecked()){
-        userList.at(i)->setLock(true);
-        static_cast<QMainApp *> qApp->lockUser(i);
-    } else {
-        userList.at(i)->setLock(false);
-        static_cast<QMainApp *> qApp->unLockUser(i);
-    }
-    if (listCheckboxList.at(pos).at(1)->isChecked()){
+        }
+        if (listCheckboxList.at(pos).at(0)->isChecked()){
+            userList.at(i)->setLock(true);
+            static_cast<QMainApp *> qApp->lockUser(i);
+        } else {
+            userList.at(i)->setLock(false);
+            static_cast<QMainApp *> qApp->unLockUser(i);
+        }
+        if (listCheckboxList.at(pos).at(1)->isChecked()){
 
-        //static_cast<QMainApp *> qApp->removeUser(i);
+            //static_cast<QMainApp *> qApp->removeUser(i);
 
-        delete userList.at(i);
+            delete userList.at(i);
 
-        userList.removeAt(i);
+            userList.removeAt(i);
             i = i - 1;
             pos ++;
-        static_cast<QMainApp *> qApp->setUserList(userList);
-        slettet = slettet + 1;
-        if (pos > x - slettet){
-            return;
-        }
-        continue;
+            static_cast<QMainApp *> qApp->setUserList(userList);
+            slettet = slettet + 1;
+            if (pos > x - slettet){
+                return;
+            }
+            continue;
 
     }
     if (passwords.at(pos)->text() != NULL ) {
@@ -327,12 +297,9 @@ for (int i = 0 ; i < x ; i ++){
 }
 }
 
-QList<User *> AendreBrugerprofil::getUserlist() {
-    return userList;
-}
 
 bool AendreBrugerprofil::adminCheck(){
-    for (int i = 0 ; i < userList.size() ; i ++){
+    for (int i = 0 ; i < userList.size(); ++i){
         if (passwords.at(i)->text() != NULL){
             if (currentUser->getAdmin()){
                 return true;
@@ -345,9 +312,8 @@ bool AendreBrugerprofil::adminCheck(){
             }
             return false;
         }
-        return true;
     }
-    return false;
+    return true;
 }
 
 void AendreBrugerprofil::clear(){

@@ -8,10 +8,14 @@
 
 //#include <QtWidgets/QWidget>
 #include "MenuWidget.h"
-#include "../Unit.h"
-#include "../Clock.h"
+#include "Unit.h"
+#include "Clock.h"
 #include <QtWidgets/QLabel>
-
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QPushButton>
+#include <QtGui/QIntValidator>
 class EnhedsHaandtering : public MenuWidget{
     Q_OBJECT
 public:

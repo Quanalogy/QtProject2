@@ -19,7 +19,7 @@ Clock::Clock(QLabel *parent)
 
     QTime qtime = QTime::currentTime();
     QString stime = qtime.toString();
-    label->setText("<h4>" + stime + "<h4\>");
+    label->setText("<h4>" + stime + "</h4>");
     label->setStyleSheet("QLabel { background-color : ; color : #a0a0a0; }");
 
     startTimer(1000);
@@ -30,5 +30,5 @@ void Clock::timerEvent(QTimerEvent *e) {
 
     QTime qtime = QTime::currentTime();
     QString stime = qtime.toString();
-    label->setText("<h4>" + stime + "<h4\>");
+    label->setText("<h4>" + stime + "</h4>");
 }

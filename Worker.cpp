@@ -15,7 +15,6 @@ Worker::Worker()
 
 void Worker::doWork()
 {
-    int i = 0;
     while (m_running) {
         controlAdfaerd();
         PortableSleep::msleep(1000);
@@ -112,7 +111,7 @@ void Worker::setAAStime(int hour) {
     AAStime = hour;
 }
 
-bool Worker::controlAdfaerd() {
+void Worker::controlAdfaerd() {
 
     QTime temptime = QTime::currentTime();
     QString tempStime = temptime.toString(); //.left(temptime.toString().size() - 3);
@@ -145,8 +144,6 @@ bool Worker::controlAdfaerd() {
     }
 }
 
-bool Worker::controlAktivitet() {
-}
 
 bool Worker::isRunning() {
     return m_running;
