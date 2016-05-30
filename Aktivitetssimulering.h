@@ -7,8 +7,8 @@
 
 
 #include "MenuWidget.h"
-#include "../Clock.h"
-#include "../Unit.h"
+#include "Clock.h"
+#include "Unit.h"
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>

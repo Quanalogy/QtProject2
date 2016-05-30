@@ -14,9 +14,9 @@
 #include "Aktivitetssimulering.h"
 #include "Lysstyring.h"
 #include "EnhedsHaandtering.h"
-#include "../User.h"
-#include "../Unit.h"
-#include "../Clock.h"
+#include "User.h"
+#include "Unit.h"
+#include "Clock.h"
 #include <QtWidgets/QPushButton>
 #include <QtCore/QMap>
 #include <vector>

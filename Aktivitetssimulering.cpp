@@ -3,7 +3,7 @@
 //
 
 #include "Aktivitetssimulering.h"
-#include "../QMainApp.h"
+#include "QMainApp.h"
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QCheckBox>

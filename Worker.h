@@ -62,8 +62,8 @@ private:
     QList<QString> dagStyrker;
     QList<QString> aftenStyrker;
 
-    bool controlAdfaerd();
-    bool controlAktivitet();
+    void controlAdfaerd();
+
 
 };
 

@@ -77,7 +77,6 @@ void SendOnX10::convertUnitToX10(int unitNumber) {
     int binaryUnitArray[5] = {0};     // a temp array for holding binary unit number
 
     int tempUnitNumber = unitNumber;
-    int i=0;
 
     int binaryStep[] = {16,8,4,2,1}; // Retard solution to modulus gave 25%2 = 0, but only sometimes
 

@@ -3,12 +3,8 @@
 //
 
 #include "Lysstyring.h"
-#include "../Clock.h"
-#include "../QMainApp.h"
-#include <QtWidgets/QVBoxLayout>
+#include "QMainApp.h"
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QCheckBox>
-#include <QtWidgets/QPushButton>
 #include <QtGui/QIntValidator>
 
 Lysstyring::Lysstyring(QWidget *parent) : MenuWidget(parent){

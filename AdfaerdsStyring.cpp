@@ -3,15 +3,13 @@
 //
 
 #include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QLineEdit>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QLabel>
 #include <QThread>
 #include <QtGui/QIntValidator>
 #include <QtCore/QObject>
 #include "AdfaerdsStyring.h"
-#include "../Clock.h"
-#include "../QMainApp.h"
+#include "Clock.h"
+#include "QMainApp.h"
 
 AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
     this->setWindowTitle(name);
@@ -212,7 +210,7 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
 
 }
 bool AdfaerdsStyring::notNull(){
-    if (dagFraTime->text() != "" && dagTilTime->text() != "" || natFraTime->text() != "" && natTilTime->text() != ""){
+    if (((dagFraTime->text() != "") && (dagTilTime->text() != "" ))|| (natFraTime->text() != "" && natTilTime->text() != "")){
         return true;
     } else {
         return false;

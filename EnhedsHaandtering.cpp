@@ -2,14 +2,10 @@
 // Created by Munke on 23-04-2016.
 //
 
-#include <QtWidgets/QGridLayout>
-#include <QtWidgets/QLineEdit>
-#include <QtWidgets/QCheckBox>
-#include <QtWidgets/QPushButton>
-#include <QtGui/QIntValidator>
+
 #include "EnhedsHaandtering.h"
 #include "MainPage.h"
-#include "../QMainApp.h"
+#include "QMainApp.h"
 
 EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
     //Add layouts to design from
@@ -104,7 +100,7 @@ EnhedsHaandtering::EnhedsHaandtering(QWidget *parent) : MenuWidget(parent) {
 }
 
 bool EnhedsHaandtering::notNull(){
-    if (serienummerInput->text().size() > 0 && unitNameInput->text().size() > 0 || EnhedsHaandtering::isChecked()){
+    if ((serienummerInput->text().size() > 0 && unitNameInput->text().size() > 0) || EnhedsHaandtering::isChecked()){
         return false;
     } else {
         return true;

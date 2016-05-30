@@ -24,14 +24,14 @@ SOURCES += main.cpp \
 	Worker.cpp \
 	QMainApp.cpp \
 	LoginDialog.cpp\
-    MenuWidgets/MenuWidget.cpp \
-    MenuWidgets/AddUser.cpp \
-    MenuWidgets/AdfaerdsStyring.cpp \
-    MenuWidgets/AendreBrugerprofil.cpp \
-    MenuWidgets/Aktivitetssimulering.cpp \
-    MenuWidgets/EnhedsHaandtering.cpp \
-    MenuWidgets/Lysstyring.cpp \
-    MenuWidgets/MainPage.cpp \
+    MenuWidget.cpp \
+    AddUser.cpp \
+    AdfaerdsStyring.cpp \
+    AendreBrugerprofil.cpp \
+    Aktivitetssimulering.cpp \
+    EnhedsHaandtering.cpp \
+    Lysstyring.cpp \
+    MainPage.cpp \
 
 
 HEADERS  += SendOnX10.h \
@@ -41,12 +41,12 @@ HEADERS  += SendOnX10.h \
 	Globals.h \
 	QMainApp.h \
 	LoginDialog.h \
-	MenuWidgets/MenuWidget.h \
-    MenuWidgets/AddUser.h \
-    MenuWidgets/AdfaerdsStyring.h \
-    MenuWidgets/AendreBrugerprofil.h \
-    MenuWidgets/Aktivitetssimulering.h \
-    MenuWidgets/EnhedsHaandtering.h \
-    MenuWidgets/Lysstyring.h \
-    MenuWidgets/MainPage.h \
-	MenuWidgets/portablesleep.h \
+	MenuWidget.h \
+    AddUser.h \
+    AdfaerdsStyring.h \
+    AendreBrugerprofil.h \
+    Aktivitetssimulering.h \
+    EnhedsHaandtering.h \
+    Lysstyring.h \
+    MainPage.h \
+	portablesleep.h \

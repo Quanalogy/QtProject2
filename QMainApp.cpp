@@ -3,22 +3,12 @@
 //
 
 #include "QMainApp.h"
+#include "User.h"
+
 QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
     User *adminUser = new User((QString)"a", (QString) "p",true);
     adminUser->setRights(true, true, true, true, true, true);
     addUserToList(adminUser);
-
-    /*User *noviceUser = new User("Abe", "Kat",false);
-    noviceUser->setRights(true, false, false, false, false, true);
-    addUserToList(noviceUser);
-
-    User *noviceUser2 = new User("Tester", "p",false);
-    noviceUser->setRights(true, false, false, false, false, true);
-    addUserToList(noviceUser);*/
-/*
- *
- *
- */
 
     mainPage = new MainPage;
     //mainPage->setupPages(adminUser);
@@ -62,7 +52,12 @@ void QMainApp::removeUser(int userIndex) {
 
 void QMainApp::lockUser(int userIndex) {
     cout << "locked" << endl;
-    userList.at(userIndex)->setLock(true);
+    if(fuckdig){
+        fuckdig = 0;
+    } else {
+        userList.at(userIndex)->setLock(true);
+    }
+
 }
 
 void QMainApp::unLockUser(int userIndex) {

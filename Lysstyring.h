@@ -10,10 +10,10 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QLineEdit>
+#include <QLabel>
 #include "MenuWidget.h"
-#include "QLabel.h"
-#include "../Unit.h"
-#include "../Clock.h"
+#include "Unit.h"
+#include "Clock.h"
 
 class Lysstyring : public MenuWidget{
 Q_OBJECT

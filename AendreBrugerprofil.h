@@ -7,9 +7,16 @@
 
 
 #include "MenuWidget.h"
-#include "../User.h"
-#include "../Clock.h"
+#include "User.h"
+#include "Clock.h"
 #include <vector>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtCore/QList>
+#include <QtWidgets/QMessageBox>
 using namespace std;
 
 
@@ -18,11 +25,8 @@ Q_OBJECT
 public:
     AendreBrugerprofil(QWidget *parent = 0);
     QString getName();
-    vector<bool> getStates(int userNum);
-    QString getNewPassword();
-    QList<QString *> getPasswords();
+
     void setUserList(QList<User * > list);
-    QList<User * > getUserlist();
     void addLayouts();
     void removeLayouts();
     void makeChanges();
@@ -57,17 +61,9 @@ private:
     QList<QLabel *> userAccessLabels;
     QList<QLineEdit *> passwords;
 
-
-    QList<vector<bool>> stateList;
-
     QList<User * > userList;                 // holds all the users in our program
     User *currentUser;                        // holds the current username try
-    QString currentPassword;                        // holds the current password try
-    vector<bool> rights;
-    QPushButton *logout;
-    bool firstTimeLogin;
 
-    int layoutsCount;
 
     QHBoxLayout *buttonLayout;
     QHBoxLayout *topLayout;
