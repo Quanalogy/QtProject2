@@ -284,7 +284,17 @@ void MainPage::changeProfileSave() {
         errorMessage.exec();
         return;
     } else {
+        if (changeProfilePage->checkAdminRemove()){
+            QMessageBox errorMessage;
+            errorMessage.setText("Admin bruger fjernet!");
+            errorMessage.setStandardButtons(QMessageBox::Ok);
+            errorMessage.button(QMessageBox::Ok)->animateClick(3000);
+            errorMessage.exec();
+        } else {
+            saveMessege();
+        }
         changeProfilePage->makeChanges();
+        cout << "kommer ud" << endl;
         if(firstTime){
             adfaerdsPage->setUnitsList(unitsList);
             adfaerdsPage->removeBox();
@@ -293,15 +303,7 @@ void MainPage::changeProfileSave() {
             userMenuPages.at(index)->hide();
             index = 4;
         } else {
-            if (changeProfilePage->checkAdminRemove()){
-                QMessageBox errorMessage;
-                errorMessage.setText("Admin bruger fjernet!");
-                errorMessage.setStandardButtons(QMessageBox::Ok);
-                errorMessage.button(QMessageBox::Ok)->animateClick(3000);
-                errorMessage.exec();
-            } else {
-                saveMessege();
-            }
+
             this->show();
             userMenuPages.at(index)->hide();
         }

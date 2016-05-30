@@ -10,6 +10,10 @@ QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
 
     /*User *noviceUser = new User("Abe", "Kat",false);
     noviceUser->setRights(true, false, false, false, false, true);
+    addUserToList(noviceUser);
+
+    User *noviceUser2 = new User("Tester", "p",false);
+    noviceUser->setRights(true, false, false, false, false, true);
     addUserToList(noviceUser);*/
 /*
  *

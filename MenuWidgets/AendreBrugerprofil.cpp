@@ -264,6 +264,7 @@ void AendreBrugerprofil::removeLayouts(){
 }
 
 void AendreBrugerprofil::makeChanges() {
+    int slettet = 0;
     int x = userList.size();
     int pos = 0;
 for (int i = 0 ; i < x ; i ++){
@@ -278,17 +279,21 @@ for (int i = 0 ; i < x ; i ++){
         static_cast<QMainApp *> qApp->unLockUser(i);
     }
     if (listCheckboxList.at(pos).at(1)->isChecked()){
-        static_cast<QMainApp *> qApp->removeUser(i);
+
+        //static_cast<QMainApp *> qApp->removeUser(i);
+
         delete userList.at(i);
+
         userList.removeAt(i);
-        x--;
-        if (i != 0){
-            i--;
+            i = i - 1;
+            pos ++;
+        static_cast<QMainApp *> qApp->setUserList(userList);
+        slettet = slettet + 1;
+        if (pos > x - slettet){
+            return;
         }
-        if (pos < x){
-            pos++;
-        }
-        //static_cast<QMainApp *> qApp->setUserList(userList);
+        continue;
+
     }
     if (passwords.at(pos)->text() != NULL ) {
         if (passwords.at(pos)->text() == "adminremove" + userList.at(i)->getName() && currentUser->getAdmin()){
@@ -296,12 +301,9 @@ for (int i = 0 ; i < x ; i ++){
             delete userList.at(i);
             userList.removeAt(i);
             x--;
-            if (i != 0){
-                i--;
-            }
-            if (pos < x){
-                pos++;
-            }
+            i--;
+            pos++;
+            continue;
         }
     }
     vector<bool> *temp = new vector<bool>;
