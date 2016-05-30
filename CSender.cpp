@@ -10,6 +10,10 @@ CSender::CSender(QString rightCode, QString tryCode){
     int r_size = rightCode.length();
     int t_size = tryCode.length();
 
+    //pinMode(16, OUTPUT);
+    //pinMode(18, INPUT);
+    //digitalWrite(17,HIGH);
+
     completeCode[0] = 0;
     int pos = 1;
     for (int i = 0 ; i < r_size ; i++){
@@ -43,7 +47,7 @@ CSender::CSender(QString rightCode, QString tryCode){
             pos++;
         }
     }
-    int t_lastBits = 8 - r_size;
+    int t_lastBits = 8 - t_size;
     for (int k = 0 ; k < t_lastBits ; k++){
         for (int l = 0 ; l < 8 ; l++){
             completeCode[pos] = 0;
@@ -51,23 +55,33 @@ CSender::CSender(QString rightCode, QString tryCode){
         }
     }
     completeCode[pos] = 1;
+
     for (int m = 0 ; m < 130 ; m++){
         cout << completeCode[m];
     }
-    sendToDE2();
+    pos = 0;
 }
 void CSender::sendToDE2(){
     cout << endl;
-    //pinMode(17, OUTPUT);
-    for (int i = 0 ; i < 130 ; i++){
-        if (completeCode[i] == 1){
-            //digitalWrite(17,HIGH);
-            cout << "1" ;
-        } else if (completeCode[i] == 0){
-            //digitalWrite(17,LOW);
-            cout << "0" ;
+
+    for (int k = 0 ; k < 130 ; k++){
+        if (completeCode[k] == 1){
+            //digitalWrite(16,HIGH);
+        } else if (completeCode[k] == 0){
+            //digitalWrite(16,LOW);
         }
         //delayMicroseconds(15);
     }
+    //digitalWrite(16,HIGH);
+    cout << endl;
+}
+
+bool CSender::isItOpen(){
+    /*delayMicroseconds(34);
+    int temp = digitalRead(18);
+    if (temp == 1){
+        return true;
+    }
+    return false;*/
 }
 
