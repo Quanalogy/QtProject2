@@ -8,6 +8,7 @@ using namespace std;
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <cmath>
 //#include <wiringPi.h>
 
 int x10Index = -1;
@@ -77,17 +78,20 @@ void SendOnX10::convertUnitToX10(int unitNumber) {
 
     int tempUnitNumber = unitNumber;
     int i=0;
-    while (tempUnitNumber > 0){
-        binaryUnitArray[4-i] = tempUnitNumber%2;
 
-        cout << "Inserting into array, on spot: " << 5-i << "\nThe value of " << binaryUnitArray[4-i]
-            << "\nThe couter i is: " << i << endl << endl;
-        tempUnitNumber = tempUnitNumber/2;
-        ++i;
+    int binaryStep[] = {16,8,4,2,1}; // Retard solution to modulus gave 25%2 = 0, but only sometimes
+
+    for (int l = 0; l < 5; ++l) {   //convert int to binary in the retard way
+        if (tempUnitNumber < binaryStep[l]){
+            binaryUnitArray[l] = 0;
+        } else{
+            binaryUnitArray[l] = 1;
+            tempUnitNumber = tempUnitNumber-binaryStep[l];
+        }
     }
-    cout << "This is the inserted values: ";
+
     int k = 0;
-    for (int j = 0; j <5 ; ++j, k+=2) {
+    for (int j = 0; j <5 ; ++j, k+=2) {// convert binary to x.10
         if(binaryUnitArray[j]){
             x10UnitArray[k] = 1;
             x10UnitArray[k+1] = 0;
@@ -95,7 +99,6 @@ void SendOnX10::convertUnitToX10(int unitNumber) {
             x10UnitArray[k] = 0;
             x10UnitArray[k+1] = 1;
         }
-        cout << x10UnitArray[k] << x10UnitArray[k+1];
     }
 }
 
@@ -109,27 +112,26 @@ void SendOnX10::convertLightToX10(int lightLevel_) {
 
     int binaryLightArray[7] = {0};   // a temp array for holding binary light level
 
-    int i = 0;
-    while (tempLightLevel > 0){
-        binaryLightArray[6-i] = tempLightLevel%2;
-        cout << "Inserting into array, on spot: " << 6-i << "\nThe value of " << binaryLightArray[6-i]
-        << "\nThe couter i is: " << i << endl << endl;
-        tempLightLevel = tempLightLevel/2;
-        ++i;
+    int binaryStep[] = {64,32,16,8,4,2,1};// Retard solution to modulus gave 25%2 = 0, but only sometimes
+
+    for (int i = 0; i < 7; ++i) {       //convert int to binary in the retard way
+        if(tempLightLevel < binaryStep[i]){
+            binaryLightArray[i]=0;
+        } else {
+            binaryLightArray[i]=1;
+            tempLightLevel = tempLightLevel-binaryStep[i];
+        }
     }
 
-    cout << "This is the inserted values: ";
-
     int k = 0;
-    for (int j = 0; j < 7 ; ++j, k+=2) {
-        if(binaryLightArray[i]){
+    for (int j = 0; j < 7 ; ++j, k+=2) { // convert binary to x.10
+        if(binaryLightArray[j]){
             x10LightArray[k] = 1;
             x10LightArray[k+1] = 0;
         } else {
             x10LightArray[k] = 0;
             x10LightArray[k+1] = 1;
         }
-        cout << x10LightArray[k] << x10LightArray[k+1];
     }
 }
 

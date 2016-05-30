@@ -6,7 +6,7 @@
 #define QTPROJECT2_UNIT_H
 
 #include <QtCore/QString>
-
+#include "SendOnX10.h"
 using namespace std;
 class Unit {
 public:
@@ -24,6 +24,7 @@ private:
     QString unitName;
     int volume;
     bool as;
+    SendOnX10 sendOnX10;
 };
 
 #endif

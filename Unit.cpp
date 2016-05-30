@@ -41,8 +41,7 @@ void Unit::setUnitName(QString name) {
 void Unit::setVolume(int vol) {
     if (volume != vol) {
         volume = vol;
-        // Call til X.10
-        // Skrives her
+        sendOnX10.SendCommunication(id, false, volume);
         cout << "X.10 command: id: " << this->getId() << ", AS=false, styrke:" << this->getVolume() <<
         " : sendes her!!" << endl;
     }
