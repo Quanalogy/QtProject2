@@ -6,11 +6,18 @@
 #include <QtWidgets/QMessageBox>
 #include "LoginDialog.h"
 #include "QMainApp.h"
+#include "CSender.h"
 
 LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent) {
     setUpGUI();
     setWindowTitle(tr("User Login"));
     setModal(true);
+
+    DE2off = true;
+
+    if (!DE2off) {
+        CSender starterSignaltoDE2("", "");
+    }
 
 }
 
@@ -83,25 +90,55 @@ void LoginDialog::slotAcceptLogin() {
         for (int i = 0; i < userList.size() ; ++i) {
             if (userList.at(i)->getName() == username && (userList.at(i)->getPass() + "iampro") == password && userList.at(i)->getAdmin()){
                 cout << "It's true bro, and the PC know its not you first time :D" << endl;
-                static_cast<QMainApp *>qApp->setCurrentUser(username);
-                static_cast<QMainApp *>qApp->notFirstTime();
-                password = userList.at(i)->getPass();
-                emit acceptLogin(username, // current username
-                                 password // current password
+                password.remove("iampro");
+                if (!DE2off) {
+                    CSender newTryPro(userList.at(i)->getPass(), password);
+                    newTryPro.sendToDE2();
+                    if (newTryPro.isItOpen()) {
+                        static_cast<QMainApp *>qApp->setCurrentUser(username);
+                        static_cast<QMainApp *>qApp->notFirstTime();
+                        password = userList.at(i)->getPass();
+                        emit acceptLogin(username, // current username
+                                         password // current password
 
-                );
-                this->hide();
-                return;
+                        );
+                        this->hide();
+                        return;
+                    }
+                } else {
+                    static_cast<QMainApp *>qApp->setCurrentUser(username);
+                    static_cast<QMainApp *>qApp->notFirstTime();
+                    password = userList.at(i)->getPass();
+                    emit acceptLogin(username, // current username
+                                     password // current password
+
+                    );
+                    this->hide();
+                    return;
+                }
             }
             if(userList.at(i)->getName() == username && userList.at(i)->getPass() == password && !userList.at(i)->getLock()){
                 cout << "It's true bro" << endl;
-                static_cast<QMainApp *>qApp->setCurrentUser(username);
-                emit acceptLogin(username, // current username
-                                 password // current password
+                if (!DE2off) {
+                    CSender newTry(userList.at(i)->getPass(), password);
+                    newTry.sendToDE2();
+                    if (newTry.isItOpen())
+                    static_cast<QMainApp *>qApp->setCurrentUser(username);
+                    emit acceptLogin(username, // current username
+                                     password // current password
 
-                );
-                this->hide();
-                return;
+                    );
+                    this->hide();
+                    return;
+                } else {
+                    static_cast<QMainApp *>qApp->setCurrentUser(username);
+                    emit acceptLogin(username, // current username
+                                     password // current password
+
+                    );
+                    this->hide();
+                    return;
+                }
             }
 
             if (userList.at(i)->getLock()){
@@ -113,8 +150,7 @@ void LoginDialog::slotAcceptLogin() {
             // 3 forsøg og derefter låses brugeren.
             if (userList.at(i)->getName() == username){
                 att++;
-                tempUserName = username;
-                editPassword->clear();
+
                 if (att == 3){
 
                     userList.at(i)->setLock(true);
@@ -134,6 +170,13 @@ void LoginDialog::slotAcceptLogin() {
                         att = 0;
                     }
                 }
+                if (att == 1){
+                    if (username != tempUserName){
+                        att = 0;
+                    }
+                }
+                tempUserName = username;
+                editPassword->clear();
             }
 
         }

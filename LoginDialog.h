@@ -56,6 +56,8 @@ private:
     // attempts, 3 strikes and out!!
     int att;
 
+    bool DE2off;
+
 /*!
  * A method to set up all dialog components and
  * initialize them.
