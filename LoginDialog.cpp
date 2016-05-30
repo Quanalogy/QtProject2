@@ -11,6 +11,7 @@ LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent) {
     setUpGUI();
     setWindowTitle(tr("User Login"));
     setModal(true);
+
 }
 
 void LoginDialog::setUpGUI() {

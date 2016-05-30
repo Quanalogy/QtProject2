@@ -347,6 +347,7 @@ bool AendreBrugerprofil::adminCheck(){
         }
         return true;
     }
+    return false;
 }
 
 void AendreBrugerprofil::clear(){

@@ -3,6 +3,8 @@
 //
 
 #include "QMainApp.h"
+#include "CodeSender.h"
+
 QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
     User *adminUser = new User((QString)"a", (QString) "p",true);
     adminUser->setRights(true, true, true, true, true, true);
@@ -28,7 +30,6 @@ QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
     QObject::connect(loginDialog, SIGNAL (acceptLogin(QString&,QString&)),
                      mainPage,
                      SLOT (slotAcceptUserLogin(QString&,QString&)));
-
 }
 
 QList<User *> QMainApp::getUserList() {

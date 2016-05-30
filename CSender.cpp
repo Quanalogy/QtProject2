@@ -4,9 +4,9 @@
 
 #include <iostream>
 #include <bitset>
-#include "CodeSender.h"
+#include "CSender.h"
 
-CodeSender::CodeSender(QString rightCode, QString tryCode){
+CSender::CSender(QString rightCode, QString tryCode){
     int r_size = rightCode.length();
     int t_size = tryCode.length();
 
@@ -55,9 +55,19 @@ CodeSender::CodeSender(QString rightCode, QString tryCode){
         cout << completeCode[m];
     }
 }
-
-
-void CodeSender::sendToDE2(){
+void CSender::sendToDE2(){
+    cout << endl;
+    //pinMode(17, OUTPUT);
+    for (int i = 0 ; i < 130 ; i++){
+        if (completeCode[i] == 1){
+            //digitalWrite(17,HIGH);
+            cout << "1" ;
+        } else if (completeCode[i] == 0){
+            //digitalWrite(17,LOW);
+            cout << "0" ;
+        }
+        //delayMicroseconds(15);
+    }
 
 }
 
