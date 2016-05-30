@@ -76,7 +76,8 @@ private:
     QWidget *horizontalLineWidget;
     bool firstTime;
 
-
+public slots:
+    void setMaxLenght(const QString &);
 
 };
 

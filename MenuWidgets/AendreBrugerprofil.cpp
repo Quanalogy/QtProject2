@@ -9,6 +9,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtCore/QList>
 #include <QtWidgets/QMessageBox>
+#include <initguid.h>
 #include "AendreBrugerprofil.h"
 #include "../QMainApp.h"
 //#include "../Globals.h"
@@ -152,6 +153,8 @@ void AendreBrugerprofil::addLayouts(){
         changePassLabels.append(changePass);
         userAccessLabels.append(userAccess);
         passwords.append(password);
+
+        connect(passwords.at(pos),SIGNAL(textEdited(const QString &)),this,SLOT(setMaxLenght(const QString &) ));
 
         userLayouts.at(pos)->addWidget(userLabels.at(pos), 0, Qt::AlignCenter);
         userLayouts.at(pos)->addWidget(changePassLabels.at(pos), 0, Qt::AlignCenter);
@@ -297,12 +300,16 @@ for (int i = 0 ; i < x ; i ++){
     }
     if (passwords.at(pos)->text() != NULL ) {
         if (passwords.at(pos)->text() == "adminremove" + userList.at(i)->getName() && currentUser->getAdmin()){
-            static_cast<QMainApp *> qApp->removeUser(i);
+
             delete userList.at(i);
             userList.removeAt(i);
-            x--;
-            i--;
-            pos++;
+            i = i - 1;
+            pos ++;
+            static_cast<QMainApp *> qApp->setUserList(userList);
+            slettet = slettet + 1;
+            if (pos > x - slettet){
+                return;
+            }
             continue;
         }
     }
@@ -363,4 +370,18 @@ bool AendreBrugerprofil::checkAdminRemove() {
         }
     }
     return false;
+}
+
+void AendreBrugerprofil::setMaxLenght(const QString &text){
+
+    QString temp = *(QString*)&text;
+    if (text.startsWith("admin")){
+        for (int i = 0 ; i < passwords.size() ; i++){
+            passwords.at(i)->setMaxLength(30);
+        }
+    } else {
+        for (int i = 0 ; i < passwords.size() ; i++){
+            passwords.at(i)->setMaxLength(8);
+        }
+    }
 }

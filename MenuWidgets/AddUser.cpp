@@ -69,6 +69,7 @@ AddUser::AddUser(QWidget *parent) : MenuWidget(parent){
     //Right side Inputbox
     QLineEdit *passwordInput = new QLineEdit;
     QLineEdit *NFCIDInput = new QLineEdit(this);
+    passwordInput->setMaxLength(8);
     // set guidance text
     passwordInput->setPlaceholderText("Indtast kodeord her");
     NFCIDInput->setPlaceholderText("Scannet NFC ID vises her");

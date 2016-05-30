@@ -105,6 +105,7 @@ private:
 public slots:
     void saveIntervals();;
 
+
 private slots:
     void ifDagModified();
     void ifNatModified();
