@@ -141,8 +141,8 @@ void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
     for (int i = 0; i <tempUserList.size(); ++i) {
         if(tempUserList.at(i)->getName()==currentUserName){
             setupPages(tempUserList.at(i));
-            //qDebug() << tempUserList.at(i);
-            //qDebug() << tempUserList.size();
+            qDebug() << tempUserList.at(i);
+            qDebug() << tempUserList.size();
         }
     }
     if (firstTime){

@@ -7,10 +7,10 @@
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-CONFIG += c++11
+CONFIG += c++11 debug
 TARGET = SemesterprojektPI
 TEMPLATE = app
-qmake_lflags += rdynamic
+qmake_lflags += -rdynamic
 qmake_cxxflags += -g
 
 # So wiringPi include files can be found during compile
