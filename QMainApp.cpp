@@ -7,6 +7,7 @@
 #include "User.h"
 
 QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
+    sendOnX10.reset(new SendOnX10());
     User *adminUser = new User((QString)"a", (QString) "p",true);
     adminUser->setRights(true, true, true, true, true, true);
     addUserToList(adminUser);
@@ -89,5 +90,5 @@ void QMainApp::notFirstTime(){
 }
 
 SendOnX10* QMainApp::getSendingPTR() {
-    return sendOnX10;
+    return sendOnX10.get();
 }

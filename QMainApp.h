@@ -7,6 +7,7 @@
 
 
 #include <QtWidgets/QApplication>
+#include <bits/unique_ptr.h>
 #include "MainPage.h"
 #include "LoginDialog.h"
 #include "User.h"
@@ -36,7 +37,7 @@ private:
     QList<User *> userList;
     QList<Unit *> unitList;
     User *currentUser;
-    SendOnX10 *sendOnX10;
+    std::unique_ptr<SendOnX10> sendOnX10;
 
 };
 
