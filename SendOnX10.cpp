@@ -63,7 +63,7 @@ void SendOnX10::SendCommunication(int unitID, bool aktivSim, int lightLevel) {
         x10Communication3[i1] = x10Communication[k];
     }
     k = 0;
-    for (int j1 = 72; j1 < 102 ; ++j1, +k) {
+    for (int j1 = 72; j1 < 102 ; ++j1, ++k) {
         x10Communication3[j1] = x10Communication[k];
     }
 
