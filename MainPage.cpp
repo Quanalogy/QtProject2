@@ -152,7 +152,7 @@ void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
         cout << "Førstegangsvisning?" << endl;
         forsteGangsVisning();
     } else {
-        cout << "GOGOOGO" << endl;
+        cout << "This" << this << endl;
         this->show();
         cout << "FUUUUUU" << endl;
     }
@@ -434,7 +434,6 @@ void MainPage::setupPages(User *currentUser_) {
     //Begin to add buttons, that map to the menupages the user has access to
     pos =0;
     for (auto i = userMenuPages.begin(); i != userMenuPages.end(); ++i,++pos) {
-
         QPushButton *btn = new QPushButton(userMenuPages[pos]->getName(), this);
         buttons.append(btn);
         if(pos%2 == 0){
