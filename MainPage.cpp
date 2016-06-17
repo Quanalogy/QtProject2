@@ -154,6 +154,7 @@ void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
     } else {
         cout << "GOGOOGO" << endl;
         this->show();
+        cout << "FUUUUUU" << endl;
     }
 
 }
