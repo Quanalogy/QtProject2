@@ -13,7 +13,12 @@ Unit::Unit(int id_, QString unitName_) {
     volume = 70;
     as = false;
 
-    static_cast<QMainApp *>qApp->getSendingPTR()->SendCommunication(id, as, volume);
+    if(id == NULL){
+
+    } else {
+        static_cast<QMainApp *>qApp->getSendingPTR()->SendCommunication(id, as, volume);
+    }
+
 
     // Call til X.10
     // Skrives her
@@ -37,9 +42,13 @@ void Unit::setUnitName(QString name) {
 void Unit::setVolume(int vol) {
     if (volume != vol) {
         volume = vol;
-        static_cast<QMainApp *>qApp->getSendingPTR()->SendCommunication(id, false, volume);
         cout << "X.10 command: id: " << this->getId() << ", AS=false, styrke:" << this->getVolume() <<
         " : sendes her!!" << endl;
+    }
+    if(id == NULL){
+
+    } else {
+        static_cast<QMainApp *>qApp->getSendingPTR()->SendCommunication(id, false, volume);
     }
 }
 
