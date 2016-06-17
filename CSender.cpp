@@ -10,7 +10,7 @@ CSender::CSender(QString rightCode, QString tryCode){
     int r_size = rightCode.length();
     int t_size = tryCode.length();
 
-    if(r_size == NULL ||t_size == NULL){
+    if(r_size <= 0 ||t_size <= 0){
         cout << "One of the values are numm in CSender constructor" << endl;
     } else {
         completeCode[0] = 0;
