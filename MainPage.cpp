@@ -138,11 +138,11 @@ void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
     currentPassword = password;
     QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
 
-    for (int i = 0; i <tempUserList.size() ; ++i) {
+    for (int i = 0; i <tempUserList.size(); ++i) {
         if(tempUserList.at(i)->getName()==currentUserName){
             setupPages(tempUserList.at(i));
-            qDebug() << tempUserList.at(i);
-            qDebug() << tempUserList.size();
+            //qDebug() << tempUserList.at(i);
+            //qDebug() << tempUserList.size();
         }
     }
     if (firstTime){
