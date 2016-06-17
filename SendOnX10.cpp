@@ -9,14 +9,15 @@ using namespace std;
 #include <stdlib.h>
 #include <stdint.h>
 #include <cmath>
-//#include <wiringPi.h>
+#include <wiringPi.h>
 
 int x10Index = -1;
 int x10Communication[30] = {0};
+int x10Communication3[108] = {0};
 void writeX10Communication();
 
 SendOnX10::SendOnX10() {
-/*    printf ("Raspberry Pi wiringPi test program\n") ;
+    printf ("Raspberry Pi wiringPi test program\n") ;
     if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
         exit (1) ;
     }
@@ -25,7 +26,7 @@ SendOnX10::SendOnX10() {
     pwmSetClock(80);                                        // Clock and range set to make a 120kHz pwm signal
     pwmSetRange (10);
     pwmWrite(18, 0);
-*/}
+}
 
 
 void SendOnX10::SendCommunication(int unitID, bool aktivSim, int lightLevel) {
@@ -52,23 +53,41 @@ void SendOnX10::SendCommunication(int unitID, bool aktivSim, int lightLevel) {
     for (int l = 16; l < 30; ++l, ++k) {
         x10Communication[l] = x10LightArray[k];
     }
+
+    for (int m = 0; m < 30; ++m) {
+        x10Communication3[m] = x10Communication[m];
+    }
+
+    k=0;
+    for (int i1 = 36; i1 < 66; ++i1, ++k) {
+        x10Communication3[i1] = x10Communication[k];
+    }
+    k = 0;
+    for (int j1 = 72; j1 < 102 ; ++j1, +k) {
+        x10Communication3[j1] = x10Communication[k];
+    }
+
     x10Index = 0;
 
 }
 
 void writeX10Communication(){
     if(x10Index != -1){
-        if(x10Communication[x10Index]){
-            //pwmWrite(18, 5);
+        if(x10Communication3[x10Index]){
+            pwmWrite(18, 5);
+            delay(2);
+            pwmWrite(18,0);
             cout << 1;
         } else {
-            //pwmWrite(18, 0);
-            cout << 1;
+            pwmWrite(18, 0);
+            cout << 0;
         }
     }
 
-    if(x10Index == 29){
+    if(x10Index == 107){
         x10Index = -1;
+    } if(x10Index != -1){
+        ++x10Index;
     }
 }
 
