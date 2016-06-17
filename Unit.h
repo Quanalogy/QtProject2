@@ -24,7 +24,6 @@ private:
     QString unitName;
     int volume;
     bool as;
-    SendOnX10 sendOnX10;
 };
 
 #endif

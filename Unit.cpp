@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "Unit.h"
+#include "QMainApp.h"
 
 
 Unit::Unit(int id_, QString unitName_) {
@@ -12,7 +13,7 @@ Unit::Unit(int id_, QString unitName_) {
     volume = 70;
     as = false;
 
-    sendOnX10.SendCommunication(id, as, volume);
+    static_cast<QMainApp *>qApp->getSendingPTR()->SendCommunication(id, as, volume);
 
     // Call til X.10
     // Skrives her
@@ -36,7 +37,7 @@ void Unit::setUnitName(QString name) {
 void Unit::setVolume(int vol) {
     if (volume != vol) {
         volume = vol;
-        sendOnX10.SendCommunication(id, false, volume);
+        static_cast<QMainApp *>qApp->getSendingPTR()->SendCommunication(id, false, volume);
         cout << "X.10 command: id: " << this->getId() << ", AS=false, styrke:" << this->getVolume() <<
         " : sendes her!!" << endl;
     }

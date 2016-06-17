@@ -10,6 +10,7 @@
 #include "MainPage.h"
 #include "LoginDialog.h"
 #include "User.h"
+#include "SendOnX10.h"
 
 class QMainApp : public QApplication{
 
@@ -28,15 +29,14 @@ public:
     User getCurrentUser();
     void update();
     void notFirstTime();
-
+    SendOnX10* getSendingPTR();
 private:
     LoginDialog *loginDialog = new LoginDialog;
     MainPage *mainPage;
     QList<User *> userList;
     QList<Unit *> unitList;
     User *currentUser;
-    int fuckdig = 1;
-
+    SendOnX10 *sendOnX10;
 
 };
 

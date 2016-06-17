@@ -87,3 +87,7 @@ void QMainApp::update(){
 void QMainApp::notFirstTime(){
     mainPage->notFirstTime();
 }
+
+SendOnX10* QMainApp::getSendingPTR() {
+    return sendOnX10;
+}
