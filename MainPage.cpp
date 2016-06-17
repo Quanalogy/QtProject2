@@ -134,11 +134,10 @@ void MainPage::handleCancelClick() {
 
 void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
     cout << "Welcome to MainPage" << endl;
-    qDebug() << "Hello";
     currentUserName = userName;
     currentPassword = password;
     QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
-
+    cout << "Size of tempUserList: " << tempUserList.size() << endl;
     for (int i = 0; i <tempUserList.size(); ++i) {
         if(tempUserList.at(i)->getName()==currentUserName){
             setupPages(tempUserList.at(i));
