@@ -9,7 +9,7 @@
 CSender::CSender(QString rightCode, QString tryCode){
     int r_size = rightCode.length();
     int t_size = tryCode.length();
-
+    cout << "This is the size of the password: " << r_size << " = size of try: " << t_size << endl;
     if(r_size <= 0 ||t_size <= 0){
         cout << "One of the values are numm in CSender constructor" << endl;
     } else {
