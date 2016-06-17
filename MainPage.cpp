@@ -5,11 +5,9 @@
 #include <QtWidgets/QGridLayout>
 #include <QtCore/QCoreApplication>
 #include <QtWidgets/QMessageBox>
-#include <QtCore/QObject>
 #include <QtGui/QTextLine>
 #include "MainPage.h"
 #include "QMainApp.h"
-#include "Globals.h"
 
 
 MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
@@ -59,11 +57,6 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
     setLayout(mainLayout);
 
-    //[[TESTER]] Adder 3 enheder
-    /*unitsList.append(new Unit(1337, "Stuen"));
-    unitsList.append(new Unit(666, "Toilet"));
-    unitsList.append(new Unit(101010, "Sovevaerelse"));
-    static_cast<QMainApp *>qApp->setUnitList(unitsList);*/
 }
 
 void MainPage::ChangeView() {
@@ -80,37 +73,30 @@ void MainPage::ChangeView() {
         enhedsHaandteringPage->removeBox();
         enhedsHaandteringPage->addBox();
 
-    }
-    if (userMenuPages.at(index)->getName() == lys){
+    } else if (userMenuPages.at(index)->getName() == lys){
         unitsList = static_cast<QMainApp *>qApp->getUnitList();
         lysstyringPage->setUnitsList(unitsList);
         lysstyringPage->removeBox();
-
-
-    }
-    if (userMenuPages.at(index)->getName() == adfaerd){
+    } else if (userMenuPages.at(index)->getName() == adfaerd){
         unitsList = static_cast<QMainApp *>qApp->getUnitList();
         adfaerdsPage->setUnitsList(unitsList);
         adfaerdsPage->removeBox();
         adfaerdsPage->addBox();
-    }
-    if (userMenuPages.at(index)->getName() == Aendre){
+    } else if (userMenuPages.at(index)->getName() == Aendre){
         User *tempUser = new User(static_cast<QMainApp *>qApp->getCurrentUser());
         changeProfilePage->setCurrenUser(tempUser);
         QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
         changeProfilePage->setUserList(tempUserList);
         changeProfilePage->addLayouts();
         changeProfilePage->removeLayouts();
-    }
-    if (userMenuPages.at(index)->getName() == adduser){
+    } else if (userMenuPages.at(index)->getName() == adduser){
         User *tempUser = new User(static_cast<QMainApp *>qApp->getCurrentUser());
         addPage->setCurrenUser(tempUser);
         QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
         addPage->setUserList(tempUserList);
         addPage->clear();
         addPage->setInfo();
-    }
-    if(userMenuPages.at(index)->getName() == aktivi){
+    } else if(userMenuPages.at(index)->getName() == aktivi){
         unitsList = static_cast<QMainApp *>qApp->getUnitList();
         aktivitetssimuleringPage->setUnitList(unitsList);
         aktivitetssimuleringPage->setInfo();
@@ -120,10 +106,8 @@ void MainPage::ChangeView() {
 }
 
 void MainPage::handleSaveClick() {
-
     userMenuPages.at(index)->hide();
     this->show();
-
 }
 
 void MainPage::handleCancelClick() {
@@ -154,8 +138,6 @@ void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
     currentPassword = password;
     QList<User *> tempUserList = static_cast<QMainApp *>qApp->getUserList();
 
-
-
     for (int i = 0; i <tempUserList.size() ; ++i) {
         if(tempUserList.at(i)->getName()==currentUserName){
             setupPages(tempUserList.at(i));
@@ -177,24 +159,21 @@ void MainPage::addUserSave() {
     QMap<QString,QString> userCredentials= addPage->getLogin();
     QString *brugernavn= new QString(userCredentials.firstKey());
     QString *kodeord = new QString(userCredentials.value(userCredentials.firstKey()));
-    if(brugernavn == NULL || *brugernavn == "" || kodeord == NULL || *kodeord == "" ){
+    if(*brugernavn == "" || *kodeord == "" ){
         QMessageBox errorMessage;
         errorMessage.setText("Du skal skrive både brugernavn og kodeord!");
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
         return;
-    }
-    if(addPage->checkIfUserExist()) {
+    } else if(addPage->checkIfUserExist()) {
         QMessageBox errorMessage;
         errorMessage.setText("Brugernavnet er optaget!");
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
         return;
-
-    }
-    if(addPage->checkAdmin() && !addPage->checkIfUserExist()) {
+    } else if(addPage->checkAdmin() && !addPage->checkIfUserExist()) {
         brugernavn->remove("admin5555admin");
         userMap.insert(*brugernavn,*kodeord);
         User *newUser = new User(*brugernavn,*kodeord,true);
@@ -206,8 +185,7 @@ void MainPage::addUserSave() {
         errorMessage.setStandardButtons(QMessageBox::Ok);
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
-    }
-    else {
+    } else {
         QMessageBox errorMessage;
         errorMessage.setText("Bruger oprettet!");
         errorMessage.setStandardButtons(QMessageBox::Ok);
@@ -396,7 +374,7 @@ void MainPage::changeLightVolumeSave() {
 
 void MainPage::setupPages(User *currentUser_) {
     rights = currentUser_->getRights();
-    int pos = 0;
+    unsigned int pos = 0;
 
     // start on finding the relevant menupages for the user
     pos = 0;
