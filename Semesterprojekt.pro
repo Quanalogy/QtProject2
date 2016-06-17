@@ -10,6 +10,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++11
 TARGET = SemesterprojektPI
 TEMPLATE = app
+qmake_lflags += rdynamic
+qmake_cxxflags += -g
 
 # So wiringPi include files can be found during compile
 INCLUDEPATH    += /usr/local/include
