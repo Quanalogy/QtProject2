@@ -147,9 +147,12 @@ void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
             //qDebug() << tempUserList.size();
         }
     }
+    cout << "Kommet ud" << endl;
     if (firstTime){
+        cout << "Førstegangsvisning?" << endl;
         forsteGangsVisning();
     } else {
+        cout << "GOGOOGO" << endl;
         this->show();
     }
 
