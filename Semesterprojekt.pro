@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-ggreaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++11 debug
 
 CONFIG(debug, debug|release) {
@@ -20,8 +20,6 @@ message("RELEASE!")
 }
 TARGET = SemesterprojektPI
 TEMPLATE = app
-qmake_lflags += -rdynamic
-qmake_cxxflags += -g
 
 # So wiringPi include files can be found during compile
 INCLUDEPATH    += /usr/local/include
