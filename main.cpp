@@ -19,7 +19,7 @@ void handler(int sig) {
     // print out all the frames to stderr
     fprintf(stderr, "Error: signal %d:\n", sig);
     backtrace_symbols_fd(array, size, STDERR_FILENO);
-    exit(1);
+    exit(10);
 }
 using namespace std;
 int main(int argc, char *argv[]) {
