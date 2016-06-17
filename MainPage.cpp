@@ -225,7 +225,6 @@ void MainPage::changeAdfaerdsStyringSave()  {
     } else {
         adfaerdsPage->saveIntervals();
         adfaerdsPage->changeSave();
-
         if (firstTime){
             QMessageBox afslut;
             afslut.setText("Førstgangsopsætningen er færdig. \n"
@@ -297,8 +296,7 @@ void MainPage::changeUnitsSave()  {
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
         return;
-    }
-    if (enhedsHaandteringPage->checkIfSerieExist() || enhedsHaandteringPage->checkIfNavnExist()) {
+    } else if (enhedsHaandteringPage->checkIfSerieExist() || enhedsHaandteringPage->checkIfNavnExist()) {
         if (enhedsHaandteringPage->checkIfSerieExist() && enhedsHaandteringPage->checkIfNavnExist()) {
             QMessageBox errorMessage;
             errorMessage.setText("Enhedens navn og serienummer er allerede i brug!");
@@ -306,8 +304,7 @@ void MainPage::changeUnitsSave()  {
             errorMessage.button(QMessageBox::Ok)->animateClick(3000);
             errorMessage.exec();
             return;
-        }
-        if (enhedsHaandteringPage->checkIfSerieExist()) {
+        } else if (enhedsHaandteringPage->checkIfSerieExist()) {
             QMessageBox errorMessage;
             errorMessage.setText("Serienummer er allerede i brug!");
             errorMessage.setStandardButtons(QMessageBox::Ok);
