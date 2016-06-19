@@ -14,11 +14,7 @@ public:
     void sendToDE2();
 
 private:
-    int bin_rightCode [64];
-    int bin_tryCode [64];
-    int completeCode [130];
-
-
+    int completeCode [130] = {0};
 };
 
 #endif //QTPROJECT2_CSENDER_H

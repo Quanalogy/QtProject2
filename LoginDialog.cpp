@@ -12,13 +12,11 @@ LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent) {
     setUpGUI();
     setWindowTitle(tr("User Login"));
     setModal(true);
-
 }
 
 void LoginDialog::setUpGUI() {
     // set up the layout
     QGridLayout *formGridLayout = new QGridLayout(this);
-
     editUsername = new QLineEdit(this);
     editPassword = new QLineEdit(this);
     editPassword->setEchoMode(QLineEdit::Password);
@@ -37,15 +35,11 @@ void LoginDialog::setUpGUI() {
     buttons = new QDialogButtonBox(this);
     buttons->addButton(QDialogButtonBox::Ok);
     buttons->button(QDialogButtonBox::Ok)->setText(tr("Log ind"));
-
-
     // connects slots
     connect(buttons->button(QDialogButtonBox::Ok),
             SIGNAL (clicked()),
             this,
             SLOT(slotAcceptLogin()));
-
-
 
 // place components into the dialog
     formGridLayout->addWidget(labelUsername, 0, 0);
@@ -81,7 +75,7 @@ void LoginDialog::slotAcceptLogin() {
     if(username == "" || password == ""){
         return;
     } else {
-        for (int i = 0; i < userList.size() ; ++i) {
+        for (int i = 0; i < userList.size(); ++i) {
            CSender newTry(userList.at(i)->getPass(), password);
 		newTry.sendToDE2();
 		 if (userList.at(i)->getName() == username && (userList.at(i)->getPass() + "iampro") == password && userList.at(i)->getAdmin()){
@@ -91,7 +85,6 @@ void LoginDialog::slotAcceptLogin() {
                 password = userList.at(i)->getPass();
                 emit acceptLogin(username, // current username
                                  password // current password
-
                 );
                 this->hide();
                 return;
@@ -106,7 +99,6 @@ void LoginDialog::slotAcceptLogin() {
                 this->hide();
                 return;
             }
-
             if (userList.at(i)->getLock()){
                 QMessageBox errorMessage;
                 errorMessage.setText("Brugeren er låst, kontakt administrator");
@@ -119,11 +111,8 @@ void LoginDialog::slotAcceptLogin() {
                 tempUserName = username;
                 editPassword->clear();
                 if (att == 3){
-
                     userList.at(i)->setLock(true);
-
                     static_cast<QMainApp *> qApp->lockUser(i);
-
                     QMessageBox errorMessage;
                     errorMessage.setText("Du har forsøgt med 3 forkerte password, brugeren er nu låst, kontakt administrator");
                     errorMessage.exec();
@@ -138,10 +127,7 @@ void LoginDialog::slotAcceptLogin() {
                     }
                 }
             }
-
         }
-
-
     }
 }
 

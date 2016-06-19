@@ -1,6 +1,6 @@
 #include <iostream>
 #include "QMainApp.h"
-#include "MenuWidget.h"
+/*#include "MenuWidget.h"
 #include "CSender.h"
 #include <stdio.h>
 #include <execinfo.h>
@@ -20,10 +20,10 @@ void handler(int sig) {
     fprintf(stderr, "Error: signal %d:\n", sig);
     backtrace_symbols_fd(array, size, STDERR_FILENO);
     exit(10);
-}
+}*/
 using namespace std;
 int main(int argc, char *argv[]) {
-    signal(SIGSEGV, handler);
+    //signal(SIGSEGV, handler);
     QMainApp app(argc,argv);
     cout << "Hello World" << endl;
     return app.exec();

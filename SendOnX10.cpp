@@ -9,7 +9,7 @@ using namespace std;
 #include <stdlib.h>
 #include <stdint.h>
 #include <cmath>
-#include <wiringPi.h>
+//#include <wiringPi.h>
 
 int x10Index = -1;
 int x10Communication[30] = {0};
@@ -18,7 +18,7 @@ void writeX10Communication();
 
 SendOnX10::SendOnX10() {
     printf ("Raspberry Pi wiringPi test program\n") ;
-    if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
+/*    if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
         //exit (1) ;
         cout << "Problems with wiringpisetupgpio" << endl;
     }
@@ -27,7 +27,7 @@ SendOnX10::SendOnX10() {
     pwmSetClock(80);                                        // Clock and range set to make a 120kHz pwm signal
     pwmSetRange (10);
     pwmWrite(18, 0);
-}
+*/}
 
 
 void SendOnX10::SendCommunication(int unitID, bool aktivSim, int lightLevel) {
@@ -75,12 +75,12 @@ void SendOnX10::SendCommunication(int unitID, bool aktivSim, int lightLevel) {
 void writeX10Communication(){
     if(x10Index != -1){
         if(x10Communication3[x10Index]){
-            pwmWrite(18, 5);
+          /*  pwmWrite(18, 5);
             delay(2);
             pwmWrite(18,0);
-            cout << 1;
+            */cout << 1;
         } else {
-            pwmWrite(18, 0);
+            //pwmWrite(18, 0);
             cout << 0;
         }
     }

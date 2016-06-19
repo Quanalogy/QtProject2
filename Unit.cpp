@@ -13,7 +13,7 @@ Unit::Unit(int id_, QString unitName_) {
     volume = 70;
     as = false;
 
-    if(id == NULL){
+    if(id == 0){
 
     } else {
         static_cast<QMainApp *>qApp->getSendingPTR()->SendCommunication(id, as, volume);

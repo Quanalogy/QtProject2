@@ -3,60 +3,42 @@
 //
 
 #include <iostream>
-#include <bitset>
 #include "CSender.h"
 
 CSender::CSender(QString rightCode, QString tryCode){
     int r_size = rightCode.length();
     int t_size = tryCode.length();
-    cout << "This is the size of the password: " << r_size << " = size of try: " << t_size << endl;
+
+    cout << "The size of r_size: " << r_size << " = The size of t_size: " << t_size << endl;
     if(r_size <= 0 ||t_size <= 0){
-        cout << "One of the values are numm in CSender constructor" << endl;
+        cout << "One of the values are below 1 in CSender constructor" << endl;
     } else {
-        completeCode[0] = 0;
-        int pos = 1;
-        for (int i = 0 ; i < r_size ; i++){
-            const std::string result = std::bitset<8>((int) rightCode.at(i).toLatin1()).to_string();
-            for (int j = 0 ; j < 8 ; j++){
-                if (result.at(j) == 48){
-                    completeCode[pos] = 0;
-                }
-                if (result.at(j) == 49){
-                    completeCode[pos] = 1;
-                }
-                pos++;
+        completeCode[0] = 0;    // start with 0 to start communication
+        int pos = 1;            // used for position in the array
+        int i;                  // used for bitshift
+        int j;                  // used for position in the codearray
+        cout << "The right code: ";
+        for(j = 0; j < r_size; ++j){
+            for (i = 0; i < 8; ++i, ++pos) {
+                completeCode[pos] = !!((rightCode.at(j).toLatin1()<<(i))&0x80);
+                cout << completeCode[pos];
             }
+            cout << " ";        // for nice print lines
         }
-        int r_lastBits = 8 - r_size;
-        for (int k = 0 ; k < r_lastBits ; k++){
-            for (int l = 0 ; l < 8 ; l++){
-                completeCode[pos] = 0;
-                pos++;
+        cout << endl;
+        pos = 64;               // make sure that every number gets treated the same way
+        cout << "The try code: ";
+        for (j = 0; j <t_size ; ++j) {
+            for (i = 0; i <8 ; ++i, ++pos) {
+                completeCode[pos] = !!((tryCode.at(j).toLatin1()<<(i))&0x80);
+                cout << completeCode[pos];
             }
+            cout << " ";        // for nice print lines
         }
-        for (int i = 0 ; i < t_size ; i++){
-            const std::string result = std::bitset<8>((int) tryCode.at(i).toLatin1()).to_string();
-            for (int j = 0 ; j < 8 ; j++){
-                if (result.at(j) == 48){
-                    completeCode[pos] = 0;
-                }
-                if (result.at(j) == 49){
-                    completeCode[pos] = 1;
-                }
-                pos++;
-            }
-        }
-        int t_lastBits = 8 - r_size;
-        for (int k = 0 ; k < t_lastBits ; k++){
-            for (int l = 0 ; l < 8 ; l++){
-                completeCode[pos] = 0;
-                pos++;
-            }
-        }
-        completeCode[pos] = 1;
-        for (int m = 0 ; m < 130 ; m++){
-            cout << completeCode[m];
-        }
+        cout << endl;
+        pos = 129;              // Making sure that every size of strings get treated even
+        completeCode[pos] = 1;  // Go high to end communication
+
     }
 
 }
