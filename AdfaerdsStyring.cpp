@@ -155,27 +155,22 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
 
 
     int pos=0;
-    for (auto i = leftList.begin(); i != leftList.end() ; ++i,++pos)
-    {
+    for (auto i = leftList.begin(); i != leftList.end() ; ++i,++pos) {
         lefVertivalLayout->addWidget(leftList.at(pos));
-        if(*i==intervalDag)
-        {
-           lefVertivalLayout->addLayout(timeDagFraHorizontalLayout);
+        if(*i==intervalDag){
+            lefVertivalLayout->addLayout(timeDagFraHorizontalLayout);
             lefVertivalLayout->addLayout(timeDagTilHorizontalLayout);
         }
     }
 
     pos=0;
 
-    for (auto j = rightList.begin(); j !=rightList.end() ; ++j,++pos)
-    {
+    for (auto j = rightList.begin(); j !=rightList.end() ; ++j,++pos) {
         rigVerticalLayout->addWidget(rightList.at(pos));
-        if(*j==intervalNat)
-        {
+        if(*j==intervalNat) {
             rigVerticalLayout->addLayout(timeNatFraHorizontalLayout);
             rigVerticalLayout->addLayout(timeNatTilHorizontalLayout);
         }
-
     }
 
 
@@ -210,11 +205,9 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
 
 }
 bool AdfaerdsStyring::notNull(){
-    if (((dagFraTime->text() != "") && (dagTilTime->text() != "" ))|| (natFraTime->text() != "" && natTilTime->text() != "")){
-        return true;
-    } else {
-        return false;
-    }
+    return ((dagFraTime->text() != "") && (dagTilTime->text() != "" ))
+        || (natFraTime->text() != "" && natTilTime->text() != "") ? true : false;
+
 }
 
 void AdfaerdsStyring::saveIntervals() {
@@ -490,18 +483,18 @@ void AdfaerdsStyring::startWork() {
 }
 
 void AdfaerdsStyring::ifDagModified() {
-        if (dagFraTime != natTilTime){
-            natTilTime->setText(dagFraTime->text());
-        }
-        if (dagFraMin !=natTilMin){
-            natTilMin->setText(dagFraMin->text());
-        }
-        if (dagTilTime != natFraTime){
-            natFraTime->setText(dagTilTime->text());
-        }
-        if (dagTilMin != natFraMin){
-            natFraMin->setText(dagTilMin->text());
-        }
+    if (dagFraTime != natTilTime){
+        natTilTime->setText(dagFraTime->text());
+    }
+    if (dagFraMin !=natTilMin){
+        natTilMin->setText(dagFraMin->text());
+    }
+    if (dagTilTime != natFraTime){
+        natFraTime->setText(dagTilTime->text());
+    }
+    if (dagTilMin != natFraMin){
+        natFraMin->setText(dagTilMin->text());
+    }
     QValidator *timeValidator = new QIntValidator(0,23,this);
     QValidator *minValidator = new QIntValidator(0,59,this);
 

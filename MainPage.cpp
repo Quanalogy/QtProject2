@@ -26,7 +26,7 @@ MainPage::MainPage(QWidget *parent) : MenuWidget(parent){
 
     //input pages into QList
     pages << addPage << changeProfilePage << aktivitetssimuleringPage << lysstyringPage
-            << adfaerdsPage << enhedsHaandteringPage;
+    << adfaerdsPage << enhedsHaandteringPage;
 
     //Sætter det til første gang programet opstartes
     firstTime = true;
@@ -72,7 +72,6 @@ void MainPage::ChangeView() {
         enhedsHaandteringPage->setUnitsList(unitsList);
         enhedsHaandteringPage->removeBox();
         enhedsHaandteringPage->addBox();
-
     } else if (userMenuPages.at(index)->getName() == lys){
         unitsList = static_cast<QMainApp *>qApp->getUnitList();
         lysstyringPage->setUnitsList(unitsList);
@@ -143,12 +142,9 @@ void MainPage::slotAcceptUserLogin(QString &userName, QString &password) {
         }
     }
     if (firstTime){
-        cout << "Førstegangsvisning?" << endl;
         forsteGangsVisning();
     } else {
-        cout << "This" << this << endl;
         this->show();
-        cout << "FUUUUUU" << endl;
     }
 
 }
@@ -221,7 +217,6 @@ void MainPage::changeAdfaerdsStyringSave()  {
         errorMessage.button(QMessageBox::Ok)->animateClick(3000);
         errorMessage.exec();
         return;
-
     } else {
         adfaerdsPage->saveIntervals();
         adfaerdsPage->changeSave();
@@ -271,7 +266,6 @@ void MainPage::changeProfileSave() {
             saveMessege();
         }
         changeProfilePage->makeChanges();
-        cout << "kommer ud" << endl;
         if(firstTime){
             adfaerdsPage->setUnitsList(unitsList);
             adfaerdsPage->removeBox();
@@ -280,7 +274,6 @@ void MainPage::changeProfileSave() {
             userMenuPages.at(index)->hide();
             index = 4;
         } else {
-
             this->show();
             userMenuPages.at(index)->hide();
         }
@@ -311,8 +304,7 @@ void MainPage::changeUnitsSave()  {
             errorMessage.button(QMessageBox::Ok)->animateClick(3000);
             errorMessage.exec();
             return;
-        }
-        if (enhedsHaandteringPage->checkIfNavnExist()) {
+        } else if (enhedsHaandteringPage->checkIfNavnExist()) {
             QMessageBox errorMessage;
             errorMessage.setText("Enhedens navn er allerede i brug!");
             errorMessage.setStandardButtons(QMessageBox::Ok);
@@ -320,10 +312,10 @@ void MainPage::changeUnitsSave()  {
             errorMessage.exec();
             return;
         }
-    }
-    else {
+    } else {
         int ID = enhedsHaandteringPage->getEditLineID();
         QString Name = enhedsHaandteringPage->getEditLineName();
+
         if (ID >= 0 && Name.toStdString().size() > 0 ) {
             unitsList.append(new Unit(ID, Name));
             enhedsHaandteringPage->setUnitsList(unitsList);
@@ -331,6 +323,7 @@ void MainPage::changeUnitsSave()  {
         enhedsHaandteringPage->removeIfChecked();
         unitsList = enhedsHaandteringPage->getUnitsList();
         static_cast<QMainApp *>qApp->setUnitList(unitsList);
+
         if (enhedsHaandteringPage->somethingWritten() || enhedsHaandteringPage->isChecked()){
             if (enhedsHaandteringPage->somethingWritten() && enhedsHaandteringPage->isChecked()){
                 QMessageBox errorMessage;
@@ -338,15 +331,13 @@ void MainPage::changeUnitsSave()  {
                 errorMessage.setStandardButtons(QMessageBox::Ok);
                 errorMessage.button(QMessageBox::Ok)->animateClick(3000);
                 errorMessage.exec();
-            }
-            if(enhedsHaandteringPage->somethingWritten()){
+            } else if(enhedsHaandteringPage->somethingWritten()){
                 QMessageBox errorMessage;
                 errorMessage.setText("Enhed tilføjet!");
                 errorMessage.setStandardButtons(QMessageBox::Ok);
                 errorMessage.button(QMessageBox::Ok)->animateClick(3000);
                 errorMessage.exec();
-            }
-            if (enhedsHaandteringPage->isChecked()){
+            } else if (enhedsHaandteringPage->isChecked()){
                 QMessageBox errorMessage;
                 errorMessage.setText("Enhed slettet!");
                 errorMessage.setStandardButtons(QMessageBox::Ok);
@@ -357,6 +348,7 @@ void MainPage::changeUnitsSave()  {
         if (running) {
             adfaerdsPage->updateWorker(unitsList);
         }
+
         this->show();
         userMenuPages.at(index)->hide();
     }
@@ -382,7 +374,6 @@ void MainPage::setupPages(User *currentUser_) {
     }
     logout  = new QPushButton("Log ud", this);
 
-
     //Laver TopLayout med brugernavn og ur.
     if(mainLayout->count() == 3){
         topLayout->removeWidget(tempClock);
@@ -393,18 +384,12 @@ void MainPage::setupPages(User *currentUser_) {
         horizontalLineWidget->deleteLater();
         topLayout->deleteLater();
         userName->deleteLater();
-        //time->deleteLater();
-
         tempClock->deleteLater();
-
-
     }
     topLayout = new QHBoxLayout();
     userName = new QLabel();
-    //time = new QLabel();
     tempClock = new Clock();
     horizontalLineWidget = new QWidget();
-
 
     if(static_cast<QMainApp *>qApp->getCurrentUser().getAdmin()){
         QString temp = static_cast<QMainApp *>qApp->getCurrentUser().getName() + "  (Admin)";
@@ -469,7 +454,7 @@ void MainPage::saveMessege(){
 void MainPage::forsteGangsVisning() {
     QMessageBox velkomst;
     velkomst.setText(
-                    "Velkommen til Home Automation System \n"
+            "Velkommen til Home Automation System \n"
                     "                                     \n"
                     "Dette er en førstegangs intro for nye\n"
                     "brugere. Du vil nu komme igennem:    \n"
@@ -481,9 +466,7 @@ void MainPage::forsteGangsVisning() {
                     "                                     \n"
                     "                                     \n"
                     "                                     \n"
-
-
-                             );
+    );
     velkomst.exec();
     User *tempUser = new User(static_cast<QMainApp *>qApp->getCurrentUser());
     addPage->setCurrenUser(tempUser);
