@@ -205,9 +205,7 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
 
 }
 bool AdfaerdsStyring::notNull(){
-    return ((dagFraTime->text() != "") && (dagTilTime->text() != "" ))
-        || (natFraTime->text() != "" && natTilTime->text() != "") ? true : false;
-
+    return (dagFraTime, dagTilTime, natFraTime, natTilTime)->text() != "" ? true : false;
 }
 
 void AdfaerdsStyring::saveIntervals() {
@@ -392,7 +390,7 @@ void AdfaerdsStyring::addBox(){
 
 void AdfaerdsStyring::removeBox(){
     if (lefCheckBoxes.size() > unitsList.size()) {
-        for (int i = 0 ; i < lefCheckBoxes.size() ; i++){
+        for (int i = 0; i < lefCheckBoxes.size(); ++i){
             lefCheckBoxes.at(i)->deleteLater();
             rigCheckBoxes.at(i)->deleteLater();
             lefLineEdits.at(i)->deleteLater();
@@ -537,3 +535,4 @@ void AdfaerdsStyring::ifNatModified() {
 void AdfaerdsStyring::updateWorker(QList<Unit *> list) {
     worker->setUnitList(list);
 }
+

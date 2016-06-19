@@ -18,17 +18,13 @@ class Aktivitetssimulering : public MenuWidget{
 Q_OBJECT
 public:
     Aktivitetssimulering(QWidget *parent = 0);
-    QString getName();
-    bool actSimOn();
-    bool acSimOff();
+    QString getName(){return name;}
     void setInfo();
-    void setUnitList(QList<Unit *> list);
+    void setUnitList(QList<Unit *> list){unitList = list;}
 
 
 private:
     QString name = "Aktivitetssimulering";
-    void toggleButtonOn();
-    void toggleButtonOff();
     void setAuto();
     QPushButton *onOff;
     bool actSimstate;
@@ -50,6 +46,10 @@ private:
 signals:
     void onSaveClick();
     void onCancelClick();
+
+private slots:
+    void actSimOn();
+    void actSimOff();
 };
 
 

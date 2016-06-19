@@ -4,13 +4,9 @@
 
 #include "Aktivitetssimulering.h"
 #include "QMainApp.h"
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QLineEdit>
-#include <QtWidgets/QCheckBox>
-#include <QtWidgets/QLabel>
 
 Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent){
-   this->setWindowTitle(name);
+    this->setWindowTitle(name);
     mainLayout = new QVBoxLayout(this);
     top= new QVBoxLayout;
     bottom = new QHBoxLayout;
@@ -54,9 +50,8 @@ Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent)
 
     connect(save, &QPushButton::clicked,this, &Aktivitetssimulering::onSaveClick);
     connect(cancel, &QPushButton::clicked, this, &Aktivitetssimulering::onCancelClick);
-    //connect(onOff, &QPushButton::clicked, this, &Aktivitetssimulering::toggleButtonColor);
-    connect(on, &QPushButton::clicked, this, &Aktivitetssimulering::toggleButtonOn);
-    connect(off, &QPushButton::clicked, this, &Aktivitetssimulering::toggleButtonOff);
+    connect(on, &QPushButton::clicked, this, &Aktivitetssimulering::actSimOn);
+    connect(off, &QPushButton::clicked, this, &Aktivitetssimulering::actSimOff);
     connect(autAct, &QCheckBox::clicked, this, &Aktivitetssimulering::setAuto);
     onOff->setDisabled(true);
 
@@ -64,56 +59,7 @@ Aktivitetssimulering::Aktivitetssimulering(QWidget *parent) : MenuWidget(parent)
     bottom->addWidget(cancel);
     bottom->addWidget(save);
 
-
     setLayout(mainLayout);
-
-
-
-}
-
-QString Aktivitetssimulering::getName() {
-    return name;
-}
-
-void Aktivitetssimulering::toggleButtonOn() {
-        QPalette *green = new QPalette();
-        green->setColor(QPalette::ButtonText, Qt::darkGreen);
-        onOff->setText("Tændt");
-        onOff->setPalette(*green);
-        off->setChecked(false);
-        for (int i = 0 ; i < unitList.size() ; i++){
-            unitList.at(i)->setAS(true);
-        }
-
-
-
-        // Call til X.10
-        // Skrives her
-        cout << "Kommando til hver enkelt enhed, kan erstattes med:" << endl;
-        cout << "X.10 command: id: 0, AS=true, styrke: x : sendes her!!" << endl;
-        cout << "Kommando for alle enheder" << endl;
-
-
-}
-
-void Aktivitetssimulering::toggleButtonOff() {
-        QPalette *red = new QPalette();
-        onOff->setText("Slukket");
-        red->setColor(QPalette::ButtonText, Qt::red);
-        onOff->setPalette(*red);
-        on->setChecked(false);
-        for (int i = 0 ; i < unitList.size() ; i++){
-            unitList.at(i)->setAS(false);
-        }
-
-
-        // Call til X.10
-        // Skrives her
-        cout << "Kommando til hver enkelt enhed, kan erstattes med:" << endl;
-        cout << "X.10 command: id: 0, AS=false, styrke: x : sendes her!!" << endl;
-        cout << "Kommando for alle enheder" << endl;
-
-
 }
 
 void Aktivitetssimulering::setAuto(){
@@ -137,8 +83,6 @@ void Aktivitetssimulering::setInfo(){
         topLayout->deleteLater();
         userName->deleteLater();
         tempClock->deleteLater();
-
-
     }
     topLayout = new QHBoxLayout();
     userName = new QLabel();
@@ -167,6 +111,27 @@ void Aktivitetssimulering::setInfo(){
     mainLayout->addLayout(bottom);
 }
 
-void Aktivitetssimulering::setUnitList(QList<Unit *> list) {
-    unitList = list;
+
+void Aktivitetssimulering::actSimOn() {
+    QPalette *green = new QPalette();
+    green->setColor(QPalette::ButtonText, Qt::darkGreen);
+    onOff->setText("Tændt");
+    onOff->setPalette(*green);
+    off->setChecked(false);
+    for (int i = 0 ; i < unitList.size() ; i++){
+        unitList.at(i)->setAS(true);
+    }
+    static_cast<QMainApp *>qApp->getSendingPTR()->SendCommunication(0,true,0);
+}
+
+void Aktivitetssimulering::actSimOff() {
+    QPalette *red = new QPalette();
+    onOff->setText("Slukket");
+    red->setColor(QPalette::ButtonText, Qt::red);
+    onOff->setPalette(*red);
+    on->setChecked(false);
+    for (int i = 0 ; i < unitList.size() ; i++){
+        unitList.at(i)->setAS(false);
+    }
+    static_cast<QMainApp *>qApp->getSendingPTR()->SendCommunication(0,false,0);
 }

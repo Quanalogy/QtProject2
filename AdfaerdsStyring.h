@@ -111,6 +111,7 @@ public slots:
 private slots:
     void ifDagModified();
     void ifNatModified();
+
 };
 
 

@@ -31,6 +31,7 @@ SendOnX10::SendOnX10() {
 
 
 void SendOnX10::SendCommunication(int unitID, bool aktivSim, int lightLevel) {
+    cout << "Sending X10" << endl;
     convertUnitToX10(unitID);
     convertLightToX10(lightLevel);
     for (int i = 0; i < 3; ++i) {
