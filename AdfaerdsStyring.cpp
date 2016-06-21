@@ -476,6 +476,7 @@ void AdfaerdsStyring::startWork() {
     connect(worker, SIGNAL(finished()), workerThread, SLOT(quit()));
     connect(worker, SIGNAL(finished()), worker, SLOT(deleteLater()));
     worker->start();
+    worker->runIt();
     workCount++;
 }
 
