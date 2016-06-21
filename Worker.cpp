@@ -5,7 +5,6 @@
 #include "Worker.h"
 #include <QApplication>
 #include <QtCore/QTime>
-#include <QtCore/QRunnable>
 #include "portablesleep.h"
 #include "QMainApp.h"
 
@@ -14,19 +13,17 @@ Worker::Worker(QObject *parent)
 {
 }
 
-void Worker::runIt()
+void Worker::run()
 {
     while (m_running) {
         controlAdfaerd();
         PortableSleep::msleep(1000);
     }
-    emit finished();
 }
 
 void Worker::stopWork()
 {
     m_running = false;
-    emit finished();
 }
 
 void Worker::setUnitList(QList<Unit *> list) {

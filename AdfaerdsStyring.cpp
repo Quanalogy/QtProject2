@@ -472,11 +472,8 @@ void AdfaerdsStyring::startWork() {
     worker->setStyrker(dagStyrker,aftenStyrker);
 
     //worker->moveToThread(workerThread);
-    QThread::connect(workerThread, SIGNAL(started()), worker, SLOT(doWork()));
-    connect(worker, SIGNAL(finished()), workerThread, SLOT(quit()));
-    connect(worker, SIGNAL(finished()), worker, SLOT(deleteLater()));
+    //connect(worker, SIGNAL(finished()), worker, SLOT(deleteLater()));
     worker->start();
-    worker->runIt();
     workCount++;
 }
 

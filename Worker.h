@@ -15,7 +15,6 @@ Q_OBJECT
 
 public:
     Worker(QObject *parent);
-    void runIt();
     void setUnitList(QList<Unit *> list);
     void setDagAftenUnit(QList<Unit *> daglist, QList<Unit *> aftenlist);
     void setStyrker(QList<QString> dagstyrker, QList<QString> aftenstyrker );
@@ -32,6 +31,7 @@ signals:
     void finished();
 
 private:
+    void run();
     bool m_running;
     QList<Unit *> unitList;
     QList<Unit *> aftenList;
