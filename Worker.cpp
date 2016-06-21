@@ -5,15 +5,16 @@
 #include "Worker.h"
 #include <QApplication>
 #include <QtCore/QTime>
+#include <QtCore/QRunnable>
 #include "portablesleep.h"
 #include "QMainApp.h"
 
-Worker::Worker()
-        : m_running(true)
+Worker::Worker(QObject *parent)
+        : QThread(parent),  m_running(true)
 {
 }
 
-void Worker::doWork()
+void Worker::runIt()
 {
     while (m_running) {
         controlAdfaerd();

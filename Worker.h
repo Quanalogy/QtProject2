@@ -6,14 +6,16 @@
 #define QTPROJECT2_WORKER_H
 
 #include <QObject>
+#include <QThread>
 #include "Unit.h"
 
-class Worker : public QObject
+class Worker : public QThread
 {
 Q_OBJECT
 
 public:
-    Worker();
+    Worker(QObject *parent);
+    void runIt();
     void setUnitList(QList<Unit *> list);
     void setDagAftenUnit(QList<Unit *> daglist, QList<Unit *> aftenlist);
     void setStyrker(QList<QString> dagstyrker, QList<QString> aftenstyrker );
@@ -24,7 +26,6 @@ public:
     bool isRunning();
 
 public slots:
-    void doWork();
     //void stopWork();
 
 signals:

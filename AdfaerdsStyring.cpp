@@ -464,19 +464,18 @@ void AdfaerdsStyring::startWork() {
         workCount = 0;
     }
 
-    workerThread = new QThread();
-    worker = new Worker;
+    worker = new Worker(this);
+
     worker->setUnitList(unitsList);
     worker->setDagAftenUnit(dagUnits,aftenUnits);
     worker->setTider(dagTider,aftenTider);
     worker->setStyrker(dagStyrker,aftenStyrker);
 
-    worker->moveToThread(workerThread);
+    //worker->moveToThread(workerThread);
     QThread::connect(workerThread, SIGNAL(started()), worker, SLOT(doWork()));
     connect(worker, SIGNAL(finished()), workerThread, SLOT(quit()));
     connect(worker, SIGNAL(finished()), worker, SLOT(deleteLater()));
-    connect(workerThread, SIGNAL(finished()), workerThread, SLOT(deleteLater()));;
-    workerThread->start();
+    worker->start();
     workCount++;
 }
 
