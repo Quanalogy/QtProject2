@@ -484,6 +484,7 @@ void MainPage::setUnitList(QList<Unit *> list) {
 }
 
 void MainPage::updateLysSettings() {
+    if(lysstyringPage)
     lysstyringPage->update();
 }
 

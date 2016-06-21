@@ -39,7 +39,6 @@ LoginDialog* QMainApp::getLogin() {
             }
         }
     return loginDialog;
-
 }
 
 void QMainApp::setUserList(QList<User *> list) {
