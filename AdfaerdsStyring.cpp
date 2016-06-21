@@ -205,7 +205,7 @@ AdfaerdsStyring::AdfaerdsStyring(QWidget *parent) : MenuWidget(parent) {
 
 }
 bool AdfaerdsStyring::notNull(){
-    return (dagFraTime, dagTilTime, natFraTime, natTilTime)->text() != "" ? true : false;
+    return ((dagFraTime->text() != "") && (dagTilTime->text() != "")) ? true : false;
 }
 
 void AdfaerdsStyring::saveIntervals() {
