@@ -9,12 +9,14 @@ using namespace std;
 #include <stdlib.h>
 #include <stdint.h>
 #include <cmath>
+#include <queue>
 //#include <wiringPi.h>
 
 int x10Index = -1;
 int x10Communication[30] = {0};
 int x10Communication3[108] = {0};
 void writeX10Communication();
+queue<int> x10SendingQueue;
 
 SendOnX10::SendOnX10() {
     printf ("Raspberry Pi wiringPi test program\n") ;
@@ -56,27 +58,43 @@ void SendOnX10::SendCommunication(int unitID, bool aktivSim, int lightLevel) {
         x10Communication[l] = x10LightArray[k];
     }
 
+    cout << "3-part array: ";
     for (int m = 0; m < 30; ++m) {
         x10Communication3[m] = x10Communication[m];
+        cout << x10Communication3[m];
     }
-
+    cout << " ";
     k=0;
     for (int i1 = 36; i1 < 66; ++i1, ++k) {
         x10Communication3[i1] = x10Communication[k];
+        cout << x10Communication3[i1];
     }
     k = 0;
+    cout << " ";
     for (int j1 = 72; j1 < 102 ; ++j1, ++k) {
         x10Communication3[j1] = x10Communication[k];
+        cout << x10Communication3[j1];
     }
+
+    cout << endl << "X.10 Queue:   ";
+    for (k = 0; k < 108; ++k) {
+        if(k == 30 || k == 66){
+            cout << " ";
+        }
+        x10SendingQueue.push(x10Communication3[k]);
+        cout << x10SendingQueue.back();
+    }
+    cout << endl;
 
     x10Index = 0;
 
 }
 
 void writeX10Communication(){
-    if(x10Index != -1){
-        if(x10Communication3[x10Index]){
-          /*  pwmWrite(18, 5);
+
+    if(!x10SendingQueue.empty()){
+        if(x10SendingQueue.front()){
+            /*  pwmWrite(18, 5);
             delay(2);
             pwmWrite(18,0);
             */cout << 1;
@@ -84,7 +102,20 @@ void writeX10Communication(){
             //pwmWrite(18, 0);
             cout << 0;
         }
+        x10SendingQueue.pop();
     }
+/*
+    if(x10Index != -1){
+        if(x10Communication3[x10Index]){
+          *//*  pwmWrite(18, 5);
+            delay(2);
+            pwmWrite(18,0);
+            *//*cout << 1;
+        } else {
+            //pwmWrite(18, 0);
+            cout << 0;
+        }
+    }*/
 
     if(x10Index == 107){
         x10Index = -1;
