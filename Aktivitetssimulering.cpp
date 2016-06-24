@@ -133,5 +133,5 @@ void Aktivitetssimulering::actSimOff() {
     for (int i = 0 ; i < unitList.size() ; i++){
         unitList.at(i)->setAS(false);
     }
-    static_cast<QMainApp *>qApp->getSendingPTR()->SendCommunication(0,false,0);
+    static_cast<QMainApp *>qApp->getSendingPTR()->SendCommunication(0,false,101);
 }

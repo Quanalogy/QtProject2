@@ -158,7 +158,7 @@ void SendOnX10::convertUnitToX10(int unitNumber) {
 
 void SendOnX10::convertLightToX10(int lightLevel_) {
     int tempLightLevel;
-    if(lightLevel_ > 100){
+    if(lightLevel_ > 101){
         tempLightLevel = 100;
     } else {
         tempLightLevel = lightLevel_;
