@@ -5,11 +5,12 @@
 #include <iostream>
 #include "CSender.h"
 #include <wiringPi.h>
+#define SERIALIN 17
+#define SERIALOUT 4
 
 CSender::CSender(){
-
-    pinMode(4, OUTPUT);
-    pinMode(17, INPUT);
+    pinMode(SERIALOUT, OUTPUT);
+    pinMode(SERIALIN, INPUT);
 }
 
 bool CSender::sendToDE2(QString rightCode, QString tryCode){
@@ -68,7 +69,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             }
         }
 
-        for (int k = 0; k < r_size; ++k) {
+        for (int k = 0; k < r_size; ++k) {      //Fill into the queue
             sendingQueue.push(0);
             for (int l = 0; l < 8; ++l) {
                 sendingQueue.push(rightBinCode[l]);
@@ -88,24 +89,26 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
 
     // start the old sendToDE2
     cout << endl;
-    for (int i = 0 ; i < 130 ; i++){
+    int i = 0;
+    while(!sendingQueue.empty()){
         if (sendingQueue.front() == 1){
-            digitalWrite(17,HIGH);
+            digitalWrite(SERIALOUT,HIGH);
             cout << "1" ;
         } else {
-            digitalWrite(17,LOW);
+            digitalWrite(SERIALOUT,LOW);
             cout << "0" ;
         }
         sendingQueue.pop();
         delayMicroseconds(416);
         if(i != 0 && i%11==0){
-            if(!digitalRead(17)){
+            if(!digitalRead(SERIALIN)){
                 cout << "The response is false" << endl;
                 return false;
             }
         }
+        ++i;
     }
-    if(digitalRead(17)){
+    if(digitalRead(SERIALIN)){
         cout << "The response is true!" << endl;
         return true;
     } else {
