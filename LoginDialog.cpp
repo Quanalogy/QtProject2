@@ -87,7 +87,7 @@ void LoginDialog::slotAcceptLogin() {
                 );
                 this->hide();
                 return;
-            } else if(userList.at(i)->getName() == username && userList.at(i)->getPass().size() != password.remove("iampro").size()){   // Make sure the password is the right length
+            } else if(userList.at(i)->getName() == username && userList.at(i)->getPass().size() != password.size()){   // Make sure the password is the right length
                 ++att;
                 QMessageBox errorMessage;
                 QString temp = "Forkert password!";
