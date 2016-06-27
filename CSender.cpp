@@ -4,10 +4,13 @@
 
 #include <iostream>
 #include "CSender.h"
+#include <wiringPi.h>
 
 CSender::CSender(QString rightCode, QString tryCode){
     int r_size = rightCode.length();
     int t_size = tryCode.length();
+    int rightBinCode[8*r_size];
+    int tryBinCode[8*t_size];
 
     cout << "The size of r_size: " << r_size << " = The size of t_size: " << t_size << endl;
     if(r_size <= 0 ||t_size <= 0){
@@ -26,9 +29,20 @@ CSender::CSender(QString rightCode, QString tryCode){
             cout << " ";        // for nice print lines
         }
         cout << endl;
+        cout << "The right code new array: ";
+
+        int arraypos = 0;
+        for (j = 0; j < r_size; ++j) {
+            for (i = 0; i < 8; ++i, ++arraypos) {
+                rightBinCode[arraypos] = !!((rightCode.at(j).toLatin1()<<(i))&0x80);
+                cout << rightBinCode[arraypos];
+            }
+        }
+
+
         pos = 64;               // make sure that every number gets treated the same way
         cout << "The try code: ";
-        for (j = 0; j <t_size ; ++j) {
+        for (j = 0; j < t_size; ++j) {
             for (i = 0; i <8 ; ++i, ++pos) {
                 completeCode[pos] = !!((tryCode.at(j).toLatin1()<<(i))&0x80);
                 cout << completeCode[pos];
@@ -39,22 +53,60 @@ CSender::CSender(QString rightCode, QString tryCode){
         pos = 129;              // Making sure that every size of strings get treated even
         completeCode[pos] = 1;  // Go high to end communication
 
-    }
+        arraypos = 0;
+        for (j = 0; j < r_size; ++j) {
+            for (i = 0; i < 8; ++i, ++arraypos) {
+                tryBinCode[arraypos] = !!((rightCode.at(j).toLatin1()<<(i))&0x80);
+                cout << tryBinCode[arraypos];
+            }
+        }
 
+        for (int k = 0; k < r_size; ++k) {
+            sendingQueue.push(0);
+            for (int l = 0; l < 8; ++l) {
+                sendingQueue.push(rightBinCode[l]);
+            }
+            sendingQueue.push(1);
+            sendingQueue.push(1);
+            sendingQueue.push(1);
+            sendingQueue.push(0);
+            for (int l = 0; l < 8; ++l) {
+                sendingQueue.push(tryBinCode[l]);
+            }
+            sendingQueue.push(1);
+            sendingQueue.push(1);
+            sendingQueue.push(1);
+        }
+    }
+    pinMode(4, OUTPUT);
+    pinMode(17, INPUT);
 }
-void CSender::sendToDE2(){
+
+bool CSender::sendToDE2(){
     cout << endl;
-    //pinMode(17, OUTPUT);
     for (int i = 0 ; i < 130 ; i++){
-        if (completeCode[i] == 1){
-            //digitalWrite(17,HIGH);
+        if (sendingQueue.front() == 1){
+            digitalWrite(17,HIGH);
             cout << "1" ;
         } else {
-            //digitalWrite(17,LOW);
+            digitalWrite(17,LOW);
             cout << "0" ;
         }
-        //delayMicroseconds(15);
+        sendingQueue.pop();
+        delayMicroseconds(416);
+        if(i != 0 && i%11==0){
+            if(!digitalRead(17)){
+                cout << "The response is false" << endl;
+                return false;
+            }
+        }
     }
-
+    if(digitalRead(17)){
+        cout << "The response is true!" << endl;
+        return true;
+    } else {
+        cout << "The response is false!" << endl;
+        return false;
+    }
 }
 
