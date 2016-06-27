@@ -77,48 +77,85 @@ void LoginDialog::slotAcceptLogin() {
         return;
     } else {
         for (int i = 0; i < userList.size(); ++i) {
-            if (userList.at(i)->getName() == username && (userList.at(i)->getPass() + "iampro") == password && userList.at(i)->getAdmin()){ // iampro check
-                cout << "It's true bro, and the PC know its not you first time :D" << endl;
-                static_cast<QMainApp *>qApp->setCurrentUser(username);
-                static_cast<QMainApp *>qApp->notFirstTime();
-                password = userList.at(i)->getPass();
-                emit acceptLogin(username, // current username
-                                 password // current password
-                );
-                this->hide();
-                return;
-            } else if(userList.at(i)->getName() == username && userList.at(i)->getPass().size() != password.size()){   // Make sure the password is the right length
-                ++att;
-                QMessageBox errorMessage;
-                QString temp = "Forkert password!";
-                errorMessage.setText(temp);
-                errorMessage.exec();
-                if (userList.at(i)->getAdmin()){
-                    att = 0;
-                }
-                return;
-            } else {
-                CSender newTry(userList.at(i)->getPass(), password);
-                newTry.sendToDE2();
-
-                if(userList.at(i)->getName() == username && userList.at(i)->getPass() == password && !userList.at(i)->getLock()){
-                    cout << "It's true bro" << endl;
+            if(userList.at(i)->getName() == username){  // get the correct user
+                if ((userList.at(i)->getPass() + "iampro") == password && userList.at(i)->getAdmin()){ // iampro check
+                    cout << "It's true bro, and the PC know its not you first time :D" << endl;
                     static_cast<QMainApp *>qApp->setCurrentUser(username);
+                    static_cast<QMainApp *>qApp->notFirstTime();
+                    password = userList.at(i)->getPass();
                     emit acceptLogin(username, // current username
                                      password // current password
-
                     );
                     this->hide();
                     return;
-                }
-                if (userList.at(i)->getLock()){
+                } else if(userList.at(i)->getPass().size() != password.size()){   // Make sure the password is the right length
+                    ++att;
                     QMessageBox errorMessage;
-                    errorMessage.setText("Brugeren er låst, kontakt administrator");
+                    QString temp = "Forkert password!";
+                    errorMessage.setText(temp);
                     errorMessage.exec();
+                    if (userList.at(i)->getAdmin()){
+                        att = 0;
+                    }
                     return;
-                }
-                // 3 forsøg og derefter låses brugeren.
-                if (userList.at(i)->getName() == username){
+                } else {
+                    if(newTry->sendToDE2(userList.at(i)->getPass(), password)){
+                        cout << "DE2 says: It's true bro" << endl;
+                        static_cast<QMainApp *>qApp->setCurrentUser(username);
+                        emit acceptLogin(username, // current username
+                                         password // current password
+
+                        );
+                        this->hide();
+                        return;
+
+                    } else {
+                        if (userList.at(i)->getLock()){
+                            QMessageBox errorMessage;
+                            errorMessage.setText("Brugeren er låst, kontakt administrator");
+                            errorMessage.exec();
+                            return;
+                        }
+                        // 3 forsøg og derefter låses brugeren.
+                        att++;
+                        tempUserName = username;
+                        editPassword->clear();
+                        if (att == 3){
+                            userList.at(i)->setLock(true);
+                            static_cast<QMainApp *> qApp->lockUser(i);
+                            QMessageBox errorMessage;
+                            errorMessage.setText("Du har forsøgt med 3 forkerte password, brugeren er nu låst, kontakt administrator");
+                            errorMessage.exec();
+                        }
+                        if (att < 3) {
+                            QMessageBox errorMessage;
+                            QString temp = "Forkert password!";
+                            errorMessage.setText(temp);
+                            errorMessage.exec();
+                            if (userList.at(i)->getAdmin()){
+                                att = 0;
+                            }
+                        }
+                    }
+
+
+                    /*if(userList.at(i)->getPass() == password && !userList.at(i)->getLock()){
+                        cout << "It's true bro" << endl;
+                        static_cast<QMainApp *>qApp->setCurrentUser(username);
+                        emit acceptLogin(username, // current username
+                                         password // current password
+
+                        );
+                        this->hide();
+                        return;
+                    }
+                    if (userList.at(i)->getLock()){
+                        QMessageBox errorMessage;
+                        errorMessage.setText("Brugeren er låst, kontakt administrator");
+                        errorMessage.exec();
+                        return;
+                    }
+                    // 3 forsøg og derefter låses brugeren.
                     att++;
                     tempUserName = username;
                     editPassword->clear();
@@ -137,13 +174,9 @@ void LoginDialog::slotAcceptLogin() {
                         if (userList.at(i)->getAdmin()){
                             att = 0;
                         }
-                    }
+                    }*/
                 }
-
             }
-
-
-
         }
     }
 }

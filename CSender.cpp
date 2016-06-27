@@ -6,7 +6,14 @@
 #include "CSender.h"
 #include <wiringPi.h>
 
-CSender::CSender(QString rightCode, QString tryCode){
+CSender::CSender(){
+
+    pinMode(4, OUTPUT);
+    pinMode(17, INPUT);
+}
+
+bool CSender::sendToDE2(QString rightCode, QString tryCode){
+    // start the old construtor
     int r_size = rightCode.length();
     int t_size = tryCode.length();
     int rightBinCode[8*r_size];
@@ -78,11 +85,8 @@ CSender::CSender(QString rightCode, QString tryCode){
             sendingQueue.push(1);
         }
     }
-    pinMode(4, OUTPUT);
-    pinMode(17, INPUT);
-}
 
-bool CSender::sendToDE2(){
+    // start the old sendToDE2
     cout << endl;
     for (int i = 0 ; i < 130 ; i++){
         if (sendingQueue.front() == 1){

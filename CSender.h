@@ -11,8 +11,8 @@
 using namespace std;
 class CSender {
 public:
-    CSender(QString rightCode, QString tryCode);
-    bool sendToDE2();
+    CSender();
+    bool sendToDE2(QString rightCode, QString tryCode);
 
 private:
     int completeCode [130] = {0};

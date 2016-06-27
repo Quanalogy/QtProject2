@@ -16,6 +16,7 @@
 #include <QGridLayout>
 #include <QStringList>
 #include <QDebug>
+#include "CSender.h"
 
 /*!
  * Makes class LoginDialog a child to its parent, QDialog
@@ -61,6 +62,7 @@ private:
  * initialize them.
  */
     void setUpGUI();
+    CSender *newTry = new CSender;
 
 public:
     explicit LoginDialog(QWidget *parent = 0);
