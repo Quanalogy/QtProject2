@@ -10,7 +10,7 @@ using namespace std;
 #include <stdint.h>
 #include <cmath>
 #include <queue>
-//#include <wiringPi.h>
+#include <wiringPi.h>
 
 int x10Index = -1;
 int x10Communication[30] = {0};
@@ -20,7 +20,7 @@ queue<int> x10SendingQueue;
 
 SendOnX10::SendOnX10() {
     printf ("Raspberry Pi wiringPi test program\n") ;
-/*    if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
+    if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
         //exit (1) ;
         cout << "Problems with wiringpisetupgpio" << endl;
     }
@@ -29,7 +29,7 @@ SendOnX10::SendOnX10() {
     pwmSetClock(80);                                        // Clock and range set to make a 120kHz pwm signal
     pwmSetRange (10);
     pwmWrite(18, 0);
-*/}
+}
 
 
 void SendOnX10::SendCommunication(int unitID, bool aktivSim, int lightLevel) {
@@ -58,33 +58,33 @@ void SendOnX10::SendCommunication(int unitID, bool aktivSim, int lightLevel) {
         x10Communication[l] = x10LightArray[k];
     }
 
-    cout << "3-part array: ";
+//    cout << "3-part array: ";
     for (int m = 0; m < 30; ++m) {
         x10Communication3[m] = x10Communication[m];
-        cout << x10Communication3[m];
+//        cout << x10Communication3[m];
     }
-    cout << " ";
+//    cout << " ";
     k=0;
     for (int i1 = 36; i1 < 66; ++i1, ++k) {
         x10Communication3[i1] = x10Communication[k];
-        cout << x10Communication3[i1];
+//        cout << x10Communication3[i1];
     }
     k = 0;
-    cout << " ";
+//    cout << " ";
     for (int j1 = 72; j1 < 102 ; ++j1, ++k) {
         x10Communication3[j1] = x10Communication[k];
-        cout << x10Communication3[j1];
+//        cout << x10Communication3[j1];
     }
 
-    cout << endl << "X.10 Queue:   ";
+//    cout << endl << "X.10 Queue:   ";
     for (k = 0; k < 108; ++k) {
-        if(k == 30 || k == 66){
+/*        if(k == 30 || k == 66){
             cout << " ";
         }
-        x10SendingQueue.push(x10Communication3[k]);
-        cout << x10SendingQueue.back();
+ */       x10SendingQueue.push(x10Communication3[k]);
+   //     cout << x10SendingQueue.back();
     }
-    cout << endl;
+    //cout << endl;
 
     x10Index = 0;
 
@@ -94,12 +94,12 @@ void writeX10Communication(){
 
     if(!x10SendingQueue.empty()){
         if(x10SendingQueue.front()){
-            /*  pwmWrite(18, 5);
+            pwmWrite(18, 5);
             delay(2);
             pwmWrite(18,0);
-            */cout << 1;
+            cout << 1;
         } else {
-            //pwmWrite(18, 0);
+            pwmWrite(18, 0);
             cout << 0;
         }
         x10SendingQueue.pop();
