@@ -15,6 +15,10 @@
 
 
 QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
+    if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
+        //exit (1) ;
+        cout << "Problems with wiringpisetupgpio" << endl;
+    }
     pinMode(SERIALOUT, OUTPUT);
     digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
     sendOnX10.reset(new SendOnX10());

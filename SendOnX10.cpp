@@ -20,10 +20,10 @@ queue<int> x10SendingQueue;
 
 SendOnX10::SendOnX10() {
     printf ("Raspberry Pi wiringPi test program\n") ;
-    if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
+    /*if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
         //exit (1) ;
         cout << "Problems with wiringpisetupgpio" << endl;
-    }
+    }*/
     pinMode(18,PWM_OUTPUT);                                // set pwmoutput
     wiringPiISR(24,INT_EDGE_BOTH,&writeX10Communication); //setup interrupt on pin 24 GPIO wise
     pwmSetClock(80);                                        // Clock and range set to make a 120kHz pwm signal
