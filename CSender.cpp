@@ -79,6 +79,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
     }
 
     cout << "CompleteSIZE is: " << completeSIZE << endl << "Starting digitalwrite: ";
+    int i = 1;
     for (int k = 0; k < completeSIZE; ++k) {
         if(completeCode[k]){
             digitalWrite(SERIALOUT,HIGH);
@@ -87,11 +88,12 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             digitalWrite(SERIALOUT,LOW);
             cout << "0" ;
         }
-        if(k!= 0 && !k%22){
+        if(k != 0 && !k%(24*i-3)){
+            ++i;
             cout << "Reading now: ";
-            digitalWrite(readingPIN, HIGH);
+            //digitalWrite(readingPIN, HIGH);
             delayMicroseconds(180);
-            digitalWrite(readingPIN, HIGH);
+            //digitalWrite(readingPIN, HIGH);
             if(!digitalRead(SERIALIN)){
                 cout << "The response is false!" << endl;
                 digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
