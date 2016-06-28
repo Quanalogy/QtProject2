@@ -11,6 +11,7 @@
 #include <cmath>
 #define SERIALIN 17
 #define SERIALOUT 4
+#define readingPIN 22
 
 CSender::CSender(){
 /*    if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
@@ -19,7 +20,8 @@ CSender::CSender(){
     }*/
     //pinMode(SERIALOUT, OUTPUT);
     pinMode(SERIALIN, INPUT);
-
+    pinMode(readingPIN, OUTPUT);
+    digitalWrite(readingPIN, LOW);
     digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
 }
 
@@ -81,6 +83,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
         if(!k%22){
             cout << "Reading now: ";
             delayMicroseconds(180);
+            digitalWrite(readingPIN, HIGH);
             if(!digitalRead(SERIALIN)){
                 cout << "The response is false!" << endl;
                 digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
