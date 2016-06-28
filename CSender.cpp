@@ -111,7 +111,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             cout << "0" ;
         }
         sendingQueue.pop();
-        delayMicroseconds(416);
+        delayMicroseconds(413);
         if(i != 0 && i%22==0){
             if(!digitalRead(SERIALIN)){
                 cout << "The response is false and i is: " << i << endl;
