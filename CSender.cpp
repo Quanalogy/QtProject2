@@ -82,17 +82,23 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
         cout << "Is it empty? " << sendingQueue.empty() << endl
             << "This is the size of the Queue before adding items: " << sendingQueue.size() << endl;
         for (int k = 0; k < r_size; ++k) {      //Fill into the queue
+            cout << "Running R_size times, which is: " << r_size << endl << "Printing Startbit 0" << endl;
             sendingQueue.push(0);
+            cout << "Pushing rightBinCode: ";
             for (int l = 0; l < 8; ++l) {
+                cout << rightBinCode[l];
                 sendingQueue.push(rightBinCode[l]);
             }
+            cout << endl << "And now the 1110" << endl << "Followed by tryBinCode: ";
             sendingQueue.push(1);
             sendingQueue.push(1);
             sendingQueue.push(1);
             sendingQueue.push(0);
             for (int l = 0; l < 8; ++l) {
+                cout << tryBinCode[l];
                 sendingQueue.push(tryBinCode[l]);
             }
+            cout << endl << "Followed by 111" << endl;
             sendingQueue.push(1);
             sendingQueue.push(1);
             sendingQueue.push(1);
