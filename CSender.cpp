@@ -17,7 +17,7 @@ CSender::CSender(){
         //exit (1) ;
         cout << "Problems with wiringpisetupgpio" << endl;
     }*/
-    pinMode(SERIALOUT, OUTPUT);
+    //pinMode(SERIALOUT, OUTPUT);
     pinMode(SERIALIN, INPUT);
 
     digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
