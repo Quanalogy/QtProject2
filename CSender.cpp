@@ -24,6 +24,7 @@ CSender::CSender(){
 }
 
 bool CSender::sendToDE2(QString rightCode, QString tryCode){
+    digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
     // start the old construtor
     int r_size = rightCode.length();
     int t_size = tryCode.length();
@@ -112,7 +113,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
         delayMicroseconds(416);
         if(i != 0 && i%22==0){
             if(!digitalRead(SERIALIN)){
-                cout << "The response is false" << endl;
+                cout << "The response is false and i is: " << i << endl;
                 return false;
             }
         }
