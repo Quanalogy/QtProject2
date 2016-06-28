@@ -31,7 +31,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
     int t_size = tryCode.length();
     //int rightBinCode[8*r_size];
     //int tryBinCode[8*t_size];
-    int completeSIZE = 10*(r_size+t_size);
+    int completeSIZE = 12*(r_size+t_size);
 
     int completeCode [completeSIZE] = {0};
     cout << "The size of r_size: " << r_size << " = The size of t_size: " << t_size
@@ -53,10 +53,10 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
                 cout << completeCode[pos];
             }
             completeCode[pos] = 1;
-            /*++pos;
+            ++pos;
             completeCode[pos] = 1;
             ++pos;
-            completeCode[pos] = 1;*/
+            completeCode[pos] = 1;
             ++pos;
             completeCode[pos] = 0;
             ++pos;
@@ -67,10 +67,10 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
                 cout << completeCode[pos];
             }
             cout << endl;        // for nice print lines
-            /*completeCode[pos] = 1;
+            completeCode[pos] = 1;
             ++pos;
             completeCode[pos] = 1;
-            ++pos;*/
+            ++pos;
             completeCode[pos] = 1;
             ++pos;
         }
@@ -78,7 +78,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
 
     cout << "CompleteSIZE is: " << completeSIZE << endl << "Starting digitalwrite: ";
     int i = 1;
-    int checksum = (20*i-1);
+    int checksum = (24*i-3);
     for (int k = 0; k < completeSIZE; ++k) {
         if(completeCode[k]){
             digitalWrite(SERIALOUT,HIGH);
