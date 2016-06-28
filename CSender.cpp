@@ -19,10 +19,7 @@ CSender::CSender(){
         cout << "Problems with wiringpisetupgpio" << endl;
     }*/
     //pinMode(SERIALOUT, OUTPUT);
-    pinMode(SERIALIN, INPUT);
-    pinMode(readingPIN, OUTPUT);
-    digitalWrite(readingPIN, LOW);
-    digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
+
 }
 
 bool CSender::sendToDE2(QString rightCode, QString tryCode){

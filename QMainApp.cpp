@@ -21,6 +21,10 @@ QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
     }
     pinMode(SERIALOUT, OUTPUT);
     digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
+    pinMode(SERIALIN, INPUT);
+    pinMode(readingPIN, OUTPUT);
+    digitalWrite(readingPIN, LOW);
+    digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
     sendOnX10.reset(new SendOnX10());
     User *adminUser = new User((QString)"a", (QString) "p",true);
     adminUser->setRights(true, true, true, true, true, true);
