@@ -87,18 +87,21 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             digitalWrite(SERIALOUT,LOW);
             cout << "0" ;
         }
-        digitalWrite(readingPIN, HIGH);
+        //digitalWrite(readingPIN, HIGH);
         if(k != 0 && !(k%checksum)){
             ++i;
             cout << "Reading now: ";
             //digitalWrite(readingPIN, HIGH);
-            delayMicroseconds(180);
+            delayMicroseconds(220);
             digitalWrite(readingPIN, HIGH);
             if(!digitalRead(SERIALIN)){
                 cout << "The response is false!" << endl;
                 digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
+                delayMicroseconds(40);
+                digitalWrite(readingPIN, LOW); // making sure it ends up being high when idle
                 return false;
             } else {
+                digitalWrite(readingPIN, LOW); // making sure it ends up being high when idle
                 cout << "The char response is true!" << endl;
             }
         }
