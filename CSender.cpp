@@ -80,6 +80,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
 
     cout << "CompleteSIZE is: " << completeSIZE << endl << "Starting digitalwrite: ";
     int i = 1;
+    int checksum = (24*i-3);
     for (int k = 0; k < completeSIZE; ++k) {
         if(completeCode[k]){
             digitalWrite(SERIALOUT,HIGH);
@@ -88,7 +89,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             digitalWrite(SERIALOUT,LOW);
             cout << "0" ;
         }
-        if(k != 0 && !k%(24*i-3)){
+        if(k != 0 && !(k%checksum)){
             ++i;
             cout << "Reading now: ";
             //digitalWrite(readingPIN, HIGH);
