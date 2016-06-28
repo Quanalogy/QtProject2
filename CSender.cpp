@@ -93,7 +93,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             ++i;
             cout << "Reading now: ";
             //digitalWrite(readingPIN, HIGH);
-            delayMicroseconds(120);
+            delayMicroseconds(160);
             digitalWrite(readingPIN, HIGH);
             if(!digitalRead(SERIALIN)){
                 cout << "The response is false!" << endl;
