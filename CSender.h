@@ -15,7 +15,7 @@ public:
     bool sendToDE2(QString rightCode, QString tryCode);
 
 private:
-    int completeCode [130] = {0};
+
     queue<int> sendingQueue;
 };
 

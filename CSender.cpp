@@ -26,6 +26,7 @@ CSender::CSender(){
 bool CSender::sendToDE2(QString rightCode, QString tryCode){
     //digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
     // start the old construtor
+    int completeCode [130] = {0};
     int r_size = rightCode.length();
     int t_size = tryCode.length();
     int rightBinCode[8*r_size];
@@ -79,55 +80,67 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
                 cout << tryBinCode[arraypos];
             }
         }
-        cout << "Is it empty? " << sendingQueue.empty() << endl
-            << "This is the size of the Queue before adding items: " << sendingQueue.size() << endl;
-        for (int k = 0; k < r_size; ++k) {      //Fill into the queue
-            cout << "Running R_size times, which is: " << r_size << endl << "Printing Startbit 0" << endl;
-            sendingQueue.push(0);
-            cout << "Pushing rightBinCode: ";
-            for (int l = 0; l < 8; ++l) {
-                cout << rightBinCode[l];
-                sendingQueue.push(rightBinCode[l]);
-            }
-            cout << endl << "And now the 1110" << endl << "Followed by tryBinCode: ";
-            sendingQueue.push(1);
-            sendingQueue.push(1);
-            sendingQueue.push(1);
-            sendingQueue.push(0);
-            for (int l = 0; l < 8; ++l) {
-                cout << tryBinCode[l];
-                sendingQueue.push(tryBinCode[l]);
-            }
-            cout << endl << "Followed by 111" << endl;
-            sendingQueue.push(1);
-            sendingQueue.push(1);
-            sendingQueue.push(1);
-        }
-    }
 
-    // start the old sendToDE2
-    cout << endl;
-    int i = 0;
-    while(!sendingQueue.empty()){
-        if (sendingQueue.front() == 1){
+
+    }
+    for (int k = 0; k < 130; ++k) {
+        if(completeCode[k]){
             digitalWrite(SERIALOUT,HIGH);
             cout << "1" ;
         } else {
             digitalWrite(SERIALOUT,LOW);
             cout << "0" ;
+        }}
+    /*
+    cout << "Is it empty? " << sendingQueue.empty() << endl
+        << "This is the size of the Queue before adding items: " << sendingQueue.size() << endl;
+    for (int k = 0; k < r_size; ++k) {      //Fill into the queue
+        cout << "Running R_size times, which is: " << r_size << endl << "Printing Startbit 0" << endl;
+        sendingQueue.push(0);
+        cout << "Pushing rightBinCode: ";
+        for (int l = 0; l < 8; ++l) {
+            cout << rightBinCode[l];
+            sendingQueue.push(rightBinCode[l]);
         }
-        sendingQueue.pop();
-        delayMicroseconds(380);
-        if(i != 0 && i%22==0){
-            if(!digitalRead(SERIALIN)){
-                cout << "The response is false and i is: " << i << endl;
-                digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
-                return false;
-            }
+        cout << endl << "And now the 1110" << endl << "Followed by tryBinCode: ";
+        sendingQueue.push(1);
+        sendingQueue.push(1);
+        sendingQueue.push(1);
+        sendingQueue.push(0);
+        for (int l = 0; l < 8; ++l) {
+            cout << tryBinCode[l];
+            sendingQueue.push(tryBinCode[l]);
         }
-        ++i;
+        cout << endl << "Followed by 111" << endl;
+        sendingQueue.push(1);
+        sendingQueue.push(1);
+        sendingQueue.push(1);
     }
+}
 
+// start the old sendToDE2
+cout << endl;
+int i = 0;
+while(!sendingQueue.empty()){
+    if (sendingQueue.front() == 1){
+        digitalWrite(SERIALOUT,HIGH);
+        cout << "1" ;
+    } else {
+        digitalWrite(SERIALOUT,LOW);
+        cout << "0" ;
+    }
+    sendingQueue.pop();
+    delayMicroseconds(380);
+    if(i != 0 && i%22==0){
+        if(!digitalRead(SERIALIN)){
+            cout << "The response is false and i is: " << i << endl;
+            digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
+            return false;
+        }
+    }
+    ++i;
+}
+*/
     digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
 
     if(digitalRead(SERIALIN)){
