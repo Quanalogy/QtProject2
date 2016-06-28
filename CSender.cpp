@@ -5,6 +5,10 @@
 #include <iostream>
 #include "CSender.h"
 #include <wiringPi.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <cmath>
 #define SERIALIN 17
 #define SERIALOUT 4
 
