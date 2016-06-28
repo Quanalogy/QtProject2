@@ -99,14 +99,14 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
                 digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
                 return false;
             } else {
-                cout << "The response is true!" << endl;
+                cout << "The char response is true!" << endl;
             }
         }
         delayMicroseconds(360);
     }
     digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
 
-    cout << "The response is true!" << endl;
+    cout << "The Full response is true!" << endl;
     return true;
 
 /*    cout << endl;
