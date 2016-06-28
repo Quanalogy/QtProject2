@@ -88,6 +88,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             cout << "0" ;
         }
         //digitalWrite(readingPIN, HIGH);
+        cout << "k%checksum" << k%checksum<< " != " << !(k%checksum) << endl;
         if(k != 0 && !(k%checksum)){
             ++i;
             cout << "Reading now: ";
