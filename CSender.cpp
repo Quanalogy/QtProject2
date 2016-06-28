@@ -31,26 +31,43 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
     int t_size = tryCode.length();
     int rightBinCode[8*r_size];
     int tryBinCode[8*t_size];
-    int completeSIZE = 8*r_size+8*t_size+2;
+    int completeSIZE = 8*r_size+8*t_size+2+(4*(r_size+t_size)/2);
     int completeCode [completeSIZE] = {0};
     cout << "The size of r_size: " << r_size << " = The size of t_size: " << t_size
             << "The size of completeCode: " << completeSIZE << endl;
     if(r_size <= 0 ||t_size <= 0){
         cout << "One of the values are below 1 in CSender constructor" << endl;
     } else {
-        completeCode[0] = 0;    // start with 0 to start communication
-        int pos = 1;            // used for position in the array
+        //completeCode[0] = 0;    // start with 0 to start communication
+        int pos = 0;            // used for position in the array
         int i;                  // used for bitshift
         int j;                  // used for position in the codearray
-        cout << "The right code: ";
+
         for(j = 0; j < r_size; ++j){
+            completeCode[pos] = 0;    // start with 0 to start communication
+            ++pos;
+            cout << "The right code: ";
             for (i = 0; i < 8; ++i, ++pos) {
                 completeCode[pos] = !!((rightCode.at(j).toLatin1()<<(i))&0x80);
                 cout << completeCode[pos];
             }
-            cout << " ";        // for nice print lines
+            completeCode[pos] = 1;
+            ++pos;
+            completeCode[pos] = 1;
+            ++pos;
+            completeCode[pos] = 1;
+            ++pos;
+            completeCode[pos] = 0;
+            ++pos;
+            cout << endl;        // for nice print lines
+            cout << "The try code: ";
+            for (i = 0; i <8 ; ++i, ++pos) {
+                completeCode[pos] = !!((tryCode.at(j).toLatin1()<<(i))&0x80);
+                cout << completeCode[pos];
+            }
+            cout << endl;        // for nice print lines
         }
-        cout << endl << "The right code new array: ";
+        /*cout << endl << "The right code new array: ";
 
         int arraypos = 0;
         for (j = 0; j < r_size; ++j) {
@@ -80,7 +97,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
                 tryBinCode[arraypos] = !!((rightCode.at(j).toLatin1()<<(i))&0x80);
                 cout << tryBinCode[arraypos];
             }
-        }
+        }*/
 
 
     }
