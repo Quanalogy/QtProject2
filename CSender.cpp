@@ -19,6 +19,8 @@ CSender::CSender(){
     }
     pinMode(SERIALOUT, OUTPUT);
     pinMode(SERIALIN, INPUT);
+
+    digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
 }
 
 bool CSender::sendToDE2(QString rightCode, QString tryCode){
@@ -116,6 +118,9 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
         }
         ++i;
     }
+
+    digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
+
     if(digitalRead(SERIALIN)){
         cout << "The response is true!" << endl;
         return true;
