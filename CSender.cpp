@@ -79,7 +79,8 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
                 cout << tryBinCode[arraypos];
             }
         }
-
+        cout << "Is it empty? " << sendingQueue.empty() << endl
+            << "This is the size of the Queue before adding items: " << sendingQueue.size() << endl;
         for (int k = 0; k < r_size; ++k) {      //Fill into the queue
             sendingQueue.push(0);
             for (int l = 0; l < 8; ++l) {
