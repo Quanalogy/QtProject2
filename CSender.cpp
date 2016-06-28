@@ -26,12 +26,13 @@ CSender::CSender(){
 bool CSender::sendToDE2(QString rightCode, QString tryCode){
     //digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
     // start the old construtor
-    int completeCode [130] = {0};
+
     int r_size = rightCode.length();
     int t_size = tryCode.length();
     int rightBinCode[8*r_size];
     int tryBinCode[8*t_size];
-
+    int completeSIZE = 8*r_size+8*t_size+2;
+    int completeCode [completeSIZE] = {0};
     cout << "The size of r_size: " << r_size << " = The size of t_size: " << t_size << endl;
     if(r_size <= 0 ||t_size <= 0){
         cout << "One of the values are below 1 in CSender constructor" << endl;
@@ -83,14 +84,19 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
 
 
     }
-    for (int k = 0; k < 130; ++k) {
+
+    cout << "CompleteSIZE is: " << completeSIZE << endl << "Starting digitalwrite: ";
+    for (int k = 0; k < completeSIZE; ++k) {
         if(completeCode[k]){
             digitalWrite(SERIALOUT,HIGH);
             cout << "1" ;
         } else {
             digitalWrite(SERIALOUT,LOW);
             cout << "0" ;
-        }}
+        }
+    }
+
+    cout << endl;
     /*
     cout << "Is it empty? " << sendingQueue.empty() << endl
         << "This is the size of the Queue before adding items: " << sendingQueue.size() << endl;
