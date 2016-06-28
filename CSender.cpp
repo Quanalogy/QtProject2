@@ -94,7 +94,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             cout << "Reading now: ";
             //digitalWrite(readingPIN, HIGH);
             delayMicroseconds(180);
-            //digitalWrite(readingPIN, HIGH);
+            digitalWrite(readingPIN, HIGH);
             if(!digitalRead(SERIALIN)){
                 cout << "The response is false!" << endl;
                 digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
