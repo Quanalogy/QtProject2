@@ -94,7 +94,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             digitalWrite(SERIALOUT,LOW);
             cout << "0" ;
         }
-        delayMicroseconds(380);
+        delayMicroseconds(360);
     }
 
     cout << endl;
