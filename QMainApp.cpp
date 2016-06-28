@@ -12,7 +12,8 @@
 #include <stdint.h>
 #include <cmath>
 #define SERIALOUT 4
-
+#define SERIALIN 17
+#define readingPIN 23
 
 QMainApp::QMainApp(int &argc, char **argv) : QApplication(argc, argv){
     if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
