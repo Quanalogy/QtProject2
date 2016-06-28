@@ -69,6 +69,12 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
                 cout << completeCode[pos];
             }
             cout << endl;        // for nice print lines
+            completeCode[pos] = 1;
+            ++pos;
+            completeCode[pos] = 1;
+            ++pos;
+            completeCode[pos] = 1;
+            ++pos;
         }
     }
 
