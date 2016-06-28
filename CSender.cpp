@@ -13,10 +13,10 @@
 #define SERIALOUT 4
 
 CSender::CSender(){
-    if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
+/*    if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
         //exit (1) ;
         cout << "Problems with wiringpisetupgpio" << endl;
-    }
+    }*/
     pinMode(SERIALOUT, OUTPUT);
     pinMode(SERIALIN, INPUT);
 
