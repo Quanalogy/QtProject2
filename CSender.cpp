@@ -106,7 +106,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
                 cout << "The char response is true!" << endl;
             }
         }
-        delayMicroseconds(360);
+        delayMicroseconds(350);
     }
     digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
 
