@@ -28,6 +28,7 @@ CSender::CSender(){
 bool CSender::sendToDE2(QString rightCode, QString tryCode){
     //digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
     // start the old construtor
+    digitalWrite(readingPIN, LOW);
 
     int r_size = rightCode.length();
     int t_size = tryCode.length();
