@@ -33,7 +33,8 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
     int tryBinCode[8*t_size];
     int completeSIZE = 8*r_size+8*t_size+2;
     int completeCode [completeSIZE] = {0};
-    cout << "The size of r_size: " << r_size << " = The size of t_size: " << t_size << endl;
+    cout << "The size of r_size: " << r_size << " = The size of t_size: " << t_size
+            << "The size of completeCode: " << completeSIZE << endl;
     if(r_size <= 0 ||t_size <= 0){
         cout << "One of the values are below 1 in CSender constructor" << endl;
     } else {
@@ -49,8 +50,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             }
             cout << " ";        // for nice print lines
         }
-        cout << endl;
-        cout << "The right code new array: ";
+        cout << endl << "The right code new array: ";
 
         int arraypos = 0;
         for (j = 0; j < r_size; ++j) {
@@ -61,7 +61,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
         }
 
 
-        pos = 64;               // make sure that every number gets treated the same way
+        //pos = 64;               // make sure that every number gets treated the same way
         cout << "The try code: ";
         for (j = 0; j < t_size; ++j) {
             for (i = 0; i <8 ; ++i, ++pos) {
@@ -71,7 +71,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             cout << " ";        // for nice print lines
         }
         cout << endl;
-        pos = 129;              // Making sure that every size of strings get treated even
+        //pos = 129;              // Making sure that every size of strings get treated even
         completeCode[pos] = 1;  // Go high to end communication
 
         arraypos = 0;
