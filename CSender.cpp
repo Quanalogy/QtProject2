@@ -11,7 +11,7 @@
 #include <cmath>
 #define SERIALIN 17
 #define SERIALOUT 4
-#define readingPIN 22
+#define readingPIN 23
 
 CSender::CSender(){
 /*    if (wiringPiSetupGpio() == -1){                       //do crash this if we can't setup the wiringPi!!
