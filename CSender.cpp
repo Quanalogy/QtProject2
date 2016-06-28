@@ -82,6 +82,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
         }
         if(!k%22){
             cout << "Reading now: ";
+            digitalWrite(readingPIN, HIGH);
             delayMicroseconds(180);
             digitalWrite(readingPIN, HIGH);
             if(!digitalRead(SERIALIN)){
