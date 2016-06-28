@@ -101,6 +101,7 @@ void LoginDialog::slotAcceptLogin() {
                 } else {
                     if(newTry->sendToDE2(userList.at(i)->getPass(), password)){
                         cout << "DE2 says: It's true bro" << endl;
+                        att = 0;
                         static_cast<QMainApp *>qApp->setCurrentUser(username);
                         emit acceptLogin(username, // current username
                                          password // current password
