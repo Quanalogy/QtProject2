@@ -34,7 +34,7 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
     int completeSIZE = 8*r_size+8*t_size+1+(2*(r_size+t_size));
     int completeCode [completeSIZE] = {0};
     cout << "The size of r_size: " << r_size << " = The size of t_size: " << t_size
-            << "The size of completeCode: " << completeSIZE << endl;
+    << "The size of completeCode: " << completeSIZE << endl;
     if(r_size <= 0 ||t_size <= 0){
         cout << "One of the values are below 1 in CSender constructor" << endl;
     } else {
@@ -67,39 +67,6 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             }
             cout << endl;        // for nice print lines
         }
-        /*cout << endl << "The right code new array: ";
-
-        int arraypos = 0;
-        for (j = 0; j < r_size; ++j) {
-            for (i = 0; i < 8; ++i, ++arraypos) {
-                rightBinCode[arraypos] = !!((rightCode.at(j).toLatin1()<<(i))&0x80);
-                cout << rightBinCode[arraypos];
-            }
-        }
-
-
-        //pos = 64;               // make sure that every number gets treated the same way
-        cout << "The try code: ";
-        for (j = 0; j < t_size; ++j) {
-            for (i = 0; i <8 ; ++i, ++pos) {
-                completeCode[pos] = !!((tryCode.at(j).toLatin1()<<(i))&0x80);
-                cout << completeCode[pos];
-            }
-            cout << " ";        // for nice print lines
-        }
-        cout << endl;
-        //pos = 129;              // Making sure that every size of strings get treated even
-        completeCode[pos] = 1;  // Go high to end communication
-
-        arraypos = 0;
-        for (j = 0; j < r_size; ++j) {
-            for (i = 0; i < 8; ++i, ++arraypos) {
-                tryBinCode[arraypos] = !!((rightCode.at(j).toLatin1()<<(i))&0x80);
-                cout << tryBinCode[arraypos];
-            }
-        }*/
-
-
     }
 
     cout << "CompleteSIZE is: " << completeSIZE << endl << "Starting digitalwrite: ";
@@ -111,61 +78,25 @@ bool CSender::sendToDE2(QString rightCode, QString tryCode){
             digitalWrite(SERIALOUT,LOW);
             cout << "0" ;
         }
+        if(!k%22){
+            cout << "Reading now: ";
+            delayMicroseconds(200);
+            if(!digitalRead(SERIALIN)){
+                cout << "The response is false!" << endl;
+                return false;
+            } else {
+                cout << "The response is true!" << endl;
+            }
+        }
         delayMicroseconds(360);
     }
-
-    cout << endl;
-    /*
-    cout << "Is it empty? " << sendingQueue.empty() << endl
-        << "This is the size of the Queue before adding items: " << sendingQueue.size() << endl;
-    for (int k = 0; k < r_size; ++k) {      //Fill into the queue
-        cout << "Running R_size times, which is: " << r_size << endl << "Printing Startbit 0" << endl;
-        sendingQueue.push(0);
-        cout << "Pushing rightBinCode: ";
-        for (int l = 0; l < 8; ++l) {
-            cout << rightBinCode[l];
-            sendingQueue.push(rightBinCode[l]);
-        }
-        cout << endl << "And now the 1110" << endl << "Followed by tryBinCode: ";
-        sendingQueue.push(1);
-        sendingQueue.push(1);
-        sendingQueue.push(1);
-        sendingQueue.push(0);
-        for (int l = 0; l < 8; ++l) {
-            cout << tryBinCode[l];
-            sendingQueue.push(tryBinCode[l]);
-        }
-        cout << endl << "Followed by 111" << endl;
-        sendingQueue.push(1);
-        sendingQueue.push(1);
-        sendingQueue.push(1);
-    }
-}
-
-// start the old sendToDE2
-cout << endl;
-int i = 0;
-while(!sendingQueue.empty()){
-    if (sendingQueue.front() == 1){
-        digitalWrite(SERIALOUT,HIGH);
-        cout << "1" ;
-    } else {
-        digitalWrite(SERIALOUT,LOW);
-        cout << "0" ;
-    }
-    sendingQueue.pop();
-    delayMicroseconds(380);
-    if(i != 0 && i%22==0){
-        if(!digitalRead(SERIALIN)){
-            cout << "The response is false and i is: " << i << endl;
-            digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
-            return false;
-        }
-    }
-    ++i;
-}
-*/
     digitalWrite(SERIALOUT, HIGH); // making sure it ends up being high when idle
+
+    cout << "The response is true!" << endl;
+    return true;
+
+/*    cout << endl;
+
 
     if(digitalRead(SERIALIN)){
         cout << "The response is true!" << endl;
@@ -173,6 +104,6 @@ while(!sendingQueue.empty()){
     } else {
         cout << "The response is false!" << endl;
         return false;
-    }
+    }*/
 }
 
